@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Web", "MiZoneCommerce.Web\MiZoneCommerce.Web.csproj", "{2F7FD549-4995-4E93-8549-A62731731DA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F7FD549-4995-4E93-8549-A62731731DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F7FD549-4995-4E93-8549-A62731731DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F7FD549-4995-4E93-8549-A62731731DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F7FD549-4995-4E93-8549-A62731731DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56B1FEF9-C044-4B27-AFF1-5E73677D9955}
+	EndGlobalSection
+EndGlobal
