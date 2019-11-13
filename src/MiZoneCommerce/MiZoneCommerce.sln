@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Model", "MiZ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Service", "MiZoneCommerce.Service\MiZoneCommerce.Service.csproj", "{A94CB690-ECF3-4643-989D-B8BE07AEAE6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.ServiceProvider", "MiZoneCommerce.ServiceProvider\MiZoneCommerce.ServiceProvider.csproj", "{AC86D0FB-E277-429F-8968-7A284E0BC070}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{A94CB690-ECF3-4643-989D-B8BE07AEAE6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A94CB690-ECF3-4643-989D-B8BE07AEAE6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A94CB690-ECF3-4643-989D-B8BE07AEAE6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
