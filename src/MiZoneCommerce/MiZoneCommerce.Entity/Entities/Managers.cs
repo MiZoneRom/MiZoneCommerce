@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace MiZoneCommerce.Entity.Entities
 {
+    /// <summary>
+    /// 管理员
+    /// </summary>
     public partial class Managers
     {
         public long Id { get; set; }

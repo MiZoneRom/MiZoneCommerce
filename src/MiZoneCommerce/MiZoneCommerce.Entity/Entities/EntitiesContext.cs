@@ -19,6 +19,7 @@ namespace MiZoneCommerce.Entity.Entities
         public virtual DbSet<RolePrivileges> RolePrivileges { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SiteSettings> SiteSettings { get; set; }
+        public virtual DbSet<Logs> Logs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -72,6 +73,27 @@ namespace MiZoneCommerce.Entity.Entities
                     .HasMaxLength(1000);
 
                 entity.Property(e => e.Value)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+            });
+
+            modelBuilder.Entity<Logs>(entity =>
+            {
+                entity.Property(e => e.PageUrl)
+                    .IsRequired()
+                    .HasMaxLength(1000);
+
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.IPAddress)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(1000);
             });

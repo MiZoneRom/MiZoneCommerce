@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MiZoneCommerce.Entity.Entities
 {
+    /// <summary>
+    /// 站点设置
+    /// </summary>
     public class SiteSettings:BaseModel
     {
         public long Id { get; set; }

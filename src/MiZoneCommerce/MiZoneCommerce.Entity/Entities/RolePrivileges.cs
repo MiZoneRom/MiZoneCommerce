@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace MiZoneCommerce.Entity.Entities
 {
+    /// <summary>
+    /// 角色权限
+    /// </summary>
     public partial class RolePrivileges : BaseModel
     {
         public long Id { get; set; }
