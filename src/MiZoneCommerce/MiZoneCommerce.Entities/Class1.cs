@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MiZoneCommerce.Common
+namespace MiZoneCommerce.Entities
 {
     public class Class1
     {

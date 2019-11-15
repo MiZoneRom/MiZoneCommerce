@@ -3,29 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Web", "MiZoneCommerce.Web\MiZoneCommerce.Web.csproj", "{2F7FD549-4995-4E93-8549-A62731731DA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Web", "MiZoneCommerce.Web\MiZoneCommerce.Web.csproj", "{2F7FD549-4995-4E93-8549-A62731731DA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Framework", "MiZoneCommerce.Framework\MiZoneCommerce.Framework.csproj", "{FD580BA7-A89A-4169-B607-9C41FB939689}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Framework", "MiZoneCommerce.Framework\MiZoneCommerce.Framework.csproj", "{FD580BA7-A89A-4169-B607-9C41FB939689}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Application", "MiZoneCommerce.Application\MiZoneCommerce.Application.csproj", "{83DFBB47-DCA7-43BB-865C-C86860F1A56D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Application", "MiZoneCommerce.Application\MiZoneCommerce.Application.csproj", "{83DFBB47-DCA7-43BB-865C-C86860F1A56D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Common", "MiZoneCommerce.Common\MiZoneCommerce.Common.csproj", "{108942C2-5602-464A-AA87-66EFF8B5B8C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.CommonModel", "MiZoneCommerce.CommonModel\MiZoneCommerce.CommonModel.csproj", "{3E10B775-086B-4A87-84CB-9AC8648CC9FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.CommonModel", "MiZoneCommerce.CommonModel\MiZoneCommerce.CommonModel.csproj", "{3E10B775-086B-4A87-84CB-9AC8648CC9FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Core", "MiZoneCommerce.Core\MiZoneCommerce.Core.csproj", "{40A785A6-FEB0-4C0D-B14C-CAB6C0A3CAFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Core", "MiZoneCommerce.Core\MiZoneCommerce.Core.csproj", "{40A785A6-FEB0-4C0D-B14C-CAB6C0A3CAFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.DTO", "MiZoneCommerce.DTO\MiZoneCommerce.DTO.csproj", "{EB62F9DC-DE79-470C-B5FD-3ABE5D57EB41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.DTO", "MiZoneCommerce.DTO\MiZoneCommerce.DTO.csproj", "{EB62F9DC-DE79-470C-B5FD-3ABE5D57EB41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Entity", "MiZoneCommerce.Entity\MiZoneCommerce.Entity.csproj", "{2080B6E0-1AFA-425C-A064-14435BF9A280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Entity", "MiZoneCommerce.Entity\MiZoneCommerce.Entity.csproj", "{2080B6E0-1AFA-425C-A064-14435BF9A280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.IServices", "MiZoneCommerce.IServices\MiZoneCommerce.IServices.csproj", "{CB06EC0F-2498-4EFC-B6DC-360B6FC8A4B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.IServices", "MiZoneCommerce.IServices\MiZoneCommerce.IServices.csproj", "{CB06EC0F-2498-4EFC-B6DC-360B6FC8A4B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Model", "MiZoneCommerce.Model\MiZoneCommerce.Model.csproj", "{FA695735-BE25-49B2-B27F-417992AFA3A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Model", "MiZoneCommerce.Model\MiZoneCommerce.Model.csproj", "{FA695735-BE25-49B2-B27F-417992AFA3A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.Service", "MiZoneCommerce.Service\MiZoneCommerce.Service.csproj", "{A94CB690-ECF3-4643-989D-B8BE07AEAE6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Service", "MiZoneCommerce.Service\MiZoneCommerce.Service.csproj", "{A94CB690-ECF3-4643-989D-B8BE07AEAE6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiZoneCommerce.ServiceProvider", "MiZoneCommerce.ServiceProvider\MiZoneCommerce.ServiceProvider.csproj", "{AC86D0FB-E277-429F-8968-7A284E0BC070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.ServiceProvider", "MiZoneCommerce.ServiceProvider\MiZoneCommerce.ServiceProvider.csproj", "{AC86D0FB-E277-429F-8968-7A284E0BC070}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{04AF847C-0412-4553-A4AC-CEDEB0AA0C45}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{4129C9A0-8E62-44A2-BBFE-1E252B07AFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiZoneCommerce.Entities", "MiZoneCommerce.Entities\MiZoneCommerce.Entities.csproj", "{33FFD4CE-0CCA-4FEC-A30F-132775EE7008}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{94832A49-8F4B-46B8-9841-ABC49DDD8913}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{774AE0A1-394C-4B99-A417-BA873B3381F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{A0617E5F-98F3-407C-97D8-A76B5FB56793}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +55,6 @@ Global
 		{83DFBB47-DCA7-43BB-865C-C86860F1A56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83DFBB47-DCA7-43BB-865C-C86860F1A56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83DFBB47-DCA7-43BB-865C-C86860F1A56D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{108942C2-5602-464A-AA87-66EFF8B5B8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{108942C2-5602-464A-AA87-66EFF8B5B8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{108942C2-5602-464A-AA87-66EFF8B5B8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{108942C2-5602-464A-AA87-66EFF8B5B8C3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E10B775-086B-4A87-84CB-9AC8648CC9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E10B775-086B-4A87-84CB-9AC8648CC9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E10B775-086B-4A87-84CB-9AC8648CC9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -81,9 +87,27 @@ Global
 		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC86D0FB-E277-429F-8968-7A284E0BC070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33FFD4CE-0CCA-4FEC-A30F-132775EE7008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33FFD4CE-0CCA-4FEC-A30F-132775EE7008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33FFD4CE-0CCA-4FEC-A30F-132775EE7008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33FFD4CE-0CCA-4FEC-A30F-132775EE7008}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2F7FD549-4995-4E93-8549-A62731731DA3} = {774AE0A1-394C-4B99-A417-BA873B3381F2}
+		{FD580BA7-A89A-4169-B607-9C41FB939689} = {774AE0A1-394C-4B99-A417-BA873B3381F2}
+		{83DFBB47-DCA7-43BB-865C-C86860F1A56D} = {04AF847C-0412-4553-A4AC-CEDEB0AA0C45}
+		{3E10B775-086B-4A87-84CB-9AC8648CC9FD} = {4129C9A0-8E62-44A2-BBFE-1E252B07AFCA}
+		{40A785A6-FEB0-4C0D-B14C-CAB6C0A3CAFF} = {A0617E5F-98F3-407C-97D8-A76B5FB56793}
+		{EB62F9DC-DE79-470C-B5FD-3ABE5D57EB41} = {4129C9A0-8E62-44A2-BBFE-1E252B07AFCA}
+		{2080B6E0-1AFA-425C-A064-14435BF9A280} = {4129C9A0-8E62-44A2-BBFE-1E252B07AFCA}
+		{CB06EC0F-2498-4EFC-B6DC-360B6FC8A4B3} = {94832A49-8F4B-46B8-9841-ABC49DDD8913}
+		{FA695735-BE25-49B2-B27F-417992AFA3A9} = {4129C9A0-8E62-44A2-BBFE-1E252B07AFCA}
+		{A94CB690-ECF3-4643-989D-B8BE07AEAE6C} = {94832A49-8F4B-46B8-9841-ABC49DDD8913}
+		{AC86D0FB-E277-429F-8968-7A284E0BC070} = {94832A49-8F4B-46B8-9841-ABC49DDD8913}
+		{33FFD4CE-0CCA-4FEC-A30F-132775EE7008} = {4129C9A0-8E62-44A2-BBFE-1E252B07AFCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56B1FEF9-C044-4B27-AFF1-5E73677D9955}
