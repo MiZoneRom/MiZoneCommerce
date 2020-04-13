@@ -56,7 +56,7 @@
             {
                 var Table = new Table();
                 Table.TableName = "dbo." + tablename;
-				//Table.ClassName = GeneratedTextTransformation.ClassPrefix + tablename + GeneratedTextTransformation.ClassSuffix;
+				//Table.ClassName = ClassPrefix + tablename + ClassSuffix;
 				Table.ClassName = tablename;
 
                 #region »ñÈ¡Ö÷¼ü
