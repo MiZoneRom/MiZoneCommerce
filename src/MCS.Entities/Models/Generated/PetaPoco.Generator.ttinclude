@@ -22,9 +22,10 @@ namespace <#=Namespace #>
 
         private static SqlConnection OpenConnection(string name)
         {
-            SqlConnection conn = new SqlConnection(JsonConfig.JsonRead(name));
-            conn.Open();
-            return conn;
+            //SqlConnection conn = new SqlConnection(JsonConfig.JsonRead(name));
+            //conn.Open();
+            //return conn;
+			return null;
         }
 
         public <#=RepoName#>() : base(OpenConnection())
@@ -116,11 +117,11 @@ namespace <#=Namespace #>
 
 
 <#
-   foreach(var item in builder.TableList)
+   foreach(var item in tables)
    {
 #>
     
-     [TableName("<#=item.TableName#>")]
+     [TableName("<#=item.Name#>")]
      <#
      if(!String.IsNullOrWhiteSpace(item.Primkey))
      {

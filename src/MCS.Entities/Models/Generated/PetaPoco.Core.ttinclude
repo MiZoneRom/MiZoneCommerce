@@ -21,7 +21,7 @@
 
 	public class Table
     {
-        public string TableName { get; set; }
+        public string Name { get; set; }
         public string Primkey { get; set; }
         public List<Column> Columns { get; set; }
         public string ClassName { get;set; }
@@ -33,15 +33,35 @@
         public string ColumnType { get; set; }
     }
 
-	public class T4Builder
-    {
-        public List<String> TableNameList = new List<String>();
+	public class Tables : List<Table>
+	{
 
-        public List<Table> TableList = new List<Table>();
+		public Tables()
+		{
+		}
+	
+		public Table GetTable(string tableName)
+		{
+			return this.Single(x=>string.Compare(x.Name, tableName, true)==0);
+		}
 
-        public T4Builder(string conectionstring)
-        {
-            SqlConnection con = new SqlConnection(conectionstring);
+		public Table this[string tableName]
+		{
+			get
+			{
+				return GetTable(tableName);
+			}
+		}
+
+	}
+
+	Tables LoadTables()
+	{
+	
+		List<String> TableNameList = new List<String>();
+        Tables TableList = new Tables();
+
+		    SqlConnection con = new SqlConnection(ConnectionString);
             con.Open();
 
             SqlCommand cmd = new SqlCommand("select name from sysobjects where xtype='u'", con);
@@ -55,9 +75,8 @@
             foreach (var tablename in TableNameList)
             {
                 var Table = new Table();
-                Table.TableName = "dbo." + tablename;
-				//Table.ClassName = ClassPrefix + tablename + ClassSuffix;
-				Table.ClassName = tablename;
+                Table.Name = "dbo." + tablename;
+				Table.ClassName = ClassPrefix + tablename + ClassSuffix;
 
                 #region »ñÈ¡Ö÷¼ü
                 SqlCommand cmd_prikey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
@@ -95,9 +114,14 @@
             }
             con.Close();
             con.Dispose();
-        }
 
-        private string GetPropertyType(string sqlType, string dataScale)
+			return TableList;
+
+
+	}
+
+
+	        private string GetPropertyType(string sqlType, string dataScale)
         {
             string sysType = "string";
             sqlType = sqlType.ToLower();
@@ -149,6 +173,5 @@
 
             return sysType;
         }
-    }
 
 #>

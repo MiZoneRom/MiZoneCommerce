@@ -24,9 +24,10 @@ namespace MCS.Entities
 
         private static SqlConnection OpenConnection(string name)
         {
-            SqlConnection conn = new SqlConnection(JsonConfig.JsonRead(name));
-            conn.Open();
-            return conn;
+            //SqlConnection conn = new SqlConnection(JsonConfig.JsonRead(name));
+            //conn.Open();
+            //return conn;
+			return null;
         }
 
         public MCS() : base(OpenConnection())
@@ -121,7 +122,7 @@ namespace MCS.Entities
      [TableName("dbo.Manager")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class Manager:MCS.Record<Manager>
+     public partial class ManagerInfo:MCS.Record<ManagerInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -138,7 +139,7 @@ namespace MCS.Entities
      [TableName("dbo.RolePrivilege")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class RolePrivilege:MCS.Record<RolePrivilege>
+     public partial class RolePrivilegeInfo:MCS.Record<RolePrivilegeInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -150,7 +151,7 @@ namespace MCS.Entities
      [TableName("dbo.SiteSetting")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class SiteSetting:MCS.Record<SiteSetting>
+     public partial class SiteSettingInfo:MCS.Record<SiteSettingInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -162,7 +163,7 @@ namespace MCS.Entities
      [TableName("dbo.MemberOpenId")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MemberOpenId:MCS.Record<MemberOpenId>
+     public partial class MemberOpenIdInfo:MCS.Record<MemberOpenIdInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -178,7 +179,7 @@ namespace MCS.Entities
      [TableName("dbo.MemberContact")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MemberContact:MCS.Record<MemberContact>
+     public partial class MemberContactInfo:MCS.Record<MemberContactInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -192,7 +193,7 @@ namespace MCS.Entities
      [TableName("dbo.MemberGroup")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MemberGroup:MCS.Record<MemberGroup>
+     public partial class MemberGroupInfo:MCS.Record<MemberGroupInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -204,7 +205,7 @@ namespace MCS.Entities
      [TableName("dbo.OpenId")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class OpenId:MCS.Record<OpenId>
+     public partial class OpenIdInfo:MCS.Record<OpenIdInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -217,7 +218,7 @@ namespace MCS.Entities
      [TableName("dbo.MemberActivityDegree")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MemberActivityDegree:MCS.Record<MemberActivityDegree>
+     public partial class MemberActivityDegreeInfo:MCS.Record<MemberActivityDegreeInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -234,7 +235,7 @@ namespace MCS.Entities
      [TableName("dbo.Member")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class Member:MCS.Record<Member>
+     public partial class MemberInfo:MCS.Record<MemberInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -272,7 +273,7 @@ namespace MCS.Entities
      [TableName("dbo.MemberIntegral")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MemberIntegral:MCS.Record<MemberIntegral>
+     public partial class MemberIntegralInfo:MCS.Record<MemberIntegralInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -286,7 +287,7 @@ namespace MCS.Entities
      [TableName("dbo.MemberIntegralRecord")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MemberIntegralRecord:MCS.Record<MemberIntegralRecord>
+     public partial class MemberIntegralRecordInfo:MCS.Record<MemberIntegralRecordInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -302,7 +303,7 @@ namespace MCS.Entities
      [TableName("dbo.MessageLog")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class MessageLog:MCS.Record<MessageLog>
+     public partial class MessageLogInfo:MCS.Record<MessageLogInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -316,7 +317,7 @@ namespace MCS.Entities
      [TableName("dbo.SendMessageRecord")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class SendMessageRecord:MCS.Record<SendMessageRecord>
+     public partial class SendMessageRecordInfo:MCS.Record<SendMessageRecordInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -332,7 +333,7 @@ namespace MCS.Entities
      [TableName("dbo.WeiXinMsgTemplate")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WeiXinMsgTemplate:MCS.Record<WeiXinMsgTemplate>
+     public partial class WeiXinMsgTemplateInfo:MCS.Record<WeiXinMsgTemplateInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -348,7 +349,7 @@ namespace MCS.Entities
      [TableName("dbo.WXAppletFormData")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WXAppletFormData:MCS.Record<WXAppletFormData>
+     public partial class WXAppletFormDataInfo:MCS.Record<WXAppletFormDataInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -363,7 +364,7 @@ namespace MCS.Entities
      [TableName("dbo.Capital")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class Capital:MCS.Record<Capital>
+     public partial class CapitalInfo:MCS.Record<CapitalInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -378,7 +379,7 @@ namespace MCS.Entities
      [TableName("dbo.CapitalDetail")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class CapitalDetail:MCS.Record<CapitalDetail>
+     public partial class CapitalDetailInfo:MCS.Record<CapitalDetailInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -395,7 +396,7 @@ namespace MCS.Entities
      [TableName("dbo.WeiXinBasic")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WeiXinBasic:MCS.Record<WeiXinBasic>
+     public partial class WeiXinBasicInfo:MCS.Record<WeiXinBasicInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -409,7 +410,7 @@ namespace MCS.Entities
      [TableName("dbo.WareHouse")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WareHouse:MCS.Record<WareHouse>
+     public partial class WareHouseInfo:MCS.Record<WareHouseInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -421,7 +422,7 @@ namespace MCS.Entities
      [TableName("dbo.WareHouseGoodsCategory")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WareHouseGoodsCategory:MCS.Record<WareHouseGoodsCategory>
+     public partial class WareHouseGoodsCategoryInfo:MCS.Record<WareHouseGoodsCategoryInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -433,7 +434,7 @@ namespace MCS.Entities
      [TableName("dbo.WareHouseAddress")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WareHouseAddress:MCS.Record<WareHouseAddress>
+     public partial class WareHouseAddressInfo:MCS.Record<WareHouseAddressInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -446,7 +447,7 @@ namespace MCS.Entities
      [TableName("dbo.WareHouseGoods")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class WareHouseGoods:MCS.Record<WareHouseGoods>
+     public partial class WareHouseGoodsInfo:MCS.Record<WareHouseGoodsInfo>
      {
         
         [Column] public long Id {get;set;}
@@ -463,7 +464,7 @@ namespace MCS.Entities
     
      [TableName("dbo.WareHouseDemo")]
      [ExplicitColumns]
-     public partial class WareHouseDemo:MCS.Record<WareHouseDemo>
+     public partial class WareHouseDemoInfo:MCS.Record<WareHouseDemoInfo>
      {
         
         [Column] public string No {get;set;}
@@ -480,7 +481,7 @@ namespace MCS.Entities
      [TableName("dbo.Role")]
      [PrimaryKey("Id")]
      [ExplicitColumns]
-     public partial class Role:MCS.Record<Role>
+     public partial class RoleInfo:MCS.Record<RoleInfo>
      {
         
         [Column] public long Id {get;set;}
