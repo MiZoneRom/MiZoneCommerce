@@ -5,6 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Generated\PetaPoco.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MCS.CommonModel\MCS.CommonModel.csproj" />
     <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
   </ItemGroup>
@@ -12,6 +28,7 @@
   <ItemGroup>
     <None Update="Models\Generated\MCS.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MCS.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -21,6 +38,20 @@
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.10.3" />
+    <PackageReference Include="PetaPoco.NetCore" Version="1.0.1" />
+    <PackageReference Include="T4" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Models\Generated\MCS.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MCS.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
