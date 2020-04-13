@@ -1,5 +1,5 @@
 using PetaPoco.NetCore;
-using WMS.CommonModel;
+using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

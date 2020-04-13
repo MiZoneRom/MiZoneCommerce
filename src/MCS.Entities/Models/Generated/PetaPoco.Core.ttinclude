@@ -56,7 +56,8 @@
             {
                 var Table = new Table();
                 Table.TableName = "dbo." + tablename;
-				Table.ClassName = ClassPrefix + tablename + ClassSuffix;
+				//Table.ClassName = GeneratedTextTransformation.ClassPrefix + tablename + GeneratedTextTransformation.ClassSuffix;
+				Table.ClassName = tablename;
 
                 #region »ñÈ¡Ö÷¼ü
                 SqlCommand cmd_prikey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
