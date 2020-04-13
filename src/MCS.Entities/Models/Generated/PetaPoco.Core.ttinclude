@@ -17,20 +17,37 @@
 	string RepoName = "";
 	string ClassPrefix = "";
 	string ClassSuffix = "";
+	string SchemaName = null;
+	string[] ExcludePrefix = new string[] {};
 	string[] ClassReplaces = new string[] {};
+	Dictionary<string, string> EnumLists = new Dictionary<string, string> {};
+	List<Tuple<string,string,bool,string,string,string>> ReferenceLists = new List<Tuple<string,string,bool,string,string,string>>{};
 
 	public class Table
     {
+	    public List<Column> Columns { get; set; }
         public string Name { get; set; }
+		public string Schema;
+		public bool IsView;
         public string Primkey { get; set; }
-        public List<Column> Columns { get; set; }
         public string ClassName { get;set; }
+		public string SequenceName;
+		public bool Ignore;
+
+		public Column PK
+		{
+			get
+				{
+					return this.Columns.SingleOrDefault(x=>x.IsPK);
+				}
+		}
     }
 
 	public class Column
     {
         public string ColumnName { get; set; }
         public string ColumnType { get; set; }
+		public bool IsPK;
     }
 
 	public class Tables : List<Table>
