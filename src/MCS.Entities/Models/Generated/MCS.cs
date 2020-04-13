@@ -1,5 +1,4 @@
 ﻿
-
 using PetaPoco.NetCore;
 using MCS.CommonModel;
 using System;

@@ -5,10 +5,8 @@
 	 ClassPrefix = "";
 	 ClassSuffix = "Info";
 	 ConnectionString = "server=122.51.229.47;uid=sa;pwd=launch-advisor-20180222;database=WMS;MultipleActiveResultSets=true;";
-	 //var builder = new T4Builder("server=122.51.229.47;uid=sa;pwd=launch-advisor-20180222;database=WMS;MultipleActiveResultSets=true;");
 
 	var tables = LoadTables();
 	if(tables.Count==0){return "无生成可用表";}
 #>
-
 <#@ include file="PetaPoco.Generator.ttinclude" #>

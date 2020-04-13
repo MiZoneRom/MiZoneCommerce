@@ -61,8 +61,8 @@
 		List<String> TableNameList = new List<String>();
         Tables TableList = new Tables();
 
-		    SqlConnection con = new SqlConnection(ConnectionString);
-            con.Open();
+		SqlConnection con = new SqlConnection(ConnectionString);
+        con.Open();
 
             SqlCommand cmd = new SqlCommand("select name from sysobjects where xtype='u'", con);
             var reader = cmd.ExecuteReader();
