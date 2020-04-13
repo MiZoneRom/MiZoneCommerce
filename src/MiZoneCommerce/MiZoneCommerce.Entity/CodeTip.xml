@@ -1,4 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<text>
-  <item>Scaffold-DbContext "Data Source=.;Initial Catalog=MiZoneCommerce_1_0;User ID=sa;Password=123456" Microsoft.EntityFrameworkCore.SqlServer -O Entities -F -Context "EntitiesContext"</item>
-</text>
