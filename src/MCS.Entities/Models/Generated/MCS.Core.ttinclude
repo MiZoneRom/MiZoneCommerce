@@ -268,16 +268,16 @@
 
             foreach (var tablename in TableNameList)
             {
-                var Table = new Table();
-                Table.Name = "dbo." + tablename;
-				Table.ClassName = ClassPrefix + tablename + ClassSuffix;
+                var tableModel = new Table();
+                tableModel.Name = "dbo." + tablename;
+				tableModel.ClassName = ClassPrefix + tablename + ClassSuffix;
 
                 #region »ñÈ¡Ö÷¼ü
                 SqlCommand cmd_prikey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
                 var key_result = cmd_prikey.ExecuteReader();
                 while (key_result.Read())
                 {
-                    Table.Primkey = key_result.GetValue(3) != null ? key_result.GetValue(3).ToString() : null;
+                    tableModel.Primkey = key_result.GetValue(3) != null ? key_result.GetValue(3).ToString() : null;
                 }
                 #endregion
 
@@ -304,7 +304,7 @@
                 #endregion
 
                 Table.Columns = Columns;
-                TableList.Add(Table);
+                TableList.Add(tableModel);
             }
             con.Close();
             con.Dispose();
