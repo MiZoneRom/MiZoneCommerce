@@ -27,13 +27,13 @@
 
 	public class Table
     {
-	    public List<Column> Columns { get; set; }
-        public string Name { get; set; }
+	    public List<Column> Columns;
+        public string Name;
 		public string Schema;
 		public bool IsView;
-        public string Primkey { get; set; }
+        public string Primkey;
 		public string CleanName;
-        public string ClassName { get;set; }
+        public string ClassName;
 		public string SequenceName;
 		public bool Ignore;
 
@@ -48,9 +48,9 @@
 
 	public class Column
     {
-        public string Name { get; set; }
+        public string Name;
 		public string PropertyName;
-        public string PropertyType { get; set; }
+        public string PropertyType;
 		public string Remark;
 		public bool IsPK;
 		public bool IsNullable;
@@ -285,12 +285,15 @@
                 #region 获取列名
                 SqlCommand cmd_table = new SqlCommand("select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'", con);
                 var table_result = cmd_table.ExecuteReader();
+
                 List<Column> Columns = new List<Column>();
 
                 while (table_result.Read())
                 {
                     Column columnModel = new Column();
                     columnModel.Name = table_result.GetValue(0) != null ? table_result.GetValue(0).ToString() : null;
+					columnModel.IsNullable = table_result.GetValue(3)=="YES";
+
                     if (!String.IsNullOrEmpty(columnModel.Name))
                     {
                         var ColumTypeStr = GetPropertyType(table_result.GetValue(1) != null ? table_result.GetValue(1).ToString() : null, table_result.GetValue(2) != null ? table_result.GetValue(2).ToString() : null);
