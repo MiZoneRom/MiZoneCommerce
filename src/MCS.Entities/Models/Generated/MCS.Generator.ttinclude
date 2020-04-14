@@ -6,7 +6,7 @@
    foreach(var item in tables)
    {
 
-		manager.StartNewFile(item.Name+".cs");
+		manager.StartNewFile(item.ClassName+".cs");
 
 #>
 
@@ -30,7 +30,7 @@ namespace <#=Namespace #>
      }
      #>
 [ExplicitColumns]
-     public partial class <#=item.ClassName#>:<#=RepoName#>.Record<<#=item.ClassName#>>
+     public partial class <#=item.ClassName#>
      {
         
         <#
@@ -49,5 +49,5 @@ namespace <#=Namespace #>
 <#
 	manager.EndBlock();
    }
-   manager.Process(true);
+   manager.Process(true,false);
 #>

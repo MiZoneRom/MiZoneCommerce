@@ -19,4 +19,23 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Models\Generated\MCS.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MCS.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Models\Generated\MCS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MCS.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Generated\GeneratedModel\" />
+  </ItemGroup>
+
 </Project>
