@@ -13,14 +13,38 @@ namespace MCS.Entities
      public partial class WareHouseDemoInfo
      {
         
-        		public string No {get;set;}
-        		public string ImgUrl {get;set;}
-        		public string Name {get;set;}
-        		public string CateName {get;set;}
-        		public string Spec {get;set;}
-        		public string Num {get;set;}
-        		public string Address {get;set;}
-        		public string Source {get;set;}
+        
+		[Column(name: "No",  isColumn: true)]
+		public string No {get;set;}
+
+        
+		[Column(name: "ImgUrl",  isColumn: true)]
+		public string ImgUrl {get;set;}
+
+        
+		[Column(name: "Name",  isColumn: true)]
+		public string Name {get;set;}
+
+        
+		[Column(name: "CateName",  isColumn: true)]
+		public string CateName {get;set;}
+
+        
+		[Column(name: "Spec",  isColumn: true)]
+		public string Spec {get;set;}
+
+        
+		[Column(name: "Num",  isColumn: true)]
+		public string Num {get;set;}
+
+        
+		[Column(name: "Address",  isColumn: true)]
+		public string Address {get;set;}
+
+        
+		[Column(name: "Source",  isColumn: true)]
+		public string Source {get;set;}
+
         
      }
 

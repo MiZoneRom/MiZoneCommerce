@@ -13,9 +13,18 @@ namespace MCS.Entities
      public partial class SiteSettingInfo
      {
         
-        		public long Id {get;set;}
-        		public string Key {get;set;}
-        		public string Value {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "Key",  isColumn: true)]
+		public string Key {get;set;}
+
+        
+		[Column(name: "Value",  isColumn: true)]
+		public string Value {get;set;}
+
         
      }
 

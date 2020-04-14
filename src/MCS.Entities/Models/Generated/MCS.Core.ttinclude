@@ -273,11 +273,12 @@
 				tableModel.ClassName = ClassPrefix + tablename + ClassSuffix;
 
                 #region »ñÈ¡Ö÷¼ü
+				string primkey = "";
                 SqlCommand cmd_prikey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
                 var key_result = cmd_prikey.ExecuteReader();
                 while (key_result.Read())
                 {
-                    tableModel.Primkey = key_result.GetValue(3) != null ? key_result.GetValue(3).ToString() : null;
+                    primkey = key_result.GetValue(3) != null ? key_result.GetValue(3).ToString() : null;
                 }
                 #endregion
 
@@ -288,17 +289,18 @@
 
                 while (table_result.Read())
                 {
-                    Column Columindex = new Column();
-                    Columindex.Name = table_result.GetValue(0) != null ? table_result.GetValue(0).ToString() : null;
-                    if (!String.IsNullOrEmpty(Columindex.Name))
+                    Column columnModel = new Column();
+                    columnModel.Name = table_result.GetValue(0) != null ? table_result.GetValue(0).ToString() : null;
+                    if (!String.IsNullOrEmpty(columnModel.Name))
                     {
                         var ColumTypeStr = GetPropertyType(table_result.GetValue(1) != null ? table_result.GetValue(1).ToString() : null, table_result.GetValue(2) != null ? table_result.GetValue(2).ToString() : null);
                         if (table_result.GetValue(3).ToString() == "YES" && ColumTypeStr != "string" && ColumTypeStr != "Guid")
                         {
                             ColumTypeStr = ColumTypeStr + "?";
                         }
-                        Columindex.PropertyType = ColumTypeStr;
-                        Columns.Add(Columindex);
+                        columnModel.PropertyType = ColumTypeStr;
+						columnModel.IsPK = columnModel.Name == primkey;
+                        Columns.Add(columnModel);
                     }
                 }
                 #endregion

@@ -13,12 +13,30 @@ namespace MCS.Entities
      public partial class CapitalInfo
      {
         
-        		public long Id {get;set;}
-        		public long UserId {get;set;}
-        		public decimal Balance {get;set;}
-        		public decimal FreezeAmount {get;set;}
-        		public decimal ChargeAmount {get;set;}
-        		public decimal PresentAmount {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "UserId",  isColumn: true)]
+		public long UserId {get;set;}
+
+        
+		[Column(name: "Balance",  isColumn: true)]
+		public decimal Balance {get;set;}
+
+        
+		[Column(name: "FreezeAmount",  isColumn: true)]
+		public decimal FreezeAmount {get;set;}
+
+        
+		[Column(name: "ChargeAmount",  isColumn: true)]
+		public decimal ChargeAmount {get;set;}
+
+        
+		[Column(name: "PresentAmount",  isColumn: true)]
+		public decimal PresentAmount {get;set;}
+
         
      }
 

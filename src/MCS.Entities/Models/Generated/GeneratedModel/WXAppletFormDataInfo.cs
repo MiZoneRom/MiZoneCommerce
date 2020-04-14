@@ -13,12 +13,30 @@ namespace MCS.Entities
      public partial class WXAppletFormDataInfo
      {
         
-        		public long Id {get;set;}
-        		public long EventId {get;set;}
-        		public string EventValue {get;set;}
-        		public string FormId {get;set;}
-        		public DateTime EventTime {get;set;}
-        		public DateTime ExpireTime {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "EventId",  isColumn: true)]
+		public long EventId {get;set;}
+
+        
+		[Column(name: "EventValue",  isColumn: true)]
+		public string EventValue {get;set;}
+
+        
+		[Column(name: "FormId",  isColumn: true)]
+		public string FormId {get;set;}
+
+        
+		[Column(name: "EventTime",  isColumn: true)]
+		public DateTime EventTime {get;set;}
+
+        
+		[Column(name: "ExpireTime",  isColumn: true)]
+		public DateTime ExpireTime {get;set;}
+
         
      }
 

@@ -13,9 +13,18 @@ namespace MCS.Entities
      public partial class MemberGroupInfo
      {
         
-        		public long Id {get;set;}
-        		public int StatisticsType {get;set;}
-        		public int Total {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "StatisticsType",  isColumn: true)]
+		public int StatisticsType {get;set;}
+
+        
+		[Column(name: "Total",  isColumn: true)]
+		public int Total {get;set;}
+
         
      }
 

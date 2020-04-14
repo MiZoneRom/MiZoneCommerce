@@ -28,7 +28,10 @@ namespace <#=Namespace #>
         foreach(var col in item.Columns)
         {
         #>
+
+		[Column(name: "<#=col.Name#>",<#=col.IsPK ? "key: ColumnKey.Primary,":""#> <#=col.IsAutoIncrement ? "isIdentity: true,":""#> isColumn: true)]
 		public <#=col.PropertyType#> <#=col.Name#> {get;set;}
+
         <#
         }
         #>

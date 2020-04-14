@@ -13,15 +13,42 @@ namespace MCS.Entities
      public partial class WareHouseGoodsInfo
      {
         
-        		public long Id {get;set;}
-        		public long WareHouseId {get;set;}
-        		public string Name {get;set;}
-        		public long CategoryId {get;set;}
-        		public int Quantity {get;set;}
-        		public string MeasureUnit {get;set;}
-        		public long AddressId {get;set;}
-        		public long SourceId {get;set;}
-        		public DateTime CreateDate {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "WareHouseId",  isColumn: true)]
+		public long WareHouseId {get;set;}
+
+        
+		[Column(name: "Name",  isColumn: true)]
+		public string Name {get;set;}
+
+        
+		[Column(name: "CategoryId",  isColumn: true)]
+		public long CategoryId {get;set;}
+
+        
+		[Column(name: "Quantity",  isColumn: true)]
+		public int Quantity {get;set;}
+
+        
+		[Column(name: "MeasureUnit",  isColumn: true)]
+		public string MeasureUnit {get;set;}
+
+        
+		[Column(name: "AddressId",  isColumn: true)]
+		public long AddressId {get;set;}
+
+        
+		[Column(name: "SourceId",  isColumn: true)]
+		public long SourceId {get;set;}
+
+        
+		[Column(name: "CreateDate",  isColumn: true)]
+		public DateTime CreateDate {get;set;}
+
         
      }
 

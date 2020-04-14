@@ -13,9 +13,18 @@ namespace MCS.Entities
      public partial class WareHouseGoodsCategoryInfo
      {
         
-        		public long Id {get;set;}
-        		public string Name {get;set;}
-        		public DateTime CreateDate {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "Name",  isColumn: true)]
+		public string Name {get;set;}
+
+        
+		[Column(name: "CreateDate",  isColumn: true)]
+		public DateTime CreateDate {get;set;}
+
         
      }
 

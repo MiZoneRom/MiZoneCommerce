@@ -13,13 +13,34 @@ namespace MCS.Entities
      public partial class WeiXinMsgTemplateInfo
      {
         
-        		public long Id {get;set;}
-        		public int MessageType {get;set;}
-        		public string TemplateNum {get;set;}
-        		public string TemplateId {get;set;}
-        		public DateTime UpdateDate {get;set;}
-        		public bool IsOpen {get;set;}
-        		public bool UserInWxApplet {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "MessageType",  isColumn: true)]
+		public int MessageType {get;set;}
+
+        
+		[Column(name: "TemplateNum",  isColumn: true)]
+		public string TemplateNum {get;set;}
+
+        
+		[Column(name: "TemplateId",  isColumn: true)]
+		public string TemplateId {get;set;}
+
+        
+		[Column(name: "UpdateDate",  isColumn: true)]
+		public DateTime UpdateDate {get;set;}
+
+        
+		[Column(name: "IsOpen",  isColumn: true)]
+		public bool IsOpen {get;set;}
+
+        
+		[Column(name: "UserInWxApplet",  isColumn: true)]
+		public bool UserInWxApplet {get;set;}
+
         
      }
 

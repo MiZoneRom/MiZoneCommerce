@@ -13,9 +13,18 @@ namespace MCS.Entities
      public partial class RolePrivilegeInfo
      {
         
-        		public long Id {get;set;}
-        		public int Privilege {get;set;}
-        		public long RoleId {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "Privilege",  isColumn: true)]
+		public int Privilege {get;set;}
+
+        
+		[Column(name: "RoleId",  isColumn: true)]
+		public long RoleId {get;set;}
+
         
      }
 

@@ -13,10 +13,22 @@ namespace MCS.Entities
      public partial class WareHouseAddressInfo
      {
         
-        		public long Id {get;set;}
-        		public long WareHouseId {get;set;}
-        		public string AddressName {get;set;}
-        		public DateTime CreateDate {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "WareHouseId",  isColumn: true)]
+		public long WareHouseId {get;set;}
+
+        
+		[Column(name: "AddressName",  isColumn: true)]
+		public string AddressName {get;set;}
+
+        
+		[Column(name: "CreateDate",  isColumn: true)]
+		public DateTime CreateDate {get;set;}
+
         
      }
 

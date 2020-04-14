@@ -13,9 +13,18 @@ namespace MCS.Entities
      public partial class RoleInfo
      {
         
-        		public long Id {get;set;}
-        		public string RoleName {get;set;}
-        		public string Description {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "RoleName",  isColumn: true)]
+		public string RoleName {get;set;}
+
+        
+		[Column(name: "Description",  isColumn: true)]
+		public string Description {get;set;}
+
         
      }
 

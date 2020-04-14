@@ -13,10 +13,22 @@ namespace MCS.Entities
      public partial class OpenIdInfo
      {
         
-        		public long Id {get;set;}
-        		public string OpenId {get;set;}
-        		public DateTime SubscribeTime {get;set;}
-        		public bool IsSubscribe {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "OpenId",  isColumn: true)]
+		public string OpenId {get;set;}
+
+        
+		[Column(name: "SubscribeTime",  isColumn: true)]
+		public DateTime SubscribeTime {get;set;}
+
+        
+		[Column(name: "IsSubscribe",  isColumn: true)]
+		public bool IsSubscribe {get;set;}
+
         
      }
 

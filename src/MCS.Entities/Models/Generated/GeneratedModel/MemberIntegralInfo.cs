@@ -13,11 +13,26 @@ namespace MCS.Entities
      public partial class MemberIntegralInfo
      {
         
-        		public long Id {get;set;}
-        		public long UserId {get;set;}
-        		public string UserName {get;set;}
-        		public int HistoryIntegrals {get;set;}
-        		public int AvailableIntegrals {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "UserId",  isColumn: true)]
+		public long UserId {get;set;}
+
+        
+		[Column(name: "UserName",  isColumn: true)]
+		public string UserName {get;set;}
+
+        
+		[Column(name: "HistoryIntegrals",  isColumn: true)]
+		public int HistoryIntegrals {get;set;}
+
+        
+		[Column(name: "AvailableIntegrals",  isColumn: true)]
+		public int AvailableIntegrals {get;set;}
+
         
      }
 

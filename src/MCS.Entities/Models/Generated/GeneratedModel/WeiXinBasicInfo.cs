@@ -13,11 +13,26 @@ namespace MCS.Entities
      public partial class WeiXinBasicInfo
      {
         
-        		public long Id {get;set;}
-        		public string Ticket {get;set;}
-        		public DateTime TicketOutTime {get;set;}
-        		public string AppId {get;set;}
-        		public string AccessToken {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "Ticket",  isColumn: true)]
+		public string Ticket {get;set;}
+
+        
+		[Column(name: "TicketOutTime",  isColumn: true)]
+		public DateTime TicketOutTime {get;set;}
+
+        
+		[Column(name: "AppId",  isColumn: true)]
+		public string AppId {get;set;}
+
+        
+		[Column(name: "AccessToken",  isColumn: true)]
+		public string AccessToken {get;set;}
+
         
      }
 

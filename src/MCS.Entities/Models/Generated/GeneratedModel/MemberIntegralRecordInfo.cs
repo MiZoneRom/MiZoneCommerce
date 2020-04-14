@@ -13,13 +13,34 @@ namespace MCS.Entities
      public partial class MemberIntegralRecordInfo
      {
         
-        		public long Id {get;set;}
-        		public long UserId {get;set;}
-        		public string UserName {get;set;}
-        		public int TypeId {get;set;}
-        		public int Integral {get;set;}
-        		public DateTime CreateDate {get;set;}
-        		public string Remark {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "UserId",  isColumn: true)]
+		public long UserId {get;set;}
+
+        
+		[Column(name: "UserName",  isColumn: true)]
+		public string UserName {get;set;}
+
+        
+		[Column(name: "TypeId",  isColumn: true)]
+		public int TypeId {get;set;}
+
+        
+		[Column(name: "Integral",  isColumn: true)]
+		public int Integral {get;set;}
+
+        
+		[Column(name: "CreateDate",  isColumn: true)]
+		public DateTime CreateDate {get;set;}
+
+        
+		[Column(name: "Remark",  isColumn: true)]
+		public string Remark {get;set;}
+
         
      }
 

@@ -13,11 +13,26 @@ namespace MCS.Entities
      public partial class MemberContactInfo
      {
         
-        		public long Id {get;set;}
-        		public long UserId {get;set;}
-        		public int UserType {get;set;}
-        		public string ServiceProvider {get;set;}
-        		public string Contact {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "UserId",  isColumn: true)]
+		public long UserId {get;set;}
+
+        
+		[Column(name: "UserType",  isColumn: true)]
+		public int UserType {get;set;}
+
+        
+		[Column(name: "ServiceProvider",  isColumn: true)]
+		public string ServiceProvider {get;set;}
+
+        
+		[Column(name: "Contact",  isColumn: true)]
+		public string Contact {get;set;}
+
         
      }
 

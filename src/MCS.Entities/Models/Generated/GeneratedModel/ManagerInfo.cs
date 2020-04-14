@@ -13,14 +13,38 @@ namespace MCS.Entities
      public partial class ManagerInfo
      {
         
-        		public long Id {get;set;}
-        		public long RoleId {get;set;}
-        		public string UserName {get;set;}
-        		public string Password {get;set;}
-        		public string PasswordSalt {get;set;}
-        		public DateTime? CreateDate {get;set;}
-        		public string Remark {get;set;}
-        		public string RealName {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "RoleId",  isColumn: true)]
+		public long RoleId {get;set;}
+
+        
+		[Column(name: "UserName",  isColumn: true)]
+		public string UserName {get;set;}
+
+        
+		[Column(name: "Password",  isColumn: true)]
+		public string Password {get;set;}
+
+        
+		[Column(name: "PasswordSalt",  isColumn: true)]
+		public string PasswordSalt {get;set;}
+
+        
+		[Column(name: "CreateDate",  isColumn: true)]
+		public DateTime? CreateDate {get;set;}
+
+        
+		[Column(name: "Remark",  isColumn: true)]
+		public string Remark {get;set;}
+
+        
+		[Column(name: "RealName",  isColumn: true)]
+		public string RealName {get;set;}
+
         
      }
 

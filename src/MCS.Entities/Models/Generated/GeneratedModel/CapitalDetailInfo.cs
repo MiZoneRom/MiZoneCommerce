@@ -13,14 +13,38 @@ namespace MCS.Entities
      public partial class CapitalDetailInfo
      {
         
-        		public long Id {get;set;}
-        		public long CapitalId {get;set;}
-        		public int SourceType {get;set;}
-        		public decimal Amount {get;set;}
-        		public string SourceData {get;set;}
-        		public DateTime CreateDate {get;set;}
-        		public string Remark {get;set;}
-        		public decimal PresentAmount {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "CapitalId",  isColumn: true)]
+		public long CapitalId {get;set;}
+
+        
+		[Column(name: "SourceType",  isColumn: true)]
+		public int SourceType {get;set;}
+
+        
+		[Column(name: "Amount",  isColumn: true)]
+		public decimal Amount {get;set;}
+
+        
+		[Column(name: "SourceData",  isColumn: true)]
+		public string SourceData {get;set;}
+
+        
+		[Column(name: "CreateDate",  isColumn: true)]
+		public DateTime CreateDate {get;set;}
+
+        
+		[Column(name: "Remark",  isColumn: true)]
+		public string Remark {get;set;}
+
+        
+		[Column(name: "PresentAmount",  isColumn: true)]
+		public decimal PresentAmount {get;set;}
+
         
      }
 

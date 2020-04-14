@@ -13,14 +13,38 @@ namespace MCS.Entities
      public partial class MemberActivityDegreeInfo
      {
         
-        		public long Id {get;set;}
-        		public long UserId {get;set;}
-        		public bool OneMonth {get;set;}
-        		public bool ThreeMonth {get;set;}
-        		public bool SixMonth {get;set;}
-        		public DateTime? OneMonthEffectiveTime {get;set;}
-        		public DateTime? ThreeMonthEffectiveTime {get;set;}
-        		public DateTime? SixMonthEffectiveTime {get;set;}
+        
+		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		public long Id {get;set;}
+
+        
+		[Column(name: "UserId",  isColumn: true)]
+		public long UserId {get;set;}
+
+        
+		[Column(name: "OneMonth",  isColumn: true)]
+		public bool OneMonth {get;set;}
+
+        
+		[Column(name: "ThreeMonth",  isColumn: true)]
+		public bool ThreeMonth {get;set;}
+
+        
+		[Column(name: "SixMonth",  isColumn: true)]
+		public bool SixMonth {get;set;}
+
+        
+		[Column(name: "OneMonthEffectiveTime",  isColumn: true)]
+		public DateTime? OneMonthEffectiveTime {get;set;}
+
+        
+		[Column(name: "ThreeMonthEffectiveTime",  isColumn: true)]
+		public DateTime? ThreeMonthEffectiveTime {get;set;}
+
+        
+		[Column(name: "SixMonthEffectiveTime",  isColumn: true)]
+		public DateTime? SixMonthEffectiveTime {get;set;}
+
         
      }
 
