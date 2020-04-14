@@ -1,0 +1,83 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Data" #>
+<#@ assembly name="System.xml" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Data" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+
+<#@ include file="MCS.Core.ttinclude" #>
+
+<#    
+   
+        string connectionString= "server=122.51.229.47;uid=sa;pwd=launch-advisor-20180222;database=WMS;";        
+        SqlConnection conn = new SqlConnection(connectionString);
+        conn.Open();
+    
+        string selectQuery ="SET FMTONLY ON; select * from @tableName; SET FMTONLY OFF;";
+        SqlCommand command = new SqlCommand(selectQuery,conn);
+        SqlDataAdapter ad = new SqlDataAdapter(command);
+        System.Data.DataSet ds = new DataSet(); 
+  
+        var manager = Manager.Create(Host, GenerationEnvironment);  
+
+        System.Data.DataTable schema = conn.GetSchema("Tables");
+        foreach(System.Data.DataRow row in schema.Rows)
+        {    
+            ds.Tables.Clear();
+            string tb_name= row["TABLE_NAME"].ToString();        
+            command.CommandText = selectQuery.Replace("@tableName",row["TABLE_NAME"].ToString());
+            ad.FillSchema(ds, SchemaType.Mapped,tb_name);  
+
+            manager.StartNewFile(tb_name+".cs");#>
+
+using System;
+using System.Data;
+using System.Linq;
+using Dapper;
+using System.Reflection;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Collections.Generic;
+
+namespace MCS.Entities
+{    
+    /// <summary>
+    /// 实体-<#=tb_name#> 
+    /// </summary>
+    public partial class <#=tb_name#>    
+    {    
+        <#
+        PushIndent("	");
+        foreach (DataColumn dc in ds.Tables[0].Columns) 
+        {
+		//根据表名称和字段名称查出字段描述 comment
+		 string sql = @"select d.value from  sys.syscolumns a left outer join  sys.extended_properties  d on a.id = d.major_id and a.colid = d.minor_id and d.name = 'MS_Description' where object_name(a.id) = '{0}' and a.name='{1}'  ";
+         SqlCommand cmd = new SqlCommand(string.Format(sql, row["TABLE_NAME"],dc.ColumnName),conn);
+         object comment= cmd.ExecuteScalar(); 
+         WriteLine("\r\n    /// <summary>\r\n    ///"+comment+"\r\n    /// </summary>\r\n    public " + dc.DataType.Name+" " + dc.ColumnName + " { get; set; }");
+		
+        }
+		WriteLine("\r\n    /// <summary>\r\n    ///实体类转字典集合\r\n    /// </summary>");
+		WriteLine("    public List<Dictionary<string, object>> ToList()");
+		WriteLine("    {");
+		WriteLine("        PropertyInfo[] attrs = this.GetType().GetProperties();");
+		WriteLine("        List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();");
+		WriteLine("        foreach (var item in attrs)");
+		WriteLine("        {");
+		WriteLine("            list.Add(new Dictionary<string, object>() { { item.Name, item.GetValue(this, null) } });");
+		WriteLine("        }");
+		WriteLine("        return list;");
+		WriteLine("    }");
+        PopIndent();
+        #>
+    }
+}
+    
+<#
+        manager.EndBlock();    
+         }            
+        conn.Close();  
+       manager.Process(true);  
+        #>

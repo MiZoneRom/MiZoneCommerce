@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MCS.CommonModel\MCS.CommonModel.csproj" />
     <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
   </ItemGroup>
