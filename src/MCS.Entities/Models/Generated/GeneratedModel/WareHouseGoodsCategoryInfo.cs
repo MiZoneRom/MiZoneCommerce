@@ -10,14 +10,12 @@ namespace MCS.Entities
 {
     
      [Table("dbo.WareHouseGoodsCategory")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class WareHouseGoodsCategoryInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public string Name {get;set;}
-        [Column] public DateTime CreateDate {get;set;}
+        		public long Id {get;set;}
+        		public string Name {get;set;}
+        		public DateTime CreateDate {get;set;}
         
      }
 

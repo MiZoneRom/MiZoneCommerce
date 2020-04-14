@@ -10,19 +10,17 @@ namespace MCS.Entities
 {
     
      [Table("dbo.CapitalDetail")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class CapitalDetailInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public long CapitalId {get;set;}
-        [Column] public int SourceType {get;set;}
-        [Column] public decimal Amount {get;set;}
-        [Column] public string SourceData {get;set;}
-        [Column] public DateTime CreateDate {get;set;}
-        [Column] public string Remark {get;set;}
-        [Column] public decimal PresentAmount {get;set;}
+        		public long Id {get;set;}
+        		public long CapitalId {get;set;}
+        		public int SourceType {get;set;}
+        		public decimal Amount {get;set;}
+        		public string SourceData {get;set;}
+        		public DateTime CreateDate {get;set;}
+        		public string Remark {get;set;}
+        		public decimal PresentAmount {get;set;}
         
      }
 

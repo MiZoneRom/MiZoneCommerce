@@ -10,18 +10,17 @@ namespace MCS.Entities
 {
     
      [Table("dbo.WareHouseDemo")]
-     [ExplicitColumns]
      public partial class WareHouseDemoInfo
      {
         
-        [Column] public string No {get;set;}
-        [Column] public string ImgUrl {get;set;}
-        [Column] public string Name {get;set;}
-        [Column] public string CateName {get;set;}
-        [Column] public string Spec {get;set;}
-        [Column] public string Num {get;set;}
-        [Column] public string Address {get;set;}
-        [Column] public string Source {get;set;}
+        		public string No {get;set;}
+        		public string ImgUrl {get;set;}
+        		public string Name {get;set;}
+        		public string CateName {get;set;}
+        		public string Spec {get;set;}
+        		public string Num {get;set;}
+        		public string Address {get;set;}
+        		public string Source {get;set;}
         
      }
 

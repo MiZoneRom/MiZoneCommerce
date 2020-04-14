@@ -10,18 +10,16 @@ namespace MCS.Entities
 {
     
      [Table("dbo.SendMessageRecord")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class SendMessageRecordInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public int MessageType {get;set;}
-        [Column] public int ContentType {get;set;}
-        [Column] public string SendContent {get;set;}
-        [Column] public string ToUserLabel {get;set;}
-        [Column] public int SendState {get;set;}
-        [Column] public DateTime SendTime {get;set;}
+        		public long Id {get;set;}
+        		public int MessageType {get;set;}
+        		public int ContentType {get;set;}
+        		public string SendContent {get;set;}
+        		public string ToUserLabel {get;set;}
+        		public int SendState {get;set;}
+        		public DateTime SendTime {get;set;}
         
      }
 

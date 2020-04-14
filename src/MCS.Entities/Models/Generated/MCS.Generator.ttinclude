@@ -21,15 +21,6 @@ namespace <#=Namespace #>
 {
     
      [Table("<#=item.Name#>")]
-     <#
-     if(!String.IsNullOrWhiteSpace(item.Primkey))
-     {
-     #>
-[PrimaryKey("<#=item.Primkey #>")]
-     <#
-     }
-     #>
-[ExplicitColumns]
      public partial class <#=item.ClassName#>
      {
         
@@ -37,7 +28,7 @@ namespace <#=Namespace #>
         foreach(var col in item.Columns)
         {
         #>
-[Column] public <#=col.PropertyType#> <#=col.Name#> {get;set;}
+		public <#=col.PropertyType#> <#=col.Name#> {get;set;}
         <#
         }
         #>

@@ -10,16 +10,14 @@ namespace MCS.Entities
 {
     
      [Table("dbo.WeiXinBasic")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class WeiXinBasicInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public string Ticket {get;set;}
-        [Column] public DateTime TicketOutTime {get;set;}
-        [Column] public string AppId {get;set;}
-        [Column] public string AccessToken {get;set;}
+        		public long Id {get;set;}
+        		public string Ticket {get;set;}
+        		public DateTime TicketOutTime {get;set;}
+        		public string AppId {get;set;}
+        		public string AccessToken {get;set;}
         
      }
 

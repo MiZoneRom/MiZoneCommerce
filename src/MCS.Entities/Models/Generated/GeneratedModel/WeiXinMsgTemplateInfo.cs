@@ -10,18 +10,16 @@ namespace MCS.Entities
 {
     
      [Table("dbo.WeiXinMsgTemplate")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class WeiXinMsgTemplateInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public int MessageType {get;set;}
-        [Column] public string TemplateNum {get;set;}
-        [Column] public string TemplateId {get;set;}
-        [Column] public DateTime UpdateDate {get;set;}
-        [Column] public bool IsOpen {get;set;}
-        [Column] public bool UserInWxApplet {get;set;}
+        		public long Id {get;set;}
+        		public int MessageType {get;set;}
+        		public string TemplateNum {get;set;}
+        		public string TemplateId {get;set;}
+        		public DateTime UpdateDate {get;set;}
+        		public bool IsOpen {get;set;}
+        		public bool UserInWxApplet {get;set;}
         
      }
 

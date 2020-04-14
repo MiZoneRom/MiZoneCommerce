@@ -10,14 +10,12 @@ namespace MCS.Entities
 {
     
      [Table("dbo.RolePrivilege")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class RolePrivilegeInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public int Privilege {get;set;}
-        [Column] public long RoleId {get;set;}
+        		public long Id {get;set;}
+        		public int Privilege {get;set;}
+        		public long RoleId {get;set;}
         
      }
 

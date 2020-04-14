@@ -10,14 +10,12 @@ namespace MCS.Entities
 {
     
      [Table("dbo.MemberGroup")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class MemberGroupInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public int StatisticsType {get;set;}
-        [Column] public int Total {get;set;}
+        		public long Id {get;set;}
+        		public int StatisticsType {get;set;}
+        		public int Total {get;set;}
         
      }
 

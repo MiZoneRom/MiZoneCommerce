@@ -10,14 +10,12 @@ namespace MCS.Entities
 {
     
      [Table("dbo.Role")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class RoleInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public string RoleName {get;set;}
-        [Column] public string Description {get;set;}
+        		public long Id {get;set;}
+        		public string RoleName {get;set;}
+        		public string Description {get;set;}
         
      }
 

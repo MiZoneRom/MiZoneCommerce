@@ -10,18 +10,16 @@ namespace MCS.Entities
 {
     
      [Table("dbo.MemberIntegralRecord")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class MemberIntegralRecordInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public long UserId {get;set;}
-        [Column] public string UserName {get;set;}
-        [Column] public int TypeId {get;set;}
-        [Column] public int Integral {get;set;}
-        [Column] public DateTime CreateDate {get;set;}
-        [Column] public string Remark {get;set;}
+        		public long Id {get;set;}
+        		public long UserId {get;set;}
+        		public string UserName {get;set;}
+        		public int TypeId {get;set;}
+        		public int Integral {get;set;}
+        		public DateTime CreateDate {get;set;}
+        		public string Remark {get;set;}
         
      }
 

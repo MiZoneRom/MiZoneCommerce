@@ -10,17 +10,15 @@ namespace MCS.Entities
 {
     
      [Table("dbo.Capital")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class CapitalInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public long UserId {get;set;}
-        [Column] public decimal Balance {get;set;}
-        [Column] public decimal FreezeAmount {get;set;}
-        [Column] public decimal ChargeAmount {get;set;}
-        [Column] public decimal PresentAmount {get;set;}
+        		public long Id {get;set;}
+        		public long UserId {get;set;}
+        		public decimal Balance {get;set;}
+        		public decimal FreezeAmount {get;set;}
+        		public decimal ChargeAmount {get;set;}
+        		public decimal PresentAmount {get;set;}
         
      }
 

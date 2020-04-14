@@ -10,17 +10,15 @@ namespace MCS.Entities
 {
     
      [Table("dbo.WXAppletFormData")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class WXAppletFormDataInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public long EventId {get;set;}
-        [Column] public string EventValue {get;set;}
-        [Column] public string FormId {get;set;}
-        [Column] public DateTime EventTime {get;set;}
-        [Column] public DateTime ExpireTime {get;set;}
+        		public long Id {get;set;}
+        		public long EventId {get;set;}
+        		public string EventValue {get;set;}
+        		public string FormId {get;set;}
+        		public DateTime EventTime {get;set;}
+        		public DateTime ExpireTime {get;set;}
         
      }
 

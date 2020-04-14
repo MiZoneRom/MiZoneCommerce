@@ -10,18 +10,16 @@ namespace MCS.Entities
 {
     
      [Table("dbo.MemberOpenId")]
-     [PrimaryKey("Id")]
-     [ExplicitColumns]
      public partial class MemberOpenIdInfo
      {
         
-        [Column] public long Id {get;set;}
-        [Column] public long UserId {get;set;}
-        [Column] public string OpenId {get;set;}
-        [Column] public string UnionOpenId {get;set;}
-        [Column] public string UnionId {get;set;}
-        [Column] public string ServiceProvider {get;set;}
-        [Column] public int AppIdType {get;set;}
+        		public long Id {get;set;}
+        		public long UserId {get;set;}
+        		public string OpenId {get;set;}
+        		public string UnionOpenId {get;set;}
+        		public string UnionId {get;set;}
+        		public string ServiceProvider {get;set;}
+        		public int AppIdType {get;set;}
         
      }
 
