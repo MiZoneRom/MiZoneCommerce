@@ -303,7 +303,7 @@
                 }
                 #endregion
 
-                Table.Columns = Columns;
+                tableModel.Columns = Columns;
                 TableList.Add(tableModel);
             }
             con.Close();
