@@ -1,22 +1,86 @@
-ï»¿<#@ assembly name="System.Core"
-#><#@ assembly name="System.Data.Linq"
-#><#@ assembly name="EnvDTE"
-#><#@ assembly name="System.Xml"
-#><#@ assembly name="System.Xml.Linq"
-#><#@ import namespace="System"
-#><#@ import namespace="System.CodeDom"
-#><#@ import namespace="System.CodeDom.Compiler"
-#><#@ import namespace="System.Collections.Generic"
-#><#@ import namespace="System.Data.Linq"
-#><#@ import namespace="System.Data.Linq.Mapping"
-#><#@ import namespace="System.IO"
-#><#@ import namespace="System.Linq"
-#><#@ import namespace="System.Reflection"
-#><#@ import namespace="System.Text"
-#><#@ import namespace="System.Xml.Linq"
-#><#@ import namespace="Microsoft.VisualStudio.TextTemplating"
-#><#+
-// Manager class records the various blocks so it can split them up
+<#@ template language="C#" hostspecific="True" #>
+<#@ output extension=".cs" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Data"#>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Data.Common" #>
+<#@ import namespace="System.Data" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.IO"#>
+<#@ import namespace="Microsoft.VisualStudio.TextTemplating"#>
+<#+
+
+	string ConnectionString = "";
+	string Namespace = "";
+	string RepoName = "";
+	string ClassPrefix = "";
+	string ClassSuffix = "";
+	string SchemaName = null;
+	string[] ExcludePrefix = new string[] {};
+	string[] ClassReplaces = new string[] {};
+	Dictionary<string, string> EnumLists = new Dictionary<string, string> {};
+	List<Tuple<string,string,bool,string,string,string>> ReferenceLists = new List<Tuple<string,string,bool,string,string,string>>{};
+
+	public class Table
+    {
+	    public List<Column> Columns { get; set; }
+        public string Name { get; set; }
+		public string Schema;
+		public bool IsView;
+        public string Primkey { get; set; }
+		public string CleanName;
+        public string ClassName { get;set; }
+		public string SequenceName;
+		public bool Ignore;
+
+		public Column PK
+		{
+			get
+				{
+					return this.Columns.SingleOrDefault(x=>x.IsPK);
+				}
+		}
+    }
+
+	public class Column
+    {
+        public string Name { get; set; }
+		public string PropertyName;
+        public string PropertyType { get; set; }
+		public string Remark;
+		public bool IsPK;
+		public bool IsNullable;
+		public bool IsAutoIncrement;
+		public bool Ignore;
+    }
+
+	public class Tables : List<Table>
+	{
+
+		public Tables()
+		{
+		}
+	
+		public Table GetTable(string tableName)
+		{
+			return this.Single(x=>string.Compare(x.Name, tableName, true)==0);
+		}
+
+		public Table this[string tableName]
+		{
+			get
+			{
+				return GetTable(tableName);
+			}
+		}
+
+	}
+
+	// Manager class records the various blocks so it can split them up
 class Manager {
     private class Block {
         public String Name;
@@ -115,6 +179,7 @@ class Manager {
     }
  
     private class VSManager: Manager {
+
         private EnvDTE.ProjectItem templateProjectItem;
         private EnvDTE.DTE dte;
         private Action<String> checkOutAction;
@@ -182,4 +247,125 @@ class Manager {
                 checkOutAction.EndInvoke(checkOutAction.BeginInvoke(fileName, null, null));
         }
     }
-} #>
+	}
+
+	Tables LoadTables()
+	{
+	
+		List<String> TableNameList = new List<String>();
+        Tables TableList = new Tables();
+
+		SqlConnection con = new SqlConnection(ConnectionString);
+        con.Open();
+
+            SqlCommand cmd = new SqlCommand("select name from sysobjects where xtype='u'", con);
+            var reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                var tablename = reader.GetValue(0).ToString();
+                TableNameList.Add(tablename);
+            }
+
+            foreach (var tablename in TableNameList)
+            {
+                var Table = new Table();
+                Table.Name = "dbo." + tablename;
+				Table.ClassName = ClassPrefix + tablename + ClassSuffix;
+
+                #region »ñÈ¡Ö÷¼ü
+                SqlCommand cmd_prikey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
+                var key_result = cmd_prikey.ExecuteReader();
+                while (key_result.Read())
+                {
+                    Table.Primkey = key_result.GetValue(3) != null ? key_result.GetValue(3).ToString() : null;
+                }
+                #endregion
+
+                #region »ñÈ¡ÁÐÃû
+                SqlCommand cmd_table = new SqlCommand("select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'", con);
+                var table_result = cmd_table.ExecuteReader();
+                List<Column> Columns = new List<Column>();
+
+                while (table_result.Read())
+                {
+                    Column Columindex = new Column();
+                    Columindex.Name = table_result.GetValue(0) != null ? table_result.GetValue(0).ToString() : null;
+                    if (!String.IsNullOrEmpty(Columindex.Name))
+                    {
+                        var ColumTypeStr = GetPropertyType(table_result.GetValue(1) != null ? table_result.GetValue(1).ToString() : null, table_result.GetValue(2) != null ? table_result.GetValue(2).ToString() : null);
+                        if (table_result.GetValue(3).ToString() == "YES" && ColumTypeStr != "string" && ColumTypeStr != "Guid")
+                        {
+                            ColumTypeStr = ColumTypeStr + "?";
+                        }
+                        Columindex.PropertyType = ColumTypeStr;
+                        Columns.Add(Columindex);
+                    }
+                }
+                #endregion
+
+                Table.Columns = Columns;
+                TableList.Add(Table);
+            }
+            con.Close();
+            con.Dispose();
+
+			return TableList;
+
+
+	}
+
+
+	        private string GetPropertyType(string sqlType, string dataScale)
+        {
+            string sysType = "string";
+            sqlType = sqlType.ToLower();
+            switch (sqlType)
+            {
+                case "bigint":
+                    sysType = "long";
+                    break;
+                case "smallint":
+                    sysType = "short";
+                    break;
+                case "int":
+                    sysType = "int";
+                    break;
+                case "uniqueidentifier":
+                    sysType = "Guid";
+                    break;
+                case "smalldatetime":
+                case "datetime":
+                case "date":
+                    sysType = "DateTime";
+                    break;
+                case "float":
+                    sysType = "double";
+                    break;
+                case "real":
+                case "numeric":
+                case "smallmoney":
+                case "decimal":
+                case "money":
+                case "number":
+                    sysType = "decimal";
+                    break;
+                case "tinyint":
+                    sysType = "byte";
+                    break;
+                case "bit":
+                    sysType = "bool";
+                    break;
+                case "image":
+                case "binary":
+                case "varbinary":
+                case "timestamp":
+                    sysType = "byte[]";
+                    break;
+            }
+            if (sqlType == "number" && dataScale == "0")
+                return "long";
+
+            return sysType;
+        }
+
+#>

@@ -1,0 +1,53 @@
+
+<# 
+
+	var manager = Manager.Create(Host, GenerationEnvironment); 
+
+   foreach(var item in tables)
+   {
+
+		manager.StartNewFile(item.Name+".cs");
+
+#>
+
+using MCS.CommonModel;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using Dapper;
+using Dapper.Common;
+
+namespace <#=Namespace #>
+{
+    
+     [Table("<#=item.Name#>")]
+     <#
+     if(!String.IsNullOrWhiteSpace(item.Primkey))
+     {
+     #>
+[PrimaryKey("<#=item.Primkey #>")]
+     <#
+     }
+     #>
+[ExplicitColumns]
+     public partial class <#=item.ClassName#>:<#=RepoName#>.Record<<#=item.ClassName#>>
+     {
+        
+        <#
+        foreach(var col in item.Columns)
+        {
+        #>
+[Column] public <#=col.PropertyType#> <#=col.Name#> {get;set;}
+        <#
+        }
+        #>
+
+     }
+
+}
+
+<#
+	manager.EndBlock();
+   }
+   manager.Process(true);
+#>
