@@ -14,7 +14,7 @@ namespace MCS.Entities
      {
         
         
-		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
+		[Column(name: "Id",key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
 		public long Id {get;set;}
 
         

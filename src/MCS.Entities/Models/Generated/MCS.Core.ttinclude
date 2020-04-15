@@ -258,6 +258,7 @@
 		SqlConnection con = new SqlConnection(ConnectionString);
         con.Open();
 
+			//获取全部表
             SqlCommand cmd = new SqlCommand("select name from sysobjects where xtype='u'", con);
             var reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -272,17 +273,25 @@
                 tableModel.Name = "dbo." + tablename;
 				tableModel.ClassName = ClassPrefix + tablename + ClassSuffix;
 
-                #region 获取主键
+                //获取主键
 				string primkey = "";
-                SqlCommand cmd_prikey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
-                var key_result = cmd_prikey.ExecuteReader();
-                while (key_result.Read())
+                SqlCommand cmdPrimkey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
+                var cmdPrimkeyKeyResult = cmdPrimkey.ExecuteReader();
+                while (cmdPrimkeyKeyResult.Read())
                 {
-                    primkey = key_result.GetValue(3) != null ? key_result.GetValue(3).ToString() : null;
+                    primkey = cmdPrimkeyKeyResult.GetValue(3) != null ? cmdPrimkeyKeyResult.GetValue(3).ToString() : null;
                 }
-                #endregion
 
-                #region 获取列名
+				//获取自增长字段
+				string isAutoIncrement="";
+				SqlCommand cmdAutoIncrement = new SqlCommand("Select so.name Table_name,sc.name Iden_Column_name from sysobjects so Inner Join syscolumns sc on so.id = sc.id and columnproperty(sc.id, sc.name, 'IsIdentity') = 1 Where upper(so.name) = upper('"+tablename+"')", con);
+                var cmdAutoIncrementResult = cmdAutoIncrement.ExecuteReader();
+                while (cmdAutoIncrementResult.Read())
+                {
+                    isAutoIncrement = cmdAutoIncrementResult.GetValue(1) != null ? cmdAutoIncrementResult.GetValue(1).ToString() : null;
+                }
+
+                //获取列名
                 SqlCommand cmd_table = new SqlCommand("select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'", con);
                 var table_result = cmd_table.ExecuteReader();
 
@@ -303,10 +312,10 @@
                         }
                         columnModel.PropertyType = ColumTypeStr;
 						columnModel.IsPK = columnModel.Name == primkey;
+						columnModel.IsAutoIncrement = columnModel.Name == isAutoIncrement;
                         Columns.Add(columnModel);
                     }
                 }
-                #endregion
 
                 tableModel.Columns = Columns;
                 TableList.Add(tableModel);
