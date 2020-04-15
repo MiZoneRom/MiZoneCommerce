@@ -13,6 +13,7 @@ namespace MCS.Entities
     /// </summary>
     public enum DatabaseType
     {
-        SqlServer = 1
+        SqlServer = 1,
+        MySql = 1
     }
 }

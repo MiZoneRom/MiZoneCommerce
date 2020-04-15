@@ -94,8 +94,8 @@ namespace MCS.Core
             DatabaseType type = DatabaseType.SqlServer;
 
             if (_providerName.StartsWith("MySql"))
-                type = DatabaseType.SqlServer;
-            if (_providerName.StartsWith("SqlCe"))
+                type = DatabaseType.MySql;
+            if (_providerName.StartsWith("System.Data.SqlClient"))
                 type = DatabaseType.SqlServer;
 
         }
