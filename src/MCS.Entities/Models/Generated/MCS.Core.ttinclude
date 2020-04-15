@@ -291,6 +291,29 @@
                     isAutoIncrement = cmdAutoIncrementResult.GetValue(1) != null ? cmdAutoIncrementResult.GetValue(1).ToString() : null;
                 }
 
+				string tableSqlStr = "SELECT";
+				tableSqlStr += "		TableName = case when a.colorder=1 then d.name else '' end,";
+				tableSqlStr += "		Value = case when a.colorder=1 then isnull(f.value,'') else '' end,";
+				tableSqlStr += "		No = a.colorder,";
+				tableSqlStr += "		Name = a.name,";
+				tableSqlStr += "		IsAutoIncrement = case when COLUMNPROPERTY(a.id,a.name,'IsIdentity')=1 then 'YES'else 'NO' end,";
+				tableSqlStr += "		IsPK = case when exists(SELECT 1 FROM sysobjects where xtype='PK' and name in (SELECT name FROM sysindexes WHERE indid in(SELECT indid FROM sysindexkeys WHERE id = a.id AND colid=a.colid))) then 'YES' else 'NO' end,";
+				tableSqlStr += "		PropertyType = b.name,";
+				tableSqlStr += "		BitLength = a.length,";
+				tableSqlStr += "		Length = COLUMNPROPERTY(a.id,a.name,'PRECISION'),";
+				tableSqlStr += "		Scale = isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0),";
+				tableSqlStr += "		IsNull = case when a.isnullable=1 then 'YES' else 'NO' end,";
+				tableSqlStr += "		DefaultValue = isnull(e.text,''),";
+				tableSqlStr += "		Remaek = isnull(g.[value],'')";
+				tableSqlStr += "	 FROM syscolumns a";
+				tableSqlStr += "		left join systypes b on a.xusertype=b.xusertype";
+				tableSqlStr += "		inner join sysobjects d on a.id=d.id and d.xtype='U' and d.name<>'dtproperties'";
+				tableSqlStr += "		left join syscomments e on a.cdefault=e.id";
+				tableSqlStr += "		left join sys.extended_properties g on a.id=g.major_id and a.colid=g.minor_id";
+				tableSqlStr += "		left join sys.extended_properties f on d.id=f.major_id and f.minor_id=0";
+				tableSqlStr += "	 where d.name='" + tablename + "'";
+				tableSqlStr += "	 order by a.id,a.colorder";
+
                 //获取列名
                 SqlCommand cmd_table = new SqlCommand("select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'", con);
                 var table_result = cmd_table.ExecuteReader();
