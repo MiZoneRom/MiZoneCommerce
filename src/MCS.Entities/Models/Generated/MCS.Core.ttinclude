@@ -318,6 +318,14 @@
                     }
 
                     columnModel.PropertyType = ColumTypeStr;
+
+					foreach(var d in EnumLists){
+						if(d.Key.Equals(tableModel.ClassName + "." + columnModel.Name, StringComparison.CurrentCultureIgnoreCase)){
+							columnModel.PropertyType = d.Value;		
+						}
+					}
+
+
 					columnModel.IsAutoIncrement = table_result.GetValue(4).ToString() == "YES";
 					columnModel.IsPK = table_result.GetValue(5).ToString() == "YES";
                     Columns.Add(columnModel);
