@@ -2,44 +2,36 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using System.IO;
+using System.Collections.Generic;
 
 namespace MCS.Core
 {
     public class ConfigurationManager
     {
-        public readonly static IConfiguration Configuration;
+        private static readonly IConfigurationRoot _configuration;
         static ConfigurationManager()
         {
-            Configuration = new ConfigurationBuilder()
+            _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true)
                 .Build();
         }
 
-        public static ConnectionStringSettings ConnectionStrings(string keyName)
+        public static IConfigurationSection ConnectionStrings
         {
-            string connectString = Configuration.GetConnectionString(keyName);
-            string providerName = Configuration.GetConnectionString(keyName + "ProviderName");
-            return new ConnectionStringSettings() { Name = keyName, ConnectionString = providerName, ProviderName = providerName };
+            get {
+               return _configuration.GetSection("ConnectionStrings");
+            }
         }
 
-        public static string AppSettings(string keyName)
+        public static IConfigurationRoot AppSettings
         {
-            return Configuration["Appsettings:" + keyName];
+            get
+            {
+                return _configuration;
+            }
         }
 
-        public static int ConnectionStringsCount
-        {
-            get { return 1; }
-        }
-
-    }
-
-    public class ConnectionStringSettings
-    {
-        public string Name { get; set; }
-        public string ConnectionString { get; set; }
-        public string ProviderName { get; set; }
     }
 
 }
