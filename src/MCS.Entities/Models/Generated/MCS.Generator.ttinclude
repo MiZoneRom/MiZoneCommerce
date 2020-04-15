@@ -23,7 +23,6 @@ namespace <#=Namespace #>
      [Table("<#=item.Name#>")]
      public partial class <#=item.ClassName#>
      {
-        
         <#
         foreach(var col in item.Columns)
         {
@@ -32,9 +31,8 @@ namespace <#=Namespace #>
 		/// <summary>
         /// <#=col.Remark#>
         /// </summary>
-		[Column(name: "<#=col.Name#>",<#=col.IsPK ? "key: ColumnKey.Primary,":""#> <#=col.IsAutoIncrement ? "isIdentity: true,":""#> isColumn: true)]
+		[Column(name: "<#=col.Name#>", <#=col.IsPK ? "key: ColumnKey.Primary, ":""#><#=col.IsAutoIncrement ? "isIdentity: true, ":""#>isColumn: true)]
 		public <#=col.PropertyType#> <#=col.Name#> { get; set; }
-
         <#
         }
         #>

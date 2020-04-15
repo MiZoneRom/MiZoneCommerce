@@ -13,41 +13,35 @@ namespace MCS.Entities
      public partial class MessageLogInfo
      {
         
-        
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id",key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
 		public long Id { get; set; }
-
         
 		/// <summary>
         /// UserId
         /// </summary>
-		[Column(name: "UserId",  isColumn: true)]
+		[Column(name: "UserId", isColumn: true)]
 		public long UserId { get; set; }
-
         
 		/// <summary>
         /// TypeId
         /// </summary>
-		[Column(name: "TypeId",  isColumn: true)]
+		[Column(name: "TypeId", isColumn: true)]
 		public string TypeId { get; set; }
-
         
 		/// <summary>
         /// MessageContent
         /// </summary>
-		[Column(name: "MessageContent",  isColumn: true)]
+		[Column(name: "MessageContent", isColumn: true)]
 		public string MessageContent { get; set; }
-
         
 		/// <summary>
         /// CreateDate
         /// </summary>
-		[Column(name: "CreateDate",  isColumn: true)]
+		[Column(name: "CreateDate", isColumn: true)]
 		public DateTime CreateDate { get; set; }
-
         
      }
 
