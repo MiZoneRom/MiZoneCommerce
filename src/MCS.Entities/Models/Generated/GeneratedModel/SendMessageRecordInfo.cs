@@ -3,56 +3,71 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.SendMessageRecord")]
-     public partial class SendMessageRecordInfo
+     public partial class SendMessageRecordInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// MessageType
         /// </summary>
-		[Column(name: "MessageType", isColumn: true)]
+		
+		[Required]
+		[Column("MessageType")]
 		public int MessageType { get; set; }
         
 		/// <summary>
         /// ContentType
         /// </summary>
-		[Column(name: "ContentType", isColumn: true)]
+		
+		[Required]
+		[Column("ContentType")]
 		public int ContentType { get; set; }
         
 		/// <summary>
         /// SendContent
         /// </summary>
-		[Column(name: "SendContent", isColumn: true)]
+		
+		[Required]
+		[Column("SendContent")]
 		public string SendContent { get; set; }
         
 		/// <summary>
         /// ToUserLabel
         /// </summary>
-		[Column(name: "ToUserLabel", isColumn: true)]
+		
+		
+		[Column("ToUserLabel")]
 		public string ToUserLabel { get; set; }
         
 		/// <summary>
         /// SendState
         /// </summary>
-		[Column(name: "SendState", isColumn: true)]
+		
+		[Required]
+		[Column("SendState")]
 		public int SendState { get; set; }
         
 		/// <summary>
         /// SendTime
         /// </summary>
-		[Column(name: "SendTime", isColumn: true)]
+		
+		[Required]
+		[Column("SendTime")]
 		public DateTime SendTime { get; set; }
         
      }

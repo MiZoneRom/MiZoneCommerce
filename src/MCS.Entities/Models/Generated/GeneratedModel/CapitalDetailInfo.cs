@@ -3,62 +3,79 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.CapitalDetail")]
-     public partial class CapitalDetailInfo
+     public partial class CapitalDetailInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// CapitalId
         /// </summary>
-		[Column(name: "CapitalId", isColumn: true)]
+		
+		[Required]
+		[Column("CapitalId")]
 		public long CapitalId { get; set; }
         
 		/// <summary>
         /// SourceType
         /// </summary>
-		[Column(name: "SourceType", isColumn: true)]
+		
+		[Required]
+		[Column("SourceType")]
 		public int SourceType { get; set; }
         
 		/// <summary>
         /// Amount
         /// </summary>
-		[Column(name: "Amount", isColumn: true)]
+		
+		[Required]
+		[Column("Amount")]
 		public decimal Amount { get; set; }
         
 		/// <summary>
         /// SourceData
         /// </summary>
-		[Column(name: "SourceData", isColumn: true)]
+		
+		
+		[Column("SourceData")]
 		public string SourceData { get; set; }
         
 		/// <summary>
         /// CreateDate
         /// </summary>
-		[Column(name: "CreateDate", isColumn: true)]
+		
+		[Required]
+		[Column("CreateDate")]
 		public DateTime CreateDate { get; set; }
         
 		/// <summary>
         /// Remark
         /// </summary>
-		[Column(name: "Remark", isColumn: true)]
+		
+		
+		[Column("Remark")]
 		public string Remark { get; set; }
         
 		/// <summary>
         /// PresentAmount
         /// </summary>
-		[Column(name: "PresentAmount", isColumn: true)]
+		
+		[Required]
+		[Column("PresentAmount")]
 		public decimal PresentAmount { get; set; }
         
      }

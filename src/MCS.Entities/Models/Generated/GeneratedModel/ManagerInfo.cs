@@ -3,62 +3,79 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.Manager")]
-     public partial class ManagerInfo
+     public partial class ManagerInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// 角色ID
         /// </summary>
-		[Column(name: "RoleId", isColumn: true)]
+		
+		[Required]
+		[Column("RoleId")]
 		public long RoleId { get; set; }
         
 		/// <summary>
         /// 用户名
         /// </summary>
-		[Column(name: "UserName", isColumn: true)]
+		
+		
+		[Column("UserName")]
 		public string UserName { get; set; }
         
 		/// <summary>
         /// 密码
         /// </summary>
-		[Column(name: "Password", isColumn: true)]
+		
+		
+		[Column("Password")]
 		public string Password { get; set; }
         
 		/// <summary>
         /// 密码加盐
         /// </summary>
-		[Column(name: "PasswordSalt", isColumn: true)]
+		
+		
+		[Column("PasswordSalt")]
 		public string PasswordSalt { get; set; }
         
 		/// <summary>
         /// 创建日期
         /// </summary>
-		[Column(name: "CreateDate", isColumn: true)]
+		
+		
+		[Column("CreateDate")]
 		public DateTime? CreateDate { get; set; }
         
 		/// <summary>
         /// 备注
         /// </summary>
-		[Column(name: "Remark", isColumn: true)]
+		
+		
+		[Column("Remark")]
 		public string Remark { get; set; }
         
 		/// <summary>
         /// 真实名称
         /// </summary>
-		[Column(name: "RealName", isColumn: true)]
+		
+		
+		[Column("RealName")]
 		public string RealName { get; set; }
         
      }

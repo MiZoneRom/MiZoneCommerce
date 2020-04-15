@@ -3,50 +3,63 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.Capital")]
-     public partial class CapitalInfo
+     public partial class CapitalInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
-		[Column(name: "UserId", isColumn: true)]
+		
+		[Required]
+		[Column("UserId")]
 		public long UserId { get; set; }
         
 		/// <summary>
         /// Balance
         /// </summary>
-		[Column(name: "Balance", isColumn: true)]
+		
+		[Required]
+		[Column("Balance")]
 		public decimal Balance { get; set; }
         
 		/// <summary>
         /// FreezeAmount
         /// </summary>
-		[Column(name: "FreezeAmount", isColumn: true)]
+		
+		[Required]
+		[Column("FreezeAmount")]
 		public decimal FreezeAmount { get; set; }
         
 		/// <summary>
         /// ChargeAmount
         /// </summary>
-		[Column(name: "ChargeAmount", isColumn: true)]
+		
+		[Required]
+		[Column("ChargeAmount")]
 		public decimal ChargeAmount { get; set; }
         
 		/// <summary>
         /// PresentAmount
         /// </summary>
-		[Column(name: "PresentAmount", isColumn: true)]
+		
+		[Required]
+		[Column("PresentAmount")]
 		public decimal PresentAmount { get; set; }
         
      }

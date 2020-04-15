@@ -3,50 +3,63 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.WXAppletFormData")]
-     public partial class WXAppletFormDataInfo
+     public partial class WXAppletFormDataInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// EventId
         /// </summary>
-		[Column(name: "EventId", isColumn: true)]
+		
+		[Required]
+		[Column("EventId")]
 		public long EventId { get; set; }
         
 		/// <summary>
         /// EventValue
         /// </summary>
-		[Column(name: "EventValue", isColumn: true)]
+		
+		
+		[Column("EventValue")]
 		public string EventValue { get; set; }
         
 		/// <summary>
         /// FormId
         /// </summary>
-		[Column(name: "FormId", isColumn: true)]
+		
+		
+		[Column("FormId")]
 		public string FormId { get; set; }
         
 		/// <summary>
         /// EventTime
         /// </summary>
-		[Column(name: "EventTime", isColumn: true)]
+		
+		[Required]
+		[Column("EventTime")]
 		public DateTime EventTime { get; set; }
         
 		/// <summary>
         /// ExpireTime
         /// </summary>
-		[Column(name: "ExpireTime", isColumn: true)]
+		
+		[Required]
+		[Column("ExpireTime")]
 		public DateTime ExpireTime { get; set; }
         
      }

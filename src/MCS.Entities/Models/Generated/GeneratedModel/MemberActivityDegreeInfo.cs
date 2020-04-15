@@ -3,62 +3,79 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.MemberActivityDegree")]
-     public partial class MemberActivityDegreeInfo
+     public partial class MemberActivityDegreeInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
-		[Column(name: "UserId", isColumn: true)]
+		
+		[Required]
+		[Column("UserId")]
 		public long UserId { get; set; }
         
 		/// <summary>
         /// OneMonth
         /// </summary>
-		[Column(name: "OneMonth", isColumn: true)]
+		
+		[Required]
+		[Column("OneMonth")]
 		public bool OneMonth { get; set; }
         
 		/// <summary>
         /// ThreeMonth
         /// </summary>
-		[Column(name: "ThreeMonth", isColumn: true)]
+		
+		[Required]
+		[Column("ThreeMonth")]
 		public bool ThreeMonth { get; set; }
         
 		/// <summary>
         /// SixMonth
         /// </summary>
-		[Column(name: "SixMonth", isColumn: true)]
+		
+		[Required]
+		[Column("SixMonth")]
 		public bool SixMonth { get; set; }
         
 		/// <summary>
         /// OneMonthEffectiveTime
         /// </summary>
-		[Column(name: "OneMonthEffectiveTime", isColumn: true)]
+		
+		
+		[Column("OneMonthEffectiveTime")]
 		public DateTime? OneMonthEffectiveTime { get; set; }
         
 		/// <summary>
         /// ThreeMonthEffectiveTime
         /// </summary>
-		[Column(name: "ThreeMonthEffectiveTime", isColumn: true)]
+		
+		
+		[Column("ThreeMonthEffectiveTime")]
 		public DateTime? ThreeMonthEffectiveTime { get; set; }
         
 		/// <summary>
         /// SixMonthEffectiveTime
         /// </summary>
-		[Column(name: "SixMonthEffectiveTime", isColumn: true)]
+		
+		
+		[Column("SixMonthEffectiveTime")]
 		public DateTime? SixMonthEffectiveTime { get; set; }
         
      }

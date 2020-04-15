@@ -3,32 +3,39 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.MemberGroup")]
-     public partial class MemberGroupInfo
+     public partial class MemberGroupInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// StatisticsType
         /// </summary>
-		[Column(name: "StatisticsType", isColumn: true)]
+		
+		[Required]
+		[Column("StatisticsType")]
 		public int StatisticsType { get; set; }
         
 		/// <summary>
         /// Total
         /// </summary>
-		[Column(name: "Total", isColumn: true)]
+		
+		[Required]
+		[Column("Total")]
 		public int Total { get; set; }
         
      }

@@ -3,56 +3,71 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.MemberIntegralRecord")]
-     public partial class MemberIntegralRecordInfo
+     public partial class MemberIntegralRecordInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
-		[Column(name: "UserId", isColumn: true)]
+		
+		[Required]
+		[Column("UserId")]
 		public long UserId { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
-		[Column(name: "UserName", isColumn: true)]
+		
+		[Required]
+		[Column("UserName")]
 		public string UserName { get; set; }
         
 		/// <summary>
         /// TypeId
         /// </summary>
-		[Column(name: "TypeId", isColumn: true)]
+		
+		[Required]
+		[Column("TypeId")]
 		public int TypeId { get; set; }
         
 		/// <summary>
         /// Integral
         /// </summary>
-		[Column(name: "Integral", isColumn: true)]
+		
+		[Required]
+		[Column("Integral")]
 		public int Integral { get; set; }
         
 		/// <summary>
         /// CreateDate
         /// </summary>
-		[Column(name: "CreateDate", isColumn: true)]
+		
+		[Required]
+		[Column("CreateDate")]
 		public DateTime CreateDate { get; set; }
         
 		/// <summary>
         /// Remark
         /// </summary>
-		[Column(name: "Remark", isColumn: true)]
+		
+		
+		[Column("Remark")]
 		public string Remark { get; set; }
         
      }

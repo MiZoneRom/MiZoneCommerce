@@ -3,188 +3,247 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.Member")]
-     public partial class MemberInfo
+     public partial class MemberInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
-		[Column(name: "UserName", isColumn: true)]
+		
+		[Required]
+		[Column("UserName")]
 		public string UserName { get; set; }
         
 		/// <summary>
         /// Password
         /// </summary>
-		[Column(name: "Password", isColumn: true)]
+		
+		[Required]
+		[Column("Password")]
 		public string Password { get; set; }
         
 		/// <summary>
         /// PasswordSalt
         /// </summary>
-		[Column(name: "PasswordSalt", isColumn: true)]
+		
+		[Required]
+		[Column("PasswordSalt")]
 		public string PasswordSalt { get; set; }
         
 		/// <summary>
         /// Nick
         /// </summary>
-		[Column(name: "Nick", isColumn: true)]
+		
+		
+		[Column("Nick")]
 		public string Nick { get; set; }
         
 		/// <summary>
         /// Sex
         /// </summary>
-		[Column(name: "Sex", isColumn: true)]
+		
+		[Required]
+		[Column("Sex")]
 		public int Sex { get; set; }
         
 		/// <summary>
         /// Email
         /// </summary>
-		[Column(name: "Email", isColumn: true)]
+		
+		
+		[Column("Email")]
 		public string Email { get; set; }
         
 		/// <summary>
         /// CreateDate
         /// </summary>
-		[Column(name: "CreateDate", isColumn: true)]
+		
+		[Required]
+		[Column("CreateDate")]
 		public DateTime CreateDate { get; set; }
         
 		/// <summary>
         /// TopRegionId
         /// </summary>
-		[Column(name: "TopRegionId", isColumn: true)]
+		
+		[Required]
+		[Column("TopRegionId")]
 		public int TopRegionId { get; set; }
         
 		/// <summary>
         /// RegionId
         /// </summary>
-		[Column(name: "RegionId", isColumn: true)]
+		
+		[Required]
+		[Column("RegionId")]
 		public int RegionId { get; set; }
         
 		/// <summary>
         /// RealName
         /// </summary>
-		[Column(name: "RealName", isColumn: true)]
+		
+		
+		[Column("RealName")]
 		public string RealName { get; set; }
         
 		/// <summary>
         /// CellPhone
         /// </summary>
-		[Column(name: "CellPhone", isColumn: true)]
+		
+		
+		[Column("CellPhone")]
 		public string CellPhone { get; set; }
         
 		/// <summary>
         /// QQ
         /// </summary>
-		[Column(name: "QQ", isColumn: true)]
+		
+		
+		[Column("QQ")]
 		public string QQ { get; set; }
         
 		/// <summary>
         /// Address
         /// </summary>
-		[Column(name: "Address", isColumn: true)]
+		
+		
+		[Column("Address")]
 		public string Address { get; set; }
         
 		/// <summary>
         /// Disabled
         /// </summary>
-		[Column(name: "Disabled", isColumn: true)]
+		
+		[Required]
+		[Column("Disabled")]
 		public bool Disabled { get; set; }
         
 		/// <summary>
         /// LastLoginDate
         /// </summary>
-		[Column(name: "LastLoginDate", isColumn: true)]
+		
+		[Required]
+		[Column("LastLoginDate")]
 		public DateTime LastLoginDate { get; set; }
         
 		/// <summary>
         /// OrderNumber
         /// </summary>
-		[Column(name: "OrderNumber", isColumn: true)]
+		
+		
+		[Column("OrderNumber")]
 		public int? OrderNumber { get; set; }
         
 		/// <summary>
         /// TotalAmount
         /// </summary>
-		[Column(name: "TotalAmount", isColumn: true)]
+		
+		
+		[Column("TotalAmount")]
 		public decimal? TotalAmount { get; set; }
         
 		/// <summary>
         /// Expenditure
         /// </summary>
-		[Column(name: "Expenditure", isColumn: true)]
+		
+		
+		[Column("Expenditure")]
 		public decimal? Expenditure { get; set; }
         
 		/// <summary>
         /// Points
         /// </summary>
-		[Column(name: "Points", isColumn: true)]
+		
+		
+		[Column("Points")]
 		public int? Points { get; set; }
         
 		/// <summary>
         /// Photo
         /// </summary>
-		[Column(name: "Photo", isColumn: true)]
+		
+		
+		[Column("Photo")]
 		public string Photo { get; set; }
         
 		/// <summary>
         /// Remark
         /// </summary>
-		[Column(name: "Remark", isColumn: true)]
+		
+		
+		[Column("Remark")]
 		public string Remark { get; set; }
         
 		/// <summary>
         /// PayPwd
         /// </summary>
-		[Column(name: "PayPwd", isColumn: true)]
+		
+		
+		[Column("PayPwd")]
 		public string PayPwd { get; set; }
         
 		/// <summary>
         /// PayPwdSalt
         /// </summary>
-		[Column(name: "PayPwdSalt", isColumn: true)]
+		
+		
+		[Column("PayPwdSalt")]
 		public string PayPwdSalt { get; set; }
         
 		/// <summary>
         /// InviteUserId
         /// </summary>
-		[Column(name: "InviteUserId", isColumn: true)]
+		
+		
+		[Column("InviteUserId")]
 		public long? InviteUserId { get; set; }
         
 		/// <summary>
         /// BirthDay
         /// </summary>
-		[Column(name: "BirthDay", isColumn: true)]
+		
+		
+		[Column("BirthDay")]
 		public DateTime? BirthDay { get; set; }
         
 		/// <summary>
         /// NetAmount
         /// </summary>
-		[Column(name: "NetAmount", isColumn: true)]
+		
+		
+		[Column("NetAmount")]
 		public decimal? NetAmount { get; set; }
         
 		/// <summary>
         /// LastConsumptionTime
         /// </summary>
-		[Column(name: "LastConsumptionTime", isColumn: true)]
+		
+		[Required]
+		[Column("LastConsumptionTime")]
 		public DateTime LastConsumptionTime { get; set; }
         
 		/// <summary>
         /// Platform
         /// </summary>
-		[Column(name: "Platform", isColumn: true)]
+		
+		[Required]
+		[Column("Platform")]
 		public int Platform { get; set; }
         
      }

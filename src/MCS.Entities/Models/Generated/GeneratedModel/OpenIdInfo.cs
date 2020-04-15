@@ -3,38 +3,47 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.OpenId")]
-     public partial class OpenIdInfo
+     public partial class OpenIdInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// OpenId
         /// </summary>
-		[Column(name: "OpenId", isColumn: true)]
+		
+		[Required]
+		[Column("OpenId")]
 		public string OpenId { get; set; }
         
 		/// <summary>
         /// SubscribeTime
         /// </summary>
-		[Column(name: "SubscribeTime", isColumn: true)]
+		
+		[Required]
+		[Column("SubscribeTime")]
 		public DateTime SubscribeTime { get; set; }
         
 		/// <summary>
         /// IsSubscribe
         /// </summary>
-		[Column(name: "IsSubscribe", isColumn: true)]
+		
+		[Required]
+		[Column("IsSubscribe")]
 		public bool IsSubscribe { get; set; }
         
      }

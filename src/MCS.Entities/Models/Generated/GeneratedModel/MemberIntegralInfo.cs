@@ -3,44 +3,55 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.MemberIntegral")]
-     public partial class MemberIntegralInfo
+     public partial class MemberIntegralInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
-		[Column(name: "UserId", isColumn: true)]
+		
+		[Required]
+		[Column("UserId")]
 		public long UserId { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
-		[Column(name: "UserName", isColumn: true)]
+		
+		[Required]
+		[Column("UserName")]
 		public string UserName { get; set; }
         
 		/// <summary>
         /// HistoryIntegrals
         /// </summary>
-		[Column(name: "HistoryIntegrals", isColumn: true)]
+		
+		[Required]
+		[Column("HistoryIntegrals")]
 		public int HistoryIntegrals { get; set; }
         
 		/// <summary>
         /// AvailableIntegrals
         /// </summary>
-		[Column(name: "AvailableIntegrals", isColumn: true)]
+		
+		[Required]
+		[Column("AvailableIntegrals")]
 		public int AvailableIntegrals { get; set; }
         
      }

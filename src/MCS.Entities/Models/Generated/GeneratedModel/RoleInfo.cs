@@ -3,32 +3,39 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.Role")]
-     public partial class RoleInfo
+     public partial class RoleInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// RoleName
         /// </summary>
-		[Column(name: "RoleName", isColumn: true)]
+		
+		[Required]
+		[Column("RoleName")]
 		public string RoleName { get; set; }
         
 		/// <summary>
         /// Description
         /// </summary>
-		[Column(name: "Description", isColumn: true)]
+		
+		[Required]
+		[Column("Description")]
 		public string Description { get; set; }
         
      }

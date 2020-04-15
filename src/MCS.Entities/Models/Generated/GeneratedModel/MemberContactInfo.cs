@@ -3,44 +3,55 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.MemberContact")]
-     public partial class MemberContactInfo
+     public partial class MemberContactInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
-		[Column(name: "UserId", isColumn: true)]
+		
+		[Required]
+		[Column("UserId")]
 		public long UserId { get; set; }
         
 		/// <summary>
         /// UserType
         /// </summary>
-		[Column(name: "UserType", isColumn: true)]
+		
+		[Required]
+		[Column("UserType")]
 		public int UserType { get; set; }
         
 		/// <summary>
         /// ServiceProvider
         /// </summary>
-		[Column(name: "ServiceProvider", isColumn: true)]
+		
+		[Required]
+		[Column("ServiceProvider")]
 		public string ServiceProvider { get; set; }
         
 		/// <summary>
         /// Contact
         /// </summary>
-		[Column(name: "Contact", isColumn: true)]
+		
+		[Required]
+		[Column("Contact")]
 		public string Contact { get; set; }
         
      }

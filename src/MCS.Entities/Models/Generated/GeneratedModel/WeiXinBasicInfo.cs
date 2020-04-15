@@ -3,44 +3,55 @@ using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
-using Dapper.Common;
 
 namespace MCS.Entities
 {
     
      [Table("dbo.WeiXinBasic")]
-     public partial class WeiXinBasicInfo
+     public partial class WeiXinBasicInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
+		[Key]
+		[Required]
+		[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// Ticket
         /// </summary>
-		[Column(name: "Ticket", isColumn: true)]
+		
+		
+		[Column("Ticket")]
 		public string Ticket { get; set; }
         
 		/// <summary>
         /// TicketOutTime
         /// </summary>
-		[Column(name: "TicketOutTime", isColumn: true)]
+		
+		[Required]
+		[Column("TicketOutTime")]
 		public DateTime TicketOutTime { get; set; }
         
 		/// <summary>
         /// AppId
         /// </summary>
-		[Column(name: "AppId", isColumn: true)]
+		
+		
+		[Column("AppId")]
 		public string AppId { get; set; }
         
 		/// <summary>
         /// AccessToken
         /// </summary>
-		[Column(name: "AccessToken", isColumn: true)]
+		
+		
+		[Column("AccessToken")]
 		public string AccessToken { get; set; }
         
      }
