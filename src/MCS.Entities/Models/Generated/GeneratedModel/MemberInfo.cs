@@ -14,7 +14,7 @@ namespace MCS.Entities
      {
         
 		/// <summary>
-        /// 自增长ID
+        /// Id
         /// </summary>
 		[Column(name: "Id", key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
 		public long Id { get; set; }
