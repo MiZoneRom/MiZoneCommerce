@@ -14,28 +14,46 @@ namespace MCS.Entities
      {
         
         
+		/// <summary>
+        /// Id
+        /// </summary>
 		[Column(name: "Id",key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
-		public long Id {get;set;}
+		public long Id { get; set; }
 
         
+		/// <summary>
+        /// EventId
+        /// </summary>
 		[Column(name: "EventId",  isColumn: true)]
-		public long EventId {get;set;}
+		public long EventId { get; set; }
 
         
+		/// <summary>
+        /// EventValue
+        /// </summary>
 		[Column(name: "EventValue",  isColumn: true)]
-		public string EventValue {get;set;}
+		public string EventValue { get; set; }
 
         
+		/// <summary>
+        /// FormId
+        /// </summary>
 		[Column(name: "FormId",  isColumn: true)]
-		public string FormId {get;set;}
+		public string FormId { get; set; }
 
         
+		/// <summary>
+        /// EventTime
+        /// </summary>
 		[Column(name: "EventTime",  isColumn: true)]
-		public DateTime EventTime {get;set;}
+		public DateTime EventTime { get; set; }
 
         
+		/// <summary>
+        /// ExpireTime
+        /// </summary>
 		[Column(name: "ExpireTime",  isColumn: true)]
-		public DateTime ExpireTime {get;set;}
+		public DateTime ExpireTime { get; set; }
 
         
      }

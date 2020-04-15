@@ -29,8 +29,11 @@ namespace <#=Namespace #>
         {
         #>
 
+		/// <summary>
+        /// <#=col.Remark#>
+        /// </summary>
 		[Column(name: "<#=col.Name#>",<#=col.IsPK ? "key: ColumnKey.Primary,":""#> <#=col.IsAutoIncrement ? "isIdentity: true,":""#> isColumn: true)]
-		public <#=col.PropertyType#> <#=col.Name#> {get;set;}
+		public <#=col.PropertyType#> <#=col.Name#> { get; set; }
 
         <#
         }

@@ -14,36 +14,60 @@ namespace MCS.Entities
      {
         
         
+		/// <summary>
+        /// No
+        /// </summary>
 		[Column(name: "No",  isColumn: true)]
-		public string No {get;set;}
+		public string No { get; set; }
 
         
+		/// <summary>
+        /// ImgUrl
+        /// </summary>
 		[Column(name: "ImgUrl",  isColumn: true)]
-		public string ImgUrl {get;set;}
+		public string ImgUrl { get; set; }
 
         
+		/// <summary>
+        /// Name
+        /// </summary>
 		[Column(name: "Name",  isColumn: true)]
-		public string Name {get;set;}
+		public string Name { get; set; }
 
         
+		/// <summary>
+        /// CateName
+        /// </summary>
 		[Column(name: "CateName",  isColumn: true)]
-		public string CateName {get;set;}
+		public string CateName { get; set; }
 
         
+		/// <summary>
+        /// Spec
+        /// </summary>
 		[Column(name: "Spec",  isColumn: true)]
-		public string Spec {get;set;}
+		public string Spec { get; set; }
 
         
+		/// <summary>
+        /// Num
+        /// </summary>
 		[Column(name: "Num",  isColumn: true)]
-		public string Num {get;set;}
+		public string Num { get; set; }
 
         
+		/// <summary>
+        /// Address
+        /// </summary>
 		[Column(name: "Address",  isColumn: true)]
-		public string Address {get;set;}
+		public string Address { get; set; }
 
         
+		/// <summary>
+        /// Source
+        /// </summary>
 		[Column(name: "Source",  isColumn: true)]
-		public string Source {get;set;}
+		public string Source { get; set; }
 
         
      }

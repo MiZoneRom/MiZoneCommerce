@@ -14,24 +14,39 @@ namespace MCS.Entities
      {
         
         
+		/// <summary>
+        /// Id
+        /// </summary>
 		[Column(name: "Id",key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
-		public long Id {get;set;}
+		public long Id { get; set; }
 
         
+		/// <summary>
+        /// Ticket
+        /// </summary>
 		[Column(name: "Ticket",  isColumn: true)]
-		public string Ticket {get;set;}
+		public string Ticket { get; set; }
 
         
+		/// <summary>
+        /// TicketOutTime
+        /// </summary>
 		[Column(name: "TicketOutTime",  isColumn: true)]
-		public DateTime TicketOutTime {get;set;}
+		public DateTime TicketOutTime { get; set; }
 
         
+		/// <summary>
+        /// AppId
+        /// </summary>
 		[Column(name: "AppId",  isColumn: true)]
-		public string AppId {get;set;}
+		public string AppId { get; set; }
 
         
+		/// <summary>
+        /// AccessToken
+        /// </summary>
 		[Column(name: "AccessToken",  isColumn: true)]
-		public string AccessToken {get;set;}
+		public string AccessToken { get; set; }
 
         
      }

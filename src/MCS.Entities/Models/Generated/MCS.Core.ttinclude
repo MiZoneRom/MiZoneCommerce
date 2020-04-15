@@ -273,24 +273,6 @@
                 tableModel.Name = "dbo." + tablename;
 				tableModel.ClassName = ClassPrefix + tablename + ClassSuffix;
 
-                //获取主键
-				string primkey = "";
-                SqlCommand cmdPrimkey = new SqlCommand("EXEC sp_pkeys @table_name='" + tablename + "' ", con);
-                var cmdPrimkeyKeyResult = cmdPrimkey.ExecuteReader();
-                while (cmdPrimkeyKeyResult.Read())
-                {
-                    primkey = cmdPrimkeyKeyResult.GetValue(3) != null ? cmdPrimkeyKeyResult.GetValue(3).ToString() : null;
-                }
-
-				//获取自增长字段
-				string isAutoIncrement="";
-				SqlCommand cmdAutoIncrement = new SqlCommand("Select so.name Table_name,sc.name Iden_Column_name from sysobjects so Inner Join syscolumns sc on so.id = sc.id and columnproperty(sc.id, sc.name, 'IsIdentity') = 1 Where upper(so.name) = upper('"+tablename+"')", con);
-                var cmdAutoIncrementResult = cmdAutoIncrement.ExecuteReader();
-                while (cmdAutoIncrementResult.Read())
-                {
-                    isAutoIncrement = cmdAutoIncrementResult.GetValue(1) != null ? cmdAutoIncrementResult.GetValue(1).ToString() : null;
-                }
-
 				string tableSqlStr = "SELECT";
 				tableSqlStr += "		TableName = case when a.colorder=1 then d.name else '' end,";
 				tableSqlStr += "		Value = case when a.colorder=1 then isnull(f.value,'') else '' end,";
@@ -304,7 +286,7 @@
 				tableSqlStr += "		Scale = isnull(COLUMNPROPERTY(a.id,a.name,'Scale'),0),";
 				tableSqlStr += "		IsNull = case when a.isnullable=1 then 'YES' else 'NO' end,";
 				tableSqlStr += "		DefaultValue = isnull(e.text,''),";
-				tableSqlStr += "		Remaek = isnull(g.[value],'')";
+				tableSqlStr += "		Remark = isnull(g.[value],'')";
 				tableSqlStr += "	 FROM syscolumns a";
 				tableSqlStr += "		left join systypes b on a.xusertype=b.xusertype";
 				tableSqlStr += "		inner join sysobjects d on a.id=d.id and d.xtype='U' and d.name<>'dtproperties'";
@@ -315,29 +297,30 @@
 				tableSqlStr += "	 order by a.id,a.colorder";
 
                 //获取列名
-                SqlCommand cmd_table = new SqlCommand("select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'", con);
+                SqlCommand cmd_table = new SqlCommand(tableSqlStr, con);
                 var table_result = cmd_table.ExecuteReader();
+
+				string	xxx=	"select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'";
 
                 List<Column> Columns = new List<Column>();
 
                 while (table_result.Read())
                 {
                     Column columnModel = new Column();
-                    columnModel.Name = table_result.GetValue(0) != null ? table_result.GetValue(0).ToString() : null;
-					columnModel.IsNullable = table_result.GetValue(3)=="YES";
+                    columnModel.Name = table_result.GetValue(3).ToString();
+					columnModel.IsNullable = table_result.GetValue(10).ToString() == "YES";
+					columnModel.Remark = table_result.GetValue(12).ToString() != "" ? table_result.GetValue(12).ToString() : columnModel.Name;
 
-                    if (!String.IsNullOrEmpty(columnModel.Name))
+                    var ColumTypeStr = GetPropertyType(table_result.GetValue(6) != null ? table_result.GetValue(6).ToString() : null, table_result.GetValue(9) != null ? table_result.GetValue(9).ToString() : null);
+                    if (columnModel.IsNullable && ColumTypeStr != "string" && ColumTypeStr != "Guid")
                     {
-                        var ColumTypeStr = GetPropertyType(table_result.GetValue(1) != null ? table_result.GetValue(1).ToString() : null, table_result.GetValue(2) != null ? table_result.GetValue(2).ToString() : null);
-                        if (table_result.GetValue(3).ToString() == "YES" && ColumTypeStr != "string" && ColumTypeStr != "Guid")
-                        {
-                            ColumTypeStr = ColumTypeStr + "?";
-                        }
-                        columnModel.PropertyType = ColumTypeStr;
-						columnModel.IsPK = columnModel.Name == primkey;
-						columnModel.IsAutoIncrement = columnModel.Name == isAutoIncrement;
-                        Columns.Add(columnModel);
+                        ColumTypeStr = ColumTypeStr + "?";
                     }
+
+                    columnModel.PropertyType = ColumTypeStr;
+					columnModel.IsAutoIncrement = table_result.GetValue(4).ToString() == "YES";
+					columnModel.IsPK = table_result.GetValue(5).ToString() == "YES";
+                    Columns.Add(columnModel);
                 }
 
                 tableModel.Columns = Columns;

@@ -14,16 +14,25 @@ namespace MCS.Entities
      {
         
         
+		/// <summary>
+        /// Id
+        /// </summary>
 		[Column(name: "Id",key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
-		public long Id {get;set;}
+		public long Id { get; set; }
 
         
+		/// <summary>
+        /// Privilege
+        /// </summary>
 		[Column(name: "Privilege",  isColumn: true)]
-		public int Privilege {get;set;}
+		public int Privilege { get; set; }
 
         
+		/// <summary>
+        /// RoleId
+        /// </summary>
 		[Column(name: "RoleId",  isColumn: true)]
-		public long RoleId {get;set;}
+		public long RoleId { get; set; }
 
         
      }

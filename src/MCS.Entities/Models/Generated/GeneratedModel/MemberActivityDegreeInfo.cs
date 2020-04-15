@@ -14,36 +14,60 @@ namespace MCS.Entities
      {
         
         
+		/// <summary>
+        /// Id
+        /// </summary>
 		[Column(name: "Id",key: ColumnKey.Primary, isIdentity: true, isColumn: true)]
-		public long Id {get;set;}
+		public long Id { get; set; }
 
         
+		/// <summary>
+        /// UserId
+        /// </summary>
 		[Column(name: "UserId",  isColumn: true)]
-		public long UserId {get;set;}
+		public long UserId { get; set; }
 
         
+		/// <summary>
+        /// OneMonth
+        /// </summary>
 		[Column(name: "OneMonth",  isColumn: true)]
-		public bool OneMonth {get;set;}
+		public bool OneMonth { get; set; }
 
         
+		/// <summary>
+        /// ThreeMonth
+        /// </summary>
 		[Column(name: "ThreeMonth",  isColumn: true)]
-		public bool ThreeMonth {get;set;}
+		public bool ThreeMonth { get; set; }
 
         
+		/// <summary>
+        /// SixMonth
+        /// </summary>
 		[Column(name: "SixMonth",  isColumn: true)]
-		public bool SixMonth {get;set;}
+		public bool SixMonth { get; set; }
 
         
+		/// <summary>
+        /// OneMonthEffectiveTime
+        /// </summary>
 		[Column(name: "OneMonthEffectiveTime",  isColumn: true)]
-		public DateTime? OneMonthEffectiveTime {get;set;}
+		public DateTime? OneMonthEffectiveTime { get; set; }
 
         
+		/// <summary>
+        /// ThreeMonthEffectiveTime
+        /// </summary>
 		[Column(name: "ThreeMonthEffectiveTime",  isColumn: true)]
-		public DateTime? ThreeMonthEffectiveTime {get;set;}
+		public DateTime? ThreeMonthEffectiveTime { get; set; }
 
         
+		/// <summary>
+        /// SixMonthEffectiveTime
+        /// </summary>
 		[Column(name: "SixMonthEffectiveTime",  isColumn: true)]
-		public DateTime? SixMonthEffectiveTime {get;set;}
+		public DateTime? SixMonthEffectiveTime { get; set; }
 
         
      }

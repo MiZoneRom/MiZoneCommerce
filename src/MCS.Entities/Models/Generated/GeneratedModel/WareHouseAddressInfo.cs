@@ -14,20 +14,32 @@ namespace MCS.Entities
      {
         
         
+		/// <summary>
+        /// Id
+        /// </summary>
 		[Column(name: "Id",key: ColumnKey.Primary,  isColumn: true)]
-		public long Id {get;set;}
+		public long Id { get; set; }
 
         
+		/// <summary>
+        /// WareHouseId
+        /// </summary>
 		[Column(name: "WareHouseId",  isColumn: true)]
-		public long WareHouseId {get;set;}
+		public long WareHouseId { get; set; }
 
         
+		/// <summary>
+        /// AddressName
+        /// </summary>
 		[Column(name: "AddressName",  isColumn: true)]
-		public string AddressName {get;set;}
+		public string AddressName { get; set; }
 
         
+		/// <summary>
+        /// CreateDate
+        /// </summary>
 		[Column(name: "CreateDate",  isColumn: true)]
-		public DateTime CreateDate {get;set;}
+		public DateTime CreateDate { get; set; }
 
         
      }
