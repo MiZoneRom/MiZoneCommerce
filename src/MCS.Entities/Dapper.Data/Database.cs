@@ -68,8 +68,7 @@ namespace MCS.Core
         public Database(string connectionStringName)
         {
 
-            // Work out connection string and provider name
-            var providerName = "System.Data.SqlClient";
+            var providerName = "";
             if (ConfigurationManager.ConnectionStrings[connectionStringName] != null)
             {
                 if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings[$"{connectionStringName}:ProviderName"]))
@@ -91,26 +90,14 @@ namespace MCS.Core
         /// </summary>
         private void CommonConstruct(string connectionString)
         {
-            // Reset
-            _transactionDepth = 0;
-            EnableAutoSelect = true;
-            EnableNamedParams = true;
-            EnableLazyLoad = true;
 
-            // If a provider name was supplied, get the IDbProviderFactory for it
-            if (null == _factory)
-            {
-                if (_providerName != null)
-                    _factory = PetaPoco.DatabaseProvider.Resolve(_providerName, false, connectionString).GetFactory(); //DbProviderFactories.GetFactory(_providerName);
-            }
-            // Resolve the DB Type
-            string DBTypeName = (_factory == null ? _sharedConnection.GetType() : _factory.GetType()).Name;
-            _dbType = DatabaseType.Resolve(DBTypeName, _providerName);
+            DatabaseType type = DatabaseType.SqlServer;
 
-            // What character is used for delimiting parameters in SQL
-            _paramPrefix = _dbType.GetParameterPrefix(_connectionString);
+            if (_providerName.StartsWith("MySql"))
+                type = DatabaseType.SqlServer;
+            if (_providerName.StartsWith("SqlCe"))
+                type = DatabaseType.SqlServer;
 
-            this.EnableWriteLog = ConfigurationManager.AppSettings["EnableWriteDBLog"].ToBool_();
         }
 
         #endregion
@@ -192,27 +179,6 @@ namespace MCS.Core
         #endregion
 
         #region Transaction Management
-        // Helper to create a transaction scope
-
-        /// <summary>
-        /// 开始或继续事务
-        /// </summary>
-        /// <returns>一个 <see cref="ITransaction" /> 引用</returns>
-        /// <remarks>This method makes management of calls to Begin/End/CompleteTransaction easier.
-        /// The usage pattern for this should be:
-        /// using (var tx = db.GetTransaction())
-        /// {
-        /// Do stuff
-        /// db.Update(...);
-        /// Mark the transaction as complete
-        /// tx.Complete();
-        /// }
-        /// Transactions can be nested but they must all be completed otherwise the entire
-        /// transaction is aborted.</remarks>
-        public ITransaction GetTransaction()
-        {
-            return new Transaction(this);
-        }
 
         /// <summary>
         /// 在开始事务时调用。
