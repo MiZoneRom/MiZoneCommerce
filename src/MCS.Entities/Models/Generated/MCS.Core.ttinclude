@@ -271,7 +271,12 @@
             {
                 var tableModel = new Table();
                 tableModel.Name = "dbo." + tablename;
-				tableModel.ClassName = ClassPrefix + tablename + ClassSuffix;
+
+				foreach(var r in ClassReplaces){
+					tableModel.ClassName = tablename.Replace(r,"");
+				}
+
+				tableModel.ClassName = ClassPrefix + tableModel.ClassName + ClassSuffix;
 
 				string tableSqlStr = "SELECT";
 				tableSqlStr += "		TableName = case when a.colorder=1 then d.name else '' end,";
@@ -300,8 +305,6 @@
                 SqlCommand cmd_table = new SqlCommand(tableSqlStr, con);
                 var table_result = cmd_table.ExecuteReader();
 
-				string	xxx=	"select COLUMN_NAME,DATA_TYPE,NUMERIC_SCALE,IS_NULLABLE from information_schema.columns where TABLE_NAME='" + tablename + "'";
-
                 List<Column> Columns = new List<Column>();
 
                 while (table_result.Read())
@@ -324,7 +327,6 @@
 							columnModel.PropertyType = d.Value;		
 						}
 					}
-
 
 					columnModel.IsAutoIncrement = table_result.GetValue(4).ToString() == "YES";
 					columnModel.IsPK = table_result.GetValue(5).ToString() == "YES";

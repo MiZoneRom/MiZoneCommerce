@@ -1,5 +1,6 @@
 ﻿<#@ include file="MCS.Core.ttinclude" #>
 <#
+	 ConnectionString = "server=192.168.2.100;uid=sa;pwd=123456;database=WMS;MultipleActiveResultSets=true;";
      Namespace = "MCS.Entities";
      RepoName = "MCS";
 	 ClassPrefix = "";
@@ -9,8 +10,6 @@
 	 EnumLists = new Dictionary<string, string> {
         { "ManagerInfo.Remark", "string" }
 	 };
-
-	 ConnectionString = "server=192.168.2.100;uid=sa;pwd=123456;database=WMS;MultipleActiveResultSets=true;";
 
 	var tables = LoadTables();
 	if(tables.Count==0){return "无生成可用表";}
