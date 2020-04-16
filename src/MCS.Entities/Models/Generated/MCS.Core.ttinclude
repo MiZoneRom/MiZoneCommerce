@@ -27,16 +27,19 @@
 
 	public class Table
     {
+		//列
 	    public List<Column> Columns;
+		//表名
         public string Name;
 		public string Schema;
 		public bool IsView;
         public string Primkey;
 		public string CleanName;
+		//类名
         public string ClassName;
 		public string SequenceName;
 		public bool Ignore;
-
+		//主键
 		public Column PK
 		{
 			get
@@ -46,6 +49,7 @@
 		}
     }
 
+	//列
 	public class Column
     {
         public string Name;
@@ -248,7 +252,8 @@
 			}
 		}
 	}
-
+	
+	//加载表
 	Tables LoadTables()
 	{
 	
@@ -341,61 +346,60 @@
 
 			return TableList;
 
-
 	}
 
 
-	        private string GetPropertyType(string sqlType, string dataScale)
+	private string GetPropertyType(string sqlType, string dataScale)
+    {
+        string sysType = "string";
+        sqlType = sqlType.ToLower();
+        switch (sqlType)
         {
-            string sysType = "string";
-            sqlType = sqlType.ToLower();
-            switch (sqlType)
-            {
-                case "bigint":
-                    sysType = "long";
-                    break;
-                case "smallint":
-                    sysType = "short";
-                    break;
-                case "int":
-                    sysType = "int";
-                    break;
-                case "uniqueidentifier":
-                    sysType = "Guid";
-                    break;
-                case "smalldatetime":
-                case "datetime":
-                case "date":
-                    sysType = "DateTime";
-                    break;
-                case "float":
-                    sysType = "double";
-                    break;
-                case "real":
-                case "numeric":
-                case "smallmoney":
-                case "decimal":
-                case "money":
-                case "number":
-                    sysType = "decimal";
-                    break;
-                case "tinyint":
-                    sysType = "byte";
-                    break;
-                case "bit":
-                    sysType = "bool";
-                    break;
-                case "image":
-                case "binary":
-                case "varbinary":
-                case "timestamp":
-                    sysType = "byte[]";
-                    break;
-            }
-            if (sqlType == "number" && dataScale == "0")
-                return "long";
-
-            return sysType;
+            case "bigint":
+                sysType = "long";
+                break;
+            case "smallint":
+                sysType = "short";
+                break;
+            case "int":
+                sysType = "int";
+                break;
+            case "uniqueidentifier":
+                sysType = "Guid";
+                break;
+            case "smalldatetime":
+            case "datetime":
+            case "date":
+                sysType = "DateTime";
+                break;
+            case "float":
+                sysType = "double";
+                break;
+            case "real":
+            case "numeric":
+            case "smallmoney":
+            case "decimal":
+            case "money":
+            case "number":
+                sysType = "decimal";
+                break;
+            case "tinyint":
+                sysType = "byte";
+                break;
+            case "bit":
+                sysType = "bool";
+                break;
+            case "image":
+            case "binary":
+            case "varbinary":
+            case "timestamp":
+                sysType = "byte[]";
+                break;
         }
+        if (sqlType == "number" && dataScale == "0")
+            return "long";
+
+        return sysType;
+    }
 
 #>
