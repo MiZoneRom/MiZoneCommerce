@@ -62,6 +62,7 @@
 		public bool Ignore;
     }
 
+	//╠Мап╠М
 	public class Tables : List<Table>
 	{
 
