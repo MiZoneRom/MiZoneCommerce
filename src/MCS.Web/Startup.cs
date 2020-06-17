@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Dapper.Common;
 using Microsoft.OpenApi.Models;
 using System.IO;
+using Swashbuckle.AspNetCore.Swagger;
+using System.Security.Policy;
 
 namespace MCS.Web
 {
@@ -29,7 +31,23 @@ namespace MCS.Web
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "MCS API",
+                    Description = "MCS ASP.NET Core Web API",
+                    Version = "v1",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "MiZone",
+                        Email = string.Empty,
+                        Url = new System.Uri("http://www.cnblogs.com/")
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT",
+                        Url = new System.Uri("http://www.cnblogs.com/")
+                    }
+                });
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
                 var xmlPath = Path.Combine(basePath, "MCS.Web.xml");
                 c.IncludeXmlComments(xmlPath);
