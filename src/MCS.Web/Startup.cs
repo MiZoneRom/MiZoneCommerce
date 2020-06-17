@@ -40,12 +40,12 @@ namespace MCS.Web
                     {
                         Name = "MiZone",
                         Email = string.Empty,
-                        Url = new System.Uri("http://www.cnblogs.com/")
+                        Url = new System.Uri("https://github.com/MiZoneRom/MiZoneCommerce")
                     },
                     License = new OpenApiLicense
                     {
                         Name = "MIT",
-                        Url = new System.Uri("http://www.cnblogs.com/")
+                        Url = new System.Uri("https://github.com/MiZoneRom/MiZoneCommerce")
                     }
                 });
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
@@ -72,7 +72,7 @@ namespace MCS.Web
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MCS API V1");
                 c.RoutePrefix = string.Empty;
             });
 
