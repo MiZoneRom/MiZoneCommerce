@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.MemberActivityDegree")]
-     public partial class MemberActivityDegreeInfo:IModel
+     [Table("dbo.Managers")]
+     public partial class ManagersInfo:IModel
      {
         
 		/// <summary>
@@ -23,60 +23,68 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// UserId
+        /// RoleId
         /// </summary>
 		
 		[Required]
-		[Column("UserId")]
-		public long UserId { get; set; }
+		[Column("RoleId")]
+		public long RoleId { get; set; }
         
 		/// <summary>
-        /// OneMonth
+        /// UserName
         /// </summary>
 		
 		[Required]
-		[Column("OneMonth")]
-		public bool OneMonth { get; set; }
+		[Column("UserName")]
+		public string UserName { get; set; }
         
 		/// <summary>
-        /// ThreeMonth
+        /// Password
         /// </summary>
 		
 		[Required]
-		[Column("ThreeMonth")]
-		public bool ThreeMonth { get; set; }
+		[Column("Password")]
+		public string Password { get; set; }
         
 		/// <summary>
-        /// SixMonth
+        /// PasswordSalt
         /// </summary>
 		
 		[Required]
-		[Column("SixMonth")]
-		public bool SixMonth { get; set; }
+		[Column("PasswordSalt")]
+		public string PasswordSalt { get; set; }
         
 		/// <summary>
-        /// OneMonthEffectiveTime
+        /// CreateDate
+        /// </summary>
+		
+		[Required]
+		[Column("CreateDate")]
+		public DateTime CreateDate { get; set; }
+        
+		/// <summary>
+        /// Remark
         /// </summary>
 		
 		
-		[Column("OneMonthEffectiveTime")]
-		public DateTime? OneMonthEffectiveTime { get; set; }
+		[Column("Remark")]
+		public string Remark { get; set; }
         
 		/// <summary>
-        /// ThreeMonthEffectiveTime
+        /// RealName
         /// </summary>
 		
 		
-		[Column("ThreeMonthEffectiveTime")]
-		public DateTime? ThreeMonthEffectiveTime { get; set; }
+		[Column("RealName")]
+		public string RealName { get; set; }
         
 		/// <summary>
-        /// SixMonthEffectiveTime
+        /// Avatars
         /// </summary>
 		
 		
-		[Column("SixMonthEffectiveTime")]
-		public DateTime? SixMonthEffectiveTime { get; set; }
+		[Column("Avatars")]
+		public string Avatars { get; set; }
         
      }
 

@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.Role")]
-     public partial class RoleInfo:IModel
+     [Table("dbo.Roles")]
+     public partial class RolesInfo:IModel
      {
         
 		/// <summary>

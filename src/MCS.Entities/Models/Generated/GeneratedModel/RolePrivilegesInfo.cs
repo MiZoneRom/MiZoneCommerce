@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.MemberGroup")]
-     public partial class MemberGroupInfo:IModel
+     [Table("dbo.RolePrivileges")]
+     public partial class RolePrivilegesInfo:IModel
      {
         
 		/// <summary>
@@ -23,20 +23,20 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// StatisticsType
+        /// Privilege
         /// </summary>
 		
 		[Required]
-		[Column("StatisticsType")]
-		public int StatisticsType { get; set; }
+		[Column("Privilege")]
+		public int Privilege { get; set; }
         
 		/// <summary>
-        /// Total
+        /// RoleId
         /// </summary>
 		
 		[Required]
-		[Column("Total")]
-		public int Total { get; set; }
+		[Column("RoleId")]
+		public long RoleId { get; set; }
         
      }
 

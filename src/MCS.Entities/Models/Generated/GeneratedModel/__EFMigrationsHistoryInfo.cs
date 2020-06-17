@@ -10,33 +10,25 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.SiteSetting")]
-     public partial class SiteSettingInfo:IModel
+     [Table("dbo.__EFMigrationsHistory")]
+     public partial class __EFMigrationsHistoryInfo:IModel
      {
         
 		/// <summary>
-        /// Id
+        /// MigrationId
         /// </summary>
 		[Key]
 		[Required]
-		[Column("Id")]
-		public long Id { get; set; }
+		[Column("MigrationId")]
+		public string MigrationId { get; set; }
         
 		/// <summary>
-        /// Key
+        /// ProductVersion
         /// </summary>
 		
 		[Required]
-		[Column("Key")]
-		public string Key { get; set; }
-        
-		/// <summary>
-        /// Value
-        /// </summary>
-		
-		[Required]
-		[Column("Value")]
-		public string Value { get; set; }
+		[Column("ProductVersion")]
+		public string ProductVersion { get; set; }
         
      }
 

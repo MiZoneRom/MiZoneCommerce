@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.WeiXinBasic")]
-     public partial class WeiXinBasicInfo:IModel
+     [Table("dbo.Logs")]
+     public partial class LogsInfo:IModel
      {
         
 		/// <summary>
@@ -23,36 +23,44 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// Ticket
-        /// </summary>
-		
-		
-		[Column("Ticket")]
-		public string Ticket { get; set; }
-        
-		/// <summary>
-        /// TicketOutTime
+        /// PageUrl
         /// </summary>
 		
 		[Required]
-		[Column("TicketOutTime")]
-		public DateTime TicketOutTime { get; set; }
+		[Column("PageUrl")]
+		public string PageUrl { get; set; }
         
 		/// <summary>
-        /// AppId
+        /// Date
         /// </summary>
 		
-		
-		[Column("AppId")]
-		public string AppId { get; set; }
+		[Required]
+		[Column("Date")]
+		public DateTime Date { get; set; }
         
 		/// <summary>
-        /// AccessToken
+        /// UserName
         /// </summary>
 		
+		[Required]
+		[Column("UserName")]
+		public string UserName { get; set; }
+        
+		/// <summary>
+        /// IPAddress
+        /// </summary>
 		
-		[Column("AccessToken")]
-		public string AccessToken { get; set; }
+		[Required]
+		[Column("IPAddress")]
+		public string IPAddress { get; set; }
+        
+		/// <summary>
+        /// Description
+        /// </summary>
+		
+		[Required]
+		[Column("Description")]
+		public string Description { get; set; }
         
      }
 

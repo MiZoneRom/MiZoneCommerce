@@ -1,6 +1,6 @@
 ﻿<#@ include file="MCS.Core.ttinclude" #>
 <#
-	 ConnectionString = "server=192.168.2.100;uid=sa;pwd=123456;database=WMS;MultipleActiveResultSets=true;";
+	 ConnectionString = "server=.;uid=sa;pwd=123456;database=MiZoneCommerce_1_0;MultipleActiveResultSets=true;";
      Namespace = "MCS.Entities";
      RepoName = "MCS";
 	 ClassPrefix = "";

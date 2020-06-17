@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.OpenId")]
-     public partial class OpenIdInfo:IModel
+     [Table("dbo.SiteSettings")]
+     public partial class SiteSettingsInfo:IModel
      {
         
 		/// <summary>
@@ -23,28 +23,20 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// OpenId
+        /// Key
         /// </summary>
 		
 		[Required]
-		[Column("OpenId")]
-		public string OpenId { get; set; }
+		[Column("Key")]
+		public string Key { get; set; }
         
 		/// <summary>
-        /// SubscribeTime
+        /// Value
         /// </summary>
 		
 		[Required]
-		[Column("SubscribeTime")]
-		public DateTime SubscribeTime { get; set; }
-        
-		/// <summary>
-        /// IsSubscribe
-        /// </summary>
-		
-		[Required]
-		[Column("IsSubscribe")]
-		public bool IsSubscribe { get; set; }
+		[Column("Value")]
+		public string Value { get; set; }
         
      }
 
