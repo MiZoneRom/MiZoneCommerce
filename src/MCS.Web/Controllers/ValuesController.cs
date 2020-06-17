@@ -17,8 +17,16 @@ namespace MCS.Web.Controllers
         /// <summary>
         /// 获取信息
         /// </summary>
-        /// <returns></returns>
+        /// <remarks>
+        /// 例子:
+        /// Get api/Values/1
+        /// </remarks>
+        /// <returns>测试返回值</returns>
+        /// <response code="201">返回value字符串</response>
+        /// <response code="400">如果id为空</response>  
         [HttpGet]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public ActionResult<IEnumerable<string>> Get()
         {
 
