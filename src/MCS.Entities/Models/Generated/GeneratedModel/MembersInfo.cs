@@ -11,8 +11,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.SiteSettings")]
-     public partial class SiteSettingsInfo:IModel
+     [Table("dbo.Members")]
+     public partial class MembersInfo:IModel
      {
         
 		/// <summary>
@@ -24,20 +24,12 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// Key
+        /// UserName
         /// </summary>
 		
 		[Required]
-		[Column("Key")]
-		public string Key { get; set; }
-        
-		/// <summary>
-        /// Value
-        /// </summary>
-		
-		[Required]
-		[Column("Value")]
-		public string Value { get; set; }
+		[Column("UserName")]
+		public string UserName { get; set; }
         
      }
 

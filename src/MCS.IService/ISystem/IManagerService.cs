@@ -29,7 +29,7 @@ namespace MCS.IServices
         /// </summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        IQueryable<ManagersInfo> GetPlatformManagerByRoleId(long roleId);
+        List<ManagersInfo> GetPlatformManagerByRoleId(long roleId);
 
         /// <summary>
         /// 添加一个平台管理员
@@ -68,7 +68,7 @@ namespace MCS.IServices
         /// </summary>
         /// <param name="keyWords">关键字</param>
         /// <returns></returns>
-        IQueryable<ManagersInfo> GetManagers(string keyWords);
+        List<ManagersInfo> GetManagers(string keyWords);
 
         /// <summary>
         /// 登录
@@ -81,7 +81,7 @@ namespace MCS.IServices
 
         void AddRefeshToken(string token, string refeshToken, long userId, double minutes = 1);
 
-        ManagersInfo GetToken(long userId);
+        ManagerTokenInfo GetToken(long userId);
 
         void RemoveToken(long userId);
     }

@@ -11,8 +11,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.SiteSettings")]
-     public partial class SiteSettingsInfo:IModel
+     [Table("dbo.ManagerToken")]
+     public partial class ManagerTokenInfo:IModel
      {
         
 		/// <summary>
@@ -24,20 +24,36 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// Key
+        /// UserId
         /// </summary>
 		
 		[Required]
-		[Column("Key")]
-		public string Key { get; set; }
+		[Column("UserId")]
+		public long UserId { get; set; }
         
 		/// <summary>
-        /// Value
+        /// Token
         /// </summary>
 		
 		[Required]
-		[Column("Value")]
-		public string Value { get; set; }
+		[Column("Token")]
+		public string Token { get; set; }
+        
+		/// <summary>
+        /// RefreshToken
+        /// </summary>
+		
+		[Required]
+		[Column("RefreshToken")]
+		public string RefreshToken { get; set; }
+        
+		/// <summary>
+        /// Expires
+        /// </summary>
+		
+		[Required]
+		[Column("Expires")]
+		public DateTime Expires { get; set; }
         
      }
 

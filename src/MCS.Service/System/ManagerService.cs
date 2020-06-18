@@ -1,45 +1,48 @@
 ﻿using MCS.CommonModel;
 using MCS.DTO.QueryModel;
+using MCS.Entities;
 using MCS.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Kogel.Dapper.Extension.MsSql;
+using MCS.Core.Helper;
+using MCS.Core;
 
 namespace MCS.Service
 {
     public class ManagerService : ServiceBase, IManagerService
     {
-        public QueryPageModel<Managers> GetPlatformManagers(ManagerQuery query)
+        public QueryPageModel<ManagersInfo> GetPlatformManagers(ManagerQuery query)
         {
-            int total = 0;
-            IQueryable<Managers> users = Context.Managers.FindBy(item => item.Id > 0, query.PageNo, query.PageSize, out total, item => item.RoleId, true);
-            QueryPageModel<Managers> pageModel = new QueryPageModel<Managers>()
+            var users = Context.QuerySet<ManagersInfo>().Where(item => item.Id > 0).PageList(query.PageNo, query.PageSize);
+            QueryPageModel<ManagersInfo> pageModel = new QueryPageModel<ManagersInfo>()
             {
-                Models = users.ToList(),
-                Total = total
+                Models = users.Items,
+                Total = users.Total
             };
             return pageModel;
         }
 
-        public IQueryable<Managers> GetPlatformManagerByRoleId(long roleId)
+        public List<ManagersInfo> GetPlatformManagerByRoleId(long roleId)
         {
-            return Context.Managers.FindBy(item => item.RoleId == roleId);
+            return Context.QuerySet<ManagersInfo>().Where(item => item.RoleId == roleId).ToList();
         }
 
-        public Managers GetPlatformManager(long userId)
+        public ManagersInfo GetPlatformManager(long userId)
         {
-            Managers manager = null;
+            ManagersInfo manager = null;
             string CACHE_MANAGER_KEY = CacheKeyCollection.Manager(userId);
 
             if (CacheHelper.Exists(CACHE_MANAGER_KEY))
             {
-                manager = CacheHelper.Get<Managers>(CACHE_MANAGER_KEY);
+                manager = CacheHelper.Get<ManagersInfo>(CACHE_MANAGER_KEY);
             }
             else
             {
-                manager = Context.Managers.FirstOrDefault(item => item.Id == userId);
+                manager = Context.QuerySet<ManagersInfo>().Where(item => item.Id == userId).Get();
                 if (manager == null)
                     return null;
                 if (manager.RoleId == 0)
@@ -51,11 +54,11 @@ namespace MCS.Service
                 }
                 else
                 {
-                    var model = Context.Managers.FirstOrDefault(p => p.Id == manager.RoleId);
+                    var model = Context.QuerySet<ManagersInfo>().Where(p => p.Id == manager.RoleId).Get();
                     if (model != null)
                     {
                         List<AdminPrivilege> AdminPrivileges = new List<AdminPrivilege>();
-                        (from a in Context.ManagerPrivileges where a.RoleId == model.RoleId select a).ToList().ForEach(a => AdminPrivileges.Add((AdminPrivilege)a.Privilege));
+                        (from a in Context.QuerySet<RolePrivilegesInfo>() where a.RoleId == model.RoleId select a).ToList().ForEach(a => AdminPrivileges.Add((AdminPrivilege)a.Privilege));
                         manager.RealName = model.RealName;
                         manager.AdminPrivileges = AdminPrivileges;
                     }
@@ -65,54 +68,52 @@ namespace MCS.Service
             return manager;
         }
 
-        public void AddPlatformManager(Managers model)
+        public void AddPlatformManager(ManagersInfo model)
         {
             if (model.RoleId == 0)
-                throw new MZcmsException("权限组选择不正确!");
+                throw new MCSException("权限组选择不正确!");
             if (CheckUserNameExist(model.UserName, true))
             {
-                throw new MZcmsException("该用户名已存在！");
+                throw new MCSException("该用户名已存在！");
             }
-            model.Salt = Guid.NewGuid().ToString();
-            model.AddDate = DateTime.Now;
-            var pwd = Common.Helper.SecureHelper.MD5(model.Password);
-            model.Password = Common.Helper.SecureHelper.MD5(pwd + model.Salt);
-            Context.Managers.Add(model);
-            Context.SaveChanges();
+            model.PasswordSalt = Guid.NewGuid().ToString();
+            model.CreateDate = DateTime.Now;
+            var pwd = SecureHelper.MD5(model.Password);
+            model.Password = SecureHelper.MD5(pwd + model.PasswordSalt);
+            Context.CommandSet<ManagersInfo>().Insert(model);
         }
 
         public void ChangePlatformManagerPassword(long id, string password, long roleId)
         {
-            var model = Context.Managers.FindBy(item => item.Id == id).FirstOrDefault();
+            var model = Context.QuerySet<ManagersInfo>().Where(item => item.Id == id).Get();
             if (model == null)
-                throw new MZcmsException("该管理员不存在，或者已被删除!");
+                throw new MCSException("该管理员不存在，或者已被删除!");
+
             if (roleId != 0 && model.RoleId != 0)
                 model.RoleId = roleId;
+
             if (!string.IsNullOrWhiteSpace(password))
             {
-                var pwd = Common.Helper.SecureHelper.MD5(password);
-                model.Password = Common.Helper.SecureHelper.MD5(pwd + model.Salt);
+                var pwd = SecureHelper.MD5(password);
+                model.Password = SecureHelper.MD5(pwd + model.PasswordSalt);
             }
 
-            Context.SaveChanges();
+            Context.CommandSet<ManagersInfo>().Where(item => item.Id == id).Update(model);
+
             string CACHE_MANAGER_KEY = CacheKeyCollection.Manager(id);
             CacheHelper.Remove(CACHE_MANAGER_KEY);
         }
 
         public void DeletePlatformManager(long id)
         {
-            var model = Context.Managers.FindBy(item => item.Id == id && item.RoleId != 0).FirstOrDefault();
-            Context.Managers.Remove(model);
-            Context.SaveChanges();
+            var model = Context.CommandSet<ManagersInfo>().Where(item => item.Id == id && item.RoleId != 0).Delete();
             string CACHE_MANAGER_KEY = CacheKeyCollection.Manager(id);
             CacheHelper.Remove(CACHE_MANAGER_KEY);
         }
 
         public void BatchDeletePlatformManager(long[] ids)
         {
-            var model = Context.Managers.FindBy(item => item.RoleId != 0 && ids.Contains(item.Id));
-            Context.Managers.RemoveRange(model);
-            Context.SaveChanges();
+            var model = Context.CommandSet<ManagersInfo>().Where(item => item.RoleId != 0 && ids.Contains(item.Id)).Delete();
             foreach (var id in ids)
             {
                 string CACHE_MANAGER_KEY = CacheKeyCollection.Manager(id);
@@ -120,19 +121,19 @@ namespace MCS.Service
             }
         }
 
-        public IQueryable<Managers> GetManagers(string keyWords)
+        public List<ManagersInfo> GetManagers(string keyWords)
         {
-            IQueryable<Managers> managers = Context.Managers.FindBy(item =>
-                         (keyWords == null || keyWords == "" || item.UserName.Contains(keyWords)));
+            List<ManagersInfo> managers = Context.QuerySet<ManagersInfo>().Where(item =>
+                         (keyWords == null || keyWords == "" || item.UserName.Contains(keyWords))).ToList();
             return managers;
         }
 
-        public Managers Login(string username, string password)
+        public ManagersInfo Login(string username, string password)
         {
-            Managers manager = Context.Managers.FindBy(item => item.UserName == username).FirstOrDefault();
+            ManagersInfo manager = Context.QuerySet<ManagersInfo>().Where(item => item.UserName == username).Get();
             if (manager != null)
             {
-                string encryptedWithSaltPassword = GetPasswrodWithTwiceEncode(password, manager.Salt);
+                string encryptedWithSaltPassword = GetPasswrodWithTwiceEncode(password, manager.PasswordSalt);
                 if (encryptedWithSaltPassword.ToLower() != manager.Password)//比较密码是否一致
                     manager = null;//不一致，则置空，表示未找到指定的管理员
                 else//一致，则表示登录成功，更新登录时间
@@ -145,8 +146,8 @@ namespace MCS.Service
 
         string GetPasswrodWithTwiceEncode(string password, string salt)
         {
-            string encryptedPassword = Common.Helper.SecureHelper.MD5(password);//一次MD5加密
-            string encryptedWithSaltPassword = Common.Helper.SecureHelper.MD5(encryptedPassword + salt);//一次结果加盐后二次加密
+            string encryptedPassword = SecureHelper.MD5(password);//一次MD5加密
+            string encryptedWithSaltPassword = SecureHelper.MD5(encryptedPassword + salt);//一次结果加盐后二次加密
             return encryptedWithSaltPassword;
         }
 
@@ -154,27 +155,24 @@ namespace MCS.Service
         {
             if (isPlatFormManager)
             {
-                return Context.Managers.Any(item => item.UserName.ToLower() == username.ToLower());
+                return Context.QuerySet<ManagersInfo>().Where(item => item.UserName.ToLower() == username.ToLower()).Count() > 0;
             }
-            return Context.Users.Any(item => item.UserName.ToLower() == username.ToLower());
+            return Context.QuerySet<MembersInfo>().Where(item => item.UserName.ToLower() == username.ToLower()).Count() > 0;
         }
 
         public void AddRefeshToken(string token, string refeshToken, long userId, double minutes = 1)
         {
-            Context.ManagerToken.Add(new ManagerToken() { UserId = userId, Token = token, RefreshToken = refeshToken, Expires = DateTime.Now.AddMinutes(minutes) });
-            Context.SaveChanges();
+            Context.CommandSet<ManagerTokenInfo>().Insert(new ManagerTokenInfo() { UserId = userId, Token = token, RefreshToken = refeshToken, Expires = DateTime.Now.AddMinutes(minutes) });
         }
 
-        public ManagerToken GetToken(long userId)
+        public ManagerTokenInfo GetToken(long userId)
         {
-            return (from a in Context.ManagerToken where a.UserId == userId orderby a.Id descending select a).FirstOrDefault();
+            return Context.QuerySet<ManagerTokenInfo>().Where(a => a.UserId == userId).OrderByDescing(a => a.Id).Get();
         }
 
         public void RemoveToken(long userId)
         {
-            IQueryable<ManagerToken> tokenList = (from a in Context.ManagerToken where a.UserId == userId select a);
-            Context.ManagerToken.RemoveRange(tokenList);
-            Context.SaveChanges();
+            int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId).Delete();
         }
 
     }

@@ -1,6 +1,5 @@
 ﻿using MCS.DTO.QueryModel;
-using MCS.Entity;
-using MCS.Entity.Entities;
+using MCS.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +14,12 @@ namespace MCS.IServices
         /// <summary>
         /// 添加一个平台管理员角色
         /// </summary>
-        void AddPlatformRole(ManagersRoles model);
+        void AddPlatformRole(RolesInfo model);
 
         /// <summary>
         /// 修改平台管理员角色
         /// </summary>
-        void UpdatePlatformRole(ManagersRoles model);
+        void UpdatePlatformRole(RolesInfo model);
 
         /// <summary>
         /// 删除一个平台角色
@@ -34,13 +33,13 @@ namespace MCS.IServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ManagersRoles GetPlatformRole(long id);
+        RolesInfo GetPlatformRole(long id);
 
         /// <summary>
         /// 获取平台角色列表
         /// </summary>
         /// <returns></returns>
-        IQueryable<ManagersRoles> GetPlatformRoles();
+        List<RolesInfo> GetPlatformRoles();
 
     }
 }

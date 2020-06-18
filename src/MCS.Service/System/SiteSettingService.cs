@@ -1,9 +1,5 @@
-﻿using MCS.Common.Helper;
-using MCS.CommonModel;
-using MCS.Entity;
-using MCS.Entity.Entities;
+﻿using MCS.CommonModel;
 using MCS.IServices;
-using MCS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
