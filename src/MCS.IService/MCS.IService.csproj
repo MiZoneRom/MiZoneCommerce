@@ -4,4 +4,10 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
+    <ProjectReference Include="..\MCS.DTO\MCS.DTO.csproj" />
+    <ProjectReference Include="..\MCS.Entities\MCS.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
