@@ -276,7 +276,7 @@
             foreach (var tablename in TableNameList)
             {
                 var tableModel = new Table();
-                tableModel.Name = "dbo." + tablename;
+                tableModel.Name = tablename;
 
 				foreach(var r in ClassReplaces){
 					tableModel.ClassName = tablename.Replace(r,"");

@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
 using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
@@ -11,32 +9,32 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.SiteSettings")]
+     [Display(Rename = "SiteSettings")]
      public partial class SiteSettingsInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Key]
-		[Required]
-		[Column("Id")]
+		[Identity]
+		//[Required]
+		//[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// Key
         /// </summary>
 		
-		[Required]
-		[Column("Key")]
+		//[Required]
+		//[Column("Key")]
 		public string Key { get; set; }
         
 		/// <summary>
         /// Value
         /// </summary>
 		
-		[Required]
-		[Column("Value")]
+		//[Required]
+		//[Column("Value")]
 		public string Value { get; set; }
         
      }

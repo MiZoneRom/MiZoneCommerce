@@ -1,14 +1,14 @@
-﻿using MCS.CommonModel;
+﻿using Kogel.Dapper.Extension.Attributes;
+using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace MCS.Entities
 {
     public partial class ManagersInfo
     {
-        [NotMapped]
+        [Display(IsField = false)]
         public virtual List<AdminPrivilege> AdminPrivileges { get; set; }
     }
 }

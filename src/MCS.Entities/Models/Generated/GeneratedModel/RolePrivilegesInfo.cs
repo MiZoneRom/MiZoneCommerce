@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
 using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
@@ -11,32 +9,32 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Table("dbo.RolePrivileges")]
+     [Display(Rename = "RolePrivileges")]
      public partial class RolePrivilegesInfo:IModel
      {
         
 		/// <summary>
         /// Id
         /// </summary>
-		[Key]
-		[Required]
-		[Column("Id")]
+		[Identity]
+		//[Required]
+		//[Column("Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// Privilege
         /// </summary>
 		
-		[Required]
-		[Column("Privilege")]
+		//[Required]
+		//[Column("Privilege")]
 		public int Privilege { get; set; }
         
 		/// <summary>
         /// RoleId
         /// </summary>
 		
-		[Required]
-		[Column("RoleId")]
+		//[Required]
+		//[Column("RoleId")]
 		public long RoleId { get; set; }
         
      }

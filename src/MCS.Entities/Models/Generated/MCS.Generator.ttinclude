@@ -13,8 +13,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Dapper;
 using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
@@ -22,7 +20,7 @@ using MCS.CommonModel;
 namespace <#=Namespace #>
 {
     
-     [Table("<#=item.Name#>")]
+     [Display(Rename = "<#=item.Name#>")]
      public partial class <#=item.ClassName#>:IModel
      {
         <#
@@ -33,9 +31,9 @@ namespace <#=Namespace #>
 		/// <summary>
         /// <#=col.Remark#>
         /// </summary>
-		<#=col.IsPK ? "[Key]":""#>
-		<#=col.IsNullable ? "":"[Required]"#>
-		[Column("<#=col.Name#>")]
+		<#=col.IsPK ? "[Identity]":""#>
+		//<#=col.IsNullable ? "":"[Required]"#>
+		//[Column("<#=col.Name#>")]
 		public <#=col.PropertyType#> <#=col.Name#> { get; set; }
         <#
         }
