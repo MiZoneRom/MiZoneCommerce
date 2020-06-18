@@ -26,6 +26,7 @@
     <ProjectReference Include="..\MCS.IService\MCS.IService.csproj" />
     <ProjectReference Include="..\MCS.ServiceProvider\MCS.ServiceProvider.csproj" />
     <ProjectReference Include="..\MCS.Service\MCS.Service.csproj" />
+    <ProjectReference Include="..\MCS.Web.Framework\MCS.Web.Framework.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

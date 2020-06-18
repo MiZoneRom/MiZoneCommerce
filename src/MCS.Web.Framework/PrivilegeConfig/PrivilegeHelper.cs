@@ -4,8 +4,8 @@ using System.Linq;
 using System.Collections.Generic;
 using MCS.CommonModel;
 using MCS.Application;
-using MCS.Model;
 using MCS.Entities;
+using MCS.DTO;
 
 namespace MCS.Web.Framework
 {
@@ -97,7 +97,7 @@ namespace MCS.Web.Framework
         /// <returns></returns>
         public static Privileges GetPrivileges<TEnum>()
         {
-            SiteSettingsInfo sitesetting = SiteSettingApplication.GetSiteSettings();
+            SiteSettings sitesetting = SiteSettingApplication.SiteSettings;
             Type type = typeof(TEnum);
             FieldInfo[] fields = type.GetFields();
             if (fields.Length == 1)
@@ -165,7 +165,7 @@ namespace MCS.Web.Framework
         /// <returns></returns>
         public static Privileges GetPrivileges<TEnum>(AdminCatalogType Type)
         {
-            SiteSettingsInfo sitesetting = SiteSettingApplication.GetSiteSettings();
+            SiteSettings sitesetting = SiteSettingApplication.SiteSettings;
 
             Type type = typeof(TEnum);
             FieldInfo[] fields = type.GetFields();

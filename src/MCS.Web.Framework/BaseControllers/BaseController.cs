@@ -4,13 +4,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MCS.Core;
 using MCS.Core.Helper;
-using MCS.Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using MCS.IServices;
+using MCS.Entities;
 
 namespace MCS.Web.Framework.BaseControllers
 {
@@ -38,7 +39,7 @@ namespace MCS.Web.Framework.BaseControllers
         /// <summary>
         /// 当前管理员
         /// </summary>
-        public Managers CurrentManager
+        public ManagersInfo CurrentManager
         {
             get
             {
@@ -65,7 +66,7 @@ namespace MCS.Web.Framework.BaseControllers
                 }
 
                 long userId = Convert.ToInt64(iden.Value);
-                Managers manager = ServiceProvider.Instance<IManagerService>.Create.GetPlatformManager(userId);
+                ManagersInfo manager = ServiceProvider.Instance<IManagerService>.Create.GetPlatformManager(userId);
 
                 return manager;
             }
