@@ -1,4 +1,7 @@
-﻿using MCS.Entities;
+﻿using MCS.CommonModel;
+using MCS.Core;
+using MCS.DTO;
+using MCS.Entities;
 using MCS.IServices;
 using System;
 using System.Collections.Generic;
@@ -12,32 +15,65 @@ namespace MCS.Application
     {
         private static ISiteSettingService _iSiteSettingService = ServiceProvider.Instance<ISiteSettingService>.Create;
 
-        /// <summary>
-        /// 获取系统配置信息
-        /// </summary>
-        /// <returns></returns>
-        public static SiteSettingsInfo GetSiteSettings()
+        public static SiteSettings SiteSettings
         {
-            return _iSiteSettingService.GetSiteSettings();
+            get
+            {
+                var settings = (SiteSettings)CallContext.GetData(CacheKeyCollection.SiteSettings);
+                if (settings == null)
+                {
+                    settings = Cache.Get<SiteSettings>(CacheKeyCollection.SiteSettings);//缓存中获取
+                    if (settings == null)
+                    {
+                        settings = InitSettings();//数据库中加载
+                        Cache.Insert(CacheKeyCollection.SiteSettings, settings);
+                    }
+                    CallContext.SetData(CacheKeyCollection.SiteSettings, settings);
+                }
+                return settings;
+            }
+        }
+
+        private static SiteSettings InitSettings()
+        {
+            var settings = new SiteSettings();
+            var properties = typeof(SiteSettings).GetProperties();
+
+            var data = _iSiteSettingService.GetSiteSettings();
+            foreach (var property in properties)
+            {
+                var temp = data.FirstOrDefault(item => item.Key == property.Name);
+                if (temp != null)
+                    property.SetValue(settings, Convert.ChangeType(temp.Value, property.PropertyType));
+            }
+            return settings;
         }
 
         /// <summary>
-        /// 保存系统配置信息
+        /// 保存对配置的修改
         /// </summary>
-        /// <param name="siteSettingsInfo">待保存的系统配置（该配置必须是完整的配置）</param>
-        public static void SetSiteSettings(SiteSettingsInfo siteSettingsInfo)
+        public static void SaveChanges()
         {
-            _iSiteSettingService.SetSiteSettings(siteSettingsInfo);
-        }
+            var current = SiteSettings;
+            var data = _iSiteSettingService.GetSiteSettings();
 
-        /// <summary>
-        /// 保存单个配置项
-        /// </summary>
-        /// <param name="key">配置项的Key（大小写敏感）</param>
-        /// <param name="value">值</param>
-        public static void SaveSetting(string key, object value)
-        {
-            _iSiteSettingService.SaveSetting(key, value);
+            var changes = new Dictionary<string, string>();
+            var properties = typeof(SiteSettings).GetProperties();
+
+            foreach (var property in properties)
+            {
+                var key = property.Name;
+                var oldValue = data.FirstOrDefault(p => p.Key == key)?.Value ?? string.Empty;
+                var newValue = property.GetValue(current)?.ToString() ?? string.Empty;
+
+                if (oldValue != newValue) changes.Add(key, newValue);
+            }
+
+            if (changes.Count > 0)
+            {
+                _iSiteSettingService.SaveSettings(changes);
+                Cache.Remove(CacheKeyCollection.SiteSettings);//清空配置缓存
+            }
         }
 
     }

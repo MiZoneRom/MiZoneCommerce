@@ -1,4 +1,5 @@
-﻿using Kogel.Dapper.Extension.MsSql;
+﻿using Kogel.Dapper.Extension;
+using Kogel.Dapper.Extension.MsSql;
 using MCS.CommonModel;
 using MCS.Core.Helper;
 using MCS.Entities;
@@ -12,124 +13,46 @@ namespace MCS.Service
 {
     public class SiteSettingService : ServiceBase, ISiteSettingService
     {
-        public SiteSettingsInfo GetSiteSettings()
+        public List<SiteSettingsInfo> GetSiteSettings()
         {
-            SiteSettingsInfo siteSettingsInfo = null;
+            return Context.QuerySet<SiteSettingsInfo>().ToList();
+        }
 
-            if (CacheHelper.Exists(CacheKeyCollection.SiteSettings))//如果存在缓存，则从缓存中读取
-                siteSettingsInfo = CacheHelper.Get<SiteSettingsInfo>(CacheKeyCollection.SiteSettings);
+        public void SaveSettings(Dictionary<string, string> settings)
+        {
+            var keys = settings.Keys.ToList();
+            var models = Context.QuerySet<SiteSettingsInfo>().Where(p => keys.Contains(p.Key)).ToList();
 
-            if (siteSettingsInfo == null)
+            using (Context)
             {
-                //否则从数据库中读取，并将配置存入至缓存
+                Context.Open();
 
-                //通过反射获取值
-                var values = Context.QuerySet<SiteSettingsInfo>().ToList();
-                siteSettingsInfo = new SiteSettingsInfo();
+                //创建事务对象
+                var transaction = Context.BeginTransaction();
 
-                var properties = siteSettingsInfo.GetType().GetProperties();
-                foreach (var property in properties)
+                foreach (var item in settings)
                 {
-                    if (property.Name != "Id")
+                    var model = models.FirstOrDefault(p => p.Key == item.Key);
+                    if (model != null)
                     {
-                        var temp = values.FirstOrDefault(item => item.Key == property.Name);
-                        if (temp != null)
-                            property.SetValue(siteSettingsInfo, Convert.ChangeType(temp.Value, property.PropertyType));
+                        model.Value = item.Value;
+                        Context.CommandSet<SiteSettingsInfo>(transaction).Where(p => p.Key == item.Key).Update(model);
+                    }
+                    else
+                    {
+                        Context.CommandSet<SiteSettingsInfo>(transaction).Insert(new SiteSettingsInfo
+                        {
+                            Key = item.Key,
+                            Value = item.Value
+                        });
                     }
                 }
 
-                CacheHelper.Insert(CacheKeyCollection.SiteSettings, siteSettingsInfo);
+                transaction.Commit();
+
             }
 
-            return siteSettingsInfo;
         }
-        public SiteSettingsInfo GetSiteSettingsByObjectCache()
-        {
-            SiteSettingsInfo siteSettingsInfo = null;
-            //ObjectCache cache = MemoryCache.Default;
-            //    if (cache.Contains(CacheKeyCollection.SiteSettings))//如果存在缓存，则从缓存中读取
-            //        siteSettingsInfo = cache.Get(CacheKeyCollection.SiteSettings) as SiteSettingsInfo;
-
-            if (siteSettingsInfo == null)
-            {
-                //否则从数据库中读取，并将配置存入至缓存
-
-                //通过反射获取值
-                var values = Context.QuerySet<SiteSettingsInfo>().ToList();
-                siteSettingsInfo = new SiteSettingsInfo();
-
-                var properties = siteSettingsInfo.GetType().GetProperties();
-                foreach (var property in properties)
-                {
-                    if (property.Name != "Id")
-                    {
-                        var temp = values.FirstOrDefault(item => item.Key == property.Name);
-                        if (temp != null)
-                            property.SetValue(siteSettingsInfo, Convert.ChangeType(temp.Value, property.PropertyType));
-                    }
-                }
-
-                // Core.Cache.Insert(CacheKeyCollection.SiteSettings, siteSettingsInfo);
-                //var policy = new CacheItemPolicy() { AbsoluteExpiration = DateTime.Now.AddSeconds(300) };
-                //cache.Add(CacheKeyCollection.SiteSettings, siteSettingsInfo, policy);
-            }
-
-            return siteSettingsInfo;
-        }
-
-        public void SetSiteSettings(SiteSettingsInfo siteSettingsInfo)
-        {
-            PropertyInfo[] properties = siteSettingsInfo.GetType().GetProperties();
-            SiteSettingsInfo temp;
-            string value;
-            object obj;
-            IEnumerable<SiteSettingsInfo> siteSettingInfos = Context.QuerySet<SiteSettingsInfo>().ToList();
-            foreach (var property in properties)
-            {
-                obj = property.GetValue(siteSettingsInfo);
-                if (obj != null)
-                    value = obj.ToString();
-                else
-                    value = "";
-                if (property.Name != "Id")
-                {
-                    temp = siteSettingInfos.FirstOrDefault(item => item.Key == property.Name);
-                    if (temp == null)//数据库中不存在，则创建
-                        Context.CommandSet<SiteSettingsInfo>().Insert(new SiteSettingsInfo() { Key = property.Name, Value = value });
-                    else//存在则更新
-                        temp.Value = value;
-                }
-            }
-
-            //删除不存在的项
-            var propertyNames = properties.Select(item => item.Name);
-            Context.CommandSet<SiteSettingsInfo>().Where(item => !propertyNames.Contains(item.Key)).Delete();
-
-            CacheHelper.Remove(CacheKeyCollection.SiteSettings);
-        }
-
-        public void SaveSetting(string key, object value)
-        {
-            if (value == null)
-                throw new ArgumentNullException("值不能为null");
-
-            //检查Key是否存在
-            PropertyInfo[] properties = typeof(SiteSettingsInfo).GetProperties();
-            if (properties.FirstOrDefault(item => item.Name == key) == null)
-                throw new ApplicationException("未找到" + key + "对应的配置项");
-
-            var siteSetting = Context.SiteSettings.FindBy(item => item.Key == key).FirstOrDefault();
-            if (siteSetting == null)
-            {
-                siteSetting = new SiteSettings();
-                Context.SiteSettings.Add(siteSetting);
-            }
-            siteSetting.Key = key;
-            siteSetting.Value = value.ToString();
-            Context.SaveChanges();
-            CacheHelper.Remove(CacheKeyCollection.SiteSettings);
-        }
-
 
     }
 }

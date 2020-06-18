@@ -1,17 +1,17 @@
 ﻿using Autofac;
 using Autofac.Configuration;
 using Microsoft.Extensions.Configuration;
-using MZcms.IServices;
+using MCS.IServices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using MZcms.Common;
+using MCS.Core;
 using Microsoft.Extensions.Configuration.Json;
 using System.IO;
 
-namespace MZcms.ServiceProvider
+namespace MCS.ServiceProvider
 {
     public class Instance<T> where T : IService
     {
@@ -116,7 +116,7 @@ namespace MZcms.ServiceProvider
                     if (ServiceProviders == null)
                     {
                         ServiceProviders = new Hashtable();
-                        ServiceProviders.Add("MZcms.IServices", "MZcms.Service" + "," + "MZcms.Service");
+                        ServiceProviders.Add("MCS.IServices", "MCS.Service" + "," + "MCS.Service");
                     }
                 }
             }

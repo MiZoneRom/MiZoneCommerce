@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace MZcms.ServiceProvider
+namespace MCS.ServiceProvider
 {
     /// <summary>
     /// 服务实例创建异常
     /// </summary>
-    public class ServiceInstacnceCreateException : MZcms.Common.MZcmsException
+    public class ServiceInstacnceCreateException : MCS.Core.MCSException
     {
         public ServiceInstacnceCreateException() { }
 

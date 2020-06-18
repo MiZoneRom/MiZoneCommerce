@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Autofac.Configuration" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
+    <ProjectReference Include="..\MCS.IService\MCS.IService.csproj" />
+  </ItemGroup>
+
 </Project>
