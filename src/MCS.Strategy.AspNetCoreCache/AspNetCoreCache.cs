@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
+﻿using MCS.Core;
+using System;
 using System.Collections;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Web;
+using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Memory;
+using System.Reflection;
 
-namespace MCS.Core.Helper
+namespace MCS.Strategy
 {
-
-    /// <summary>
-    /// 自定义缓存帮助类
-    /// </summary>
-    public static class CacheHelper
+    public class AspNetCoreCache : ICache
     {
         private static MemoryCache cache;
         static object cacheLocker = new object();
 
-        static CacheHelper()
+        public AspNetCoreCache()
         {
             cache = new MemoryCache(new MemoryCacheOptions());
         }
@@ -31,21 +23,9 @@ namespace MCS.Core.Helper
         /// </summary>
         /// <param name="key">缓存键</param>
         /// <returns>缓存值</returns>
-        public static object Get(string key)
+        public T Get<T>(string key)
         {
-            return cache.Get(key);
-        }
-
-        /// <summary>
-        /// 获得指定键的缓存值
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key">缓存键</param>
-        /// <returns></returns>
-        public static T Get<T>(string key)
-        {
-            T result = (T)cache.Get(key);
-            return result;
+            return (T)cache.Get(key);
         }
 
         /// <summary>
@@ -53,7 +33,7 @@ namespace MCS.Core.Helper
         /// </summary>
         /// <param name="key">缓存键</param>
         /// <param name="value">缓存值</param>
-        public static void Insert(string key, object value)
+        public void Insert(string key, object value)
         {
             lock (cacheLocker)
             {
@@ -68,8 +48,8 @@ namespace MCS.Core.Helper
         /// </summary>
         /// <param name="key">缓存键</param>
         /// <param name="data">缓存值</param>
-        /// <param name="cacheTime">缓存过期时间(秒)</param>
-        public static void Insert(string key, object value, int cacheTime)
+        /// <param name="cacheTime">缓存过期时间</param>
+        public void Insert(string key, object value, int cacheTime)
         {
             lock (cacheLocker)
             {
@@ -79,13 +59,8 @@ namespace MCS.Core.Helper
             }
         }
 
-        /// <summary>
-        /// 将指定键的对象添加到缓存中，并指定过期时间
-        /// </summary>
-        /// <param name="key">缓存键</param>
-        /// <param name="value">缓存值</param>
-        /// <param name="cacheTime">缓存过期时间</param>
-        public static void Insert(string key, object value, DateTime cacheTime)
+
+        public void Insert(string key, object value, DateTime cacheTime)
         {
             lock (cacheLocker)
             {
@@ -99,7 +74,7 @@ namespace MCS.Core.Helper
         /// 从缓存中移除指定键的缓存值
         /// </summary>
         /// <param name="key">缓存键</param>
-        public static void Remove(string key)
+        public void Remove(string key)
         {
             cache.Remove(key);
         }
@@ -107,7 +82,7 @@ namespace MCS.Core.Helper
         /// <summary>
         /// 清空所有缓存对象
         /// </summary>
-        public static void Clear()
+        public void Clear()
         {
             var l = GetCacheKeys();
             foreach (var s in l)
@@ -116,12 +91,27 @@ namespace MCS.Core.Helper
             }
         }
 
-        /// <summary>
-        /// 缓存是否存在
-        /// </summary>
-        /// <param name="key">缓存键</param>
-        /// <returns></returns>
-        public static bool Exists(string key)
+        public void Send(string key, object data)
+        {
+            return;
+        }
+
+        public void Recieve<T>(string key, Core.Cache.DoSub dosub)
+        {
+            return;
+        }
+
+        public void RegisterSubscribe<T>(string key, Core.Cache.DoSub dosub)
+        {
+            return;
+        }
+
+        public void UnRegisterSubscrib(string key)
+        {
+            return;
+        }
+
+        public bool Exists(string key)
         {
             if (cache.Get(key) != null)
                 return true;
@@ -129,13 +119,7 @@ namespace MCS.Core.Helper
                 return false;
         }
 
-        /// <summary>
-        /// 将指定键的对象添加到缓存中
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key">缓存键</param>
-        /// <param name="value">缓存值</param>
-        public static void Insert<T>(string key, T value)
+        public void Insert<T>(string key, T value)
         {
             lock (cacheLocker)
             {
@@ -145,14 +129,7 @@ namespace MCS.Core.Helper
             }
         }
 
-        /// <summary>
-        /// 将指定键的对象添加到缓存中，并指定过期时间
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key">缓存键</param>
-        /// <param name="value">缓存值</param>
-        /// <param name="cacheTime">缓存过期时间(秒)</param>
-        public static void Insert<T>(string key, T value, int cacheTime)
+        public void Insert<T>(string key, T value, int cacheTime)
         {
             lock (cacheLocker)
             {
@@ -162,20 +139,48 @@ namespace MCS.Core.Helper
             }
         }
 
-        /// <summary>
-        /// 将指定键的对象添加到缓存中，并指定过期时间
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key">缓存键</param>
-        /// <param name="value">缓存值</param>
-        /// <param name="cacheTime">缓存过期时间</param>
-        public static void Insert<T>(string key, T value, DateTime cacheTime)
+        public void Insert<T>(string key, T value, DateTime cacheTime)
         {
             lock (cacheLocker)
             {
                 if (cache.Get(key) != null)
                     cache.Remove(key);
                 cache.Set(key, value, new MemoryCacheEntryOptions().SetAbsoluteExpiration(cacheTime - DateTime.Now));
+            }
+        }
+
+        public bool SetNX(string key, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SetNX(string key, string value, int cacheTime)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICacheLocker GetCacheLocker(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        const int DEFAULT_TMEOUT = 600;//默认超时时间（单位秒）
+
+        private int _timeout = DEFAULT_TMEOUT;
+
+        /// <summary>
+        /// 缓存过期时间
+        /// </summary>
+        /// <value></value>
+        public int TimeOut
+        {
+            get
+            {
+                return _timeout;
+            }
+            set
+            {
+                _timeout = value > 0 ? value : DEFAULT_TMEOUT;
             }
         }
 

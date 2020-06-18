@@ -20,6 +20,8 @@ using MCS.Core;
 using System.Reflection;
 using MCS.IServices;
 using Autofac.Extensions.DependencyInjection;
+using Autofac.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace MCS.Web
 {
@@ -121,16 +123,23 @@ namespace MCS.Web
         {
             //业务逻辑层所在程序集命名空间
             Assembly service = Assembly.Load("MCS.Service");
+
             //接口层所在程序集命名空间
             Assembly repository = Assembly.Load("MCS.IService");
+
             //自动注入
             builder.RegisterAssemblyTypes(service, repository)
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces();
-            //注册仓储，所有IRepository接口到Repository的映射
-            //builder.RegisterGeneric(typeof(Repository<>))
-            //InstancePerDependency：默认模式，每次调用，都会重新实例化对象；每次请求都创建一个新的对象；
-            // .As(typeof(IRepository<>)).InstancePerDependency();
+
+            ConfigurationBuilder configBuild = new ConfigurationBuilder();
+            configBuild.SetBasePath(Directory.GetCurrentDirectory());
+            configBuild.Add(new JsonConfigurationSource { Path = "Config/autofac.json", ReloadOnChange = true });
+            IConfigurationRoot config = configBuild.Build();
+            ConfigurationModule module = new ConfigurationModule(config);
+
+            builder.RegisterModule(module);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

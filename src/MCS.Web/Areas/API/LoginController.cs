@@ -31,8 +31,8 @@ namespace MCS.Web.Areas.API.Controllers
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpGet]
         public ActionResult<object> Get(string username, string password)

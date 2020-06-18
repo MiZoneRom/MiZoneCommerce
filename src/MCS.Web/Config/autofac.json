@@ -1,18 +1,18 @@
 {
   "components": [
     {
-      "type": "MCS.Strategy.AspNetCache, MCS.Strategy.AspNetCache",
+      "type": "MCS.Strategy.AspNetCoreCache, MCS.Strategy.AspNetCoreCache",
       "services": [
         {
-          "type": "MCS.Common.ICache,MCS.Common"
+          "type": "MCS.Core.ICache,MCS.Core"
         }
       ]
     },
     {
-      "type": "MCS.Strategy.AspNetIO, MCS.Strategy.AspNetIO",
+      "type": "MCS.Strategy.AspNetCoreIO, MCS.Strategy.AspNetCoreIO",
       "services": [
         {
-          "type": "MCS.Common.IMCSIO,MCS.Core"
+          "type": "MCS.Core.IMCSIO,MCS.Core"
         }
       ]
     }
