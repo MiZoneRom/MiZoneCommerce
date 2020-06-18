@@ -1,4 +1,7 @@
-﻿using MCS.CommonModel;
+﻿using Kogel.Dapper.Extension.MsSql;
+using MCS.CommonModel;
+using MCS.Core.Helper;
+using MCS.Entities;
 using MCS.IServices;
 using System;
 using System.Collections.Generic;
@@ -21,7 +24,7 @@ namespace MCS.Service
                 //否则从数据库中读取，并将配置存入至缓存
 
                 //通过反射获取值
-                var values = Context.SiteSettings.FindAll().ToArray();
+                var values = Context.QuerySet<SiteSettingsInfo>().ToList();
                 siteSettingsInfo = new SiteSettingsInfo();
 
                 var properties = siteSettingsInfo.GetType().GetProperties();
@@ -52,7 +55,7 @@ namespace MCS.Service
                 //否则从数据库中读取，并将配置存入至缓存
 
                 //通过反射获取值
-                var values = Context.SiteSettings.FindAll().ToArray();
+                var values = Context.QuerySet<SiteSettingsInfo>().ToList();
                 siteSettingsInfo = new SiteSettingsInfo();
 
                 var properties = siteSettingsInfo.GetType().GetProperties();
@@ -77,10 +80,10 @@ namespace MCS.Service
         public void SetSiteSettings(SiteSettingsInfo siteSettingsInfo)
         {
             PropertyInfo[] properties = siteSettingsInfo.GetType().GetProperties();
-            SiteSettings temp;
+            SiteSettingsInfo temp;
             string value;
             object obj;
-            IEnumerable<SiteSettings> siteSettingInfos = Context.SiteSettings.FindAll().ToArray();
+            IEnumerable<SiteSettingsInfo> siteSettingInfos = Context.QuerySet<SiteSettingsInfo>().ToList();
             foreach (var property in properties)
             {
                 obj = property.GetValue(siteSettingsInfo);
@@ -92,7 +95,7 @@ namespace MCS.Service
                 {
                     temp = siteSettingInfos.FirstOrDefault(item => item.Key == property.Name);
                     if (temp == null)//数据库中不存在，则创建
-                        Context.SiteSettings.Add(new SiteSettings() { Key = property.Name, Value = value });
+                        Context.CommandSet<SiteSettingsInfo>().Insert(new SiteSettingsInfo() { Key = property.Name, Value = value });
                     else//存在则更新
                         temp.Value = value;
                 }
@@ -100,8 +103,8 @@ namespace MCS.Service
 
             //删除不存在的项
             var propertyNames = properties.Select(item => item.Name);
-            Context.SiteSettings.RemoveRange(siteSettingInfos.Where(item => !propertyNames.Contains(item.Key)));
-            Context.SaveChanges();
+            Context.CommandSet<SiteSettingsInfo>().Where(item => !propertyNames.Contains(item.Key)).Delete();
+
             CacheHelper.Remove(CacheKeyCollection.SiteSettings);
         }
 
