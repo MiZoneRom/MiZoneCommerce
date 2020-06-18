@@ -31,6 +31,10 @@ namespace MCS.Web.Framework.BaseControllers
             get
             {
                 string token = HttpContext.Request.Headers["Authorization"];
+                if (string.IsNullOrEmpty(token))
+                {
+                    return string.Empty;
+                }
                 token = token.Replace("Bearer", "").Trim();
                 return token;
             }
