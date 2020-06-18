@@ -12,6 +12,10 @@ namespace MCS.Web.Areas.API.Controllers
     [ApiController]
     public class ConsoleController : Controller
     {
+        /// <summary>
+        /// 获取导航
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Navigation")]
         public ActionResult<object> Navigation()
         {
