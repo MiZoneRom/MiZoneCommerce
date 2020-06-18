@@ -31,10 +31,9 @@ namespace MCS.Web
         }
 
         public IConfiguration Configuration { get; }
-        public IContainer ApplicationContainer;
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public IServiceProvider ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
 
             //添加jwt验证：
@@ -116,27 +115,22 @@ namespace MCS.Web
                 o.Filters.Add(typeof(BaseExceptions));
             });
 
-            //实例化 AutoFac  容器   
-            var builder = new ContainerBuilder();
+        }
 
-            //MZcms.Service是继承接口的实现方法类库名称
-            var assemblys = Assembly.Load("MCS.Service");
-
-            //IService 是一个接口（所有要实现依赖注入的借口都要继承该接口）
-            var baseType = typeof(IService);
-
-            //注入所有类库下的接口
-            builder.RegisterAssemblyTypes(assemblys)
-                .Where(m => baseType.IsAssignableFrom(m) && m != baseType)
-                .AsImplementedInterfaces().InstancePerLifetimeScope();
-
-            builder.Populate(services);
-
-            ApplicationContainer = builder.Build();
-
-            //第三方IOC接管 core内置DI容器
-            return new AutofacServiceProvider(ApplicationContainer);
-
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            //业务逻辑层所在程序集命名空间
+            Assembly service = Assembly.Load("MCS.Service");
+            //接口层所在程序集命名空间
+            Assembly repository = Assembly.Load("MCS.IService");
+            //自动注入
+            builder.RegisterAssemblyTypes(service, repository)
+                .Where(t => t.Name.EndsWith("Service"))
+                .AsImplementedInterfaces();
+            //注册仓储，所有IRepository接口到Repository的映射
+            //builder.RegisterGeneric(typeof(Repository<>))
+            //InstancePerDependency：默认模式，每次调用，都会重新实例化对象；每次请求都创建一个新的对象；
+            // .As(typeof(IRepository<>)).InstancePerDependency();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -164,6 +158,9 @@ namespace MCS.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //启用跨越
+            app.UseCors("Any");
 
             app.UseEndpoints(endpoints =>
             {

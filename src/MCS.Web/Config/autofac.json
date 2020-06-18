@@ -1,0 +1,20 @@
+{
+  "components": [
+    {
+      "type": "MCS.Strategy.AspNetCache, MCS.Strategy.AspNetCache",
+      "services": [
+        {
+          "type": "MCS.Common.ICache,MCS.Common"
+        }
+      ]
+    },
+    {
+      "type": "MCS.Strategy.AspNetIO, MCS.Strategy.AspNetIO",
+      "services": [
+        {
+          "type": "MCS.Common.IMCSIO,MCS.Core"
+        }
+      ]
+    }
+  ]
+}
