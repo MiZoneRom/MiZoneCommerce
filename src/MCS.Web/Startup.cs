@@ -121,16 +121,19 @@ namespace MCS.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+
+            ObjectContainer.ApplicationStart(new AutoFacContainer(builder));
+
             //业务逻辑层所在程序集命名空间
-            Assembly service = Assembly.Load("MCS.Service");
+            //Assembly service = Assembly.Load("MCS.Service");
 
             //接口层所在程序集命名空间
-            Assembly repository = Assembly.Load("MCS.IService");
+            //Assembly repository = Assembly.Load("MCS.IService");
 
             //自动注入
-            builder.RegisterAssemblyTypes(service, repository)
-                .Where(t => t.Name.EndsWith("Service"))
-                .AsImplementedInterfaces();
+            //builder.RegisterAssemblyTypes(service, repository)
+            //    .Where(t => t.Name.EndsWith("Service"))
+            //    .AsImplementedInterfaces();
 
             //ConfigurationBuilder configBuild = new ConfigurationBuilder();
             //configBuild.SetBasePath(Directory.GetCurrentDirectory());
