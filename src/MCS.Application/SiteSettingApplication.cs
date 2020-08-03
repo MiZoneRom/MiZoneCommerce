@@ -11,9 +11,8 @@ using System.Threading.Tasks;
 
 namespace MCS.Application
 {
-    public class SiteSettingApplication
+    public class SiteSettingApplication : BaseApplicaion<ISiteSettingService>
     {
-        private static ISiteSettingService _iSiteSettingService = ServiceProvider.Instance<ISiteSettingService>.Create;
 
         public static SiteSettings SiteSettings
         {
@@ -39,7 +38,7 @@ namespace MCS.Application
             var settings = new SiteSettings();
             var properties = typeof(SiteSettings).GetProperties();
 
-            var data = _iSiteSettingService.GetSiteSettings();
+            var data = Service.GetSiteSettings();
             foreach (var property in properties)
             {
                 var temp = data.FirstOrDefault(item => item.Key == property.Name);
@@ -55,7 +54,7 @@ namespace MCS.Application
         public static void SaveChanges()
         {
             var current = SiteSettings;
-            var data = _iSiteSettingService.GetSiteSettings();
+            var data = Service.GetSiteSettings();
 
             var changes = new Dictionary<string, string>();
             var properties = typeof(SiteSettings).GetProperties();
@@ -71,7 +70,7 @@ namespace MCS.Application
 
             if (changes.Count > 0)
             {
-                _iSiteSettingService.SaveSettings(changes);
+                Service.SaveSettings(changes);
                 Cache.Remove(CacheKeyCollection.SiteSettings);//清空配置缓存
             }
         }
