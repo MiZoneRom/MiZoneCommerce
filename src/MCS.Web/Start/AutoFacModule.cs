@@ -19,35 +19,7 @@ namespace MCS.Web
         {
             _builder = builder;
 
-            SetupResolveRules(builder);  //注入
 
-            //builder.RegisterControllers(Assembly.GetExecutingAssembly());  //注入所有Controller
-            //container = builder.Build();
-            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            ObjectContainer.ApplicationStart(this);
-        }
-
-        #region IinjectContainer 成员
-        public void RegisterType<T>()
-        {
-            _builder.RegisterType<T>();
-        }
-
-        public T Resolve<T>()
-        {
-            return _container.Resolve<T>();
-        }
-
-        public object Resolve(Type type)
-        {
-            return _container.Resolve(type);
-        }
-        #endregion
-
-        #region 私有方法
-        private void SetupResolveRules(ContainerBuilder builder)
-        {
             //var services = Assembly.Load("MCS.Service");
             //builder.RegisterAssemblyTypes(services).Where(t => t.GetInterface(typeof(MCS.IServices.IService).Name)!=null).AsImplementedInterfaces().InstancePerLifetimeScope();
 
@@ -70,6 +42,32 @@ namespace MCS.Web
             builder.RegisterModule(module);
 
             builder.RegisterBuildCallback(container => _container = container);
+
+            //builder.RegisterControllers(Assembly.GetExecutingAssembly());  //注入所有Controller
+            //container = builder.Build();
+            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            ObjectContainer.ApplicationStart(this);
+        }
+
+        #region IinjectContainer 成员
+        /// <summary>
+        /// 注册类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void RegisterType<T>()
+        {
+            _builder.RegisterType<T>();
+        }
+
+        public T Resolve<T>()
+        {
+            return _container.Resolve<T>();
+        }
+
+        public object Resolve(Type type)
+        {
+            return _container.Resolve(type);
         }
         #endregion
 
