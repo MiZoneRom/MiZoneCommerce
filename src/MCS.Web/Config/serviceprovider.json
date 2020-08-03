@@ -1,0 +1,14 @@
+{
+  "serviceprovider": [
+    {
+      "interface": "MCS.IServices",
+      "assembly": "WMS.Service",
+      "namespace": "WMS.Service"
+    },
+    {
+      "interface": "WMS.IExServices",
+      "assembly": "WMS.ExService",
+      "namespace": "WMS.ExService"
+    }
+  ]
+}
