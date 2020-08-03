@@ -17,10 +17,11 @@ namespace MCS.Core
 		#endregion
 
 		#region 构造函数
-		public AutoFacContainer(ContainerBuilder builder)
+		public AutoFacContainer(ContainerBuilder containerBuilder)
 		{
-
+			builder = containerBuilder;
 			SetupResolveRules(builder);  //注入
+
 			//builder.RegisterControllers(Assembly.GetExecutingAssembly());  //注入所有Controller
 			//container = builder.Build();
 			//DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

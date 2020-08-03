@@ -121,8 +121,11 @@ namespace MCS.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            //var module = new AutoFacModule();
+            //module.Load();
 
-            ObjectContainer.ApplicationStart(new AutoFacContainer(builder));
+            var assembly = typeof(AutoFacModule).Assembly;
+            var xx = builder.RegisterAssemblyModules(assembly);
 
             //业务逻辑层所在程序集命名空间
             //Assembly service = Assembly.Load("MCS.Service");
@@ -144,6 +147,8 @@ namespace MCS.Web
             //builder.RegisterModule(module);
 
         }
+
+        public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -180,6 +185,8 @@ namespace MCS.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
 
         }
     }
