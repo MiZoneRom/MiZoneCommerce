@@ -75,7 +75,8 @@ namespace MCS.Web
 
                 });
 
-            services.AddControllersWithViews();
+            //配置Controller全部由Autofac创建
+            services.AddControllersWithViews().AddControllersAsServices();
 
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>

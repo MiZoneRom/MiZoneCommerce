@@ -27,7 +27,10 @@ namespace MCS.Service
 
         public void Dispose()
         {
-            _connection.Dispose();
+            if (_connection != null)
+            {
+                _connection.Dispose();
+            }
         }
         #endregion
 
