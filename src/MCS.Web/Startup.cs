@@ -132,13 +132,13 @@ namespace MCS.Web
                 .Where(t => t.Name.EndsWith("Service"))
                 .AsImplementedInterfaces();
 
-            ConfigurationBuilder configBuild = new ConfigurationBuilder();
-            configBuild.SetBasePath(Directory.GetCurrentDirectory());
-            configBuild.Add(new JsonConfigurationSource { Path = "Config/autofac.json", ReloadOnChange = true });
-            IConfigurationRoot config = configBuild.Build();
-            ConfigurationModule module = new ConfigurationModule(config);
+            //ConfigurationBuilder configBuild = new ConfigurationBuilder();
+            //configBuild.SetBasePath(Directory.GetCurrentDirectory());
+            //configBuild.Add(new JsonConfigurationSource { Path = "Config/autofac.json", ReloadOnChange = true });
+            //IConfigurationRoot config = configBuild.Build();
+            //ConfigurationModule module = new ConfigurationModule(config);
 
-            builder.RegisterModule(module);
+            //builder.RegisterModule(module);
 
         }
 

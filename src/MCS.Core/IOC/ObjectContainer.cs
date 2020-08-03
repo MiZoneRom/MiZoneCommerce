@@ -15,14 +15,21 @@ namespace MCS.Core
     public class ObjectContainer
     {
         private static ObjectContainer current;
-        private static ContainerBuilder builder;
+        private static ContainerBuilder container;
+
+        public static void ApplicationStart(ContainerBuilder c)
+        {
+            container = c;
+            current = new ObjectContainer(container);
+        }
 
         public static ObjectContainer Current
         {
             get
             {
-                if (builder == null) {
-                    builder = new ContainerBuilder();
+                if (current == null)
+                {
+                    ApplicationStart(container);
                 }
                 return current;
             }
@@ -30,34 +37,38 @@ namespace MCS.Core
 
         protected ContainerBuilder Container
         {
-            get
-            {
-                return builder;
-            }
-            set
-            {
-                builder = value;
-            }
+            get;
+            set;
+        }
+
+        protected ObjectContainer()
+        {
+            Container = new ContainerBuilder();
+        }
+
+        protected ObjectContainer(ContainerBuilder inversion)
+        {
+            Container = inversion;
         }
 
         public void RegisterType<T>()
         {
-            Container.RegisterType<T>();
+            current.RegisterType<T>();
         }
 
         public T Resolve<T>()
         {
             Autofac.IContainer container = null;
             T t;
-            builder.RegisterType<T>();
+            Container.RegisterType<T>();
 
             ConfigurationBuilder configBuild = new ConfigurationBuilder();
             configBuild.AddJsonFile("Config/autofac.json");
             IConfigurationRoot config = configBuild.Build();
             ConfigurationModule module = new ConfigurationModule(config);
-            builder.RegisterModule(module);
+            Container.RegisterModule(module);
 
-            container = builder.Build();
+            container = Container.Build();
             t = container.Resolve<T>();
             return t;
         }

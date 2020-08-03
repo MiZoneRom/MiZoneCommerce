@@ -24,8 +24,7 @@ namespace MCS.ServiceProvider
                 ContainerBuilder builder = new ContainerBuilder();
 
                 ConfigurationBuilder configBuild = new ConfigurationBuilder();
-                configBuild.SetBasePath(Directory.GetCurrentDirectory());
-                configBuild.Add(new JsonConfigurationSource { Path = "Config/autofac.json", ReloadOnChange = true });
+                configBuild.AddJsonFile("Config/autofac.json");
                 IConfigurationRoot config = configBuild.Build();
                 ConfigurationModule module = new ConfigurationModule(config);
                 var components = config.GetSection("components").GetChildren();
