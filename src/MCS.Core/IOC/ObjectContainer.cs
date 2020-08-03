@@ -1,5 +1,11 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Configuration;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,39 +15,35 @@ namespace MCS.Core
     public class ObjectContainer
     {
         private static ObjectContainer current;
-        private static IinjectContainer container;
-        public static void ApplicationStart( IinjectContainer c )
-        {
-            container = c;
-            current = new ObjectContainer( container );
-        }
+        private static ContainerBuilder builder;
 
         public static ObjectContainer Current
         {
             get
             {
-                if( current == null )
-                {
-                    ApplicationStart( container );
+                if (builder == null) {
+                    builder = new ContainerBuilder();
+                    ConfigurationBuilder configBuild = new ConfigurationBuilder();
+                    configBuild.SetBasePath(Directory.GetCurrentDirectory());
+                    configBuild.Add(new JsonConfigurationSource { Path = "Config/autofac.json", ReloadOnChange = true });
+                    IConfigurationRoot config = configBuild.Build();
+                    ConfigurationModule module = new ConfigurationModule(config);
+                    builder.RegisterModule(module);
                 }
                 return current;
             }
         }
 
-        protected IinjectContainer Container
+        protected ContainerBuilder Container
         {
-            get;
-            set;
-        }
-
-        protected ObjectContainer()
-        {
-            Container = new DefaultContainerForDictionary();
-        }
-
-        protected ObjectContainer( IinjectContainer inversion )
-        {
-            Container = inversion;
+            get
+            {
+                return builder;
+            }
+            set
+            {
+                builder = value;
+            }
         }
 
         public void RegisterType<T>()
@@ -51,7 +53,12 @@ namespace MCS.Core
 
         public T Resolve<T>()
         {
-            return Container.Resolve<T>();
+            Autofac.IContainer container = null;
+            T t;
+            builder.RegisterType<T>();
+            container = builder.Build();
+            t = container.Resolve<T>();
+            return t;
         }
 
 
