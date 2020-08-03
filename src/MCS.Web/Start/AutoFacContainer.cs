@@ -59,7 +59,7 @@ namespace MCS.Core
 			//自动注入
 			builder.RegisterAssemblyTypes(service, repository)
 			    .Where(t => t.Name.EndsWith("Service"))
-			    .AsImplementedInterfaces();
+			    .AsImplementedInterfaces().InstancePerLifetimeScope();
 
 			//注入模组
 			ConfigurationBuilder configBuild = new ConfigurationBuilder();
