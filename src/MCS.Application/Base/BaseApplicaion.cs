@@ -3,6 +3,9 @@ using MCS.IServices;
 
 namespace MCS.Application
 {
+    /// <summary>
+    /// Applicaion 基类
+    /// </summary>
     public class BaseApplicaion
     {
         protected static T GetService<T>() where T:IService
