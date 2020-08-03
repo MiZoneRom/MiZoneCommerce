@@ -15,9 +15,8 @@ namespace MCS.Core
     public class ObjectContainer
     {
         private static ObjectContainer current;
-        private static ContainerBuilder container;
-
-        public static void ApplicationStart(ContainerBuilder c)
+        private static IinjectContainer container;
+        public static void ApplicationStart(IinjectContainer c)
         {
             container = c;
             current = new ObjectContainer(container);
@@ -35,7 +34,7 @@ namespace MCS.Core
             }
         }
 
-        protected ContainerBuilder Container
+        protected IinjectContainer Container
         {
             get;
             set;
@@ -43,36 +42,23 @@ namespace MCS.Core
 
         protected ObjectContainer()
         {
-            Container = new ContainerBuilder();
+            Container = new DefaultContainerForDictionary();
         }
 
-        protected ObjectContainer(ContainerBuilder inversion)
+        protected ObjectContainer(IinjectContainer inversion)
         {
             Container = inversion;
         }
 
         public void RegisterType<T>()
         {
-            current.RegisterType<T>();
+            Container.RegisterType<T>();
         }
 
         public T Resolve<T>()
         {
-            Autofac.IContainer container = null;
-            T t;
-            Container.RegisterType<T>();
-
-            ConfigurationBuilder configBuild = new ConfigurationBuilder();
-            configBuild.AddJsonFile("Config/autofac.json");
-            IConfigurationRoot config = configBuild.Build();
-            ConfigurationModule module = new ConfigurationModule(config);
-            Container.RegisterModule(module);
-
-            container = Container.Build();
-            t = container.Resolve<T>();
-            return t;
+            return Container.Resolve<T>();
         }
-
 
     }
 }
