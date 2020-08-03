@@ -19,7 +19,6 @@ namespace MCS.Web
         {
             _builder = builder;
 
-
             //var services = Assembly.Load("MCS.Service");
             //builder.RegisterAssemblyTypes(services).Where(t => t.GetInterface(typeof(MCS.IServices.IService).Name)!=null).AsImplementedInterfaces().InstancePerLifetimeScope();
 
@@ -41,13 +40,14 @@ namespace MCS.Web
             ConfigurationModule module = new ConfigurationModule(config);
             builder.RegisterModule(module);
 
+            //注入回调
             builder.RegisterBuildCallback(container => _container = container);
 
             //builder.RegisterControllers(Assembly.GetExecutingAssembly());  //注入所有Controller
             //container = builder.Build();
             //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
-            ObjectContainer.ApplicationStart(this);
+            ObjectContainer.ModuleStart(this);
         }
 
         #region IinjectContainer 成员
@@ -60,11 +60,21 @@ namespace MCS.Web
             _builder.RegisterType<T>();
         }
 
+        /// <summary>
+        /// 解释
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public T Resolve<T>()
         {
             return _container.Resolve<T>();
         }
 
+        /// <summary>
+        /// 解释
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public object Resolve(Type type)
         {
             return _container.Resolve(type);

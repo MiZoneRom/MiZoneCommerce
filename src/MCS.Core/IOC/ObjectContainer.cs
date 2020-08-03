@@ -16,7 +16,7 @@ namespace MCS.Core
     {
         private static ObjectContainer current;
         private static IinjectContainer container;
-        public static void ApplicationStart(IinjectContainer c)
+        public static void ModuleStart(IinjectContainer c)
         {
             container = c;
             current = new ObjectContainer(container);
@@ -28,7 +28,7 @@ namespace MCS.Core
             {
                 if (current == null)
                 {
-                    ApplicationStart(container);
+                    ModuleStart(container);
                 }
                 return current;
             }
