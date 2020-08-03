@@ -23,11 +23,6 @@ namespace MCS.Core
             {
                 if (builder == null) {
                     builder = new ContainerBuilder();
-                    ConfigurationBuilder configBuild = new ConfigurationBuilder();
-                    configBuild.AddJsonFile("Config/autofac.json");
-                    IConfigurationRoot config = configBuild.Build();
-                    ConfigurationModule module = new ConfigurationModule(config);
-                    builder.RegisterModule(module);
                 }
                 return current;
             }
@@ -55,6 +50,13 @@ namespace MCS.Core
             Autofac.IContainer container = null;
             T t;
             builder.RegisterType<T>();
+
+            ConfigurationBuilder configBuild = new ConfigurationBuilder();
+            configBuild.AddJsonFile("Config/autofac.json");
+            IConfigurationRoot config = configBuild.Build();
+            ConfigurationModule module = new ConfigurationModule(config);
+            builder.RegisterModule(module);
+
             container = builder.Build();
             t = container.Resolve<T>();
             return t;
