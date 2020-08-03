@@ -14,23 +14,28 @@ namespace MCS.Core
 {
     public class ObjectContainer
     {
-        private static ObjectContainer current;
-        private static IinjectContainer container;
+        private static ObjectContainer _current;
+        private static IinjectContainer _container;
+
+        /// <summary>
+        /// 模块启动
+        /// </summary>
+        /// <param name="c"></param>
         public static void ModuleStart(IinjectContainer c)
         {
-            container = c;
-            current = new ObjectContainer(container);
+            _container = c;
+            _current = new ObjectContainer(_container);
         }
 
         public static ObjectContainer Current
         {
             get
             {
-                if (current == null)
+                if (_current == null)
                 {
-                    ModuleStart(container);
+                    ModuleStart(_container);
                 }
-                return current;
+                return _current;
             }
         }
 
