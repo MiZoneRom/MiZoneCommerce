@@ -9,6 +9,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace MCS.Web.Areas.API.Controllers
 {
+    /// <summary>
+    /// 管理员
+    /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
     public class ManagerController : BaseController
