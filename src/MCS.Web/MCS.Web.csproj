@@ -28,6 +28,7 @@
     <ProjectReference Include="..\MCS.Service\MCS.Service.csproj" />
     <ProjectReference Include="..\MCS.Strategy.AspNetCoreCache\MCS.Strategy.AspNetCoreCache.csproj" />
     <ProjectReference Include="..\MCS.Strategy.AspNetCoreIO\MCS.Strategy.AspNetCoreIO.csproj" />
+    <ProjectReference Include="..\MCS.Strategy.OSS\MCS.Strategy.OSS.csproj" />
     <ProjectReference Include="..\MCS.Web.Framework\MCS.Web.Framework.csproj" />
   </ItemGroup>
 
