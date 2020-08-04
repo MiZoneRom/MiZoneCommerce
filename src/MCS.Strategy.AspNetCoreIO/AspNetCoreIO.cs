@@ -45,7 +45,7 @@ namespace MCS.Strategy
         {
             if (string.IsNullOrWhiteSpace(sourceFileName))
             {
-                throw new MCSIOException(IOErrorMsg.FileNotExist.GetDescription());
+                throw new MCSIOException(IOErrorMsg.FileNotExist.ToDescription());
             }
             var s = GetPhysicalPath(sourceFileName);
             var d = GetPhysicalPath(destFileName);
@@ -56,7 +56,7 @@ namespace MCS.Strategy
             }
             if (!overwrite && ExistFile(destFileName)) //如果不可覆盖文件且目标文件已存在,传相对路径
             {
-                throw new MCSIOException(IOErrorMsg.FileExist.GetDescription());
+                throw new MCSIOException(IOErrorMsg.FileExist.ToDescription());
             }
             else
             {
@@ -101,7 +101,7 @@ namespace MCS.Strategy
                 }
                 else
                 {
-                    throw new MCSIOException(IOErrorMsg.FileExist.GetDescription());
+                    throw new MCSIOException(IOErrorMsg.FileExist.ToDescription());
                 }
             }
             else
@@ -143,7 +143,7 @@ namespace MCS.Strategy
                 }
                 else
                 {
-                    throw new MCSIOException(IOErrorMsg.FileExist.GetDescription());
+                    throw new MCSIOException(IOErrorMsg.FileExist.ToDescription());
                 }
             }
             else
@@ -166,7 +166,7 @@ namespace MCS.Strategy
             }
             else
             {
-                throw new MCSIOException(IOErrorMsg.DirNotExist.GetDescription());
+                throw new MCSIOException(IOErrorMsg.DirNotExist.ToDescription());
             }
         }
 
@@ -232,7 +232,7 @@ namespace MCS.Strategy
         {
             if (string.IsNullOrWhiteSpace(fileName))
             {
-                throw new MCSIOException(IOErrorMsg.FileNotExist.GetDescription());
+                throw new MCSIOException(IOErrorMsg.FileNotExist.ToDescription());
             }
             var f = GetPhysicalPath(fileName);
             FileStream fs = new FileStream(f, FileMode.Open);
@@ -317,7 +317,7 @@ namespace MCS.Strategy
         {
             if (string.IsNullOrWhiteSpace(sourceFileName))
             {
-                throw new MCSIOException(IOErrorMsg.FileNotExist.GetDescription());
+                throw new MCSIOException(IOErrorMsg.FileNotExist.ToDescription());
             }
             var s = GetPhysicalPath(sourceFileName);
             var d = GetPhysicalPath(destFileName);
@@ -328,7 +328,7 @@ namespace MCS.Strategy
             }
             if (!overwrite && ExistFile(d)) //如果不可覆盖文件且目标文件已存在
             {
-                throw new MCSIOException(IOErrorMsg.FileExist.GetDescription());
+                throw new MCSIOException(IOErrorMsg.FileExist.ToDescription());
             }
             else
             {

@@ -9,7 +9,7 @@ namespace MCS.Core
 {
     public static class EnumExtensions
     {
-        public static string GetDescription(this Enum value)
+        public static string ToDescription(this Enum value)
         {
             return value.GetType()
                 .GetMember(value.ToString())

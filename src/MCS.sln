@@ -37,9 +37,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cache", "Cache", "{23EF2B7A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{AA6100B4-5EE4-46EE-B870-743CF0DC6A09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Strategy.AspNetCoreCache", "MCS.Strategy.AspNetCoreCache\MCS.Strategy.AspNetCoreCache.csproj", "{43F307D9-1F09-41AF-BECF-843D2A602283}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Strategy.AspNetCoreCache", "MCS.Strategy.AspNetCoreCache\MCS.Strategy.AspNetCoreCache.csproj", "{43F307D9-1F09-41AF-BECF-843D2A602283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Strategy.AspNetCoreIO", "MCS.Strategy.AspNetCoreIO\MCS.Strategy.AspNetCoreIO.csproj", "{E6F7C5D2-EB2D-4EBA-974F-AFDAC6C4EA62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Strategy.AspNetCoreIO", "MCS.Strategy.AspNetCoreIO\MCS.Strategy.AspNetCoreIO.csproj", "{E6F7C5D2-EB2D-4EBA-974F-AFDAC6C4EA62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Strategy.OSS", "MCS.Strategy.OSS\MCS.Strategy.OSS.csproj", "{D220003C-5229-4EB8-8944-8502535E3088}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{E6F7C5D2-EB2D-4EBA-974F-AFDAC6C4EA62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6F7C5D2-EB2D-4EBA-974F-AFDAC6C4EA62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6F7C5D2-EB2D-4EBA-974F-AFDAC6C4EA62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D220003C-5229-4EB8-8944-8502535E3088}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D220003C-5229-4EB8-8944-8502535E3088}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D220003C-5229-4EB8-8944-8502535E3088}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D220003C-5229-4EB8-8944-8502535E3088}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +118,7 @@ Global
 		{F402D7F3-8124-4ECA-BC1D-E77014CAE92A} = {5D1AD185-9E74-468D-95E5-16C12FBA9251}
 		{43F307D9-1F09-41AF-BECF-843D2A602283} = {23EF2B7A-E6D0-4BA7-BE9E-79E8797AE219}
 		{E6F7C5D2-EB2D-4EBA-974F-AFDAC6C4EA62} = {23EF2B7A-E6D0-4BA7-BE9E-79E8797AE219}
+		{D220003C-5229-4EB8-8944-8502535E3088} = {23EF2B7A-E6D0-4BA7-BE9E-79E8797AE219}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1545996-40BE-4F88-A489-BE41C612DB22}
