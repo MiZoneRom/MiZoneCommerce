@@ -21,6 +21,10 @@ namespace MCS.Web.Areas.API.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// 获取管理员信息
+        /// </summary>
+        /// <returns>管理员Model</returns>
         [HttpGet]
         [Authorize]
         public ActionResult<object> Get()
