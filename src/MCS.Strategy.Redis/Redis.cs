@@ -26,7 +26,7 @@ namespace MCS.Strategy
 
         public Redis()
         {
-            this.address = ConfigurationManager.AppSettings["RedisServer"];
+            this.address = ConfigurationManager.AppSettings.GetSection("Redis")["RedisServer"];
 
             if (this.address == null || string.IsNullOrWhiteSpace(this.address.ToString()))
                 throw new ApplicationException("配置文件中未找到RedisServer的有效配置");

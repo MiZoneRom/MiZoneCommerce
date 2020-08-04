@@ -12,32 +12,32 @@ namespace MCS.Strategy
         /// <summary>
         /// OSS 内网Endpoint地址
         /// </summary>
-        public static readonly string PrivateEndpoint = ConfigurationManager.AppSettings["PrivateEndpoint"];
+        public static readonly string PrivateEndpoint = ConfigurationManager.AppSettings.GetSection("OSS")["PrivateEndpoint"];
 
         /// <summary>
         /// 文件服务器域名（即OSS外网域名）
         /// </summary>
-        public static readonly string FileServerDomain = ConfigurationManager.AppSettings["FileServerDomain"];
+        public static readonly string FileServerDomain = ConfigurationManager.AppSettings.GetSection("OSS")["FileServerDomain"];
 
         /// <summary>
         /// 阿里云AccessKeyId
         /// </summary>
-        public static readonly string AccessKeyId = ConfigurationManager.AppSettings["AccessKeyId"];
+        public static readonly string AccessKeyId = ConfigurationManager.AppSettings.GetSection("OSS")["AccessKeyId"];
 
         /// <summary>
         /// 阿里云AccessKeySecret
         /// </summary>
-        public static readonly string AccessKeySecret = ConfigurationManager.AppSettings["AccessKeySecret"];
+        public static readonly string AccessKeySecret = ConfigurationManager.AppSettings.GetSection("OSS")["AccessKeySecret"];
 
         /// <summary>
         /// OSS BucketName
         /// </summary>
-        public static readonly string BucketName = ConfigurationManager.AppSettings["BucketName"];
+        public static readonly string BucketName = ConfigurationManager.AppSettings.GetSection("OSS")["BucketName"];
 
         /// <summary>
         /// 图片服务器域名（开通OSS图片服务后给出的图片服务域名）
         /// </summary>
-        public static readonly string ImageServerDomain = ConfigurationManager.AppSettings["ImageServerDomain"];
+        public static readonly string ImageServerDomain = ConfigurationManager.AppSettings.GetSection("OSS")["ImageServerDomain"];
 
         static Config()
         {
