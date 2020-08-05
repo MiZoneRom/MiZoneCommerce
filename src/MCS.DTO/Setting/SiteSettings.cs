@@ -675,10 +675,6 @@ namespace MCS.DTO
         /// 首页可视化模板配置的搜索关键词
         /// </summary>
         public string SearchKeyword { get; set; }
-        /// <summary>
-        /// 热搜词
-        /// </summary>
-        public string HotKeyWords { get; set; }
         #endregion
     }
 }
