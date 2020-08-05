@@ -80,9 +80,16 @@ namespace MCS.Web
 
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>
-                options.AddPolicy("Any",
-                p => p.AllowAnyOrigin().AllowAnyHeader())
-            );
+            {
+                options.AddPolicy("CustomCorsPolicy", policy =>
+                {
+                    // 设定允许跨域的来源，有多个可以用','隔开
+                    policy.WithOrigins("http://localhost:8080")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+                });
+            });
 
             //注册缓存
             services.AddMemoryCache();
@@ -153,7 +160,7 @@ namespace MCS.Web
             app.UseAuthorization();
 
             //启用跨越
-            app.UseCors("Any");
+            app.UseCors("CustomCorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
