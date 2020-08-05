@@ -84,7 +84,7 @@ namespace MCS.Web
                 options.AddPolicy("CustomCorsPolicy", policy =>
                 {
                     // 设定允许跨域的来源，有多个可以用','隔开
-                    policy.WithOrigins("http://localhost:8080")
+                    policy.WithOrigins(Configuration.GetSection("AllowedHosts").Value.Split('|'))
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -157,6 +157,7 @@ namespace MCS.Web
 
             app.UseRouting();
 
+            //使用认证中间件
             app.UseAuthorization();
 
             //启用跨越
