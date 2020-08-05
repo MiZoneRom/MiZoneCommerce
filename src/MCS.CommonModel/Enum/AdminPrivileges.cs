@@ -21,7 +21,7 @@ namespace MCS.CommonModel
         Manager = 2002,
         [Privilege("系统管理", "权限组", 2001, "/Privilege", "category", "manage/SiteSettings")]
         Privilege = 2003,
-        [Privilege("系统管理", "操作日志", 2001, "/OperationLog", "category", "manage/SiteSettings")]
+        [Privilege("系统管理", "操作日志", 2001, "/OperationLog", "category", "manage/ManageLog")]
         OperationLog = 2004,
     }
 }
