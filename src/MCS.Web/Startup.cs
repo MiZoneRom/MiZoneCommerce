@@ -185,9 +185,10 @@ namespace MCS.Web
             //启用跨越
             app.UseCors("CustomCorsPolicy");
 
+            //使用认证中间件
             app.UseAuthentication();
 
-            //使用认证中间件
+            //使用授权中间件
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
