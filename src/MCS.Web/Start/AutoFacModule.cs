@@ -43,10 +43,6 @@ namespace MCS.Web
             //注入回调
             builder.RegisterBuildCallback(container => _container = container);
 
-            //builder.RegisterControllers(Assembly.GetExecutingAssembly());  //注入所有Controller
-            //container = builder.Build();
-            //DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
             ObjectContainer.ModuleStart(this);
         }
 
