@@ -84,7 +84,7 @@ namespace MCS.Web
                 options.AddPolicy("CustomCorsPolicy", policy =>
                 {
                     // 设定允许跨域的来源，有多个可以用','隔开
-                    policy.WithOrigins(Configuration.GetSection("AllowedHosts").Value.Split('|'))
+                    policy.WithOrigins(Configuration.GetSection("AllowedCorHosts").Value.Split('|'))
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -114,6 +114,31 @@ namespace MCS.Web
                         Url = new System.Uri("https://github.com/MiZoneRom/MiZoneCommerce")
                     }
                 });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Description = "在下框中输入请求头中需要添加Jwt授权Token：Bearer Token",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
                 var xmlPath = Path.Combine(basePath, "MCS.Web.xml");
                 c.IncludeXmlComments(xmlPath);

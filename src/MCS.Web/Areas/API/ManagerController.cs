@@ -14,6 +14,7 @@ namespace MCS.Web.Areas.API.Controllers
     /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
+    [Authorize]
     public class ManagerController : BaseController
     {
 
@@ -29,7 +30,6 @@ namespace MCS.Web.Areas.API.Controllers
         /// </summary>
         /// <returns>管理员Model</returns>
         [HttpGet]
-        [Authorize]
         public ActionResult<object> Get()
         {
             return Json(new { managerModel = CurrentManager });
