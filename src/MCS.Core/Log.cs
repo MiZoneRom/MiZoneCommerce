@@ -15,7 +15,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Error(message);
             }
             catch
@@ -34,7 +34,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Error(message, exception);
             }
             catch
@@ -52,7 +52,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Info(message);
             }
             catch
@@ -70,7 +70,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Info(message, ex);
             }
             catch
@@ -87,7 +87,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Warn(message);
             }
             catch
@@ -105,7 +105,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Warn(message, ex);
             }
             catch
@@ -122,7 +122,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Debug(message);
             }
             catch
@@ -140,7 +140,7 @@ namespace MCS.Core
         {
             try
             {
-                log4net.ILog log = log4net.LogManager.GetLogger(GetCurrentMethodFullName(), "NETCorelog4net");
+                log4net.ILog log = log4net.LogManager.GetLogger("NETCoreRepository", GetCurrentMethodFullName());
                 log.Debug(message, ex);
             }
             catch

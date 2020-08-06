@@ -13,6 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Config\log4net.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Config\log4net.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Configuration" Version="5.1.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Dapper" Version="2.0.35" />

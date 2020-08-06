@@ -22,14 +22,23 @@ using MCS.IServices;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 
 namespace MCS.Web
 {
     public class Startup
     {
+        //log4net日志
+        public static ILoggerRepository repository { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //加载log4net日志配置文件
+            repository = LogManager.CreateRepository("NETCoreRepository");
+            XmlConfigurator.Configure(repository, new FileInfo(@"Config\log4net.config"));
         }
 
         public IConfiguration Configuration { get; }

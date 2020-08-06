@@ -11,6 +11,7 @@ using MCS.DTO;
 using MCS.Web.Framework.BaseControllers;
 using MCS.Entities;
 using MCS.Core.Helper;
+using MCS.Core;
 
 namespace MCS.Web.Areas.API.Controllers
 {
@@ -37,6 +38,8 @@ namespace MCS.Web.Areas.API.Controllers
         [HttpGet]
         public ActionResult<object> Get(string username, string password)
         {
+
+            Log.Info(username);
 
             ManagersInfo managerModel = _manager.Login(username, password);
             var jwtSection = _configuration.GetSection("jwt");
@@ -75,6 +78,8 @@ namespace MCS.Web.Areas.API.Controllers
         [HttpPost("RefreshToken")]
         public ActionResult<object> RefreshToken([FromBody] RefreshTokenModel entity)
         {
+            Log.Info("aaaaaaaaaaaa");
+
             ManagersInfo managerModel = CurrentManager;
             var jwtSection = _configuration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
