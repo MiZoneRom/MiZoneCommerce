@@ -78,9 +78,9 @@ namespace MCS.Web.Areas.API.Controllers
         [HttpPost("RefreshToken")]
         public ActionResult<object> RefreshToken([FromBody] RefreshTokenModel entity)
         {
-            Log.Info("aaaaaaaaaaaa");
+            Log.Info(entity.token);
 
-            ManagersInfo managerModel = CurrentManager;
+            ManagersInfo managerModel = GetManagerByToken(entity.token);
             var jwtSection = _configuration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
             int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
