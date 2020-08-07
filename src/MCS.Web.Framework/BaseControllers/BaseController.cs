@@ -83,38 +83,6 @@ namespace MCS.Web.Framework.BaseControllers
 
         }
 
-        /// <summary>
-        /// 当前管理员
-        /// </summary>
-        public ManagersInfo GetManagerByToken(string token)
-        {
-
-            if (string.IsNullOrEmpty(token))
-            {
-                return null;
-            }
-
-            ClaimsPrincipal clams = new JwtTokenHelper().GetPrincipalFromAccessToken(token);
-
-            if (clams == null)
-            {
-                return null;
-            }
-
-            Claim iden = clams.Claims.Where(a => a.Type == JwtRegisteredClaimNames.Sid).FirstOrDefault();
-
-            if (iden == null)
-            {
-                return null;
-            }
-
-            long userId = Convert.ToInt64(iden.Value);
-            ManagersInfo manager = ServiceProvider.Instance<IManagerService>.Create.GetPlatformManager(userId);
-
-            return manager;
-
-        }
-
         #region 公共方法
 
         ///// <summary>

@@ -78,28 +78,24 @@ namespace MCS.Web.Areas.API.Controllers
         [HttpPost("RefreshToken")]
         public ActionResult<object> RefreshToken([FromBody] RefreshTokenModel entity)
         {
-            Log.Info(entity.token);
 
-            ManagersInfo managerModel = GetManagerByToken(entity.token);
+            //jwt配置
             var jwtSection = _configuration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
             int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
             string token = entity.token;
             string refreshToken = entity.refresh_token;
 
-            if (managerModel == null)
-            {
-                return ErrorResult<int>("用户登录过期");
-            }
-
-            ManagerTokenInfo tokenModel = _manager.GetToken(managerModel.Id);
+            //获取刷新token记录
+            ManagerTokenInfo tokenModel = _manager.GetTokenByRefreshToken(entity.refresh_token);
 
             if (tokenModel == null)
             {
-                return ErrorResult<int>("认证过期");
+                return ErrorResult<int>("登录过期");
             }
 
-            _manager.RemoveToken(managerModel.Id);
+            //通过记录获取用户信息
+            ManagersInfo managerModel = _manager.GetPlatformManager(tokenModel.UserId);
 
             JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
 
@@ -112,11 +108,15 @@ namespace MCS.Web.Areas.API.Controllers
 
             string newToken = jwtTokenHelper.GetToken(claims);
             string newRefreshToken = jwtTokenHelper.RefreshToken();
-
             string tokenExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(tokenExpires));
             string refreshToeknExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(refreshTokenExpires));
 
-            _manager.AddRefeshToken(newToken, newRefreshToken, managerModel.Id, refreshTokenExpires);
+            tokenModel.Token = newToken;
+            tokenModel.RefreshToken = newRefreshToken;
+            tokenModel.Expires = DateTime.Now.AddMinutes(refreshTokenExpires);
+
+            //更新token
+            _manager.UpdateManagerToken(tokenModel);
 
             return SuccessResult<object>(new { token = newToken, refreshToken = newRefreshToken, userName = managerModel.UserName, expires = tokenExpired, refreshExpires = refreshToeknExpired });
 

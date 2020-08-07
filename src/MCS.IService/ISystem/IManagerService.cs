@@ -83,6 +83,10 @@ namespace MCS.IServices
 
         ManagerTokenInfo GetToken(long userId);
 
+        ManagerTokenInfo GetTokenByRefreshToken(string refreshToken);
+
+        bool UpdateManagerToken(ManagerTokenInfo model);
+
         void RemoveToken(long userId);
     }
 }

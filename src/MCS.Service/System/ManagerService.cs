@@ -170,6 +170,16 @@ namespace MCS.Service
             return Context.QuerySet<ManagerTokenInfo>().Where(a => a.UserId == userId).OrderByDescing(a => a.Id).Get();
         }
 
+        public ManagerTokenInfo GetTokenByRefreshToken(string refreshToken)
+        {
+            return Context.QuerySet<ManagerTokenInfo>().Where(a => a.RefreshToken == refreshToken && a.Expires > DateTime.Now).OrderByDescing(a => a.Id).Get();
+        }
+
+        public bool UpdateManagerToken(ManagerTokenInfo model)
+        {
+            return Context.CommandSet<ManagerTokenInfo>().Where(item => item.Id == model.Id).Update(model) > 0;
+        }
+
         public void RemoveToken(long userId)
         {
             int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId).Delete();
