@@ -19,5 +19,14 @@ namespace MCS.Web.Areas.API
             SiteSettings siteSettingModel = SiteSettingApplication.SiteSettings;
             return SuccessResult<object>(siteSettingModel);
         }
+
+        [HttpPost("EditSiteSettings")]
+        public ActionResult<object> EditSiteSettings(SiteSettings siteSettingModel)
+        {
+            var settings = SiteSettingApplication.SiteSettings;
+            settings.SiteName = siteSettingModel.SiteName;
+            SiteSettingApplication.SaveChanges();
+            return SuccessResult<object>();
+        }
     }
 }
