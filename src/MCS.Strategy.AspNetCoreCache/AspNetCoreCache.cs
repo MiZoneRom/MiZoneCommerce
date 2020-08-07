@@ -76,7 +76,11 @@ namespace MCS.Strategy
         /// <param name="key">缓存键</param>
         public void Remove(string key)
         {
-            cache.Remove(key);
+            lock (cacheLocker)
+            {
+                if (cache.Get(key) != null)
+                    cache.Remove(key);
+            }
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using MCS.Entities;
 using MCS.IServices;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 
@@ -23,12 +24,13 @@ namespace MCS.Service
             var keys = settings.Keys.ToList();
             var models = Context.QuerySet<SiteSettingsInfo>().Where(p => keys.Contains(p.Key)).ToList();
 
-            using (Context)
+            using (var conn = new SqlConnection(ConnectionString))
             {
-                Context.Open();
+
+                conn.Open();
 
                 //创建事务对象
-                var transaction = Context.BeginTransaction();
+                var transaction = conn.BeginTransaction();
 
                 foreach (var item in settings)
                 {
@@ -36,11 +38,11 @@ namespace MCS.Service
                     if (model != null)
                     {
                         model.Value = item.Value;
-                        Context.CommandSet<SiteSettingsInfo>(transaction).Where(p => p.Key == item.Key).Update(model);
+                        conn.CommandSet<SiteSettingsInfo>(transaction).Where(p => p.Key == item.Key).Update(model);
                     }
                     else
                     {
-                        Context.CommandSet<SiteSettingsInfo>(transaction).Insert(new SiteSettingsInfo
+                        conn.CommandSet<SiteSettingsInfo>(transaction).Insert(new SiteSettingsInfo
                         {
                             Key = item.Key,
                             Value = item.Value

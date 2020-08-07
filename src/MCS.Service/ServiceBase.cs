@@ -19,9 +19,17 @@ namespace MCS.Service
         {
             get
             {
-                string connectionString = ConfigurationManager.ConnectionStrings.GetSection("SqlServer").Value;
-                _connection = new SqlConnection(connectionString);
+                _connection = new SqlConnection(ConnectionString);
                 return _connection;
+            }
+        }
+
+        protected string ConnectionString
+        {
+            get
+            {
+                string connectionString = ConfigurationManager.ConnectionStrings.GetSection("SqlServer").Value;
+                return connectionString;
             }
         }
 
