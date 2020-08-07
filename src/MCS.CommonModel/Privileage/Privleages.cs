@@ -80,6 +80,11 @@ namespace MCS.CommonModel
         public string Component { get; set; }
 
         /// <summary>
+        /// 图标
+        /// </summary>
+        public string IconCls { get; set; }
+
+        /// <summary>
         /// 跳转
         /// </summary>
         public string Redirect { get; set; }

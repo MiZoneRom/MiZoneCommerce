@@ -34,16 +34,10 @@ namespace MCS.CommonModel
         /// </summary> 
         public string Action { set; get; }
 
-        public int Pid { set; get; }
-
-        public AdminCatalogType AdminCatalogType { get; set; }
-
-        public string Component { get; set; }
-
         /// <summary>
-        /// 链接打开方式，blank,parent,self,top
+        /// 权限Id
         /// </summary>
-        public string LinkTarget { get; set; }
+        public int Pid { set; get; }
 
         /// <summary>
         /// 
@@ -54,8 +48,7 @@ namespace MCS.CommonModel
         /// <param name="Url">权限地址</param>
         /// <param name="Controller">权限包含的控制器</param>
         /// <param name="Action">权限包含的action</param>
-        /// <param name="type">是否显示在导航中</param>
-        public PrivilegeAttribute(string groupName, string name, int pid, string url, string controller,string component, string action = "", MCS.CommonModel.AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
+        public PrivilegeAttribute(string groupName, string name, int pid, string url, string controller, string action = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default)
         {
             this.Name = name;
             this.GroupName = groupName;
@@ -63,15 +56,7 @@ namespace MCS.CommonModel
             this.Url = url;
             this.Controller = controller;
             this.Action = action;
-            this.AdminCatalogType = type;
-            this.LinkTarget = target;
-            this.Component = component;
         }
 
-        public PrivilegeAttribute(string controller, string action = "")
-        {
-            this.Controller = controller;
-            this.Action = action;
-        }
     }
 }

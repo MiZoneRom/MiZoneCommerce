@@ -107,42 +107,62 @@ namespace MCS.Web.Framework
             Privileges p = new Privileges();
             foreach (var field in fields)
             {
-                var attributes = field.GetCustomAttributes(typeof(PrivilegeAttribute), true);
-                if (attributes.Length == 0)
+                var privilegeAttributes = field.GetCustomAttributes(typeof(PrivilegeAttribute), true);
+
+                if (privilegeAttributes.Length == 0)
                 {
                     continue;
-
                 }
                 GroupActionItem group = new GroupActionItem();
                 ActionItem item = new ActionItem();
-                List<string> actions = new List<string>();
-                List<PrivilegeAttribute> attrs = new List<PrivilegeAttribute>();
+                List<PrivilegeAttribute> privilegeAttributeList = new List<PrivilegeAttribute>();
                 List<Controllers> ctrls = new List<Controllers>();
 
-                foreach (var attr in attributes)
+                foreach (var attr in privilegeAttributes)
                 {
                     Controllers ctrl = new Controllers();
                     var attribute = attr as PrivilegeAttribute;
                     ctrl.ControllerName = attribute.Controller;
                     ctrl.ActionNames.AddRange(attribute.Action.Split(','));
                     ctrls.Add(ctrl);
-                    attrs.Add(attribute);
+                    privilegeAttributeList.Add(attribute);
                 }
-                var groupInfo = attrs.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
+
+                var privilegeAttributeGroupInfo = privilegeAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
                 if (sitesetting != null)
                 {
 
                 }
 
-                group.Name = groupInfo.GroupName;
-                item.PrivilegeId = groupInfo.Pid;
-                item.Name = groupInfo.Name;
-                item.Path = groupInfo.Url;
-                item.Type = groupInfo.AdminCatalogType;
-                item.Component = groupInfo.Component;
+                group.Name = privilegeAttributeGroupInfo.GroupName;
 
+                item.PrivilegeId = privilegeAttributeGroupInfo.Pid;
+                item.Name = privilegeAttributeGroupInfo.Name;
+                item.Path = privilegeAttributeGroupInfo.Url;
                 item.Controllers.AddRange(ctrls);
+
+                //获取导航属性
+                var adminNavigations = field.GetCustomAttributes(typeof(AdminNavigationAttribute), true);
+
+                if (adminNavigations.Count() > 0)
+                {
+                    List<AdminNavigationAttribute> adminNavigationAttributeList = new List<AdminNavigationAttribute>();
+                    foreach (var attr in adminNavigations)
+                    {
+                        var attribute = attr as AdminNavigationAttribute;
+                        adminNavigationAttributeList.Add(attribute);
+                    }
+
+                    var adminNavigationGroupInfo = adminNavigationAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Component));
+
+                    item.IconCls = adminNavigationGroupInfo.IconCls;
+                    item.Type = adminNavigationGroupInfo.AdminCatalogType;
+                    item.LinkTarget = adminNavigationGroupInfo.LinkTarget;
+                    item.Component = adminNavigationGroupInfo.Component;
+                }
+
                 var currentGroup = p.Privilege.FirstOrDefault(a => a.Name == group.Name);
+
                 if (currentGroup == null)
                 {
                     group.Children.Add(item);
@@ -166,69 +186,76 @@ namespace MCS.Web.Framework
         public static Privileges GetPrivileges<TEnum>(AdminCatalogType Type)
         {
             SiteSettings sitesetting = SiteSettingApplication.SiteSettings;
-
             Type type = typeof(TEnum);
             FieldInfo[] fields = type.GetFields();
+
             if (fields.Length == 1)
             {
                 return null;
             }
+
             Privileges p = new Privileges();
+
             foreach (var field in fields)
             {
-
-                var attributes = field.GetCustomAttributes(typeof(PrivilegeAttribute), true);
-                if (attributes.Length == 0)
+                //权限属性
+                var privilegeAttributes = field.GetCustomAttributes(typeof(PrivilegeAttribute), true);
+                if (privilegeAttributes.Length == 0)
                 {
                     continue;
-                }
-
-                ActionItem item = new ActionItem();
-                List<string> actions = new List<string>();
-                List<PrivilegeAttribute> attrs = new List<PrivilegeAttribute>();
-                List<Controllers> ctrls = new List<Controllers>();
-                string linkTarget = string.Empty;
-
-                foreach (var attr in attributes)
-                {
-                    Controllers ctrl = new Controllers();
-                    var attribute = attr as PrivilegeAttribute;
-                    if (!attribute.AdminCatalogType.Equals(Type))
-                    {
-                        continue;
-                    }
-                    ctrl.ControllerName = attribute.Controller;
-                    ctrl.ActionNames.AddRange(attribute.Action.Split(','));
-                    ctrls.Add(ctrl);
-                    attrs.Add(attribute);
-                    linkTarget = attribute.LinkTarget;
-                }
-
-                if (attrs.Count.Equals(0))
-                {
-                    continue;
-                }
-
-                var groupInfo = attrs.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
-
-                if (sitesetting != null)
-                {
-
                 }
 
                 GroupActionItem group = new GroupActionItem();
-                group.Name = groupInfo.GroupName;
+                ActionItem item = new ActionItem();
+
+                List<PrivilegeAttribute> privilegeAttributeList = new List<PrivilegeAttribute>();
+                List<Controllers> ctrls = new List<Controllers>();
+
+                foreach (var attr in privilegeAttributes)
+                {
+                    Controllers ctrl = new Controllers();
+                    var attribute = attr as PrivilegeAttribute;
+                    ctrl.ControllerName = attribute.Controller;
+                    ctrl.ActionNames.AddRange(attribute.Action.Split(','));
+                    ctrls.Add(ctrl);
+                    privilegeAttributeList.Add(attribute);
+                }
+
+                if (privilegeAttributeList.Count.Equals(0))
+                {
+                    continue;
+                }
+
+                var privilegeAttributeGroupInfo = privilegeAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
+
+                group.Name = privilegeAttributeGroupInfo.GroupName;
                 group.Path = "/";
                 group.Component = "Layout";
-                group.IconCls = "el-icon-edit";
 
-                item.PrivilegeId = groupInfo.Pid;
-                item.Name = groupInfo.Name;
-                item.Path = groupInfo.Url;
-                item.Type = groupInfo.AdminCatalogType;
-                item.LinkTarget = linkTarget;
-                item.Component = groupInfo.Component;
+                item.PrivilegeId = privilegeAttributeGroupInfo.Pid;
+                item.Name = privilegeAttributeGroupInfo.Name;
+                item.Path = privilegeAttributeGroupInfo.Url;
                 item.Controllers.AddRange(ctrls);
+
+                //获取导航属性
+                var adminNavigations = field.GetCustomAttributes(typeof(AdminNavigationAttribute), true);
+
+                if (adminNavigations.Count() > 0)
+                {
+                    List<AdminNavigationAttribute> adminNavigationAttributeList = new List<AdminNavigationAttribute>();
+                    foreach (var attr in adminNavigations)
+                    {
+                        var attribute = attr as AdminNavigationAttribute;
+                        adminNavigationAttributeList.Add(attribute);
+                    }
+
+                    var adminNavigationGroupInfo = adminNavigationAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Component));
+
+                    item.IconCls = adminNavigationGroupInfo.IconCls;
+                    item.Type = adminNavigationGroupInfo.AdminCatalogType;
+                    item.LinkTarget = adminNavigationGroupInfo.LinkTarget;
+                    item.Component = adminNavigationGroupInfo.Component;
+                }
 
                 var currentGroup = p.Privilege.FirstOrDefault(a => a.Name == group.Name);
 
