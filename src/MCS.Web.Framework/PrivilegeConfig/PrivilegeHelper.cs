@@ -113,6 +113,7 @@ namespace MCS.Web.Framework
                 {
                     continue;
                 }
+
                 GroupActionItem group = new GroupActionItem();
                 ActionItem item = new ActionItem();
                 List<PrivilegeAttribute> privilegeAttributeList = new List<PrivilegeAttribute>();
@@ -159,6 +160,7 @@ namespace MCS.Web.Framework
                     item.Type = adminNavigationGroupInfo.AdminCatalogType;
                     item.LinkTarget = adminNavigationGroupInfo.LinkTarget;
                     item.Component = adminNavigationGroupInfo.Component;
+
                 }
 
                 var currentGroup = p.Privilege.FirstOrDefault(a => a.Name == group.Name);
@@ -166,6 +168,7 @@ namespace MCS.Web.Framework
                 if (currentGroup == null)
                 {
                     group.Children.Add(item);
+                    group.IconCls = item.IconCls;
                     p.Privilege.Add(group);
                 }
                 else
@@ -262,6 +265,7 @@ namespace MCS.Web.Framework
                 if (currentGroup == null)
                 {
                     group.Children.Add(item);
+                    group.IconCls = item.IconCls;
                     p.Privilege.Add(group);
                 }
                 else
