@@ -20,8 +20,21 @@ namespace MCS.CommonModel
         /// 主页
         /// </summary>
         [Privilege("Console", "/Console", "category")]
-        [AdminNavigation(1001, 1000, "主页", "Console", "el-icon-menu")]
+        [AdminNavigation(1001, 1000, "/Console", "主页", "Console", "el-icon-menu")]
         Console = 1001,
+
+        /// <summary>
+        /// 系统设置
+        /// </summary>
+        [AdminNavigationGroup(3000, "SiteSetting", "系统设置", "el-icon-menu")]
+        OrderSetting = 3000,
+
+        [Privilege("SiteSettings", "/SiteSettings", "category")]
+        [AdminNavigation(3001, 3000, "/SiteSettings", "支付设置", "manage/SiteSettings", "el-icon-s-tools")]
+        PaymentSettings = 3001,
+
+
+
 
         /// <summary>
         /// 系统设置
@@ -33,19 +46,23 @@ namespace MCS.CommonModel
         /// 网站设置
         /// </summary>
         [Privilege("SiteSettings", "/SiteSettings", "category")]
-        [AdminNavigation(2001, 2000, "网站设置", "manage/SiteSettings", "el-icon-s-tools")]
+        [AdminNavigation(2001, 2000, "/SiteSettings", "网站设置", "manage/SiteSettings", "el-icon-s-tools")]
         SiteSettings = 2001,
 
         [Privilege("Manager", "/Manager", "category")]
-        [AdminNavigation(2002, 2000, "管理员", "manage/SiteSettings", "el-icon-user-solid")]
+        [AdminNavigation(2002, 2000, "/Manager", "管理员", "manage/SiteSettings", "el-icon-user-solid")]
         Manager = 2002,
 
         [Privilege("Privilege", "/Privilege", "category")]
-        [AdminNavigation(2003, 2000, "权限组", "manage/SiteSettings", "el-icon-s-check")]
+        [AdminNavigation(2003, 2000, "/Privilege", "权限组", "manage/SiteSettings", "el-icon-s-check")]
         Privilege = 2003,
 
         [Privilege("OperationLog", "/OperationLog", "category")]
-        [AdminNavigation(2004, 2000, "操作日志", "manage/ManageLog", "el-icon-s-claim")]
+        [AdminNavigation(2004, 2000, "/OperationLog", "操作日志", "manage/ManageLog", "el-icon-s-claim")]
         OperationLog = 2004,
+
+        [Privilege("OperationLog", "/OperationLog", "category")]
+        [AdminNavigation(2005, 2000, "/OperationLog", "消息设置", "manage/ManageLog", "el-icon-s-claim")]
+        MessageSettings = 2005,
     }
 }
