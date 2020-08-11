@@ -26,7 +26,7 @@ namespace MCS.CommonModel
         /// <summary>
         /// 系统设置
         /// </summary>
-        [AdminNavigationGroup(2000, "Dashboard", "控制台", "el-icon-menu")]
+        [AdminNavigationGroup(2000, "SiteSetting", "系统设置", "el-icon-menu")]
         SiteSetting = 2000,
 
         /// <summary>

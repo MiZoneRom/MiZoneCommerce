@@ -274,10 +274,14 @@ namespace MCS.Web.Framework
                         item.Name = adminNavigationAttribute.NavigationName;
                         item.Path = adminNavigationAttribute.Url;
                         item.PrivilegeId = adminNavigationAttribute.NavigationId;
+                        item.GroupId = adminNavigationAttribute.GroupId;
                     }
 
-                    var currentGroup = p.Privilege.FirstOrDefault(a => a.GroupId == item.PrivilegeId);
-                    currentGroup.Children.Add(item);
+                    var currentGroup = p.Privilege.FirstOrDefault(a => a.GroupId == item.GroupId);
+                    if (currentGroup != null)
+                    {
+                        currentGroup.Children.Add(item);
+                    }
 
                 }
 

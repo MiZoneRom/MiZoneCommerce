@@ -101,6 +101,8 @@ namespace MCS.CommonModel
         /// </summary>
         public int PrivilegeId { get; set; }
 
+        public int GroupId { get; set; }
+
         public MCS.CommonModel.AdminCatalogType Type { get; set; }
 
         /// <summary>
