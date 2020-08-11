@@ -65,6 +65,7 @@ namespace MCS.Web.Areas.API.Controllers
             string tokenExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(tokenExpires));
             string refreshToeknExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(refreshTokenExpires));
 
+            _manager.RemoveExpiresToken(managerModel.Id);
             _manager.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
 
             return SuccessResult<object>(new { token = token, refreshToken = refreshToken, userName = managerModel.UserName, expires = tokenExpired, refreshExpires = refreshToeknExpired });

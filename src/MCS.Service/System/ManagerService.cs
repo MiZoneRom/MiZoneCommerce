@@ -185,5 +185,10 @@ namespace MCS.Service
             int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId).Delete();
         }
 
+        public void RemoveExpiresToken(long userId)
+        {
+            int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId && a.Expires < DateTime.Now).Delete();
+        }
+
     }
 }

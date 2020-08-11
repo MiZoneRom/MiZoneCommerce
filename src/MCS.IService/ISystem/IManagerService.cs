@@ -88,5 +88,7 @@ namespace MCS.IServices
         bool UpdateManagerToken(ManagerTokenInfo model);
 
         void RemoveToken(long userId);
+
+        void RemoveExpiresToken(long userId);
     }
 }

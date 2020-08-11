@@ -11,6 +11,9 @@ namespace MCS.CommonModel
     public enum AdminPrivilege
     {
         //控制台
+        [AdminNavigationGroup("Console", "el-icon-menu")]
+        Dashboard = 1000,
+
         [Privilege("控制台", "主页", 1001, "/Console", "category")]
         [AdminNavigation("Console", "el-icon-menu")]
         Console = 1001,
