@@ -97,10 +97,13 @@ namespace MCS.CommonModel
         public List<Controllers> Controllers { set; get; }
 
         /// <summary>
-        /// id
+        /// 权限Id
         /// </summary>
         public int PrivilegeId { get; set; }
 
+        /// <summary>
+        /// 分组Id
+        /// </summary>
         public int GroupId { get; set; }
 
         public MCS.CommonModel.AdminCatalogType Type { get; set; }

@@ -103,10 +103,9 @@ namespace MCS.Web.Framework
         /// <summary>
         /// 相当于根目录的路径
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="Type">导航类别</param>
+        /// <param name="catalogType">导航类别</param>
         /// <returns></returns>
-        public static Privileges GetPrivileges<TEnum>(AdminCatalogType? Type)
+        public static Privileges GetPrivileges<TEnum>(AdminCatalogType? catalogType)
         {
             SiteSettings sitesetting = SiteSettingApplication.SiteSettings;
             Type type = typeof(TEnum);
@@ -186,6 +185,12 @@ namespace MCS.Web.Framework
                         }
 
                         var adminNavigationAttribute = adminNavigationsAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.NavigationName));
+
+                        //如果有导航筛选
+                        if (catalogType.HasValue && !adminNavigationAttribute.AdminCatalogType.Equals(catalogType))
+                        {
+                            continue;
+                        }
 
                         item.IconCls = adminNavigationAttribute.IconCls;
                         item.Type = adminNavigationAttribute.AdminCatalogType;
