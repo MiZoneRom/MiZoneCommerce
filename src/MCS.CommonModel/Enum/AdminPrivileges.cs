@@ -10,29 +10,42 @@ namespace MCS.CommonModel
 {
     public enum AdminPrivilege
     {
-        //控制台
-        [AdminNavigationGroup("Console", "el-icon-menu")]
+        /// <summary>
+        /// 控制台
+        /// </summary>
+        [AdminNavigationGroup("Dashboard", "控制台", "el-icon-menu")]
         Dashboard = 1000,
 
-        [Privilege("控制台", "主页", 1001, "/Console", "category")]
-        [AdminNavigation("Console", "el-icon-menu")]
+        /// <summary>
+        /// 主页
+        /// </summary>
+        [Privilege("Console", "/Console", "category")]
+        [AdminNavigation(1000, "主页", "Console", "el-icon-menu")]
         Console = 1001,
 
-        //系统管理
-        [Privilege("系统管理", "网站设置", 2001, "/SiteSettings", "category")]
-        [AdminNavigation("manage/SiteSettings", "el-icon-s-tools")]
+        /// <summary>
+        /// 系统设置
+        /// </summary>
+        [AdminNavigationGroup("Dashboard", "控制台", "el-icon-menu")]
+        SiteSetting = 2000,
+
+        /// <summary>
+        /// 网站设置
+        /// </summary>
+        [Privilege("SiteSettings", "/SiteSettings", "category")]
+        [AdminNavigation(2000, "网站设置", "manage/SiteSettings", "el-icon-s-tools")]
         SiteSettings = 2001,
 
-        [Privilege("系统管理", "管理员", 2001, "/Manager", "category")]
-        [AdminNavigation("manage/SiteSettings", "el-icon-user-solid")]
+        [Privilege("Manager", "/Manager", "category")]
+        [AdminNavigation(2000, "管理员", "manage/SiteSettings", "el-icon-user-solid")]
         Manager = 2002,
 
-        [Privilege("系统管理", "权限组", 2001, "/Privilege", "category")]
-        [AdminNavigation("manage/SiteSettings", "el-icon-s-check")]
+        [Privilege("Privilege", "/Privilege", "category")]
+        [AdminNavigation(2000, "权限组", "manage/SiteSettings", "el-icon-s-check")]
         Privilege = 2003,
 
-        [Privilege("系统管理", "操作日志", 2001, "/OperationLog", "category")]
-        [AdminNavigation("manage/ManageLog", "el-icon-s-claim")]
+        [Privilege("OperationLog", "/OperationLog", "category")]
+        [AdminNavigation(2000, "操作日志", "manage/ManageLog", "el-icon-s-claim")]
         OperationLog = 2004,
     }
 }

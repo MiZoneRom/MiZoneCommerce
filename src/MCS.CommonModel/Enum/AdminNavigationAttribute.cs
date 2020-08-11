@@ -5,21 +5,30 @@ using System.Text;
 namespace MCS.CommonModel
 {
     /// <summary>  
-    ///描述枚举的属性  
+    /// 导航条目属性
     /// </summary>  
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class AdminNavigationAttribute : Attribute
     {
+        /// <summary>
+        /// 分组Id
+        /// </summary>
+        public int GroupId { get; set; }
 
         /// <summary>
-        /// 图标
+        /// 导航名称
         /// </summary>
-        public string IconCls { get; set; }
+        public string NavigationName { get; set; }
 
         /// <summary>
         /// 模块
         /// </summary>
         public string Component { get; set; }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string IconCls { get; set; }
 
         /// <summary>
         /// 是否显示在导航中
@@ -38,8 +47,10 @@ namespace MCS.CommonModel
         /// <param name="IconCls">图标</param>
         /// <param name="type">是否显示在导航中</param>
         /// <param name="target">目标</param>
-        public AdminNavigationAttribute(string component, string iconCls = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
+        public AdminNavigationAttribute(int groupId, string navigationName, string component, string iconCls = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
         {
+            this.GroupId = groupId;
+            this.NavigationName = navigationName;
             this.Component = component;
             this.IconCls = iconCls;
             this.AdminCatalogType = type;

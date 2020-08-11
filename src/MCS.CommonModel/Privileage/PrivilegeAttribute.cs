@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 namespace MCS.CommonModel
 {
     /// <summary>  
-    ///描述枚举的属性  
+    /// 后台导航权限
     /// </summary>  
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class PrivilegeAttribute : Attribute
     {
-        /// <summary>
-        /// 权限组名
-        /// </summary>
-        public string GroupName { set; get; }
 
         /// <summary>
         /// 权限名
@@ -35,11 +31,6 @@ namespace MCS.CommonModel
         public string Action { set; get; }
 
         /// <summary>
-        /// 权限Id
-        /// </summary>
-        public int Pid { set; get; }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="GroupName">权限组名</param>
@@ -48,14 +39,12 @@ namespace MCS.CommonModel
         /// <param name="Url">权限地址</param>
         /// <param name="Controller">权限包含的控制器</param>
         /// <param name="Action">权限包含的action</param>
-        public PrivilegeAttribute(string groupName, string name, int pid, string url, string controller, string action = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default)
+        public PrivilegeAttribute(string name, string url, string controller, string action = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default)
         {
             this.Name = name;
-            this.GroupName = groupName;
-            this.Pid = pid;
             this.Url = url;
-            this.Controller = controller;
             this.Action = action;
+            this.Controller = controller;
         }
 
     }
