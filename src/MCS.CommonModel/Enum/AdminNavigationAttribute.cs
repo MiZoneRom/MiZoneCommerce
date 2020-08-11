@@ -13,7 +13,17 @@ namespace MCS.CommonModel
         /// <summary>
         /// 分组Id
         /// </summary>
+        public int NavigationId { get; set; }
+
+        /// <summary>
+        /// 分组Id
+        /// </summary>
         public int GroupId { get; set; }
+
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Url { set; get; }
 
         /// <summary>
         /// 导航名称
@@ -47,9 +57,11 @@ namespace MCS.CommonModel
         /// <param name="IconCls">图标</param>
         /// <param name="type">是否显示在导航中</param>
         /// <param name="target">目标</param>
-        public AdminNavigationAttribute(int groupId, string navigationName, string component, string iconCls = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
+        public AdminNavigationAttribute(int navigationId, int groupId, string url, string navigationName, string component, string iconCls = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
         {
+            this.NavigationId = navigationId;
             this.GroupId = groupId;
+            this.Url = url;
             this.NavigationName = navigationName;
             this.Component = component;
             this.IconCls = iconCls;

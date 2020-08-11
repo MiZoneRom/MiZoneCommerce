@@ -129,17 +129,17 @@ namespace MCS.Web.Framework
                     privilegeAttributeList.Add(attribute);
                 }
 
-                var privilegeAttributeGroupInfo = privilegeAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
-                if (sitesetting != null)
-                {
+                //var privilegeAttributeGroupInfo = privilegeAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
+                //if (sitesetting != null)
+                //{
 
-                }
+                //}
 
-                group.Name = privilegeAttributeGroupInfo.GroupName;
+                //group.Name = privilegeAttributeGroupInfo.GroupName;
 
-                item.PrivilegeId = privilegeAttributeGroupInfo.Pid;
-                item.Name = privilegeAttributeGroupInfo.Name;
-                item.Path = privilegeAttributeGroupInfo.Url;
+                //item.PrivilegeId = privilegeAttributeGroupInfo.Pid;
+                //item.Name = privilegeAttributeGroupInfo.Name;
+                //item.Path = privilegeAttributeGroupInfo.Url;
                 item.Controllers.AddRange(ctrls);
 
                 //获取导航属性
@@ -201,76 +201,84 @@ namespace MCS.Web.Framework
 
             foreach (var field in fields)
             {
-                //权限属性
-                var privilegeAttributes = field.GetCustomAttributes(typeof(PrivilegeAttribute), true);
-                if (privilegeAttributes.Length == 0)
+
+                //导航分组
+                var adminNavigationsGroupAttributes = field.GetCustomAttributes(typeof(AdminNavigationGroupAttribute), true);
+
+                //如果是分组
+                if (adminNavigationsGroupAttributes.Count() > 0)
                 {
-                    continue;
-                }
+                    GroupActionItem group = new GroupActionItem();
 
-                GroupActionItem group = new GroupActionItem();
-                ActionItem item = new ActionItem();
+                    List<AdminNavigationGroupAttribute> adminNavigationsGroupAttributeList = new List<AdminNavigationGroupAttribute>();
 
-                List<PrivilegeAttribute> privilegeAttributeList = new List<PrivilegeAttribute>();
-                List<Controllers> ctrls = new List<Controllers>();
-
-                foreach (var attr in privilegeAttributes)
-                {
-                    Controllers ctrl = new Controllers();
-                    var attribute = attr as PrivilegeAttribute;
-                    ctrl.ControllerName = attribute.Controller;
-                    ctrl.ActionNames.AddRange(attribute.Action.Split(','));
-                    ctrls.Add(ctrl);
-                    privilegeAttributeList.Add(attribute);
-                }
-
-                if (privilegeAttributeList.Count.Equals(0))
-                {
-                    continue;
-                }
-
-                var privilegeAttributeGroupInfo = privilegeAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.GroupName));
-
-                group.Name = privilegeAttributeGroupInfo.GroupName;
-                group.Path = "/";
-                group.Component = "Layout";
-
-                item.PrivilegeId = privilegeAttributeGroupInfo.Pid;
-                item.Name = privilegeAttributeGroupInfo.Name;
-                item.Path = privilegeAttributeGroupInfo.Url;
-                item.Controllers.AddRange(ctrls);
-
-                //获取导航属性
-                var adminNavigations = field.GetCustomAttributes(typeof(AdminNavigationAttribute), true);
-
-                if (adminNavigations.Count() > 0)
-                {
-                    List<AdminNavigationAttribute> adminNavigationAttributeList = new List<AdminNavigationAttribute>();
-                    foreach (var attr in adminNavigations)
+                    foreach (var attr in adminNavigationsGroupAttributes)
                     {
-                        var attribute = attr as AdminNavigationAttribute;
-                        adminNavigationAttributeList.Add(attribute);
+                        var attribute = attr as AdminNavigationGroupAttribute;
+                        adminNavigationsGroupAttributeList.Add(attribute);
                     }
 
-                    var adminNavigationGroupInfo = adminNavigationAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Component));
+                    var adminNavigationAttribute = adminNavigationsGroupAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Name));
+                    group.Name = adminNavigationAttribute.GroupName;
+                    group.IconCls = adminNavigationAttribute.IconCls;
+                    group.Path = "/";
+                    group.Component = "Layout";
+                    group.GroupId = adminNavigationAttribute.NavigationId;
 
-                    item.IconCls = adminNavigationGroupInfo.IconCls;
-                    item.Type = adminNavigationGroupInfo.AdminCatalogType;
-                    item.LinkTarget = adminNavigationGroupInfo.LinkTarget;
-                    item.Component = adminNavigationGroupInfo.Component;
-                }
-
-                var currentGroup = p.Privilege.FirstOrDefault(a => a.Name == group.Name);
-
-                if (currentGroup == null)
-                {
-                    group.Children.Add(item);
-                    group.IconCls = item.IconCls;
                     p.Privilege.Add(group);
                 }
                 else
                 {
+
+                    //权限属性
+                    var privilegeAttributes = field.GetCustomAttributes(typeof(PrivilegeAttribute), true);
+                    //权限列表
+                    List<PrivilegeAttribute> privilegeAttributeList = new List<PrivilegeAttribute>();
+                    //控制器列表
+                    List<Controllers> ctrls = new List<Controllers>();
+
+                    foreach (var attr in privilegeAttributes)
+                    {
+                        Controllers ctrl = new Controllers();
+                        var attribute = attr as PrivilegeAttribute;
+                        ctrl.ControllerName = attribute.Controller;
+                        ctrl.ActionNames.AddRange(attribute.Action.Split(','));
+                        ctrls.Add(ctrl);
+                        privilegeAttributeList.Add(attribute);
+                    }
+
+                    ActionItem item = new ActionItem();
+
+                    item.Controllers.AddRange(ctrls);
+
+                    //获取导航属性
+                    var adminNavigationsAttributes = field.GetCustomAttributes(typeof(AdminNavigationAttribute), true);
+
+                    if (adminNavigationsAttributes.Count() > 0)
+                    {
+
+                        List<AdminNavigationAttribute> adminNavigationsAttributeList = new List<AdminNavigationAttribute>();
+
+                        foreach (var attr in adminNavigationsAttributes)
+                        {
+                            var attribute = attr as AdminNavigationAttribute;
+                            adminNavigationsAttributeList.Add(attribute);
+                        }
+
+                        var adminNavigationAttribute = adminNavigationsAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.NavigationName));
+
+                        item.IconCls = adminNavigationAttribute.IconCls;
+                        item.Type = adminNavigationAttribute.AdminCatalogType;
+                        item.LinkTarget = adminNavigationAttribute.LinkTarget;
+                        item.Component = adminNavigationAttribute.Component;
+                        item.Name = adminNavigationAttribute.NavigationName;
+                        item.Path = adminNavigationAttribute.Url;
+                        item.PrivilegeId = adminNavigationAttribute.NavigationId;
+                    }
+
+                    var currentGroup = p.Privilege.FirstOrDefault(a => a.GroupId == item.PrivilegeId);
                     currentGroup.Children.Add(item);
+
                 }
 
             }

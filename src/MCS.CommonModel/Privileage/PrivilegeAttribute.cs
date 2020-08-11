@@ -18,6 +18,9 @@ namespace MCS.CommonModel
         /// </summary>
         public string Name { set; get; }
 
+        /// <summary>
+        /// 地址
+        /// </summary>
         public string Url { set; get; }
 
         /// <summary>

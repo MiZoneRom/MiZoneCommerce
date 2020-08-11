@@ -32,6 +32,8 @@ namespace MCS.CommonModel
         /// </summary>
         public string Name { set; get; }
 
+        public int GroupId { get; set; }
+
         /// <summary>
         /// 组件
         /// </summary>

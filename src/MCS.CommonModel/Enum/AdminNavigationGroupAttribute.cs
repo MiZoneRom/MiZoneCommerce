@@ -11,6 +11,10 @@ namespace MCS.CommonModel
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
     public class AdminNavigationGroupAttribute : Attribute
     {
+        /// <summary>
+        /// 分组Id
+        /// </summary>
+        public int NavigationId { get; set; }
 
         /// <summary>
         /// 名称
@@ -34,8 +38,9 @@ namespace MCS.CommonModel
         /// <param name="IconCls">图标</param>
         /// <param name="type">是否显示在导航中</param>
         /// <param name="target">目标</param>
-        public AdminNavigationGroupAttribute(string name, string groupName, string iconCls = "")
+        public AdminNavigationGroupAttribute(int navigationId, string name, string groupName, string iconCls = "")
         {
+            this.NavigationId = navigationId;
             this.Name = name;
             this.GroupName = groupName;
             this.IconCls = iconCls;
