@@ -19,9 +19,6 @@ namespace MCS.Web
         {
             _builder = builder;
 
-            //var services = Assembly.Load("MCS.Service");
-            //builder.RegisterAssemblyTypes(services).Where(t => t.GetInterface(typeof(MCS.IServices.IService).Name)!=null).AsImplementedInterfaces().InstancePerLifetimeScope();
-
             //业务逻辑层所在程序集命名空间
             Assembly service = Assembly.Load("MCS.Service");
 
