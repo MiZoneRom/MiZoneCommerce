@@ -9,7 +9,7 @@ namespace MCS.CommonModel
     ///导航分组属性
     /// </summary>  
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
-    public class AdminNavigationGroupAttribute : Attribute
+    public class NavigationGroupAttribute : Attribute
     {
         /// <summary>
         /// 分组Id
@@ -27,23 +27,17 @@ namespace MCS.CommonModel
         public string GroupName { get; set; }
 
         /// <summary>
-        /// 图标
-        /// </summary>
-        public string IconCls { get; set; }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="Component">模块</param>
         /// <param name="IconCls">图标</param>
         /// <param name="type">是否显示在导航中</param>
         /// <param name="target">目标</param>
-        public AdminNavigationGroupAttribute(int navigationId, string name, string groupName, string iconCls = "")
+        public NavigationGroupAttribute(int navigationId, string name, string groupName)
         {
             this.NavigationId = navigationId;
             this.Name = name;
             this.GroupName = groupName;
-            this.IconCls = iconCls;
         }
 
     }

@@ -42,6 +42,11 @@ namespace MCS.CommonModel
         /// <summary>
         /// 图标
         /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
         public string IconCls { get; set; }
 
         /// <summary>
@@ -80,6 +85,11 @@ namespace MCS.CommonModel
         /// 组件
         /// </summary>
         public string Component { get; set; }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
 
         /// <summary>
         /// 图标

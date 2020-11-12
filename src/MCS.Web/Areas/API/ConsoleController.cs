@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MCS.Web.Areas.API.Controllers
 {
+    /// <summary>
+    /// 控制台
+    /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
     public class ConsoleController : BaseController

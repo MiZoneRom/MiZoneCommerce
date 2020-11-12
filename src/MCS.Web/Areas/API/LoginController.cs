@@ -15,6 +15,9 @@ using MCS.Core;
 
 namespace MCS.Web.Areas.API.Controllers
 {
+    /// <summary>
+    /// 登录
+    /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
     public class LoginController : BaseController

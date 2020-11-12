@@ -8,7 +8,7 @@ namespace MCS.CommonModel
     /// 导航条目属性
     /// </summary>  
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
-    public class AdminNavigationAttribute : Attribute
+    public class NavigationAttribute : Attribute
     {
         /// <summary>
         /// 分组Id
@@ -36,11 +36,6 @@ namespace MCS.CommonModel
         public string Component { get; set; }
 
         /// <summary>
-        /// 图标
-        /// </summary>
-        public string IconCls { get; set; }
-
-        /// <summary>
         /// 是否显示在导航中
         /// </summary>
         public AdminCatalogType AdminCatalogType { get; set; }
@@ -57,14 +52,13 @@ namespace MCS.CommonModel
         /// <param name="IconCls">图标</param>
         /// <param name="type">是否显示在导航中</param>
         /// <param name="target">目标</param>
-        public AdminNavigationAttribute(int navigationId, int groupId, string url, string navigationName, string component, string iconCls = "", AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
+        public NavigationAttribute(int navigationId, int groupId, string url, string navigationName, string component, AdminCatalogType type = MCS.CommonModel.AdminCatalogType.Default, string target = "")
         {
             this.NavigationId = navigationId;
             this.GroupId = groupId;
             this.Url = url;
             this.NavigationName = navigationName;
             this.Component = component;
-            this.IconCls = iconCls;
             this.AdminCatalogType = type;
             this.LinkTarget = target;
         }

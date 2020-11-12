@@ -122,27 +122,39 @@ namespace MCS.Web.Framework
             {
 
                 //导航分组
-                var adminNavigationsGroupAttributes = field.GetCustomAttributes(typeof(AdminNavigationGroupAttribute), true);
+                var adminNavigationsGroupAttributes = field.GetCustomAttributes(typeof(NavigationGroupAttribute), true).Select(a => a as NavigationGroupAttribute).FirstOrDefault(a => !string.IsNullOrEmpty(a.Name));
+
+                //导航图标
+                var adminNavigationsIconAttributes = field.GetCustomAttributes(typeof(NavigationIconAttribute), true).Select(a => a as NavigationIconAttribute).FirstOrDefault(a => !string.IsNullOrEmpty(a.Icon) || !string.IsNullOrEmpty(a.ApiIcon));
 
                 //如果是分组
-                if (adminNavigationsGroupAttributes.Count() > 0)
+                if (adminNavigationsGroupAttributes != null)
                 {
                     GroupActionItem group = new GroupActionItem();
 
-                    List<AdminNavigationGroupAttribute> adminNavigationsGroupAttributeList = new List<AdminNavigationGroupAttribute>();
+                    //List<NavigationGroupAttribute> adminNavigationsGroupAttributeList = new List<NavigationGroupAttribute>();
+                    //foreach (var attr in adminNavigationsGroupAttributes)
+                    //{
+                    //    var attribute = attr as NavigationGroupAttribute;
+                    //    adminNavigationsGroupAttributeList.Add(attribute);
+                    //}
 
-                    foreach (var attr in adminNavigationsGroupAttributes)
-                    {
-                        var attribute = attr as AdminNavigationGroupAttribute;
-                        adminNavigationsGroupAttributeList.Add(attribute);
-                    }
+                    //List<NavigationIconAttribute> adminNavigationsIconAttributeList = new List<NavigationIconAttribute>();
+                    //foreach (var attr in adminNavigationsIconAttributes)
+                    //{
+                    //    var attribute = attr as NavigationIconAttribute;
+                    //    adminNavigationsIconAttributeList.Add(attribute);
+                    //}
 
-                    var adminNavigationAttribute = adminNavigationsGroupAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Name));
-                    group.Name = adminNavigationAttribute.GroupName;
-                    group.IconCls = adminNavigationAttribute.IconCls;
+                    //var adminNavigationGroupAttribute = adminNavigationsGroupAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Name));
+                    //var adminNavigationIconAttribute = adminNavigationsIconAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.Icon) || !string.IsNullOrEmpty(a.ApiIcon));
+
+                    group.Name = adminNavigationsGroupAttributes.GroupName;
+                    group.Icon = adminNavigationsIconAttributes.Icon;
+                    group.IconCls = adminNavigationsIconAttributes.ApiIcon;
                     group.Path = "/";
                     group.Component = "Layout";
-                    group.GroupId = adminNavigationAttribute.NavigationId;
+                    group.GroupId = adminNavigationsGroupAttributes.NavigationId;
 
                     p.Privilege.Add(group);
                 }
@@ -171,35 +183,38 @@ namespace MCS.Web.Framework
                     item.Controllers.AddRange(ctrls);
 
                     //获取导航属性
-                    var adminNavigationsAttributes = field.GetCustomAttributes(typeof(AdminNavigationAttribute), true);
+                    var adminNavigationsItemAttributes = field.GetCustomAttributes(typeof(NavigationAttribute), true).Select(a => a as NavigationAttribute).FirstOrDefault(a => !string.IsNullOrEmpty(a.NavigationName));
+                    //获取导航属性
+                    var adminNavigationsItemIconAttributes = field.GetCustomAttributes(typeof(NavigationIconAttribute), true).Select(a => a as NavigationIconAttribute).FirstOrDefault(a => !string.IsNullOrEmpty(a.Icon) || !string.IsNullOrEmpty(a.ApiIcon));
 
-                    if (adminNavigationsAttributes.Count() > 0)
+                    if (adminNavigationsItemAttributes != null)
                     {
 
-                        List<AdminNavigationAttribute> adminNavigationsAttributeList = new List<AdminNavigationAttribute>();
+                        //List<NavigationAttribute> adminNavigationsAttributeList = new List<NavigationAttribute>();
 
-                        foreach (var attr in adminNavigationsAttributes)
-                        {
-                            var attribute = attr as AdminNavigationAttribute;
-                            adminNavigationsAttributeList.Add(attribute);
-                        }
+                        //foreach (var attr in adminNavigationsAttributes)
+                        //{
+                        //    var attribute = attr as NavigationAttribute;
+                        //    adminNavigationsAttributeList.Add(attribute);
+                        //}
 
-                        var adminNavigationAttribute = adminNavigationsAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.NavigationName));
+                        //var adminNavigationAttribute = adminNavigationsAttributeList.FirstOrDefault(a => !string.IsNullOrEmpty(a.NavigationName));
 
                         //如果有导航筛选
-                        if (catalogType.HasValue && !adminNavigationAttribute.AdminCatalogType.Equals(catalogType))
+                        if (catalogType.HasValue && !adminNavigationsItemAttributes.AdminCatalogType.Equals(catalogType))
                         {
                             continue;
                         }
 
-                        item.IconCls = adminNavigationAttribute.IconCls;
-                        item.Type = adminNavigationAttribute.AdminCatalogType;
-                        item.LinkTarget = adminNavigationAttribute.LinkTarget;
-                        item.Component = adminNavigationAttribute.Component;
-                        item.Name = adminNavigationAttribute.NavigationName;
-                        item.Path = adminNavigationAttribute.Url;
-                        item.PrivilegeId = adminNavigationAttribute.NavigationId;
-                        item.GroupId = adminNavigationAttribute.GroupId;
+                        item.Icon = adminNavigationsItemIconAttributes.Icon;
+                        item.IconCls = adminNavigationsItemIconAttributes.ApiIcon;
+                        item.Type = adminNavigationsItemAttributes.AdminCatalogType;
+                        item.LinkTarget = adminNavigationsItemAttributes.LinkTarget;
+                        item.Component = adminNavigationsItemAttributes.Component;
+                        item.Name = adminNavigationsItemAttributes.NavigationName;
+                        item.Path = adminNavigationsItemAttributes.Url;
+                        item.PrivilegeId = adminNavigationsItemAttributes.NavigationId;
+                        item.GroupId = adminNavigationsItemAttributes.GroupId;
                     }
 
                     var currentGroup = p.Privilege.FirstOrDefault(a => a.GroupId == item.GroupId);
