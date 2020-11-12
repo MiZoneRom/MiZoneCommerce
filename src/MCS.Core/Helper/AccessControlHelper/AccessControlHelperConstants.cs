@@ -1,4 +1,4 @@
-﻿namespace WeihanLi.AspNetMvc.AccessControlHelper
+﻿namespace MCS.Core.AccessControlHelper
 {
     public static class AccessControlHelperConstants
     {

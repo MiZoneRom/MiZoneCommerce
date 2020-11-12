@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace WeihanLi.AspNetMvc.AccessControlHelper
+namespace MCS.Core.AccessControlHelper
 {
     public interface IAccessControlHelperBuilder
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
-namespace WeihanLi.AspNetMvc.AccessControlHelper
+namespace MCS.Core.AccessControlHelper
 {
     internal sealed class AccessControlRequirement : IAuthorizationRequirement
     {

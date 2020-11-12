@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace WeihanLi.AspNetMvc.AccessControlHelper
+namespace MCS.Core.AccessControlHelper
 {
     public sealed class SparkContainer : IDisposable
     {

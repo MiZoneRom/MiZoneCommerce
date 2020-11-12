@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
-namespace WeihanLi.AspNetMvc.AccessControlHelper
+namespace MCS.Core.AccessControlHelper
 {
     /// <summary>
     /// AccessControlHelperMiddleware
@@ -37,7 +37,7 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
         /// </summary>
         /// <param name="context">The <see cref="HttpContext"/> for the current request.</param>
         /// <returns>A task that represents the execution of this middleware.</returns>
-        public Task Invoke(HttpContext context)
+        public Task Invoke(Microsoft.AspNetCore.Http.HttpContext context)
         {
             var accessKey = _option.AccessKeyResolver?.Invoke(context);
 

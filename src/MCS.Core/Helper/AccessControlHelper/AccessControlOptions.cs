@@ -2,15 +2,15 @@
 using System;
 using System.Threading.Tasks;
 
-namespace WeihanLi.AspNetMvc.AccessControlHelper
+namespace MCS.Core.AccessControlHelper
 {
     public class AccessControlOptions
     {
         public bool UseAsDefaultPolicy { get; set; }
 
-        public Func<HttpContext, string> AccessKeyResolver { get; set; } = context =>
+        public Func<Microsoft.AspNetCore.Http.HttpContext, string> AccessKeyResolver { get; set; } = context =>
             context.Request.Headers.TryGetValue("X-Access-Key", out var val) ? val.ToString() : null;
 
-        public Func<HttpContext, Task> DefaultUnauthorizedOperation { get; set; }
+        public Func<Microsoft.AspNetCore.Http.HttpContext, Task> DefaultUnauthorizedOperation { get; set; }
     }
 }

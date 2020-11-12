@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace WeihanLi.AspNetMvc.AccessControlHelper
+namespace MCS.Core.AccessControlHelper
 {
     /// <summary>
     /// 权限控制
@@ -13,6 +13,7 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
     public class AccessControlAttribute : Attribute, IAuthorizationFilter
     {
         public string AccessKey { get; set; }
+
 
 
         public virtual void OnAuthorization(AuthorizationFilterContext filterContext)
@@ -42,6 +43,8 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
         }
     }
 
+
+
     public static class AjaxRequestExtensions
     {
         public static bool IsAjaxRequest(this Microsoft.AspNetCore.Http.HttpRequest request)
@@ -49,7 +52,8 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
             return request?.Headers != null && string.Equals(request.Headers["X-Requested-With"], "XMLHttpRequest", StringComparison.OrdinalIgnoreCase);
         }
 
-        public static bool IsDefined(this Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor actionDescriptor, Type attributeType, bool inherit)
+        public static bool IsDefined(this Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor actionDescriptor,
+            Type attributeType, bool inherit)
         {
             if (actionDescriptor is ControllerActionDescriptor controllerActionDescriptor)
             {

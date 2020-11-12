@@ -1,6 +1,5 @@
 ﻿using System;
-
-using WeihanLi.AspNetMvc.AccessControlHelper;
+using MCS.Core.AccessControlHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
