@@ -5,6 +5,7 @@
 - 添加Log4Net自动日志
 - 内置阿里OSS和DotNet本地存储
 - 使用JWT进行权限认证
+- WeihanLi.AspNetMvc.AccessControlHelper
 
 MCS.Application
 -
