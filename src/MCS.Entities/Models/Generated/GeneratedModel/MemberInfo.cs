@@ -9,8 +9,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Display(Rename = "SiteSettings")]
-     public partial class SiteSettingsInfo:IModel
+     [Display(Rename = "Member")]
+     public partial class MemberInfo:IModel
      {
         
 		/// <summary>
@@ -22,20 +22,12 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// Key
+        /// UserName
         /// </summary>
 		
 		//[Required]
-		//[Column("Key")]
-		public string Key { get; set; }
-        
-		/// <summary>
-        /// Value
-        /// </summary>
-		
-		//[Required]
-		//[Column("Value")]
-		public string Value { get; set; }
+		//[Column("UserName")]
+		public string UserName { get; set; }
         
      }
 

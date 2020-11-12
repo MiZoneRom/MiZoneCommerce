@@ -9,8 +9,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Display(Rename = "Logs")]
-     public partial class LogsInfo:IModel
+     [Display(Rename = "Log")]
+     public partial class LogInfo:IModel
      {
         
 		/// <summary>

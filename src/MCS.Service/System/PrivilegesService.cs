@@ -13,7 +13,7 @@ namespace MCS.Service
     public class PrivilegesService : ServiceBase, IPrivilegesService
     {
 
-        public void AddPlatformRole(RolesInfo model)
+        public void AddPlatformRole(RoleInfo model)
         {
 
             if (string.IsNullOrEmpty(model.Description))
@@ -21,21 +21,21 @@ namespace MCS.Service
                 model.Description = model.RoleName;
             }
 
-            var ex = Context.QuerySet<RolesInfo>().Where(a => a.RoleName == model.RoleName).ToList();
+            var ex = Context.QuerySet<RoleInfo>().Where(a => a.RoleName == model.RoleName).ToList();
             if (ex.Count > 0)
             {
                 throw new MCSException("已存在相同名称的权限组");
             }
-            Context.CommandSet<RolesInfo>().Insert(model);
+            Context.CommandSet<RoleInfo>().Insert(model);
         }
 
-        public void UpdatePlatformRole(RolesInfo model)
+        public void UpdatePlatformRole(RoleInfo model)
         {
-            var updatemodel = Context.QuerySet<RolesInfo>().Where(a => a.Id == model.Id).Get();
+            var updatemodel = Context.QuerySet<RoleInfo>().Where(a => a.Id == model.Id).Get();
             if (updatemodel == null)
                 throw new MCSException("找不到该权限组");
 
-            var ex = Context.QuerySet<RolesInfo>().Where(a => a.RoleName == model.RoleName && a.RoleName != updatemodel.RoleName).Count() > 0;
+            var ex = Context.QuerySet<RoleInfo>().Where(a => a.RoleName == model.RoleName && a.RoleName != updatemodel.RoleName).Count() > 0;
             if (ex)
             {
                 throw new MCSException("已存在相同名称的权限组");
@@ -48,24 +48,24 @@ namespace MCS.Service
                 updatemodel.Description = model.RoleName;
             }
 
-            Context.CommandSet<RolePrivilegesInfo>().Where(a => a.RoleId == model.Id).Delete();
-            Context.CommandSet<RolePrivilegesInfo>().Insert(model.RolePrivileges);
+            Context.CommandSet<RolePrivilegeInfo>().Where(a => a.RoleId == model.Id).Delete();
+            Context.CommandSet<RolePrivilegeInfo>().Insert(model.RolePrivileges);
 
         }
 
         public void DeletePlatformRole(long id)
         {
-            var model = Context.CommandSet<RolesInfo>().Where(a => a.Id == id).Delete();
+            var model = Context.CommandSet<RoleInfo>().Where(a => a.Id == id).Delete();
         }
 
-        public RolesInfo GetPlatformRole(long id)
+        public RoleInfo GetPlatformRole(long id)
         {
-            return Context.QuerySet<RolesInfo>().Where(a => a.Id == id).Get();
+            return Context.QuerySet<RoleInfo>().Where(a => a.Id == id).Get();
         }
 
-        public List<RolesInfo> GetPlatformRoles()
+        public List<RoleInfo> GetPlatformRoles()
         {
-            return Context.QuerySet<RolesInfo>().Where(item => item.Id > 0).ToList();
+            return Context.QuerySet<RoleInfo>().Where(item => item.Id > 0).ToList();
         }
 
     }

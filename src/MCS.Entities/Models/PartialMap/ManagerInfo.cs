@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MCS.Entities
 {
-    public partial class ManagersInfo
+    public partial class ManagerInfo
     {
         [Display(IsField = false)]
         public virtual List<AdminPrivilege> AdminPrivileges { get; set; }

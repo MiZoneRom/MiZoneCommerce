@@ -43,7 +43,7 @@ namespace MCS.Web.Framework.BaseControllers
         /// <summary>
         /// 当前管理员
         /// </summary>
-        public ManagersInfo CurrentManager
+        public ManagerInfo CurrentManager
         {
             get
             {
@@ -70,7 +70,7 @@ namespace MCS.Web.Framework.BaseControllers
                 }
 
                 long userId = Convert.ToInt64(iden.Value);
-                ManagersInfo manager = ServiceProvider.Instance<IManagerService>.Create.GetPlatformManager(userId);
+                ManagerInfo manager = ServiceProvider.Instance<IManagerService>.Create.GetPlatformManager(userId);
 
                 return manager;
             }

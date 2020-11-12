@@ -14,15 +14,15 @@ namespace MCS.Service
 {
     public class SiteSettingService : ServiceBase, ISiteSettingService
     {
-        public List<SiteSettingsInfo> GetSiteSettings()
+        public List<SiteSettingInfo> GetSiteSettings()
         {
-            return Context.QuerySet<SiteSettingsInfo>().ToList();
+            return Context.QuerySet<SiteSettingInfo>().ToList();
         }
 
         public void SaveSettings(Dictionary<string, string> settings)
         {
             var keys = settings.Keys.ToList();
-            var models = Context.QuerySet<SiteSettingsInfo>().Where(p => keys.Contains(p.Key)).ToList();
+            var models = Context.QuerySet<SiteSettingInfo>().Where(p => keys.Contains(p.Key)).ToList();
 
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -38,11 +38,11 @@ namespace MCS.Service
                     if (model != null)
                     {
                         model.Value = item.Value;
-                        conn.CommandSet<SiteSettingsInfo>(transaction).Where(p => p.Key == item.Key).Update(model);
+                        conn.CommandSet<SiteSettingInfo>(transaction).Where(p => p.Key == item.Key).Update(model);
                     }
                     else
                     {
-                        conn.CommandSet<SiteSettingsInfo>(transaction).Insert(new SiteSettingsInfo
+                        conn.CommandSet<SiteSettingInfo>(transaction).Insert(new SiteSettingInfo
                         {
                             Key = item.Key,
                             Value = item.Value

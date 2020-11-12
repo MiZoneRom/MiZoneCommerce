@@ -8,7 +8,7 @@ namespace MCS.IServices
     /// </summary>
     public interface ISiteSettingService:IService
     {
-        List<SiteSettingsInfo> GetSiteSettings();
+        List<SiteSettingInfo> GetSiteSettings();
 
         void SaveSettings(Dictionary<string, string> settings);
 

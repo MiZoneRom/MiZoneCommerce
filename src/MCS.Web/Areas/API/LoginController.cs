@@ -44,7 +44,7 @@ namespace MCS.Web.Areas.API.Controllers
 
             Log.Info(username);
 
-            ManagersInfo managerModel = _manager.Login(username, password);
+            ManagerInfo managerModel = _manager.Login(username, password);
             var jwtSection = _configuration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
             int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
@@ -99,7 +99,7 @@ namespace MCS.Web.Areas.API.Controllers
             }
 
             //通过记录获取用户信息
-            ManagersInfo managerModel = _manager.GetPlatformManager(tokenModel.UserId);
+            ManagerInfo managerModel = _manager.GetPlatformManager(tokenModel.UserId);
 
             JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
 

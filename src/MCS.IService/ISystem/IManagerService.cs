@@ -16,26 +16,26 @@ namespace MCS.IServices
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        QueryPageModel<ManagersInfo> GetPlatformManagers(ManagerQuery query);
+        QueryPageModel<ManagerInfo> GetPlatformManagers(ManagerQuery query);
 
         /// <summary>
         /// 获取当前登录的平台管理员
         /// </summary>
         /// <returns></returns>
-        ManagersInfo GetPlatformManager(long userId);
+        ManagerInfo GetPlatformManager(long userId);
 
         /// <summary>
         /// 根据角色ID获取平台角色下的管理员
         /// </summary>
         /// <param name="roleid"></param>
         /// <returns></returns>
-        List<ManagersInfo> GetPlatformManagerByRoleId(long roleId);
+        List<ManagerInfo> GetPlatformManagerByRoleId(long roleId);
 
         /// <summary>
         /// 添加一个平台管理员
         /// </summary>
         /// <param name="model"></param>
-        void AddPlatformManager(ManagersInfo model);
+        void AddPlatformManager(ManagerInfo model);
 
         /// <summary>
         /// 修改平台管理员密码和角色
@@ -68,7 +68,7 @@ namespace MCS.IServices
         /// </summary>
         /// <param name="keyWords">关键字</param>
         /// <returns></returns>
-        List<ManagersInfo> GetManagers(string keyWords);
+        List<ManagerInfo> GetManagers(string keyWords);
 
         /// <summary>
         /// 登录
@@ -77,7 +77,7 @@ namespace MCS.IServices
         /// <param name="password">密码（明文）</param>
         /// <param name="isPlatFormManager">是否为平台管理员</param>
         /// <returns></returns>
-        ManagersInfo Login(string username, string password);
+        ManagerInfo Login(string username, string password);
 
         void AddRefeshToken(string token, string refeshToken, long userId, double minutes = 1);
 

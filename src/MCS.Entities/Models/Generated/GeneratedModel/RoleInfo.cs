@@ -9,8 +9,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Display(Rename = "RolePrivileges")]
-     public partial class RolePrivilegesInfo:IModel
+     [Display(Rename = "Role")]
+     public partial class RoleInfo:IModel
      {
         
 		/// <summary>
@@ -22,28 +22,20 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// Privilege
+        /// RoleName
         /// </summary>
 		
 		//[Required]
-		//[Column("Privilege")]
-		public int Privilege { get; set; }
+		//[Column("RoleName")]
+		public string RoleName { get; set; }
         
 		/// <summary>
-        /// RoleId
+        /// Description
         /// </summary>
 		
 		//[Required]
-		//[Column("RoleId")]
-		public long RoleId { get; set; }
-        
-		/// <summary>
-        /// NavId
-        /// </summary>
-		
-		//[Required]
-		//[Column("NavId")]
-		public long NavId { get; set; }
+		//[Column("Description")]
+		public string Description { get; set; }
         
      }
 

@@ -9,8 +9,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Display(Rename = "Managers")]
-     public partial class ManagersInfo:IModel
+     [Display(Rename = "Manager")]
+     public partial class ManagerInfo:IModel
      {
         
 		/// <summary>
