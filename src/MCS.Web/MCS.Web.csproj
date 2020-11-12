@@ -17,7 +17,106 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Config\log4net.config" />
+    <None Include="wwwroot\lib\adminlte\css\adminlte.css" />
+    <None Include="wwwroot\lib\adminlte\css\adminlte.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\adminlte.min.css" />
+    <None Include="wwwroot\lib\adminlte\css\adminlte.min.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.components.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.components.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.components.min.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.components.min.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.core.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.core.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.core.min.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.core.min.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.extra-components.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.extra-components.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.extra-components.min.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.extra-components.min.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.pages.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.pages.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.pages.min.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.pages.min.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.plugins.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.plugins.css.map" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.plugins.min.css" />
+    <None Include="wwwroot\lib\adminlte\css\alt\adminlte.plugins.min.css.map" />
+    <None Include="wwwroot\lib\adminlte\img\AdminLTELogo.png" />
+    <None Include="wwwroot\lib\adminlte\img\avatar.png" />
+    <None Include="wwwroot\lib\adminlte\img\avatar2.png" />
+    <None Include="wwwroot\lib\adminlte\img\avatar3.png" />
+    <None Include="wwwroot\lib\adminlte\img\avatar4.png" />
+    <None Include="wwwroot\lib\adminlte\img\avatar5.png" />
+    <None Include="wwwroot\lib\adminlte\img\boxed-bg.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\boxed-bg.png" />
+    <None Include="wwwroot\lib\adminlte\img\credit\american-express.png" />
+    <None Include="wwwroot\lib\adminlte\img\credit\cirrus.png" />
+    <None Include="wwwroot\lib\adminlte\img\credit\mastercard.png" />
+    <None Include="wwwroot\lib\adminlte\img\credit\paypal.png" />
+    <None Include="wwwroot\lib\adminlte\img\credit\paypal2.png" />
+    <None Include="wwwroot\lib\adminlte\img\credit\visa.png" />
+    <None Include="wwwroot\lib\adminlte\img\default-150x150.png" />
+    <None Include="wwwroot\lib\adminlte\img\icons.png" />
+    <None Include="wwwroot\lib\adminlte\img\photo1.png" />
+    <None Include="wwwroot\lib\adminlte\img\photo2.png" />
+    <None Include="wwwroot\lib\adminlte\img\photo3.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\photo4.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\prod-1.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\prod-2.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\prod-3.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\prod-4.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\prod-5.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user1-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user2-160x160.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user3-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user4-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user5-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user6-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user7-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\img\user8-128x128.jpg" />
+    <None Include="wwwroot\lib\adminlte\js\adminlte.js" />
+    <None Include="wwwroot\lib\adminlte\js\adminlte.js.map" />
+    <None Include="wwwroot\lib\adminlte\js\adminlte.min.js" />
+    <None Include="wwwroot\lib\adminlte\js\adminlte.min.js.map" />
+    <None Include="wwwroot\lib\adminlte\js\demo.js" />
+    <None Include="wwwroot\lib\adminlte\js\pages\dashboard.js" />
+    <None Include="wwwroot\lib\adminlte\js\pages\dashboard2.js" />
+    <None Include="wwwroot\lib\adminlte\js\pages\dashboard3.js" />
+    <None Include="wwwroot\lib\fontawesome-free\css\all.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\all.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\brands.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\brands.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\fontawesome.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\fontawesome.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\regular.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\regular.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\solid.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\solid.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\svg-with-js.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\svg-with-js.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\v4-shims.css" />
+    <None Include="wwwroot\lib\fontawesome-free\css\v4-shims.min.css" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-brands-400.eot" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-brands-400.woff" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-regular-400.eot" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-regular-400.woff" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.eot" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.woff" />
+    <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\lib\icheck-bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.js" />
+    <None Include="wwwroot\lib\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +145,8 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\lib\adminlte\" />
   </ItemGroup>
   
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit|ie-stand">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>平台中心</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link href="~/lib/fontawesome-free/css/all.css" rel="stylesheet" />
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+    <!-- iCheck -->
+    <link href="~/lib/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="~/lib/adminlte/css/adminlte.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    @RenderSection("HeadScript", false)
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    @await Component.InvokeAsync("Navigation")
+    @*@{Html.RenderAction("Top", "AdminPublic");}*@
+    @RenderBody()
+    @RenderSection("Scripts", false)
+    @*@{Html.RenderAction("Bottom", "AdminPublic");}*@
+    @*@Html.Partial("_SelectMenuItem")*@
+</body>
+</html>
