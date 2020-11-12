@@ -17,11 +17,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Autofac;
 using MCS.Core;
-using System.Reflection;
-using MCS.IServices;
-using Autofac.Extensions.DependencyInjection;
-using Autofac.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -154,6 +149,10 @@ namespace MCS.Web
                 var xmlPath = Path.Combine(basePath, "MCS.Web.xml");
                 c.IncludeXmlComments(xmlPath);
             });
+
+            services.AddAccessControlHelper()
+                .AddResourceAccessStrategy<AdminPermissionAccessStrategy>()
+                .AddControlAccessStrategy<AdminControlAccessStrategy>();
 
             //注入全局异常捕获
             services.AddMvc(o =>
