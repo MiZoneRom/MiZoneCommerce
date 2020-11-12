@@ -9,6 +9,7 @@ using MCS.Web.Models;
 
 namespace MCS.Web.Controllers
 {
+    [Area("Common")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
