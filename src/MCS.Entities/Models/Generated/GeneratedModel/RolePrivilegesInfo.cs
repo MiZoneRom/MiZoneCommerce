@@ -37,6 +37,14 @@ namespace MCS.Entities
 		//[Column("RoleId")]
 		public long RoleId { get; set; }
         
+		/// <summary>
+        /// NavId
+        /// </summary>
+		
+		//[Required]
+		//[Column("NavId")]
+		public long NavId { get; set; }
+        
      }
 
 }
