@@ -11,7 +11,7 @@ namespace MCS.Web.Areas.API
 {
     [Route("api/admin/[controller]")]
     [ApiController]
-    public class SiteController : BaseController
+    public class SiteController : BaseAPIController
     {
         [HttpGet("SiteSettings")]
         public ActionResult<object> SiteSettings()

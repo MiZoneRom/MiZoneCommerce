@@ -15,7 +15,7 @@ namespace MCS.Web.Areas.API.Controllers
     [Route("api/admin/[controller]")]
     [ApiController]
     [Authorize]
-    public class ManagerController : BaseController
+    public class ManagerController : BaseAPIController
     {
 
         private readonly IConfiguration _configuration;

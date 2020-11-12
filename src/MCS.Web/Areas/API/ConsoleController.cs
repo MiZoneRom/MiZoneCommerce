@@ -14,7 +14,7 @@ namespace MCS.Web.Areas.API.Controllers
     /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
-    public class ConsoleController : BaseController
+    public class ConsoleController : BaseAPIController
     {
         /// <summary>
         /// 获取导航

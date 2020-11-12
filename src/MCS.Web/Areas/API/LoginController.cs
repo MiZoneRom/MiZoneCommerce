@@ -20,7 +20,7 @@ namespace MCS.Web.Areas.API.Controllers
     /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
-    public class LoginController : BaseController
+    public class LoginController : BaseAPIController
     {
 
         private readonly IConfiguration _configuration;

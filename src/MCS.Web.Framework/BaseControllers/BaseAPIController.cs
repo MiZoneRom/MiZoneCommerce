@@ -16,11 +16,11 @@ using MCS.Entities;
 namespace MCS.Web.Framework.BaseControllers
 {
 
-    public class BaseController : Controller
+    public class BaseAPIController : Controller
     {
 
         #region 构造函数
-        public BaseController()
+        public BaseAPIController()
         {
 
         }
