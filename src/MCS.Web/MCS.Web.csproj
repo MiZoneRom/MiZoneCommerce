@@ -21,6 +21,8 @@
     <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Config\log4net.config" />
     <None Include="wwwroot\lib\daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
+    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <None Include="wwwroot\lib\moment\locales.js" />
     <None Include="wwwroot\lib\moment\locales.min.js" />
     <None Include="wwwroot\lib\moment\locales.min.js.map" />
@@ -460,7 +462,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="wwwroot\lib\adminlte\" />
   </ItemGroup>
   

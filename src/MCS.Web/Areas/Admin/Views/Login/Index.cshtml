@@ -1,4 +1,4 @@
-﻿
+﻿@model MCS.Web.Areas.Admin.Models.Manage.ManageLoginModel
 @{
     Layout = null;
 }
@@ -29,22 +29,25 @@
             <div class="card-body">
                 <p class="login-box-msg">立即登录</p>
 
-                <form action="../../index3.html" method="post">
+                <form asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="用户名">
+                        <input asp-for="UserName" class="form-control" placeholder="用户名">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
+                        <span asp-validation-for="UserName" class="error invalid-feedback"></span>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="密码">
+                        <input asp-for="Password" class="form-control" placeholder="密码">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        <span asp-validation-for="Password" class="error invalid-feedback"></span>
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -72,12 +75,13 @@
         <!-- /.card -->
     </div>
     <!-- /.login-box -->
-
     <!-- jQuery -->
     <script src="~/lib/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="~/lib/adminlte/adminlte.min.js"></script>
+    <script src="~/lib/adminlte/js/adminlte.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>
