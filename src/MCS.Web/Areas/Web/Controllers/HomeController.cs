@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MCS.Web.Areas.Web.Controllers
 {
+    [Area("Web")]
     public class HomeController : Controller
     {
         public IActionResult Index()

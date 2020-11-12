@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MCS.Web.Controllers
+namespace MCS.Web.Areas.API.Controllers
 {
     /// <summary>
     /// 测试接口

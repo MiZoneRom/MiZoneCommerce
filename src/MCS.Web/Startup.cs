@@ -206,10 +206,11 @@ namespace MCS.Web
             {
                 endpoints.MapControllerRoute(
                     name: "areas",
-                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}",
+                    defaults: new { area = "Web", controller = "Home", action = "Index" });
                 endpoints.MapControllerRoute(
-                    name: "Web_default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "common",
+                    pattern: "Common/{controller=Home}/{action=Index}/{id?}");
                 //endpoints.MapRazorPages();
             });
 
