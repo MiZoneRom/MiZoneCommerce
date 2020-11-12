@@ -87,6 +87,8 @@ namespace MCS.Web
             //配置Controller全部由Autofac创建
             services.AddControllersWithViews().AddControllersAsServices();
 
+            services.AddRazorPages();
+
             //配置跨域处理，允许所有来源：
             services.AddCors(options =>
             {
@@ -205,6 +207,10 @@ namespace MCS.Web
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapAreaControllerRoute(
+                   name: "areas", "areas",
+                   pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
 
         }

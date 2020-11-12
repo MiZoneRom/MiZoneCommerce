@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MCS.Web.Areas.API.Controllers
 {
-    [Route("api/admin/[controller]")]
     [ApiController]
+    [Route("api/admin/[controller]")]
     public class ConsoleController : BaseController
     {
         /// <summary>

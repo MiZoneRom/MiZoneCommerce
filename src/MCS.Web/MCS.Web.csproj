@@ -27,6 +27,7 @@
     <PackageReference Include="Dapper.Common" Version="2.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
 
@@ -40,6 +41,11 @@
     <ProjectReference Include="..\MCS.Strategy.OSS\MCS.Strategy.OSS.csproj" />
     <ProjectReference Include="..\MCS.Strategy.Redis\MCS.Strategy.Redis.csproj" />
     <ProjectReference Include="..\MCS.Web.Framework\MCS.Web.Framework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
   
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
