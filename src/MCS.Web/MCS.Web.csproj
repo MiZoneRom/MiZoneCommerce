@@ -115,6 +115,8 @@
     <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.woff" />
     <None Include="wwwroot\lib\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <None Include="wwwroot\lib\icheck-bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\jquery-ui\jquery-ui.js" />
+    <None Include="wwwroot\lib\jquery-ui\jquery-ui.min.js" />
     <None Include="wwwroot\lib\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.js" />
     <None Include="wwwroot\lib\tempusdominus-bootstrap-4\js\tempusdominus-bootstrap-4.min.js" />
   </ItemGroup>

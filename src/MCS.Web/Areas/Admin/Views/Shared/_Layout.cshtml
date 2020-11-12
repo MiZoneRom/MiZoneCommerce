@@ -21,10 +21,16 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     @await Component.InvokeAsync("Navigation")
-    @*@{Html.RenderAction("Top", "AdminPublic");}*@
-    @RenderBody()
+    @await Component.InvokeAsync("Sidebar")
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        @RenderBody()
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     @RenderSection("Scripts", false)
-    @*@{Html.RenderAction("Bottom", "AdminPublic");}*@
-    @*@Html.Partial("_SelectMenuItem")*@
 </body>
 </html>
