@@ -205,11 +205,11 @@ namespace MCS.Web
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "Common/{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
                     name: "areas",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "Common/{controller=Home}/{action=Index}/{id?}");
                 //endpoints.MapRazorPages();
             });
 
