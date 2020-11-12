@@ -1,39 +1,5 @@
 ﻿using System;
 
-#if NET45
-using WeihanLi.Common;
-
-namespace WeihanLi.AspNetMvc.AccessControlHelper
-{
-    public static class AccessControlHelper
-    {
-        public static void RegisterAccessControlHelper<TResourceStrategy, TControlStrategy>(Func<IServiceProvider> registerFunc)
-            where TResourceStrategy : class, IResourceAccessStrategy
-            where TControlStrategy : class, IControlAccessStrategy
-        {
-            DependencyResolver.SetDependencyResolver(registerFunc());
-        }
-
-        public static void RegisterAccessControlHelper<TResourceStrategy, TControlStrategy>(Func<Type, object> getServiceFunc)
-            where TResourceStrategy : class, IResourceAccessStrategy
-            where TControlStrategy : class, IControlAccessStrategy
-        {
-            DependencyResolver.SetDependencyResolver(getServiceFunc);
-        }
-
-        public static void RegisterAccessControlHelper<TResourceStrategy, TControlStrategy>(Action<Type, Type> registerTypeAsAction, Func<Type, object> getServiceFunc)
-            where TResourceStrategy : class, IResourceAccessStrategy
-            where TControlStrategy : class, IControlAccessStrategy
-        {
-            registerTypeAsAction(typeof(TResourceStrategy), typeof(IResourceAccessStrategy));
-            registerTypeAsAction(typeof(TControlStrategy), typeof(IControlAccessStrategy));
-
-            DependencyResolver.SetDependencyResolver(getServiceFunc);
-        }
-    }
-}
-#else
-
 using WeihanLi.AspNetMvc.AccessControlHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -212,5 +178,3 @@ namespace Microsoft.Extensions.DependencyInjection
         }
     }
 }
-
-#endif

@@ -1,15 +1,6 @@
 ﻿using System;
 using System.IO;
-
-#if NET45
-
-using System.Web.Mvc;
-
-#else
-
 using Microsoft.AspNetCore.Mvc.Rendering;
-
-#endif
 
 namespace WeihanLi.AspNetMvc.AccessControlHelper
 {
@@ -19,11 +10,7 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
         private readonly ViewContext _viewContext;
         private readonly bool _canAccess;
         private bool _disposed;
-#if NET45
-        private readonly string _content;
-#else
         private readonly TextWriter _writer;
-#endif
 
         public SparkContainer(ViewContext viewContext, string tagName, bool canAccess = true)
         {
@@ -32,12 +19,8 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
             _canAccess = canAccess;
             if (!_canAccess)
             {
-#if NET45
-                _content = (_viewContext.Writer as StringWriter)?.GetStringBuilder().ToString();
-#else
                 _writer = viewContext.Writer;
                 viewContext.Writer = TextWriter.Null;
-#endif
             }
         }
 
@@ -54,11 +37,7 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
         {
             if (!_canAccess)
             {
-#if NET45
-                (_viewContext.Writer as StringWriter)?.GetStringBuilder().Clear().Append(_content);
-#else
                 _viewContext.Writer = _writer;
-#endif
             }
             else
             {

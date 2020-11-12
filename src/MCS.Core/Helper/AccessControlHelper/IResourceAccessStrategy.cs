@@ -1,10 +1,4 @@
-﻿#if NET45
-using System.Web.Mvc;
-#else
-
-using Microsoft.AspNetCore.Mvc;
-
-#endif
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WeihanLi.AspNetMvc.AccessControlHelper
 {
@@ -22,16 +16,9 @@ namespace WeihanLi.AspNetMvc.AccessControlHelper
         /// </summary>
         //string StrategyName { get; }
 
-#if NET45
-        ActionResult DisallowedCommonResult { get; }
-
-        ActionResult DisallowedAjaxResult { get; }
-
-#else
         IActionResult DisallowedCommonResult { get; }
 
         IActionResult DisallowedAjaxResult { get; }
 
-#endif
     }
 }
