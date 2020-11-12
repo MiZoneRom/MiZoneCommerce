@@ -46,7 +46,13 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-            @RenderBody()
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </section>
+            <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
         @await Component.InvokeAsync("Footer")
