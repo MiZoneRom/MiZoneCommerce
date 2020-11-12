@@ -461,7 +461,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\lib\adminlte\" />
   </ItemGroup>
   

@@ -13,9 +13,9 @@
     <!-- Tempusdominus Bootstrap 4 -->
     <link href="~/lib/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.css" rel="stylesheet" />
     <!-- iCheck -->
-    <link href="~/lib/icheck-bootstrap/icheck-bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" />
     <!-- Theme style -->
-    <link href="~/lib/adminlte/css/adminlte.css" rel="stylesheet" />
+    <link href="~/lib/adminlte/css/adminlte.min.css" rel="stylesheet" />
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="~/lib/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Daterange picker -->
@@ -24,19 +24,25 @@
     @RenderSection("HeadScript", false)
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-    @await Component.InvokeAsync("Navigation")
-    @await Component.InvokeAsync("Sidebar")
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        @RenderBody()
+    <div class="wrapper">
+        @await Component.InvokeAsync("Navigation")
+        @await Component.InvokeAsync("Sidebar")
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <!-- /.content-wrapper -->
+        @await Component.InvokeAsync("Footer")
+        @await Component.InvokeAsync("ControlSidebar")
     </div>
-    <!-- /.content-wrapper -->
+    <!-- ./wrapper -->
     <!-- jQuery -->
     <script src="~/lib/jquery/jquery.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Moment -->
     <script src="~/lib/moment/moment.min.js"></script>
     <!-- daterangepicker -->
     <script src="~/lib/daterangepicker/daterangepicker.js"></script>
@@ -46,6 +52,8 @@
     <script src="~/lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="~/lib/adminlte/js/adminlte.js"></script>
+    <!-- ControlSidebar -->
+    <script src="~/js/admin/controlSidebar.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>
