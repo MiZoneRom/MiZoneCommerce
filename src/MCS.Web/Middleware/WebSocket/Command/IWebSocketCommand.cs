@@ -7,5 +7,6 @@ namespace MCS.Web.WebSocket.Command
 {
     public interface IWebSocketCommand
     {
+        WebSocketProtocolCommandType Commond { get; set; }
     }
 }

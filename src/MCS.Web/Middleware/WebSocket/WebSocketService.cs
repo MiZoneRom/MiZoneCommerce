@@ -1,4 +1,5 @@
 ﻿using MCS.Core;
+using MCS.Web.WebSocket.Command;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -26,6 +27,7 @@ namespace MCS.Web
         /// <param name="app"></param>
         public static void Map(IApplicationBuilder app)
         {
+            CommondRegistration.Register();
             app.UseWebSockets();
             app.UseMiddleware<WebSocketService>();
         }
