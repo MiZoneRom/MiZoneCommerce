@@ -8,5 +8,6 @@ namespace MCS.Web.WebSocket.Command
     public interface IWebSocketCommand
     {
         void RegisterAreaOrder();
+        void Test();
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MCS.Web.WebSocket.Command
 {
-    public class WebSocketCommand : IWebSocketCommand
+    public class WebSocketCommand
     {
         public WebSocketProtocolCommandType Commond { get; set; }
 

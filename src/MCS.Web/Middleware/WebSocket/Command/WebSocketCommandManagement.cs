@@ -51,34 +51,16 @@ namespace MCS.Web.WebSocket.Command
 
         }
 
-        static WebSocketCommandManagement()
-        {
-            //初始化intalledPlugins
-            //foreach (var value in Enum.GetValues(typeof(WebSocketProtocolCommandType)))
-            //{
-            //    IntalledPlugins.Add((WebSocketProtocolCommandType)value, string.Empty);
-            //}
-        }
-
-        /// <summary>
-        /// 获取指定的插件信息
-        /// </summary>
-        /// <param name="pluginId">插件标识</param>
-        /// <returns></returns>
         public static string GetPluginInfo(WebSocketProtocolCommandType pluginId)
         {
             return IntalledPlugins[pluginId];
         }
 
-        /// <summary>
-        /// 获取指定id的插件
-        /// </summary>
-        /// <typeparam name="T">插件类型</typeparam>
-        /// <param name="pluginId">插件Id</param>
-        /// <returns></returns>
         public static T GetPlugin<T>(WebSocketProtocolCommandType pluginId) where T : IWebSocketCommand
         {
+            Log.Info("aaaa");
             var pluginInfo = GetPluginInfo(pluginId);
+            Log.Info(pluginInfo);
             return Instance.Get<T>(pluginInfo);
         }
 

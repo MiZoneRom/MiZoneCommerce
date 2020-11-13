@@ -61,7 +61,6 @@ namespace MCS.Web
 
             if (!_sockets.ContainsKey(sessionId))
             {
-                Log.Debug(context.TraceIdentifier);
                 WebSocketSession sessionModel = new WebSocketSession()
                 {
                     SessionId = sessionId,
@@ -91,7 +90,8 @@ namespace MCS.Web
                     continue;
                 }
 
-                //var payment = WebSocketCommandManagement.GetPlugin<IWebSocketMainCommand>("");
+                var payment = WebSocketCommandManagement.GetPlugin<IWebSocketCommand>(WebSocketProtocolCommandType.Message);
+                payment.Test();
 
                 await Broadcast(response);
 

@@ -15,10 +15,10 @@ namespace MCS.Web.WebSocket.Command
             RegisterAreaOrder();
         }
 
-        //public override void RegisterAreaOrder()
-        //{
-        //    Log.Debug(Commond);
-        //}
+        public void Test()
+        {
+            Log.Debug("aaaaa");
+        }
 
     }
 }
