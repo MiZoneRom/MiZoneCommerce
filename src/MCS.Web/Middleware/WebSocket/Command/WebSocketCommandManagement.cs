@@ -61,7 +61,9 @@ namespace MCS.Web.WebSocket.Command
             Log.Info("aaaa");
             var pluginInfo = GetPluginInfo(pluginId);
             Log.Info(pluginInfo);
-            return Instance.Get<T>(pluginInfo);
+            Type sourceType = Type.GetType(pluginInfo);
+            return (T)Activator.CreateInstance(sourceType);
+            //return Instance.Get<T>(pluginInfo);
         }
 
     }
