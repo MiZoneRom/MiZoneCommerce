@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MCS.DTO.WebSocket;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
@@ -60,7 +61,7 @@ namespace MCS.Web
                 }
 
                 string response = await ReceiveStringAsync(currentSocket, ct);
-                MsgTemplate msg = JsonConvert.DeserializeObject<MsgTemplate>(response);
+                WebSocketProtocolModel msg = JsonConvert.DeserializeObject<WebSocketProtocolModel>(response);
 
                 if (string.IsNullOrEmpty(response))
                 {
@@ -126,14 +127,6 @@ namespace MCS.Web
             }
         }
 
-    }
-
-    public class MsgTemplate
-    {
-        public string SenderID { get; set; }
-        public string ReceiverID { get; set; }
-        public string MessageType { get; set; }
-        public string Content { get; set; }
     }
 
 }
