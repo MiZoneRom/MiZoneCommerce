@@ -12,8 +12,12 @@ using System.Threading.Tasks;
 
 namespace MCS.Web
 {
+    /// <summary>
+    /// WS服务
+    /// </summary>
     public class WebSocketService
     {
+        //客户端列表
         private static ConcurrentDictionary<string, System.Net.WebSockets.WebSocket> _sockets = new ConcurrentDictionary<string, System.Net.WebSockets.WebSocket>();
 
         private readonly RequestDelegate _next;
@@ -39,10 +43,12 @@ namespace MCS.Web
             var currentSocket = await context.WebSockets.AcceptWebSocketAsync();
             //string socketId = Guid.NewGuid().ToString();
             string socketId = context.Request.Query["sid"].ToString();
+
             if (!_sockets.ContainsKey(socketId))
             {
                 _sockets.TryAdd(socketId, currentSocket);
             }
+
             //_sockets.TryRemove(socketId, out dummy);
             //_sockets.TryAdd(socketId, currentSocket);
 
@@ -100,7 +106,6 @@ namespace MCS.Web
             using (var ms = new MemoryStream())
             {
                 WebSocketReceiveResult result;
-
                 do
                 {
                     ct.ThrowIfCancellationRequested();
@@ -109,20 +114,18 @@ namespace MCS.Web
                     ms.Write(buffer.Array, buffer.Offset, result.Count);
                 }
                 while (!result.EndOfMessage);
-
                 ms.Seek(0, SeekOrigin.Begin);
-
                 if (result.MessageType != WebSocketMessageType.Text)
                 {
                     return null;
                 }
-
                 using (var reader = new StreamReader(ms, Encoding.UTF8))
                 {
                     return await reader.ReadToEndAsync();
                 }
             }
         }
+
     }
 
     public class MsgTemplate
