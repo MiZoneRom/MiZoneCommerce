@@ -33,7 +33,7 @@ namespace MCS.Web
         /// <summary>
         /// 客户端列表
         /// </summary>
-        private static ConcurrentDictionary<string, System.Net.WebSockets.WebSocket> _sockets = new ConcurrentDictionary<string, System.Net.WebSockets.WebSocket>();
+        private static ConcurrentDictionary<string, WebSocketSession> _sockets = new ConcurrentDictionary<string, WebSocketSession>();
 
         private readonly RequestDelegate _next;
 
@@ -52,16 +52,21 @@ namespace MCS.Web
                 return;
             }
 
-            System.Net.WebSockets.WebSocket dummy;
+            //System.Net.WebSockets.WebSocket dummy;
 
             CancellationToken ct = context.RequestAborted;
-            var currentSocket = await context.WebSockets.AcceptWebSocketAsync();
-            //string socketId = Guid.NewGuid().ToString();
-            string socketId = context.Request.Query["sid"].ToString();
+            var currentSession = await context.WebSockets.AcceptWebSocketAsync();
+            string sessionId = Guid.NewGuid().ToString();
+            //string socketId = context.Request.Query["sid"].ToString();
 
-            if (!_sockets.ContainsKey(socketId))
+            if (!_sockets.ContainsKey(sessionId))
             {
-                _sockets.TryAdd(socketId, currentSocket);
+                WebSocketSession sessionModel = new WebSocketSession()
+                {
+                    SessionId = sessionId,
+                    Session = currentSession
+                };
+                _sockets.TryAdd(sessionId, sessionModel);
             }
 
             //_sockets.TryRemove(socketId, out dummy);
@@ -74,7 +79,7 @@ namespace MCS.Web
                     break;
                 }
 
-                string response = await ReceiveStringAsync(currentSocket, ct);
+                string response = await ReceiveStringAsync(currentSession, ct);
                 //WebSocketProtocolModel msg = JsonConvert.DeserializeObject<WebSocketProtocolModel>(response);
 
                 //if (string.IsNullOrEmpty(response))
@@ -100,14 +105,14 @@ namespace MCS.Web
                 //    }
                 //}
 
-                await SendStringAsync(currentSocket, JsonConvert.SerializeObject(response), ct);
+                await SendStringAsync(currentSession, JsonConvert.SerializeObject(response), ct);
 
             }
 
             //_sockets.TryRemove(socketId, out dummy);
 
-            await currentSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", ct);
-            currentSocket.Dispose();
+            await currentSession.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", ct);
+            currentSession.Dispose();
         }
 
         #region 扩展方法
