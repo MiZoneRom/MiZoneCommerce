@@ -89,6 +89,8 @@ namespace MCS.Web
                     continue;
                 }
 
+                //var payment = WebSocketCommandManagement.GetPlugin<IWebSocketMainCommand>("");
+
                 await Broadcast(response);
 
             }
