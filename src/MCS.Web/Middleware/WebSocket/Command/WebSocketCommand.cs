@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace MCS.Web
 {
-    public enum WebSocketProtocolCommondType
+    public class WebSocketCommand<T> : WebSocketCommandBase where T : IWebSocketCommand
     {
-        Register = 1,
-        Message = 2
+        public T Biz { get; set; }
     }
 }

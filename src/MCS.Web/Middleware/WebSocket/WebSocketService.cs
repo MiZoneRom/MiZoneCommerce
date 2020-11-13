@@ -54,7 +54,6 @@ namespace MCS.Web
 
             CancellationToken ct = context.RequestAborted;
             var currentWebSocketContext = await context.WebSockets.AcceptWebSocketAsync();
-            //string sessionId = Guid.NewGuid().ToString();
             string sessionId = context.TraceIdentifier;
             string token = context.Request.Headers["Authorization"];
 
