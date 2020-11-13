@@ -201,7 +201,11 @@ namespace MCS.Web
             //使用授权中间件
             app.UseAuthorization();
 
-            app.UseMiddleware<WebSocketService>();
+            //app.UseWebSockets();
+
+            //app.UseMiddleware<WebSocketService>();
+
+            app.Map("/WebSocket", WebSocketService.Map);
 
             app.UseEndpoints(endpoints =>
             {

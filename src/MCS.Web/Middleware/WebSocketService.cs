@@ -1,4 +1,5 @@
 ﻿using MCS.DTO.WebSocket;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -18,6 +19,17 @@ namespace MCS.Web
     /// </summary>
     public class WebSocketService
     {
+
+        /// <summary>
+        /// 路由绑定处理
+        /// </summary>
+        /// <param name="app"></param>
+        public static void Map(IApplicationBuilder app)
+        {
+            app.UseWebSockets();
+            app.UseMiddleware<WebSocketService>();
+        }
+
         //客户端列表
         private static ConcurrentDictionary<string, System.Net.WebSockets.WebSocket> _sockets = new ConcurrentDictionary<string, System.Net.WebSockets.WebSocket>();
 
@@ -61,30 +73,32 @@ namespace MCS.Web
                 }
 
                 string response = await ReceiveStringAsync(currentSocket, ct);
-                WebSocketProtocolModel msg = JsonConvert.DeserializeObject<WebSocketProtocolModel>(response);
+                //WebSocketProtocolModel msg = JsonConvert.DeserializeObject<WebSocketProtocolModel>(response);
 
-                if (string.IsNullOrEmpty(response))
-                {
-                    if (currentSocket.State != WebSocketState.Open)
-                    {
-                        break;
-                    }
+                //if (string.IsNullOrEmpty(response))
+                //{
+                //    if (currentSocket.State != WebSocketState.Open)
+                //    {
+                //        break;
+                //    }
 
-                    continue;
-                }
+                //    continue;
+                //}
 
-                foreach (var socket in _sockets)
-                {
-                    if (socket.Value.State != WebSocketState.Open)
-                    {
-                        continue;
-                    }
-                    //如果是接收者
-                    if (socket.Key == msg.ReceiverID || socket.Key == socketId)
-                    {
-                        await SendStringAsync(socket.Value, JsonConvert.SerializeObject(msg), ct);
-                    }
-                }
+                //foreach (var socket in _sockets)
+                //{
+                //    if (socket.Value.State != WebSocketState.Open)
+                //    {
+                //        continue;
+                //    }
+                //    //如果是接收者
+                //    if (socket.Key == msg.ReceiverID || socket.Key == socketId)
+                //    {
+                //        await SendStringAsync(socket.Value, JsonConvert.SerializeObject(msg), ct);
+                //    }
+                //}
+
+                await SendStringAsync(currentSocket, JsonConvert.SerializeObject(response), ct);
 
             }
 
