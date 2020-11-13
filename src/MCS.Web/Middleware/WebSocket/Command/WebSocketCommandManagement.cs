@@ -14,6 +14,15 @@ namespace MCS.Web.WebSocket.Command
         static Dictionary<WebSocketProtocolCommandType, List<WebSocketProtocolModelInfo>> IntalledPlugins = new Dictionary<WebSocketProtocolCommandType, List<WebSocketProtocolModelInfo>>();
         //此处可以考虑放到缓存中,否则多Web下会存在问题
 
+        static WebSocketCommandManagement()
+        {
+            //初始化intalledPlugins
+            foreach (var value in Enum.GetValues(typeof(WebSocketProtocolCommandType)))
+            {
+                IntalledPlugins.Add((WebSocketProtocolCommandType)value, new List<WebSocketProtocolModelInfo>());
+            }
+        }
+
         /// <summary>
         /// 获取指定的插件信息
         /// </summary>
