@@ -30,7 +30,9 @@ namespace MCS.Web
             app.UseMiddleware<WebSocketService>();
         }
 
-        //客户端列表
+        /// <summary>
+        /// 客户端列表
+        /// </summary>
         private static ConcurrentDictionary<string, System.Net.WebSockets.WebSocket> _sockets = new ConcurrentDictionary<string, System.Net.WebSockets.WebSocket>();
 
         private readonly RequestDelegate _next;
@@ -108,6 +110,14 @@ namespace MCS.Web
             currentSocket.Dispose();
         }
 
+        #region 扩展方法
+        /// <summary>
+        /// 发送消息
+        /// </summary>
+        /// <param name="socket"></param>
+        /// <param name="data"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         private static Task SendStringAsync(System.Net.WebSockets.WebSocket socket, string data, CancellationToken ct = default(CancellationToken))
         {
             var buffer = Encoding.UTF8.GetBytes(data);
@@ -115,6 +125,12 @@ namespace MCS.Web
             return socket.SendAsync(segment, WebSocketMessageType.Text, true, ct);
         }
 
+        /// <summary>
+        /// 接受返回的消息
+        /// </summary>
+        /// <param name="socket"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         private static async Task<string> ReceiveStringAsync(System.Net.WebSockets.WebSocket socket, CancellationToken ct = default(CancellationToken))
         {
             var buffer = new ArraySegment<byte>(new byte[8192]);
@@ -140,7 +156,6 @@ namespace MCS.Web
                 }
             }
         }
-
+        #endregion
     }
-
 }

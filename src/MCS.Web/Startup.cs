@@ -201,10 +201,11 @@ namespace MCS.Web
             //使用授权中间件
             app.UseAuthorization();
 
+            //如果不设置路由
             //app.UseWebSockets();
-
             //app.UseMiddleware<WebSocketService>();
 
+            //设置到指定路由
             app.Map("/WebSocket", WebSocketService.Map);
 
             app.UseEndpoints(endpoints =>
@@ -216,7 +217,6 @@ namespace MCS.Web
                 endpoints.MapControllerRoute(
                     name: "common",
                     pattern: "Common/{controller=Home}/{action=Index}/{id?}");
-                //endpoints.MapRazorPages();
             });
 
         }
