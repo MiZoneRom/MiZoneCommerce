@@ -27,7 +27,7 @@ namespace MCS.Web
         /// <param name="app"></param>
         public static void Map(IApplicationBuilder app)
         {
-            CommondRegistration.Register();
+            WebSocketCommandManagement.Register();
             app.UseWebSockets();
             app.UseMiddleware<WebSocketService>();
         }

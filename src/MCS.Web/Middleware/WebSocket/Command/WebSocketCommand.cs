@@ -5,8 +5,14 @@ using System.Threading.Tasks;
 
 namespace MCS.Web.WebSocket.Command
 {
-    public class WebSocketCommand<T> : WebSocketCommandBase where T : IWebSocketCommand
+    public class WebSocketCommand : IWebSocketCommand
     {
-        public T Biz { get; set; }
+        public WebSocketProtocolCommandType Commond { get; set; }
+
+        public void RegisterAreaOrder()
+        {
+            WebSocketCommandManagement.IntalledPlugins.Add(WebSocketProtocolCommandType.Message, this.GetType().FullName);
+        }
+
     }
 }

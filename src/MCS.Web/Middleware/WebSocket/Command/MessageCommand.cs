@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace MCS.Web.WebSocket.Command
 {
-    public class MessageCommand : CommondRegistration, IWebSocketCommand
+    public class MessageCommand : WebSocketCommand, IWebSocketCommand
     {
         public MessageCommand()
         {
-            areaRegistration.Add(this);
             Commond = WebSocketProtocolCommandType.Message;
+            RegisterAreaOrder();
         }
 
-        public override void RegisterAreaOrder()
-        {
-            Log.Debug(Commond);
-        }
+        //public override void RegisterAreaOrder()
+        //{
+        //    Log.Debug(Commond);
+        //}
 
     }
 }
