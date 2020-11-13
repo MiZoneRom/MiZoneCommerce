@@ -56,6 +56,7 @@ namespace MCS.Web
             var currentWebSocketContext = await context.WebSockets.AcceptWebSocketAsync();
             //string sessionId = Guid.NewGuid().ToString();
             string sessionId = context.TraceIdentifier;
+            string token = context.Request.Headers["Authorization"];
 
             if (!_sockets.ContainsKey(sessionId))
             {
@@ -70,11 +71,13 @@ namespace MCS.Web
 
             while (true)
             {
+                //如果取消连接
                 if (ct.IsCancellationRequested)
                 {
                     break;
                 }
 
+                //根据Id获取对应用户
                 WebSocketSession currentSession = GetSessionById(sessionId);
                 WebSocketProtocolModel response = await currentSession.ReceiveModelAsync();
 
@@ -87,18 +90,7 @@ namespace MCS.Web
                     continue;
                 }
 
-                foreach (var socket in _sockets)
-                {
-                    if (socket.Value.Session.State != WebSocketState.Open)
-                    {
-                        continue;
-                    }
-                    //如果是接收者
-                    //if (socket.Key == msg.ReceiverID || socket.Key == socketId)
-                    //{
-                    await socket.Value.SendModelAsync(response, ct);
-                    //}
-                }
+                await Broadcast(response);
 
             }
 
@@ -122,65 +114,39 @@ namespace MCS.Web
             return dummy;
         }
 
-        ///// <summary>
-        ///// 发送消息
-        ///// </summary>
-        ///// <param name="socket"></param>
-        ///// <param name="data"></param>
-        ///// <param name="ct"></param>
-        ///// <returns></returns>
-        //private static Task SendStringAsync(System.Net.WebSockets.WebSocket socket, WebSocketProtocolModel model)
-        //{
-        //    var buffer = Encoding.UTF8.GetBytes(data);
-        //    var segment = new ArraySegment<byte>(buffer);
-        //    return socket.SendAsync(segment, WebSocketMessageType.Text, true, ct);
-        //}
+        /// <summary>
+        /// 广播消息
+        /// </summary>
+        /// <param name="msgModel"></param>
+        /// <returns></returns>
+        private async Task Broadcast(WebSocketProtocolModel msgModel)
+        {
+            foreach (var socket in _sockets)
+            {
+                if (socket.Value.Session.State != WebSocketState.Open)
+                {
+                    continue;
+                }
+                await socket.Value.SendModelAsync(msgModel);
+            }
+        }
 
-        ///// <summary>
-        ///// 发送消息
-        ///// </summary>
-        ///// <param name="socket"></param>
-        ///// <param name="data"></param>
-        ///// <param name="ct"></param>
-        ///// <returns></returns>
-        //private static Task SendStringAsync(System.Net.WebSockets.WebSocket socket, string data, CancellationToken ct = default(CancellationToken))
-        //{
-        //    var buffer = Encoding.UTF8.GetBytes(data);
-        //    var segment = new ArraySegment<byte>(buffer);
-        //    return socket.SendAsync(segment, WebSocketMessageType.Text, true, ct);
-        //}
-
-        ///// <summary>
-        ///// 接受返回的消息
-        ///// </summary>
-        ///// <param name="socket"></param>
-        ///// <param name="ct"></param>
-        ///// <returns></returns>
-        //private static async Task<string> ReceiveStringAsync(System.Net.WebSockets.WebSocket socket, CancellationToken ct = default(CancellationToken))
-        //{
-        //    var buffer = new ArraySegment<byte>(new byte[8192]);
-        //    using (var ms = new MemoryStream())
-        //    {
-        //        WebSocketReceiveResult result;
-        //        do
-        //        {
-        //            ct.ThrowIfCancellationRequested();
-
-        //            result = await socket.ReceiveAsync(buffer, ct);
-        //            ms.Write(buffer.Array, buffer.Offset, result.Count);
-        //        }
-        //        while (!result.EndOfMessage);
-        //        ms.Seek(0, SeekOrigin.Begin);
-        //        if (result.MessageType != WebSocketMessageType.Text)
-        //        {
-        //            return null;
-        //        }
-        //        using (var reader = new StreamReader(ms, Encoding.UTF8))
-        //        {
-        //            return await reader.ReadToEndAsync();
-        //        }
-        //    }
-        //}
+        /// <summary>
+        /// 对指定用户广播
+        /// </summary>
+        /// <param name="msgModel"></param>
+        /// <returns></returns>
+        private async Task BroadcastByUserId(long userId, WebSocketProtocolModel msgModel)
+        {
+            foreach (var socket in _sockets)
+            {
+                if (socket.Value.Session.State != WebSocketState.Open)
+                {
+                    continue;
+                }
+                await socket.Value.SendModelAsync(msgModel);
+            }
+        }
         #endregion
     }
 }

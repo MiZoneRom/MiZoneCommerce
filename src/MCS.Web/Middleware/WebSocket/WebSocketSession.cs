@@ -16,6 +16,10 @@ namespace MCS.Web
         /// </summary>
         public string SessionId { get; set; }
         /// <summary>
+        /// 是否绑定用户
+        /// </summary>
+        public bool IsRegister { get; set; }
+        /// <summary>
         /// 会话
         /// </summary>
         public System.Net.WebSockets.WebSocket Session { get; set; }
