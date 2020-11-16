@@ -60,7 +60,6 @@ namespace MCS.Web.Middleware.WebSocket.Command
         public static T GetFunction<T>(WebSocketProtocolCommandType command) where T : IWebSocketCommand
         {
             var commandInfo = GetCommandInfo(command);
-            //Type sourceType = Type.GetType(commandInfo);
             var functionObj = (T)Activator.CreateInstance(commandInfo);
             return functionObj;
         }

@@ -51,9 +51,13 @@ namespace MCS.Web.Middleware.WebSocket
 
             CancellationToken ct = context.RequestAborted;
             var currentWebSocketContext = await context.WebSockets.AcceptWebSocketAsync();
+
+            //会话ID
             string sessionId = context.TraceIdentifier;
+            //Token
             string token = context.Request.Headers["Authorization"];
 
+            //如果队列中不存在该用户
             if (!WebSocketSessionPool.ExistsSession(sessionId))
             {
                 WebSocketSession sessionModel = new WebSocketSession()
@@ -75,14 +79,17 @@ namespace MCS.Web.Middleware.WebSocket
                 //根据Id获取对应用户
                 WebSocketSession currentSession = WebSocketSessionPool.GetSessionById(sessionId);
 
+                //如果用户不存在
                 if (currentSession == null)
                 {
                     Log.Error("用户不存在");
                     continue;
                 }
 
+                //接收消息
                 WebSocketProtocolModel response = await currentSession.ReceiveModelAsync();
 
+                //如果消息为空
                 if (response == null)
                 {
                     Log.Error("消息为空");
@@ -93,12 +100,14 @@ namespace MCS.Web.Middleware.WebSocket
                     continue;
                 }
 
+                //如果没有匹配到命令
                 if (((int)response.Cmd) <= 0)
                 {
                     Log.Error("未匹配的命令");
                     continue;
                 }
 
+                //防止客户端连接失败
                 try
                 {
                     var commandFunction = WebSocketCommandManagement.GetFunction<IWebSocketCommand>(response.Cmd);
@@ -111,6 +120,7 @@ namespace MCS.Web.Middleware.WebSocket
 
             }
 
+            //用户断开连接后移出队列
             WebSocketSession dummy;
             WebSocketSessionPool.TryRemove(sessionId, out dummy);
 

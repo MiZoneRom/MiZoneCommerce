@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MCS.Core;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +16,17 @@ namespace MCS.Web.Middleware.WebSocket
         /// 会话Id
         /// </summary>
         public string SessionId { get; set; }
+
+        /// <summary>
+        /// 验证Token
+        /// </summary>
+        public string Token { get; set; }
+
         /// <summary>
         /// 是否绑定用户
         /// </summary>
         public bool IsRegister { get; set; }
+
         /// <summary>
         /// 会话
         /// </summary>
@@ -110,7 +118,15 @@ namespace MCS.Web.Middleware.WebSocket
                 using (var reader = new StreamReader(ms, Encoding.UTF8))
                 {
                     string jsonStr = await reader.ReadToEndAsync();
-                    return JsonConvert.DeserializeObject<WebSocketProtocolModel>(jsonStr);
+                    try
+                    {
+                        return JsonConvert.DeserializeObject<WebSocketProtocolModel>(jsonStr);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error("Socket消息反序列化失败", ex);
+                        return null;
+                    }
                 }
             }
         }
