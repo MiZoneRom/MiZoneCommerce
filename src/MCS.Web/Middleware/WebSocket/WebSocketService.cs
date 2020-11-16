@@ -74,10 +74,18 @@ namespace MCS.Web.Middleware.WebSocket
 
                 //根据Id获取对应用户
                 WebSocketSession currentSession = WebSocketSessionPool.GetSessionById(sessionId);
+
+                if (currentSession == null)
+                {
+                    Log.Error("用户不存在");
+                    continue;
+                }
+
                 WebSocketProtocolModel response = await currentSession.ReceiveModelAsync();
 
                 if (response == null)
                 {
+                    Log.Error("消息为空");
                     if (currentWebSocketContext.State != WebSocketState.Open)
                     {
                         break;
