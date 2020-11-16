@@ -20,6 +20,7 @@ using MCS.Core;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
+using MCS.Web.Middleware.WebSocket;
 
 namespace MCS.Web
 {
