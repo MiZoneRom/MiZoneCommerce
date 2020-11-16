@@ -28,12 +28,11 @@ namespace MCS.Web.Middleware.WebSocket
         /// <summary>
         /// 添加会话
         /// </summary>
-        /// <param name="sessionId"></param>
         /// <param name="sessionModel"></param>
         /// <returns></returns>
-        public static bool AddSession(string sessionId, WebSocketSession sessionModel)
+        public static bool AddSession(WebSocketSession sessionModel)
         {
-            return _sockets.TryAdd(sessionId, sessionModel);
+            return _sockets.TryAdd(sessionModel.SessionId, sessionModel);
         }
 
         /// <summary>

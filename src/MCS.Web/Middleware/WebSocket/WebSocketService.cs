@@ -57,7 +57,7 @@ namespace MCS.Web.Middleware.WebSocket
             //Token
             string token = context.Request.Headers["Authorization"];
 
-            Log.Error(token);
+            Log.Debug(sessionId + "__" + token);
 
             //如果队列中不存在该用户
             if (!WebSocketSessionPool.ExistsSession(sessionId))
@@ -65,9 +65,10 @@ namespace MCS.Web.Middleware.WebSocket
                 WebSocketSession sessionModel = new WebSocketSession()
                 {
                     SessionId = sessionId,
+                    Token = token,
                     Session = currentWebSocketContext
                 };
-                WebSocketSessionPool.AddSession(sessionId, sessionModel);
+                WebSocketSessionPool.AddSession(sessionModel);
             }
 
             while (true)
