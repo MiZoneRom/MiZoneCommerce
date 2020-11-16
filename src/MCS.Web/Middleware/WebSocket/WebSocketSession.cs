@@ -92,12 +92,7 @@ namespace MCS.Web.Middleware.WebSocket
             }
         }
 
-        /// <summary>
-        /// 接受返回的消息
-        /// </summary>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        public async Task<WebSocketProtocolModel> ReceiveModelAsync(CancellationToken ct = default(CancellationToken))
+        public async Task<T> ReceiveModelAsync<T>(CancellationToken ct = default(CancellationToken))
         {
             var buffer = new ArraySegment<byte>(new byte[8192]);
             using (var ms = new MemoryStream())
@@ -113,22 +108,32 @@ namespace MCS.Web.Middleware.WebSocket
                 ms.Seek(0, SeekOrigin.Begin);
                 if (result.MessageType != WebSocketMessageType.Text)
                 {
-                    return null;
+                    return default(T);
                 }
                 using (var reader = new StreamReader(ms, Encoding.UTF8))
                 {
                     string jsonStr = await reader.ReadToEndAsync();
                     try
                     {
-                        return JsonConvert.DeserializeObject<WebSocketProtocolModel>(jsonStr);
+                        return JsonConvert.DeserializeObject<T>(jsonStr);
                     }
                     catch (Exception ex)
                     {
                         Log.Error("Socket消息反序列化失败", ex);
-                        return null;
+                        return default(T);
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 接受返回的消息
+        /// </summary>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<WebSocketProtocolModel> ReceiveModelAsync(CancellationToken ct = default(CancellationToken))
+        {
+            return await ReceiveModelAsync(ct);
         }
 
     }
