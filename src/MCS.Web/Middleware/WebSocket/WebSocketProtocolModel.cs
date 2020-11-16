@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MCS.Web
+namespace MCS.Web.Middleware.WebSocket
 {
     public class WebSocketProtocolModel
     {

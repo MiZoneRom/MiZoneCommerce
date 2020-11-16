@@ -1,5 +1,5 @@
 ﻿using MCS.Core;
-using MCS.Web.WebSocket.Command;
+using MCS.Web.Middleware.WebSocket.Command;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MCS.Web
+namespace MCS.Web.Middleware.WebSocket
 {
     /// <summary>
     /// WS服务
@@ -27,15 +27,10 @@ namespace MCS.Web
         /// <param name="app"></param>
         public static void Map(IApplicationBuilder app)
         {
-            WebSocketCommandManagement.Register();
+            WebSocketCommandManagement.RegisterFunction();
             app.UseWebSockets();
             app.UseMiddleware<WebSocketService>();
         }
-
-        /// <summary>
-        /// 客户端列表
-        /// </summary>
-        private static ConcurrentDictionary<string, WebSocketSession> _sockets = new ConcurrentDictionary<string, WebSocketSession>();
 
         private readonly RequestDelegate _next;
 
@@ -59,14 +54,14 @@ namespace MCS.Web
             string sessionId = context.TraceIdentifier;
             string token = context.Request.Headers["Authorization"];
 
-            if (!_sockets.ContainsKey(sessionId))
+            if (!WebSocketSessionPool.ExistsSession(sessionId))
             {
                 WebSocketSession sessionModel = new WebSocketSession()
                 {
                     SessionId = sessionId,
                     Session = currentWebSocketContext
                 };
-                _sockets.TryAdd(sessionId, sessionModel);
+                WebSocketSessionPool.AddSession(sessionId, sessionModel);
             }
 
             while (true)
@@ -78,7 +73,7 @@ namespace MCS.Web
                 }
 
                 //根据Id获取对应用户
-                WebSocketSession currentSession = GetSessionById(sessionId);
+                WebSocketSession currentSession = WebSocketSessionPool.GetSessionById(sessionId);
                 WebSocketProtocolModel response = await currentSession.ReceiveModelAsync();
 
                 if (response == null)
@@ -90,66 +85,17 @@ namespace MCS.Web
                     continue;
                 }
 
-                var payment = WebSocketCommandManagement.GetPlugin<IWebSocketCommand>(WebSocketProtocolCommandType.Message);
-                payment.Test();
-
-                await Broadcast(response);
+                var commandFunction = WebSocketCommandManagement.GetFunction<IWebSocketCommand>(WebSocketProtocolCommandType.Message);
+                commandFunction.ReceiveModel(currentSession, response);
 
             }
 
             WebSocketSession dummy;
-            _sockets.TryRemove(sessionId, out dummy);
+            WebSocketSessionPool.TryRemove(sessionId, out dummy);
 
             await currentWebSocketContext.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closing", ct);
             currentWebSocketContext.Dispose();
         }
 
-        #region 扩展方法
-        /// <summary>
-        /// 获取会话
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private WebSocketSession GetSessionById(string id)
-        {
-            WebSocketSession dummy;
-            _sockets.TryGetValue(id, out dummy);
-            return dummy;
-        }
-
-        /// <summary>
-        /// 广播消息
-        /// </summary>
-        /// <param name="msgModel"></param>
-        /// <returns></returns>
-        private async Task Broadcast(WebSocketProtocolModel msgModel)
-        {
-            foreach (var socket in _sockets)
-            {
-                if (socket.Value.Session.State != WebSocketState.Open)
-                {
-                    continue;
-                }
-                await socket.Value.SendModelAsync(msgModel);
-            }
-        }
-
-        /// <summary>
-        /// 对指定用户广播
-        /// </summary>
-        /// <param name="msgModel"></param>
-        /// <returns></returns>
-        private async Task BroadcastByUserId(long userId, WebSocketProtocolModel msgModel)
-        {
-            foreach (var socket in _sockets)
-            {
-                if (socket.Value.Session.State != WebSocketState.Open)
-                {
-                    continue;
-                }
-                await socket.Value.SendModelAsync(msgModel);
-            }
-        }
-        #endregion
     }
 }

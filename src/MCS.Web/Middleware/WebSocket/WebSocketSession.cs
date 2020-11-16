@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MCS.Web
+namespace MCS.Web.Middleware.WebSocket
 {
     public class WebSocketSession
     {
