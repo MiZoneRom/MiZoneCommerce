@@ -34,9 +34,7 @@ namespace MCS.Web.Middleware.WebSocket
             {
                 ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
             });
-            var buffer = Encoding.UTF8.GetBytes(json);
-            var segment = new ArraySegment<byte>(buffer);
-            return webSocket.SendAsync(segment, WebSocketMessageType.Text, true, ct);
+            return webSocket.SendStringAsync(json, ct);
         }
 
         /// <summary>
