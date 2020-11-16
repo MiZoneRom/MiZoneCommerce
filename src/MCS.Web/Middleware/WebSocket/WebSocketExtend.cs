@@ -100,7 +100,7 @@ namespace MCS.Web.Middleware.WebSocket
         /// <returns></returns>
         public static async Task<WebSocketProtocolModel> ReceiveModelAsync(this System.Net.WebSockets.WebSocket webSocket, CancellationToken ct = default(CancellationToken))
         {
-            return await webSocket.ReceiveModelAsync(ct);
+            return await webSocket.ReceiveModelAsync<WebSocketProtocolModel>(ct);
         }
 
     }
