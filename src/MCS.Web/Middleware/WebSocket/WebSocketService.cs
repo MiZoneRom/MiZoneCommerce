@@ -103,13 +103,6 @@ namespace MCS.Web.Middleware.WebSocket
                     continue;
                 }
 
-                //如果没有匹配到命令
-                if (((int)response.Cmd) <= 0)
-                {
-                    Log.Error("未匹配的命令");
-                    continue;
-                }
-
                 //防止客户端连接断开
                 try
                 {
