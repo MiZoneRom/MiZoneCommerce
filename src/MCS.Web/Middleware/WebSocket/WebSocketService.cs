@@ -85,8 +85,21 @@ namespace MCS.Web.Middleware.WebSocket
                     continue;
                 }
 
-                var commandFunction = WebSocketCommandManagement.GetFunction<IWebSocketCommand>(WebSocketProtocolCommandType.Message);
-                commandFunction.ReceiveModel(currentSession, response);
+                if (((int)response.Cmd) <= 0)
+                {
+                    Log.Error("未匹配的命令");
+                    continue;
+                }
+
+                try
+                {
+                    var commandFunction = WebSocketCommandManagement.GetFunction<IWebSocketCommand>(response.Cmd);
+                    commandFunction.ReceiveModel(currentSession, response);
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex);
+                }
 
             }
 
