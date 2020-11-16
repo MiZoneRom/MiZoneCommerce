@@ -12,7 +12,7 @@ namespace MCS.Web.Middleware.WebSocket.Command
         /// <summary>
         /// 已注册方法
         /// </summary>
-        public static Dictionary<WebSocketProtocolCommandType, string> CommandFunctionList = new Dictionary<WebSocketProtocolCommandType, string>();
+        public static Dictionary<WebSocketProtocolCommandType, Type> CommandFunctionList = new Dictionary<WebSocketProtocolCommandType, Type>();
 
         /// <summary>
         /// 注册命令对应方法
@@ -36,7 +36,7 @@ namespace MCS.Web.Middleware.WebSocket.Command
             foreach (Type item in typeList)
             {
                 var attr = item.GetCustomAttributes(typeof(MessageCommandAttribute), true).FirstOrDefault() as MessageCommandAttribute;
-                CommandFunctionList.Add(attr.Command, item.FullName);
+                CommandFunctionList.Add(attr.Command, item);
             }
 
         }
@@ -46,7 +46,7 @@ namespace MCS.Web.Middleware.WebSocket.Command
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
-        public static string GetCommandInfo(WebSocketProtocolCommandType command)
+        public static Type GetCommandInfo(WebSocketProtocolCommandType command)
         {
             return CommandFunctionList[command];
         }
@@ -60,8 +60,8 @@ namespace MCS.Web.Middleware.WebSocket.Command
         public static T GetFunction<T>(WebSocketProtocolCommandType command) where T : IWebSocketCommand
         {
             var commandInfo = GetCommandInfo(command);
-            Type sourceType = Type.GetType(commandInfo);
-            var functionObj = (T)Activator.CreateInstance(sourceType);
+            //Type sourceType = Type.GetType(commandInfo);
+            var functionObj = (T)Activator.CreateInstance(commandInfo);
             return functionObj;
         }
 
