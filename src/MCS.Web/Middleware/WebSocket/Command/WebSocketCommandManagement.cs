@@ -48,6 +48,8 @@ namespace MCS.Web.Middleware.WebSocket.Command
         /// <returns></returns>
         public static Type GetCommandInfo(WebSocketProtocolCommandType command)
         {
+            if (!CommandFunctionList.ContainsKey(command))
+                return null;
             return CommandFunctionList[command];
         }
 
@@ -60,6 +62,8 @@ namespace MCS.Web.Middleware.WebSocket.Command
         public static T GetFunction<T>(WebSocketProtocolCommandType command) where T : IWebSocketCommand
         {
             var commandInfo = GetCommandInfo(command);
+            if (commandInfo == null)
+                return default(T);
             var functionObj = (T)Activator.CreateInstance(commandInfo);
             return functionObj;
         }

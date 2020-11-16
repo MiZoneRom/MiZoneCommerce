@@ -107,6 +107,11 @@ namespace MCS.Web.Middleware.WebSocket
                 try
                 {
                     var commandFunction = WebSocketCommandManagement.GetFunction<IWebSocketCommand>(response.Cmd);
+                    if (commandFunction == null)
+                    {
+                        Log.Error("无匹配方法");
+                        continue;
+                    }
                     commandFunction.ReceiveModel(currentSession, response);
                 }
                 catch (Exception ex)
