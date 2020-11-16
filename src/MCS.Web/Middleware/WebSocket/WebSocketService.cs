@@ -89,7 +89,7 @@ namespace MCS.Web.Middleware.WebSocket
                 }
 
                 //接收消息
-                WebSocketProtocolModel response = await currentSession.ReceiveModelAsync();
+                WebSocketProtocolModel response = await currentSession.Session.ReceiveModelAsync();
 
                 //如果消息为空
                 if (response == null)

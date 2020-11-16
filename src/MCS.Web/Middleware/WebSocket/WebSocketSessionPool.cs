@@ -72,7 +72,7 @@ namespace MCS.Web.Middleware.WebSocket
                 {
                     continue;
                 }
-                await socket.Value.SendModelAsync(msgModel);
+                await socket.Value.Session.SendModelAsync(msgModel);
             }
         }
 
@@ -89,7 +89,7 @@ namespace MCS.Web.Middleware.WebSocket
                 {
                     continue;
                 }
-                await socket.Value.SendModelAsync(msgModel);
+                await socket.Value.Session.SendModelAsync(msgModel);
             }
         }
 
