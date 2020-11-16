@@ -107,7 +107,7 @@ namespace MCS.Web.Middleware.WebSocket
                     continue;
                 }
 
-                //防止客户端连接失败
+                //防止客户端连接断开
                 try
                 {
                     var commandFunction = WebSocketCommandManagement.GetFunction<IWebSocketCommand>(response.Cmd);

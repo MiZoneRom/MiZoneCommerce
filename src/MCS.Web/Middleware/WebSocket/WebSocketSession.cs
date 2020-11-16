@@ -92,6 +92,12 @@ namespace MCS.Web.Middleware.WebSocket
             }
         }
 
+        /// <summary>
+        /// 接受返回的消息
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         public async Task<T> ReceiveModelAsync<T>(CancellationToken ct = default(CancellationToken))
         {
             var buffer = new ArraySegment<byte>(new byte[8192]);
