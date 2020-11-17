@@ -99,7 +99,7 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             /// <summary>
             /// 视频
             /// </summary>
-            Video
+            Video = 4
         }
 
         /// <summary>
