@@ -21,6 +21,14 @@ using log4net;
 using log4net.Config;
 using log4net.Repository;
 using MCS.Web.Middleware.WebSocket;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Http;
+using Senparc.CO2NET.Cache;
+using Senparc.CO2NET.RegisterServices;
+using Microsoft.Extensions.Options;
+using Senparc.Weixin.RegisterServices;
+using Senparc.CO2NET;
+using Senparc.Weixin.Entities;
 
 namespace MCS.Web
 {
@@ -80,8 +88,16 @@ namespace MCS.Web
 
                 });
 
+            services.AddSession();
+
             //配置Controller全部由Autofac创建
             services.AddControllersWithViews().AddControllersAsServices();
+
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+
+            services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddRazorPages();
 
@@ -161,6 +177,8 @@ namespace MCS.Web
                 o.Filters.Add(typeof(BaseExceptions));
             });
 
+            services.AddSenparcWeixinServices(Configuration);
+
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -170,7 +188,7 @@ namespace MCS.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             if (env.IsDevelopment())
             {
@@ -191,6 +209,7 @@ namespace MCS.Web
                 c.RoutePrefix = "swagger";
             });
 
+            //使用路由
             app.UseRouting();
 
             //启用跨越

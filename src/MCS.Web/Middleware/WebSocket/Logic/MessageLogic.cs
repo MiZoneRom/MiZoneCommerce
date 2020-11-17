@@ -2,6 +2,9 @@
 using MCS.Core.Helper;
 using MCS.Web.Middleware.WebSocket;
 using MCS.Web.Middleware.WebSocket.Command;
+using Senparc.Weixin;
+using Senparc.Weixin.Entities.TemplateMessage;
+using Senparc.Weixin.MP.Containers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +79,40 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             await WebSocketSessionPool.Broadcast(message);
 
             //开辟一个新线程用于发送微信消息
-            await Task.Factory.StartNew(() => { });
+            await Task.Factory.StartNew(() => SendWXMessage(message.Msg));
+        }
+
+        private async void SendWXMessage(string msg)
+        {
+            await AccessTokenContainer.RegisterAsync("wxf4ce6bf0b56699b3", "eadbda3863b6ac5a1e43713c24a86d1e");
+            string access_token = AccessTokenContainer.GetAccessTokenResult("wxf4ce6bf0b56699b3").access_token;
+
+            var templateMessageData = new TemplateMessageData();
+            templateMessageData["thing1"] = new TemplateMessageDataValue("即时聊天");
+            templateMessageData["thing2"] = new TemplateMessageDataValue(msg);
+            templateMessageData["date3"] = new TemplateMessageDataValue(DateTime.Now);
+            templateMessageData["thing4"] = new TemplateMessageDataValue("Biu");
+
+            var page = "page/tabbar/index/index";
+            //templateId也可以由后端指定
+
+            try
+            {
+                var result = await Senparc.Weixin.WxOpen.AdvancedAPIs.MessageApi.SendSubscribeAsync("wxf4ce6bf0b56699b3", "oaDT45YxHE-w7jEZOHt5LniAB5S8", "-tJp5MPKiysoDTioBgZo70Qn8cku3yc5jG-RPgbsSaI", templateMessageData, page);
+                if (result.errcode == ReturnCode.请求成功)
+                {
+                    Log.Debug("msg Success");
+                }
+                else
+                {
+                    Log.Debug(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("aaaa", ex);
+            }
+
         }
 
         /// <summary>
