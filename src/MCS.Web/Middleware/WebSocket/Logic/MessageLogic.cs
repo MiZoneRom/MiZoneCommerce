@@ -84,7 +84,7 @@ namespace MCS.Web.Middleware.WebSocket.Logic
 
         private async void SendWXMessage(string msg)
         {
-            await AccessTokenContainer.RegisterAsync("wxf4ce6bf0b56699b3", "eadbda3863b6ac5a1e43713c24a86d1e");
+            //await AccessTokenContainer.RegisterAsync("wxf4ce6bf0b56699b3", "eadbda3863b6ac5a1e43713c24a86d1e");
             string access_token = AccessTokenContainer.GetAccessTokenResult("wxf4ce6bf0b56699b3").access_token;
 
             var templateMessageData = new TemplateMessageData();

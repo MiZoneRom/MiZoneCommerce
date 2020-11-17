@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Dapper.Common;
 using Microsoft.OpenApi.Models;
 using System.IO;
@@ -24,11 +25,14 @@ using MCS.Web.Middleware.WebSocket;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Http;
 using Senparc.CO2NET.Cache;
-using Senparc.CO2NET.RegisterServices;
-using Microsoft.Extensions.Options;
+using Senparc.CO2NET.Utilities;
+using Senparc.Weixin.MP;
 using Senparc.Weixin.RegisterServices;
-using Senparc.CO2NET;
+using Senparc.Weixin.WxOpen;
 using Senparc.Weixin.Entities;
+using Senparc.CO2NET;
+using Senparc.CO2NET.AspNet;
+using Senparc.Weixin;
 
 namespace MCS.Web
 {
@@ -92,8 +96,6 @@ namespace MCS.Web
 
             //配置Controller全部由Autofac创建
             services.AddControllersWithViews().AddControllersAsServices();
-
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
 
@@ -177,6 +179,7 @@ namespace MCS.Web
                 o.Filters.Add(typeof(BaseExceptions));
             });
 
+            //SenparcWeixin
             services.AddSenparcWeixinServices(Configuration);
 
         }
@@ -211,6 +214,12 @@ namespace MCS.Web
 
             //使用路由
             app.UseRouting();
+
+            var registerService = app.UseSenparcGlobal(env, senparcSetting.Value, globalRegister => { }, true);
+            registerService.UseSenparcWeixin(senparcWeixinSetting.Value, weixinRegister =>
+            {
+                weixinRegister.RegisterWxOpenAccount(senparcWeixinSetting.Value, "测试小程序");
+            });
 
             //启用跨越
             app.UseCors("CustomCorsPolicy");
