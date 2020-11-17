@@ -61,5 +61,17 @@ namespace MCS.Web.Middleware.WebSocket
             return Convert.ToDecimal(GetValue(propertyName).ToString());
         }
 
+        /// <summary>
+        /// 获取枚举类型值
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public T GetEnumValue<T>(string propertyName)
+        {
+            int enumItemValue = GetIntValue(propertyName);
+            return (T)Enum.ToObject(typeof(T), enumItemValue);
+        }
+
     }
 }
