@@ -37,7 +37,8 @@ namespace MCS.Web.Middleware.WebSocket.Logic
                 {
                     Type = type,
                     Date = date,
-                    TargetId = 1
+                    TargetId = 1,
+                    Target = target
                 }
             };
 
@@ -88,6 +89,9 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             Image = 3
         }
 
+        /// <summary>
+        /// 消息目标
+        /// </summary>
         private enum MessageTarget
         {
             /// <summary>
