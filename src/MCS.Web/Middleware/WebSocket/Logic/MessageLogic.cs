@@ -90,7 +90,7 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             var templateMessageData = new TemplateMessageData();
             templateMessageData["thing1"] = new TemplateMessageDataValue("即时聊天");
             templateMessageData["thing2"] = new TemplateMessageDataValue(msg);
-            templateMessageData["date3"] = new TemplateMessageDataValue(DateTime.Now);
+            templateMessageData["date3"] = new TemplateMessageDataValue(DateTime.Now.ToString("yyyy年MM月dd日 HH:mm"));
             templateMessageData["thing4"] = new TemplateMessageDataValue("Biu");
 
             var page = "page/tabbar/index/index";
