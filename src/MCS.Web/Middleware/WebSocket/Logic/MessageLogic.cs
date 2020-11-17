@@ -39,7 +39,8 @@ namespace MCS.Web.Middleware.WebSocket.Logic
                 {
                     Type = type,
                     Date = date,
-                    TargetId = 1,
+                    Timestamp = StringHelper.GetTimeStamp(),
+                    TargetId = targetId,
                     Target = target,
                     Nick = StringHelper.GetTimeStamp(),
                     Duration = duration,
@@ -73,6 +74,9 @@ namespace MCS.Web.Middleware.WebSocket.Logic
         private async Task BroadcastMessage(WebSocketProtocolModel message)
         {
             await WebSocketSessionPool.Broadcast(message);
+
+            //开辟一个新线程用于发送微信消息
+            await Task.Factory.StartNew(() => { });
         }
 
         /// <summary>
