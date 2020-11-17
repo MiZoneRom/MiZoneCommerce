@@ -49,19 +49,19 @@ namespace MCS.Web.Middleware.WebSocket.Logic
 
             if (target == MessageTarget.Person)
             {
-                BroadcastMessage(sendMessageModel);
+                await BroadcastMessage(sendMessageModel);
             }
             else if (target == MessageTarget.Community)
             {
-                BroadcastMessage(sendMessageModel);
+                await BroadcastMessage(sendMessageModel);
             }
             else if (target == MessageTarget.Department)
             {
-                BroadcastMessage(sendMessageModel);
+                await BroadcastMessage(sendMessageModel);
             }
             else if (target == MessageTarget.Broadcast)
             {
-                BroadcastMessage(sendMessageModel);
+                await BroadcastMessage(sendMessageModel);
             }
 
         }
@@ -70,7 +70,7 @@ namespace MCS.Web.Middleware.WebSocket.Logic
         /// 广播消息
         /// </summary>
         /// <param name="message"></param>
-        private async void BroadcastMessage(WebSocketProtocolModel message)
+        private async Task BroadcastMessage(WebSocketProtocolModel message)
         {
             await WebSocketSessionPool.Broadcast(message);
         }
@@ -91,7 +91,11 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             /// <summary>
             /// 图片
             /// </summary>
-            Image = 3
+            Image = 3,
+            /// <summary>
+            /// 视频
+            /// </summary>
+            Video
         }
 
         /// <summary>
