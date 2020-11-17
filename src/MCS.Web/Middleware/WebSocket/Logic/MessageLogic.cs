@@ -1,4 +1,5 @@
 ﻿using MCS.Core;
+using MCS.Core.Helper;
 using MCS.Web.Middleware.WebSocket;
 using MCS.Web.Middleware.WebSocket.Command;
 using System;
@@ -27,6 +28,7 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             MessageType type = message.GetEnumValue<MessageType>("type");
             //消息目标
             int targetId = message.GetIntValue("targetId");
+            int duration = message.GetIntValue("duration");
 
             var sendMessageModel = new WebSocketProtocolModel()
             {
@@ -38,21 +40,24 @@ namespace MCS.Web.Middleware.WebSocket.Logic
                     Type = type,
                     Date = date,
                     TargetId = 1,
-                    Target = target
+                    Target = target,
+                    Nick = StringHelper.GetTimeStamp(),
+                    Duration = duration,
+                    Avatar = "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJmNEmZfcl6SDQkahpeQljK7pR1EKJx3Oia6M7wicL3AFoBYmiafOxNIygVI5rNPPMCgUZMGnKWuZHFQ/132"
                 }
             };
 
             if (target == MessageTarget.Person)
             {
-
+                BroadcastMessage(sendMessageModel);
             }
             else if (target == MessageTarget.Community)
             {
-
+                BroadcastMessage(sendMessageModel);
             }
             else if (target == MessageTarget.Department)
             {
-
+                BroadcastMessage(sendMessageModel);
             }
             else if (target == MessageTarget.Broadcast)
             {

@@ -19,6 +19,7 @@ namespace MCS.Web.Middleware.WebSocket.Command
         /// </summary>
         public static void RegisterFunction()
         {
+            List<Type> typeList = new List<Type>();
             var types = Assembly.GetAssembly(typeof(IWebSocketCommand)).GetTypes().Where(t => !t.IsInterface);
             foreach (var item in types)
             {
@@ -27,10 +28,15 @@ namespace MCS.Web.Middleware.WebSocket.Command
                 {
                     if (ty == typeof(IWebSocketCommand))
                     {
-                        var attr = ty.GetCustomAttributes(typeof(MessageCommandAttribute), true).FirstOrDefault() as MessageCommandAttribute;
-                        CommandFunctionList.Add(attr.Command, ty);
+                        typeList.Add(item);
                     }
                 }
+            }
+
+            foreach (Type item in typeList)
+            {
+                var attr = item.GetCustomAttributes(typeof(MessageCommandAttribute), true).FirstOrDefault() as MessageCommandAttribute;
+                CommandFunctionList.Add(attr.Command, item);
             }
         }
 
