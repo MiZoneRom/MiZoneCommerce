@@ -215,10 +215,17 @@ namespace MCS.Web
             //使用路由
             app.UseRouting();
 
-            var registerService = app.UseSenparcGlobal(env, senparcSetting.Value, globalRegister => { }, true);
+            // 启动 CO2NET 全局注册，必须！
+            var registerService = app.UseSenparcGlobal(env, senparcSetting.Value, globalRegister => { 
+            
+            }, true);
+
+            //使用 Senparc.Weixin SDK
             registerService.UseSenparcWeixin(senparcWeixinSetting.Value, weixinRegister =>
             {
+                //注册小程序
                 weixinRegister.RegisterWxOpenAccount(senparcWeixinSetting.Value, "测试小程序");
+
             });
 
             //启用跨越
