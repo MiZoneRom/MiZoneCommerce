@@ -66,7 +66,9 @@ namespace MCS.Web.Middleware.WebSocket
                 {
                     SessionId = sessionId,
                     Token = token,
-                    Session = currentWebSocketContext
+                    Session = currentWebSocketContext,
+                    ConnectTime = DateTime.Now,
+                    IsRegister = !string.IsNullOrEmpty(token)
                 };
                 WebSocketSessionPool.AddSession(sessionModel);
             }
@@ -91,6 +93,7 @@ namespace MCS.Web.Middleware.WebSocket
 
                 //接收消息
                 WebSocketProtocolModel response = await currentSession.Session.ReceiveModelAsync();
+                currentSession.LastReceiveTime = DateTime.Now;
 
                 //如果消息为空
                 if (response == null)

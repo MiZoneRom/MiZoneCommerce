@@ -28,6 +28,26 @@ namespace MCS.Web.Middleware.WebSocket
         public bool IsRegister { get; set; }
 
         /// <summary>
+        /// 连接时间
+        /// </summary>
+        public DateTime ConnectTime { get; set; }
+
+        /// <summary>
+        /// 最后发送消息时间 （服务端向客户端发送）
+        /// </summary>
+        public DateTime LastSendTime { get; set; }
+
+        /// <summary>
+        /// 最后接收时间 (客户端向服务端发送)
+        /// </summary>
+        public DateTime LastReceiveTime { get; set; }
+
+        /// <summary>
+        /// 最后推送微信消息时间
+        /// </summary>
+        public DateTime LastSendWeiXinOpen { get; set; }
+
+        /// <summary>
         /// 会话
         /// </summary>
         public System.Net.WebSockets.WebSocket Session { get; set; }
