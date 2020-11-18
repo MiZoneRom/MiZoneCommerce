@@ -4,8 +4,8 @@
 {
     foreach (var item in Model)
     {
-        <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
+        <li class="nav-item">
+            <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     @item.Name
@@ -13,7 +13,7 @@
                 </p>
             </a>
             <ul class="nav nav-treeview">
-                <partial src="NavigationItem" data="@item.Children"></partial>
+                <partial name="_NavigationItem" for="@item.Children"/>
             </ul>
         </li>
     }
