@@ -85,11 +85,11 @@ namespace MCS.Web.Middleware.WebSocket.Logic
         private async void SendWXMessage(string msg)
         {
             //await AccessTokenContainer.RegisterAsync("wxf4ce6bf0b56699b3", "eadbda3863b6ac5a1e43713c24a86d1e");
-            string access_token = AccessTokenContainer.GetAccessTokenResult("wxf4ce6bf0b56699b3").access_token;
+            //string access_token = AccessTokenContainer.GetAccessTokenResult("wxf4ce6bf0b56699b3").access_token;
 
             var templateMessageData = new TemplateMessageData();
             templateMessageData["thing1"] = new TemplateMessageDataValue("即时聊天");
-            templateMessageData["thing2"] = new TemplateMessageDataValue(msg);
+            templateMessageData["thing2"] = new TemplateMessageDataValue(StringHelper.CutString(msg, 15));
             templateMessageData["date3"] = new TemplateMessageDataValue(DateTime.Now.ToString("yyyy年MM月dd日 HH:mm"));
             templateMessageData["thing4"] = new TemplateMessageDataValue("Biu");
 
