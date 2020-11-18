@@ -58,7 +58,7 @@ namespace MCS.Service
                     if (model != null)
                     {
                         List<AdminPrivilege> AdminPrivileges = new List<AdminPrivilege>();
-                        (from a in Context.QuerySet<RolePrivilegeInfo>() where a.RoleId == model.RoleId select a).ToList().ForEach(a => AdminPrivileges.Add((AdminPrivilege)a.Privilege));
+                        (from a in Context.QuerySet<ManagerRolePrivilegeInfo>() where a.RoleId == model.RoleId select a).ToList().ForEach(a => AdminPrivileges.Add((AdminPrivilege)a.Privilege));
                         manager.RealName = model.RealName;
                         manager.AdminPrivileges = AdminPrivileges;
                     }

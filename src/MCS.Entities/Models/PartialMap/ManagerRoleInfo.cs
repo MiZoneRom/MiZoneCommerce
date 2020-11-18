@@ -6,9 +6,9 @@ using System.Text;
 
 namespace MCS.Entities
 {
-    public partial class RoleInfo
+    public partial class ManagerRoleInfo
     {
         [NotMapped]
-        public virtual List<RolePrivilegeInfo> RolePrivileges { get; set; }
+        public virtual List<ManagerRolePrivilegeInfo> RolePrivileges { get; set; }
     }
 }

@@ -14,12 +14,12 @@ namespace MCS.IServices
         /// <summary>
         /// 添加一个平台管理员角色
         /// </summary>
-        void AddPlatformRole(RoleInfo model);
+        void AddPlatformRole(ManagerRoleInfo model);
 
         /// <summary>
         /// 修改平台管理员角色
         /// </summary>
-        void UpdatePlatformRole(RoleInfo model);
+        void UpdatePlatformRole(ManagerRoleInfo model);
 
         /// <summary>
         /// 删除一个平台角色
@@ -33,13 +33,13 @@ namespace MCS.IServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        RoleInfo GetPlatformRole(long id);
+        ManagerRoleInfo GetPlatformRole(long id);
 
         /// <summary>
         /// 获取平台角色列表
         /// </summary>
         /// <returns></returns>
-        List<RoleInfo> GetPlatformRoles();
+        List<ManagerRoleInfo> GetPlatformRoles();
 
     }
 }
