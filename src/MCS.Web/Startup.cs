@@ -97,6 +97,7 @@ namespace MCS.Web
             //配置Controller全部由Autofac创建
             services.AddControllersWithViews().AddControllersAsServices();
 
+            //如果在IIS中搭建
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -179,7 +180,7 @@ namespace MCS.Web
                 o.Filters.Add(typeof(BaseExceptions));
             });
 
-            //SenparcWeixin
+            //SenparcWeixin 加入微信服务
             services.AddSenparcWeixinServices(Configuration);
 
         }

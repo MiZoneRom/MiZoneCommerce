@@ -5,6 +5,8 @@ using MCS.Web.Middleware.WebSocket.Command;
 using Senparc.Weixin;
 using Senparc.Weixin.Entities.TemplateMessage;
 using Senparc.Weixin.MP.Containers;
+using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
+using Senparc.Weixin.WxOpen.Containers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +92,25 @@ namespace MCS.Web.Middleware.WebSocket.Logic
 
         private async void SendWXMessage(string source, string content, string tip)
         {
+
+            //登录
+            //var jsonResult = SnsApi.JsCode2Json("appid", "appsecret", "code");
+            //if (jsonResult.errcode == ReturnCode.请求成功)
+            //{
+            //    //Session["WxOpenUser"] = jsonResult;//使用Session保存登陆信息（不推荐）
+            //    //使用SessionContainer管理登录信息（推荐）
+            //    var unionId = "";
+            //    var sessionBag = SessionContainer.UpdateSession(null, jsonResult.openid, jsonResult.session_key, unionId);
+
+            //    //注意：生产环境下SessionKey属于敏感信息，不能进行传输！
+            //    return Json(new { success = true, msg = "OK", sessionId = sessionBag.Key, sessionKey = sessionBag.SessionKey });
+            //}
+            //else
+            //{
+            //    return Json(new { success = false, msg = jsonResult.errmsg });
+            //}
+
+            //获取token
             //await AccessTokenContainer.RegisterAsync("wxf4ce6bf0b56699b3", "eadbda3863b6ac5a1e43713c24a86d1e");
             //string access_token = AccessTokenContainer.GetAccessTokenResult("wxf4ce6bf0b56699b3").access_token;
 
