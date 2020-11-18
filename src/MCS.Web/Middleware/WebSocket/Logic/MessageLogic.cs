@@ -33,6 +33,8 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             int targetId = message.GetIntValue("targetId");
             int duration = message.GetIntValue("duration");
 
+            string nick = StringHelper.GetTimeStamp();
+
             var sendMessageModel = new WebSocketProtocolModel()
             {
                 Cmd = WebSocketProtocolCommandType.Message,
@@ -45,7 +47,7 @@ namespace MCS.Web.Middleware.WebSocket.Logic
                     Timestamp = StringHelper.GetTimeStamp(),
                     TargetId = targetId,
                     Target = target,
-                    Nick = StringHelper.GetTimeStamp(),
+                    Nick = nick,
                     Duration = duration,
                     Avatar = "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJmNEmZfcl6SDQkahpeQljK7pR1EKJx3Oia6M7wicL3AFoBYmiafOxNIygVI5rNPPMCgUZMGnKWuZHFQ/132"
                 }
@@ -54,6 +56,9 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             if (target == MessageTarget.Person)
             {
                 await BroadcastMessage(sendMessageModel);
+
+                //开辟一个新线程用于发送微信消息
+                await Task.Factory.StartNew(() => SendWXMessage(nick, message.Msg, "您有一条新的消息"));
             }
             else if (target == MessageTarget.Community)
             {
@@ -77,28 +82,27 @@ namespace MCS.Web.Middleware.WebSocket.Logic
         private async Task BroadcastMessage(WebSocketProtocolModel message)
         {
             await WebSocketSessionPool.Broadcast(message);
-
-            //开辟一个新线程用于发送微信消息
-            await Task.Factory.StartNew(() => SendWXMessage(message.Msg));
         }
 
-        private async void SendWXMessage(string msg)
+        private async void SendWXMessage(string source, string content, string tip)
         {
             //await AccessTokenContainer.RegisterAsync("wxf4ce6bf0b56699b3", "eadbda3863b6ac5a1e43713c24a86d1e");
             //string access_token = AccessTokenContainer.GetAccessTokenResult("wxf4ce6bf0b56699b3").access_token;
 
             var templateMessageData = new TemplateMessageData();
-            templateMessageData["thing1"] = new TemplateMessageDataValue("即时聊天");
-            templateMessageData["thing2"] = new TemplateMessageDataValue(StringHelper.CutString(msg, 15));
+            templateMessageData["thing1"] = new TemplateMessageDataValue(source);
+            templateMessageData["thing2"] = new TemplateMessageDataValue(StringHelper.CutString(content, 15));
             templateMessageData["date3"] = new TemplateMessageDataValue(DateTime.Now.ToString("yyyy年MM月dd日 HH:mm"));
-            templateMessageData["thing4"] = new TemplateMessageDataValue("Biu");
+            templateMessageData["thing4"] = new TemplateMessageDataValue(tip);
 
             var page = "page/tabbar/index/index";
-            //templateId也可以由后端指定
+            string templateId = "-tJp5MPKiysoDTioBgZo70Qn8cku3yc5jG-RPgbsSaI";
+            string openId = "oaDT45YxHE-w7jEZOHt5LniAB5S8";
+            string appId = "wxf4ce6bf0b56699b3";
 
             try
             {
-                var result = await Senparc.Weixin.WxOpen.AdvancedAPIs.MessageApi.SendSubscribeAsync("wxf4ce6bf0b56699b3", "oaDT45YxHE-w7jEZOHt5LniAB5S8", "-tJp5MPKiysoDTioBgZo70Qn8cku3yc5jG-RPgbsSaI", templateMessageData, page);
+                var result = await Senparc.Weixin.WxOpen.AdvancedAPIs.MessageApi.SendSubscribeAsync(appId, openId, templateId, templateMessageData, page);
                 if (result.errcode == ReturnCode.请求成功)
                 {
                     Log.Debug("msg Success");
