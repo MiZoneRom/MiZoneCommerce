@@ -57,8 +57,12 @@ namespace MCS.Web.Middleware.WebSocket.Logic
             {
                 await BroadcastMessage(sendMessageModel);
 
-                //开辟一个新线程用于发送微信消息
-                await Task.Factory.StartNew(() => SendWXMessage(nick, message.Msg, "您有一条新的消息"));
+                if ((DateTime.Now - session.LastSendWeiXinOpen).TotalHours > 2)
+                {
+                    session.LastSendWeiXinOpen = DateTime.Now;
+                    //开辟一个新线程用于发送微信消息
+                    await Task.Factory.StartNew(() => SendWXMessage(nick, message.Msg, "您有一条新的消息"));
+                }
             }
             else if (target == MessageTarget.Community)
             {
