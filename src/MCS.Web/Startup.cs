@@ -33,6 +33,8 @@ using Senparc.Weixin.Entities;
 using Senparc.CO2NET;
 using Senparc.CO2NET.AspNet;
 using Senparc.Weixin;
+using AutoMapper;
+using MCS.Application.Mappers.Profiles;
 
 namespace MCS.Web
 {
@@ -180,6 +182,12 @@ namespace MCS.Web
                 o.Filters.Add(typeof(BaseExceptions));
             });
 
+            //AutoMapper
+            services.AddAutoMapper(cfg =>
+            {
+                cfg.AddProfile<NavigationProfile>();
+            });
+
             //SenparcWeixin 加入微信服务
             services.AddSenparcWeixinServices(Configuration);
 
@@ -218,8 +226,9 @@ namespace MCS.Web
             app.UseRouting();
 
             // 启动 CO2NET 全局注册，必须！
-            var registerService = app.UseSenparcGlobal(env, senparcSetting.Value, globalRegister => { 
-            
+            var registerService = app.UseSenparcGlobal(env, senparcSetting.Value, globalRegister =>
+            {
+
             }, true);
 
             //使用 Senparc.Weixin SDK

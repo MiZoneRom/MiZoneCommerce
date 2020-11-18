@@ -1,4 +1,5 @@
-﻿using MCS.Core;
+﻿using AutoMapper;
+using MCS.Core;
 using MCS.IServices;
 
 namespace MCS.Application
@@ -8,7 +9,7 @@ namespace MCS.Application
     /// </summary>
     public class BaseApplicaion
     {
-        protected static T GetService<T>() where T:IService
+        protected static T GetService<T>() where T : IService
         {
             return ObjectContainer.Current.Resolve<T>();
         }
@@ -17,5 +18,6 @@ namespace MCS.Application
     public class BaseApplicaion<T> : BaseApplicaion where T : IService
     {
         protected static T Service { get { return GetService<T>(); } }
+        protected static IMapper Mapper { get { return ObjectContainer.Current.Resolve<IMapper>(); } }
     }
 }
