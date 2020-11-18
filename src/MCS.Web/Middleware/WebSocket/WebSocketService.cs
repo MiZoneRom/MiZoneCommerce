@@ -31,15 +31,6 @@ namespace MCS.Web.Middleware.WebSocket
             WebSocketCommandManagement.RegisterFunction();
             app.UseWebSockets();
             app.UseMiddleware<WebSocketService>();
-
-            try
-            {
-                NavigationApplication.GetNavigations();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("aa", ex);
-            }
         }
 
         private readonly RequestDelegate _next;

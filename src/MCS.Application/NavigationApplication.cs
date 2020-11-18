@@ -16,29 +16,22 @@ namespace MCS.Application
         {
         }
 
-        IMapper _mapper;
-        public NavigationApplication(IMapper mapper) : this()
-        {
-            _mapper = mapper;
-        }
-
         public static List<Navigation> GetNavigations()
         {
-            List<NavigationInfo> navigationInfoList = Service.GetNavigations();
+            return GetChild(0);
+        }
 
+        private static List<Navigation> GetChild(long parentId)
+        {
+            List<NavigationInfo> navigationInfoList = Service.GetNavigations(parentId).ToList();
+            List<Navigation> navigationList = new List<Navigation>();
             foreach (var item in navigationInfoList)
             {
                 Navigation nav = Mapper.Map<NavigationInfo, Navigation>(item);
-                Log.Debug(nav.Name);
+                nav.Children = GetChild(nav.Id);
+                navigationList.Add(nav);
             }
-
-            return null;
-        }
-
-        private Navigation GetChild()
-        {
-
-            return null;
+            return navigationList;
         }
 
     }
