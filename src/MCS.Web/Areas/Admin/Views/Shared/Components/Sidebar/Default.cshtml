@@ -1,4 +1,17 @@
-﻿  <!-- Main Sidebar Container -->
+﻿@{
+    List<MCS.DTO.Navigation> Navs = (List<MCS.DTO.Navigation>)ViewBag.Navs;
+}
+
+@functions{
+    private string GetChildNav(long parentId)
+    {
+
+        string html = "";
+        return html;
+    }
+}
+
+<!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a asp-controller="Home" asp-action="Index" asp-area="Admin" class="brand-link">
@@ -33,8 +46,11 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <partial name="_NavigationItem" for="@Navs"/>
+
                 <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
