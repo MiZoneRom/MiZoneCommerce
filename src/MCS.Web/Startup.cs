@@ -187,6 +187,7 @@ namespace MCS.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            //注册Autofac
             var assembly = typeof(AutoFacModule).Assembly;
             builder.RegisterAssemblyModules(assembly);
         }
