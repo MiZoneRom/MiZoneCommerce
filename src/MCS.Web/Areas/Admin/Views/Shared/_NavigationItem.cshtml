@@ -5,16 +5,22 @@
     foreach (var item in Model)
     {
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="@(string.IsNullOrEmpty(item.Link)?"javascript:;":item.Link)" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     @item.Name
-                    <i class="right fas fa-angle-left"></i>
+                    @if (item.Children.Count > 0)
+                    {
+                        <i class="right fas fa-angle-left"></i>
+                    }
                 </p>
             </a>
-            <ul class="nav nav-treeview">
-                <partial name="_NavigationItem" for="@item.Children"/>
-            </ul>
+            @if (item.Children.Count > 0)
+            {
+                <ul class="nav nav-treeview">
+                    <partial name="_NavigationItem" for="@item.Children" />
+                </ul>
+            }
         </li>
     }
 }
