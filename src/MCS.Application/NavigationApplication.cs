@@ -16,18 +16,18 @@ namespace MCS.Application
         {
         }
 
-        public static List<Navigation> GetNavigations()
+        public static List<NavigationModel> GetNavigations()
         {
             return GetChild(0);
         }
 
-        private static List<Navigation> GetChild(long parentId)
+        private static List<NavigationModel> GetChild(long parentId)
         {
             List<NavigationInfo> navigationInfoList = Service.GetNavigations(parentId).ToList();
-            List<Navigation> navigationList = new List<Navigation>();
+            List<NavigationModel> navigationList = new List<NavigationModel>();
             foreach (var item in navigationInfoList)
             {
-                Navigation nav = Mapper.Map<NavigationInfo, Navigation>(item);
+                NavigationModel nav = Mapper.Map<NavigationInfo, NavigationModel>(item);
                 nav.Children = GetChild(nav.Id);
                 navigationList.Add(nav);
             }

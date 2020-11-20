@@ -22,7 +22,7 @@ namespace MCS.Entities
 		public long Id { get; set; }
         
 		/// <summary>
-        /// ParentId
+        /// 父级导航ID
         /// </summary>
 		
 		//[Required]
@@ -30,7 +30,7 @@ namespace MCS.Entities
 		public long ParentId { get; set; }
         
 		/// <summary>
-        /// Type
+        /// 导航类型
         /// </summary>
 		
 		//
@@ -38,7 +38,7 @@ namespace MCS.Entities
 		public int? Type { get; set; }
         
 		/// <summary>
-        /// Name
+        /// 导航名称
         /// </summary>
 		
 		//
@@ -46,15 +46,7 @@ namespace MCS.Entities
 		public string Name { get; set; }
         
 		/// <summary>
-        /// Title
-        /// </summary>
-		
-		//[Required]
-		//[Column("Title")]
-		public string Title { get; set; }
-        
-		/// <summary>
-        /// SubTitle
+        /// 副标题
         /// </summary>
 		
 		//
@@ -62,7 +54,7 @@ namespace MCS.Entities
 		public string SubTitle { get; set; }
         
 		/// <summary>
-        /// Icon
+        /// 图标
         /// </summary>
 		
 		//
@@ -70,15 +62,31 @@ namespace MCS.Entities
 		public string Icon { get; set; }
         
 		/// <summary>
-        /// Link
+        /// 路径
         /// </summary>
 		
 		//
-		//[Column("Link")]
-		public string Link { get; set; }
+		//[Column("Path")]
+		public string Path { get; set; }
         
 		/// <summary>
-        /// SortId
+        /// 路径类型
+        /// </summary>
+		
+		//[Required]
+		//[Column("PathType")]
+		public int PathType { get; set; }
+        
+		/// <summary>
+        /// 模块
+        /// </summary>
+		
+		//
+		//[Column("Component")]
+		public string Component { get; set; }
+        
+		/// <summary>
+        /// 排序Id
         /// </summary>
 		
 		//[Required]
@@ -86,44 +94,20 @@ namespace MCS.Entities
 		public int SortId { get; set; }
         
 		/// <summary>
-        /// IsLock
+        /// 状态
         /// </summary>
 		
 		//[Required]
-		//[Column("IsLock")]
-		public bool IsLock { get; set; }
+		//[Column("Status")]
+		public int Status { get; set; }
         
 		/// <summary>
-        /// Remark
+        /// 备注
         /// </summary>
 		
 		//
 		//[Column("Remark")]
 		public string Remark { get; set; }
-        
-		/// <summary>
-        /// ActionType
-        /// </summary>
-		
-		//[Required]
-		//[Column("ActionType")]
-		public int ActionType { get; set; }
-        
-		/// <summary>
-        /// IsSys
-        /// </summary>
-		
-		//[Required]
-		//[Column("IsSys")]
-		public bool IsSys { get; set; }
-        
-		/// <summary>
-        /// IsHidden
-        /// </summary>
-		
-		//[Required]
-		//[Column("IsHidden")]
-		public bool IsHidden { get; set; }
         
      }
 
