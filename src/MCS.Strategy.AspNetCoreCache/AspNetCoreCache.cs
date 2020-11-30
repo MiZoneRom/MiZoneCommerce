@@ -5,6 +5,7 @@ using System.Web;
 using System.Collections.Generic;
 using Microsoft.Extensions.Caching.Memory;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MCS.Strategy
 {
