@@ -14,7 +14,7 @@ namespace MCS.Entities
      {
         
 		/// <summary>
-        /// Id
+        /// 导航Id
         /// </summary>
 		[Identity]
 		//[Required]
@@ -28,14 +28,6 @@ namespace MCS.Entities
 		//[Required]
 		//[Column("ParentId")]
 		public long ParentId { get; set; }
-        
-		/// <summary>
-        /// 导航类型
-        /// </summary>
-		
-		//
-		//[Column("Type")]
-		public int? Type { get; set; }
         
 		/// <summary>
         /// 导航名称
@@ -62,6 +54,46 @@ namespace MCS.Entities
 		public string Icon { get; set; }
         
 		/// <summary>
+        /// 导航类型
+        /// </summary>
+		
+		//
+		//[Column("Type")]
+		public int? Type { get; set; }
+        
+		/// <summary>
+        /// 区域
+        /// </summary>
+		
+		//
+		//[Column("Areas")]
+		public string Areas { get; set; }
+        
+		/// <summary>
+        /// 控制器
+        /// </summary>
+		
+		//
+		//[Column("Controllers")]
+		public string Controllers { get; set; }
+        
+		/// <summary>
+        /// 视图
+        /// </summary>
+		
+		//
+		//[Column("Views")]
+		public string Views { get; set; }
+        
+		/// <summary>
+        /// 模块（VUE使用）
+        /// </summary>
+		
+		//
+		//[Column("Component")]
+		public string Component { get; set; }
+        
+		/// <summary>
         /// 路径
         /// </summary>
 		
@@ -70,20 +102,12 @@ namespace MCS.Entities
 		public string Path { get; set; }
         
 		/// <summary>
-        /// 路径类型
+        /// 路径类型（本页面，新标签页）
         /// </summary>
 		
 		//[Required]
 		//[Column("PathType")]
 		public int PathType { get; set; }
-        
-		/// <summary>
-        /// 模块
-        /// </summary>
-		
-		//
-		//[Column("Component")]
-		public string Component { get; set; }
         
 		/// <summary>
         /// 排序Id

@@ -65,6 +65,56 @@ namespace MCS.Core.Helper
 
         #endregion
 
+        #region Cookie
+
+        /// <summary>
+        /// 删除指定名称的Cookie
+        /// </summary>
+        /// <param name="name">Cookie名称</param>
+        public static void DeleteCookie(string name)
+        {
+            HttpContext.Current.Response.Cookies.Delete(name);
+        }
+
+        /// <summary>
+        /// 获得指定名称的Cookie值
+        /// </summary>
+        /// <param name="name">Cookie名称</param>
+        /// <returns></returns>
+        public static string GetCookie(string name)
+        {
+            var cookie = HttpContext.Current.Request.Cookies[name];
+            if (cookie != null)
+                return cookie;
+            return string.Empty;
+        }
+
+        /// <summary>
+        /// 设置指定名称的Cookie的值
+        /// </summary>
+        /// <param name="name">Cookie名称</param>
+        /// <param name="value">值</param>
+        public static void SetCookie(string name, string value)
+        {
+            HttpContext.Current.Response.Cookies.Append(name, value);
+        }
+
+        /// <summary>
+        /// 设置指定名称的Cookie的值
+        /// </summary>
+        /// <param name="name">Cookie名称</param>
+        /// <param name="value">值</param>
+        /// <param name="expires">过期时间</param>
+        public static void SetCookie(string name, string value, DateTime expires)
+        {
+            HttpContext.Current.Response.Cookies.Append(name, value, new CookieOptions
+            {
+                Expires = expires
+            });
+        }
+
+        #endregion
+
         #region 客户端信息
 
         /// <summary>
