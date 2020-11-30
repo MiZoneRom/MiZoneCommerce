@@ -12,5 +12,9 @@ namespace MCS.Web.Areas.Admin.Models.Manage
         [Required(ErrorMessage = "登录密码必填")]
         [StringLength(15, ErrorMessage = "字符长度不能超过15个字")]
         public string Password { get; set; }
+
+        public bool Remember { get; set; }
+
+        public string CheckCode { get; set; }
     }
 }
