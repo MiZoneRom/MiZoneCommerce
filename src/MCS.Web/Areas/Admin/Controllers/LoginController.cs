@@ -57,8 +57,7 @@ namespace MCS.Web.Areas.Admin.Controllers
                 return View(nameof(Index));
             }
 
-            //登录认证，存入Cookie
-            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, user.UserName), new Claim("password", user.Password) };
+            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, manager.UserName), new Claim(ClaimTypes.Sid, manager.Id.ToString()) };
 
             var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, CookieKeysCollection.PLATFORM_MANAGER));
 
@@ -72,15 +71,11 @@ namespace MCS.Web.Areas.Admin.Controllers
             //清除输入错误记录次数
             ClearErrorTimes(user.UserName);
 
-            if (user.Remember)
-                base.SetAdminLoginCookie(manager.Id, DateTime.Now.AddDays(3));
-            else
-                base.SetAdminLoginCookie(manager.Id);
-
             if (ModelState.IsValid)
             {
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
+
             return View(nameof(Index));
         }
 
