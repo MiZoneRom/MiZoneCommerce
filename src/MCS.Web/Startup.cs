@@ -35,6 +35,7 @@ using Senparc.CO2NET.AspNet;
 using Senparc.Weixin;
 using AutoMapper;
 using MCS.Application.Mappers.Profiles;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MCS.Web
 {
@@ -94,6 +95,19 @@ namespace MCS.Web
 
                 });
 
+            services.AddAuthentication(options =>
+            {
+                options.AddScheme<MCSAuthHandler>(MCSAuthHandler.SchemeName, "default scheme");
+                options.DefaultAuthenticateScheme = MCSAuthHandler.SchemeName;
+                options.DefaultChallengeScheme = MCSAuthHandler.SchemeName;
+            }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
+            {
+                o.LoginPath = new PathString("/Home/Login");
+                o.AccessDeniedPath = new PathString("/Home/Error");
+                o.SlidingExpiration = true;
+            });
+
+            //注册session
             services.AddSession();
 
             //配置Controller全部由Autofac创建

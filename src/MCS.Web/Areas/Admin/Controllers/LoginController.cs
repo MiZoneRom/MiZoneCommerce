@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using MCS.CommonModel;
 using MCS.IServices;
 using MCS.Web.Areas.Admin.Models.Manage;
 using MCS.Web.Framework;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +31,7 @@ namespace MCS.Web.Areas.Admin.Controllers
             _iManagerService = iManagerService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
@@ -51,6 +56,18 @@ namespace MCS.Web.Areas.Admin.Controllers
                 int errorTimes = SetErrorTimes(user.UserName);
                 return View(nameof(Index));
             }
+
+            //登录认证，存入Cookie
+            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, user.UserName), new Claim("password", user.Password) };
+
+            var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, CookieKeysCollection.PLATFORM_MANAGER));
+
+            await HttpContext.SignInAsync(MCSAuthHandler.SchemeName, userPrincipal, new AuthenticationProperties
+            {
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
+                IsPersistent = false,
+                AllowRefresh = false
+            });
 
             //清除输入错误记录次数
             ClearErrorTimes(user.UserName);
