@@ -35,7 +35,7 @@ namespace MCS.Core.AccessControlHelper
         /// <summary>
         /// Executes the middleware.
         /// </summary>
-        /// <param name="context">The <see cref="HttpContext"/> for the current request.</param>
+        /// <param name="context">The <see cref="HttpContextAccessor"/> for the current request.</param>
         /// <returns>A task that represents the execution of this middleware.</returns>
         public Task Invoke(Microsoft.AspNetCore.Http.HttpContext context)
         {

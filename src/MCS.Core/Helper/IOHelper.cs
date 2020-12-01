@@ -15,7 +15,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetMapPath(string path)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextAccessor.Current != null)
             {
                 //return HttpContext.Current.Server.MapPath(path);
                 return AppContext.BaseDirectory;
@@ -36,9 +36,9 @@ namespace MCS.Core.Helper
 
         public static string GetAuthorityPath(string path)
         {
-            if (HttpContext.Current != null)
+            if (HttpContextAccessor.Current != null)
             {
-                return HttpContext.Current.Request.Scheme + "://" + HttpContext.Current.Request.Host.Value + path;
+                return HttpContextAccessor.HttpContext.Request.Scheme + "://" + HttpContextAccessor.HttpContext.Request.Host.Value + path;
             }
             else
             {

@@ -29,7 +29,7 @@ namespace MCS.Strategy
         /// <returns>缓存值</returns>
         public T Get<T>(string key)
         {
-            return (T)cache.Get(key);
+            return cache.Get<T>(key);
         }
 
         /// <summary>

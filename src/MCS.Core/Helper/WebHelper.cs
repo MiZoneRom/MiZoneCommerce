@@ -73,7 +73,7 @@ namespace MCS.Core.Helper
         /// <param name="name">Cookie名称</param>
         public static void DeleteCookie(string name)
         {
-            HttpContext.Current.Response.Cookies.Delete(name);
+            HttpContextAccessor.HttpContext.Response.Cookies.Delete(name);
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetCookie(string name)
         {
-            var cookie = HttpContext.Current.Request.Cookies[name];
+            var cookie = HttpContextAccessor.HttpContext.Request.Cookies[name];
             if (cookie != null)
                 return cookie;
             return string.Empty;
@@ -96,7 +96,7 @@ namespace MCS.Core.Helper
         /// <param name="value">值</param>
         public static void SetCookie(string name, string value)
         {
-            HttpContext.Current.Response.Cookies.Append(name, value);
+            HttpContextAccessor.HttpContext.Response.Cookies.Append(name, value);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace MCS.Core.Helper
         /// <param name="expires">过期时间</param>
         public static void SetCookie(string name, string value, DateTime expires)
         {
-            HttpContext.Current.Response.Cookies.Append(name, value, new CookieOptions
+            HttpContextAccessor.Current.HttpContext.Response.Cookies.Append(name, value, new CookieOptions
             {
                 Expires = expires
             });
@@ -123,7 +123,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static bool IsGet()
         {
-            return HttpContext.Current.Request.Method == "GET";
+            return HttpContextAccessor.HttpContext.Request.Method == "GET";
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static bool IsPost()
         {
-            return HttpContext.Current.Request.Method == "POST";
+            return HttpContextAccessor.HttpContext.Request.Method == "POST";
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static bool IsAjax()
         {
-            return HttpContext.Current.Request.Headers["X-Requested-With"] == "XMLHttpRequest";
+            return HttpContextAccessor.HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest";
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetQueryString(string key, string defaultValue)
         {
-            string value = HttpContext.Current.Request.Query[key];
+            string value = HttpContextAccessor.HttpContext.Request.Query[key];
             if (!string.IsNullOrWhiteSpace(value))
                 return value;
             else
@@ -177,7 +177,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static int GetQueryInt(string key, int defaultValue)
         {
-            return TypeHelper.StringToInt(HttpContext.Current.Request.Query[key], defaultValue);
+            return TypeHelper.StringToInt(HttpContextAccessor.HttpContext.Request.Query[key], defaultValue);
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetFormString(string key, string defaultValue)
         {
-            string value = HttpContext.Current.Request.Form[key];
+            string value = HttpContextAccessor.HttpContext.Request.Form[key];
             if (!string.IsNullOrWhiteSpace(value))
                 return value;
             else
@@ -223,7 +223,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static int GetFormInt(string key, int defaultValue)
         {
-            return TypeHelper.StringToInt(HttpContext.Current.Request.Form[key], defaultValue);
+            return TypeHelper.StringToInt(HttpContextAccessor.HttpContext.Request.Form[key], defaultValue);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetUrlReferrer()
         {
-            return HttpContext.Current.Request.Headers[HeaderNames.Referer].ToString();
+            return HttpContextAccessor.HttpContext.Request.Headers[HeaderNames.Referer].ToString();
         }
         /// <summary>
         /// 获得请求的方式
@@ -250,7 +250,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetScheme()
         {
-            return HttpContext.Current.Request.Scheme;
+            return HttpContextAccessor.HttpContext.Request.Scheme;
         }
         /// <summary>
         /// 获得请求的主机部分
@@ -258,7 +258,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetHost()
         {
-            return HttpContext.Current.Request.Host.Host;
+            return HttpContextAccessor.HttpContext.Request.Host.Host;
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace MCS.Core.Helper
         /// <returns></returns>
         public static string GetPort()
         {
-            var port = HttpContext.Current.Request.HttpContext.Connection.RemotePort;
+            var port = HttpContextAccessor.HttpContext.Request.HttpContext.Connection.RemotePort;
             return port.ToString();
         }
 

@@ -102,7 +102,7 @@ namespace MCS.Web
             //如果在IIS中搭建
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
 
             services.AddRazorPages();
 
@@ -208,7 +208,7 @@ namespace MCS.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpContextAccessor accessor, IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
             if (env.IsDevelopment())
             {
@@ -243,7 +243,6 @@ namespace MCS.Web
             {
                 //注册小程序
                 weixinRegister.RegisterWxOpenAccount(senparcWeixinSetting.Value, "测试小程序");
-
             });
 
             //启用跨越
@@ -261,6 +260,8 @@ namespace MCS.Web
 
             //设置到指定路由
             app.Map("/WebSocket", WebSocketService.Map);
+
+            Core.HttpContextAccessor.Current = accessor;
 
             app.UseEndpoints(endpoints =>
             {
