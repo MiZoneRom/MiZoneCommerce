@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MCS.Web
 {
-    public class MCSAuthHandler : IAuthenticationHandler
+    public class MCSAuthHandler : IAuthenticationHandler, IAuthenticationSignInHandler, IAuthenticationSignOutHandler
     {
         public const string SchemeName = "MCSAuth";
         protected AuthenticationScheme _scheme;
@@ -69,8 +70,58 @@ namespace MCS.Web
         /// </summary>
         public Task ChallengeAsync(AuthenticationProperties properties)
         {
-            _context.Response.Redirect($"/{_area}/Login");
+            string redirectUrl = "";
+            if (_area.ToLower() == "web")
+            {
+                redirectUrl = "/Login";
+            }
+            else
+            {
+                redirectUrl = $"/{_area}/Login";
+            }
+            string returnUrl = _context.Request.Path;
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                redirectUrl += $"?ReturnUrl={returnUrl}";
+            }
+            _context.Response.Redirect(redirectUrl);
             return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="properties"></param>
+        /// <returns></returns>
+        public Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties properties)
+        {
+            var ticket = new AuthenticationTicket(user, properties, SchemeName);
+            _context.Response.Cookies.Append("myCookie", this.Serialize(ticket));
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 退出
+        /// </summary>
+        /// <param name="properties"></param>
+        /// <returns></returns>
+        public Task SignOutAsync(AuthenticationProperties properties)
+        {
+            _context.Response.Cookies.Delete("myCookie");
+            return Task.CompletedTask;
+        }
+
+        private AuthenticationTicket Deserialize(string content)
+        {
+            byte[] byteTicket = Encoding.Default.GetBytes(content);
+            return TicketSerializer.Default.Deserialize(byteTicket);
+        }
+
+        private string Serialize(AuthenticationTicket ticket)
+        {
+            byte[] byteTicket = TicketSerializer.Default.Serialize(ticket);
+            return Encoding.Default.GetString(byteTicket);
         }
 
     }
