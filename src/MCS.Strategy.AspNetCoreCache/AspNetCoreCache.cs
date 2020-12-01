@@ -16,7 +16,10 @@ namespace MCS.Strategy
 
         public AspNetCoreCache()
         {
-            cache = new MemoryCache(new MemoryCacheOptions());
+            if (cache == null)
+            {
+                cache = new MemoryCache(new MemoryCacheOptions());
+            }
         }
 
         /// <summary>
