@@ -32,37 +32,14 @@ namespace MCS.Web
         /// <summary>
         /// 认证处理
         /// </summary>
-        public Task<AuthenticateResult> AuthenticateAsync()
+        public async Task<AuthenticateResult> AuthenticateAsync()
         {
-
-            if (!_context.User.Identity.IsAuthenticated)
+            var cookie = _context.Request.Cookies["myCookie"];
+            if (string.IsNullOrEmpty(cookie))
             {
-                return Task.FromResult(AuthenticateResult.Fail("未登陆"));
+                return AuthenticateResult.NoResult();
             }
-
-            var ticket = GetAuthTicket("test", "test");
-            return Task.FromResult(AuthenticateResult.Success(ticket));
-        }
-
-        AuthenticationTicket GetAuthTicket(string name, string role)
-        {
-            var claimsIdentity = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Name, name),
-                new Claim(ClaimTypes.Role, role),
-            }, "My_Auth");
-
-            var principal = new ClaimsPrincipal(claimsIdentity);
-            return new AuthenticationTicket(principal, _scheme.Name);
-        }
-
-        /// <summary>
-        /// 权限不足时的处理
-        /// </summary>
-        public Task ForbidAsync(AuthenticationProperties properties)
-        {
-            _context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-            return Task.CompletedTask;
+            return AuthenticateResult.Success(this.Deserialize(cookie));
         }
 
         /// <summary>
@@ -70,7 +47,7 @@ namespace MCS.Web
         /// </summary>
         public Task ChallengeAsync(AuthenticationProperties properties)
         {
-            string redirectUrl = "";
+            string redirectUrl;
             if (_area.ToLower() == "web")
             {
                 redirectUrl = "/Login";
@@ -85,6 +62,15 @@ namespace MCS.Web
                 redirectUrl += $"?ReturnUrl={returnUrl}";
             }
             _context.Response.Redirect(redirectUrl);
+            return Task.CompletedTask;
+        }
+
+        /// <summary>
+        /// 权限不足时的处理
+        /// </summary>
+        public Task ForbidAsync(AuthenticationProperties properties)
+        {
+            _context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
             return Task.CompletedTask;
         }
 
@@ -112,12 +98,22 @@ namespace MCS.Web
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// 反序列化
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         private AuthenticationTicket Deserialize(string content)
         {
             byte[] byteTicket = Encoding.Default.GetBytes(content);
             return TicketSerializer.Default.Deserialize(byteTicket);
         }
 
+        /// <summary>
+        /// 序列化
+        /// </summary>
+        /// <param name="ticket"></param>
+        /// <returns></returns>
         private string Serialize(AuthenticationTicket ticket)
         {
             byte[] byteTicket = TicketSerializer.Default.Serialize(ticket);
