@@ -100,11 +100,6 @@ namespace MCS.Web
                 options.AddScheme<MCSAuthHandler>(MCSAuthHandler.SchemeName, "default scheme");
                 options.DefaultAuthenticateScheme = MCSAuthHandler.SchemeName;
                 options.DefaultChallengeScheme = MCSAuthHandler.SchemeName;
-            }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, o =>
-            {
-                o.LoginPath = new PathString("/Home/Login");
-                o.AccessDeniedPath = new PathString("/Home/Error");
-                o.SlidingExpiration = true;
             });
 
             //注册session
