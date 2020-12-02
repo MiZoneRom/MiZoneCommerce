@@ -32,7 +32,7 @@ namespace MCS.Application
         public static string GetPageName(string path)
         {
             List<NavigationInfo> navigationInfoList = GetNavigations();
-            NavigationInfo page = navigationInfoList.Where(a => a.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            NavigationInfo page = navigationInfoList.Where(a => !string.IsNullOrEmpty(a.Path) && a.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
             if (page != null)
             {
                 return page.Name;
