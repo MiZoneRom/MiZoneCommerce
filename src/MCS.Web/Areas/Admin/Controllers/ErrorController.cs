@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MCS.Web.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class ErrorController : Controller
     {
         public IActionResult InternalServerError()
