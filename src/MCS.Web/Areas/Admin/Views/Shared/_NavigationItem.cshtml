@@ -17,7 +17,7 @@
             </a>
             @if (item.Children.Count > 0)
             {
-                <ul class="nav nav-treeview @(item.IsOpen?"menu-open":"")">
+                <ul class="nav nav-treeview">
                     <partial name="_NavigationItem" for="@item.Children" />
                 </ul>
             }
