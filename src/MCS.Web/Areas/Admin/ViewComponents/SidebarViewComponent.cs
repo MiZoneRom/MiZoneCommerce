@@ -1,4 +1,5 @@
 ﻿using MCS.Application;
+using MCS.Core;
 using MCS.Web.Framework;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,7 +17,10 @@ namespace MCS.Web.Areas.Admin.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.Navs = NavigationApplication.GetNavigations();
+            string path = this.HttpContext.Request.Path;
+            Log.Debug(path);
+            List<DTO.NavigationModel> navList = NavigationApplication.GetNavigations(path);
+            ViewBag.Navs = navList;
             ViewBag.Manager = CurrentManager;
             return View();
         }

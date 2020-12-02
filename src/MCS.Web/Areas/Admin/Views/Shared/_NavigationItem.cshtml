@@ -4,8 +4,8 @@
 {
     foreach (var item in Model)
     {
-        <li class="nav-item">
-            <a href="@(string.IsNullOrEmpty(item.Path)?"javascript:;":item.Path)" class="nav-link">
+        <li class="nav-item @(item.IsOpen?"menu-open":"")">
+            <a href="@(string.IsNullOrEmpty(item.Path)?"javascript:;":item.Path)" class="nav-link @(item.IsOpen?"active":"")">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     @item.Name
@@ -17,7 +17,7 @@
             </a>
             @if (item.Children.Count > 0)
             {
-                <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview @(item.IsOpen?"menu-open":"")">
                     <partial name="_NavigationItem" for="@item.Children" />
                 </ul>
             }

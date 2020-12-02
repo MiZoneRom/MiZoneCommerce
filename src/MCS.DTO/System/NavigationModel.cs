@@ -31,7 +31,11 @@ namespace MCS.DTO
 
         public string Remark { get; set; }
 
-		public List<NavigationModel> Children { get; set; }
+        public bool IsOpen { get; set; }
+
+        public List<NavigationModel> Children { get; set; }
+
+        public NavigationModel Parent { get; set; }
 
     }
 }
