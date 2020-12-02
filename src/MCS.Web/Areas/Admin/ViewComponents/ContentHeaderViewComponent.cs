@@ -18,6 +18,7 @@ namespace MCS.Web.Areas.Admin.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             string path = this.HttpContext.Request.Path;
+            ViewBag.PageName = NavigationApplication.GetPageName(path);
             return View();
         }
     }

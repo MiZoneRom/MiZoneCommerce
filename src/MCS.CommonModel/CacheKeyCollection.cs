@@ -245,5 +245,7 @@ namespace MCS.CommonModel
             return string.Format("DataCache-latlngAddress-{0}", fromLatLng);
         }
 
+        public const string Navigations = "Cache-Navigations";
+
     }
 }
