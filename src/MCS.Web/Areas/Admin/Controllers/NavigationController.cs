@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace MCS.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomeController : BaseAdminController
+    public class NavigationController : BaseAdminController
     {
         [Authorize]
-        public IActionResult Index()
+        public IActionResult List()
         {
             return View();
         }
