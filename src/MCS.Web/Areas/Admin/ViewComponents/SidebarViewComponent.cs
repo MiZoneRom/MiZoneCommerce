@@ -1,4 +1,5 @@
 ﻿using MCS.Application;
+using MCS.Web.Framework;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MCS.Web.Areas.Admin.ViewComponents
 {
-    public class SidebarViewComponent : ViewComponent
+    public class SidebarViewComponent : BaseViewComponents
     {
         public SidebarViewComponent()
         {
@@ -16,6 +17,7 @@ namespace MCS.Web.Areas.Admin.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             ViewBag.Navs = NavigationApplication.GetNavigations();
+            ViewBag.Manager = CurrentManager;
             return View();
         }
     }

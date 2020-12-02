@@ -57,7 +57,7 @@ namespace MCS.Web.Areas.Admin.Controllers
                 return View(nameof(Index));
             }
 
-            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, manager.UserName), new Claim(ClaimTypes.Sid, manager.Id.ToString()) };
+            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, manager.UserName), new Claim(ClaimTypes.NameIdentifier, manager.Id.ToString()) };
 
             var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, CookieKeysCollection.PLATFORM_MANAGER));
 

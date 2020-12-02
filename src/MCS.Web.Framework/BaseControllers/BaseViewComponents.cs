@@ -1,17 +1,14 @@
 ﻿using MCS.Application;
-using MCS.Core.Helper;
 using MCS.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MCS.Web.Framework
 {
-    public abstract class BaseAdminController : BaseController
+    public abstract class BaseViewComponents : ViewComponent
     {
         ManagerInfo manager = null;
 
@@ -23,14 +20,9 @@ namespace MCS.Web.Framework
                 {
                     return manager;
                 }
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-                if (string.IsNullOrEmpty(userId))
+                var userId = this.UserClaimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (!string.IsNullOrEmpty(userId))
                     manager = ManagerApplication.GetPlatformManager(Convert.ToInt32(userId));
-                if (null == manager)
-                {
-                    Redirect(Url.Action("Login", new { area = "Admin" }));
-                    return null;
-                }
                 return manager;
             }
         }
