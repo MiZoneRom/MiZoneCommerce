@@ -2,7 +2,6 @@
 using MCS.CommonModel;
 using MCS.Core;
 using MCS.DTO;
-using MCS.DTO.System;
 using MCS.Entities;
 using MCS.IServices;
 using System;
@@ -30,7 +29,7 @@ namespace MCS.Application
             return navigationInfoList;
         }
 
-        public static List<NavigationBreadCrumbModel> GetPageName(string path)
+        public static List<NavigationBreadCrumbModel> GetBreadCrumb(string path)
         {
             List<NavigationInfo> navigationInfoList = GetNavigations();
             List<NavigationBreadCrumbModel> breadCrumbList = new List<NavigationBreadCrumbModel>();
@@ -41,11 +40,20 @@ namespace MCS.Application
 
             breadCrumbList.Add(new NavigationBreadCrumbModel { Name = page.Name, Path = page.Path });
 
-            bool noParent = false;
+            NavigationInfo temp = page;
+            bool hasParent = true;
             do
             {
-
-            } while (noParent);
+                temp = navigationInfoList.Where(a => a.Id == temp.ParentId).FirstOrDefault();
+                if (temp != null)
+                {
+                    breadCrumbList.Insert(0, new NavigationBreadCrumbModel { Name = temp.Name, Path = temp.Path });
+                }
+                else
+                {
+                    hasParent = false;
+                }
+            } while (hasParent);
 
             return breadCrumbList;
 

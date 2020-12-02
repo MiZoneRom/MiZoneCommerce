@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MCS.DTO.System
+namespace MCS.DTO
 {
     public class NavigationBreadCrumbModel
     {
