@@ -70,7 +70,17 @@ namespace MCS.Web
         /// </summary>
         public Task ForbidAsync(AuthenticationProperties properties)
         {
-            _context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+            string redirectUrl;
+            if (_area.ToLower() == "web")
+            {
+                redirectUrl = "/Error/Forbidden";
+            }
+            else
+            {
+                redirectUrl = $"/{_area}/Error/Forbidden";
+            }
+            _context.Response.Redirect(redirectUrl);
+            //_context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
             return Task.CompletedTask;
         }
 

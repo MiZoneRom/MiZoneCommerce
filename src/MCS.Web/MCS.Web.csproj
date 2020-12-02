@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <None Include="Config\log4net.config" />
     <None Include="wwwroot\lib\daterangepicker\daterangepicker.js" />
