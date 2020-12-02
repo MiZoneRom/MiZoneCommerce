@@ -36,7 +36,7 @@ namespace MCS.Application
             NavigationInfo page = navigationInfoList.Where(a => !string.IsNullOrEmpty(a.Path) && a.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
             if (page == null)
-                return null;
+                return new List<NavigationBreadCrumbModel>();
 
             breadCrumbList.Add(new NavigationBreadCrumbModel { Name = page.Name, Path = page.Path });
 
