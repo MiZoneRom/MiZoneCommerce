@@ -1,1 +1,11 @@
-﻿
+﻿.layout-fixed .main-sidebar{-webkit-box-shadow: 0 0 15px 0 rgba(0,0,0,0.05) !important;box-shadow: 0 0 15px 0 rgba(0,0,0,0.05) !important;}
+[class*=sidebar-light-] .sidebar a{color: #475f7b;}
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active{background-color: rgba(105,147,255,0.2);color: #6993ff;box-shadow:none;}
+.nav-sidebar>.nav-item.menu-open{background-color: rgba(250,250,250,0.9)!important;border-radius: 5px;}
+.nav-sidebar>.nav-item.menu-open>.nav-link.active{background: transparent;color: #475f7b!important;}
+[class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active:hover{background-color: rgba(105,147,255,0.2);color: #6993ff;}
+.nav-sidebar.nav-child-indent .nav-treeview{padding-left:0;}
+.nav-sidebar.nav-child-indent .nav-treeview .nav-item{padding-left: .5rem;}
+.nav-pills .nav-link{border-radius:0;}
+.nav-pills .nav-link:last-child{border-radius: 0 0 .25rem .25rem;}
+.content-wrapper{background-color: #eef0f8;}
