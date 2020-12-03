@@ -15,11 +15,16 @@
                 </div>
             </div>
             <div class="card-body p-0">
-                <ul class="nav nav-pills flex-column">
+                <ul class="nav nav-pills flex-column nav-type">
+                    <li class="nav-item active" data-type-id="0">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-inbox"></i>&nbsp;全部
+                        </a>
+                    </li>
                     @foreach (var item in NavigationTypes)
                     {
-                        <li class="nav-item active">
-                            <a href="#" class="nav-link" data-id="@item.Key">
+                        <li class="nav-item" data-type-id="@item.Key">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-inbox"></i>&nbsp;@item.Value
                             </a>
                         </li>

@@ -5251,3 +5251,4 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
 .content-wrapper{background-color: #eef0f8;}
 .tree-list [tree-expanded=true] a>i[class*=right]{transform: rotate(90deg);}
 .tree-list a>i[class*=right]{transition: transform .3s linear;cursor:pointer;}
+.card .nav.flex-column>li.active{background-color: #007bff;color: #fff;}

@@ -11,3 +11,4 @@
 .content-wrapper{background-color: #eef0f8;}
 .tree-list [tree-expanded=true] a>i[class*=right]{transform: rotate(90deg);}
 .tree-list a>i[class*=right]{transition: transform .3s linear;cursor:pointer;}
+.card .nav.flex-column>li.active a{background-color: #007bff;color: #fff;}

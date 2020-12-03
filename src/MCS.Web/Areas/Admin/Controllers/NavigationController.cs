@@ -21,10 +21,14 @@ namespace MCS.Web.Areas.Admin.Controllers
             return View();
         }
 
-        public JsonResult ListResult()
+        public JsonResult ListResult(NavigationType? type)
         {
             var navList = NavigationApplication.GetNavigations();
-            return Json(new Result() { success = true, msg = "添加成功！", data = navList });
+            if (type.HasValue && type > 0)
+            {
+                navList = navList.Where(a => a.Type == type).ToList();
+            }
+            return Json(new Result() { success = true, msg = "", data = navList });
         }
 
     }

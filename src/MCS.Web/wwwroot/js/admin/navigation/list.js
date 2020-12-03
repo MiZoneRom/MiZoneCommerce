@@ -1,10 +1,15 @@
 ﻿var _navList = [];
 var _level = 0;
 $(function () {
+    loadNavData($('.nav-type .nav-item.active').data('type-id'));
+    initClickType();
+});
+
+function loadNavData(type) {
     $.ajax({
         url: './ListResult',
         type: 'post',
-        data: {},
+        data: { type: type},
         dataType: 'json',
         success: function (result) {
             _navList = result.data;
@@ -20,7 +25,7 @@ $(function () {
             });
         }
     });
-});
+}
 
 function loadNav(result, isLevelFirst) {
     if (!isLevelFirst) {
@@ -62,4 +67,13 @@ function getSpaceStr() {
         str += '<i class="fas fa-ellipsis-h fa-fw" style="color:#e0e0e0"></i>';
     }
     return str;
+}
+
+function initClickType() {
+    $('.nav-type li').click(function () {
+        var type = $(this).data('type-id');
+        $(this).addClass('active').siblings().removeClass('active');
+        loadNavData(type);
+    });
+
 }
