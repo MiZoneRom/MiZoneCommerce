@@ -59,7 +59,7 @@ namespace MCS.Entities
 		
 		//
 		//[Column("Type")]
-		public int? Type { get; set; }
+		public NavigationType Type { get; set; }
         
 		/// <summary>
         /// 区域

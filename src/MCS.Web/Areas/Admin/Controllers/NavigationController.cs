@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MCS.Application;
+using MCS.CommonModel;
+using MCS.Core;
 using MCS.Web.Framework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +17,7 @@ namespace MCS.Web.Areas.Admin.Controllers
         [Authorize]
         public IActionResult List()
         {
+            ViewBag.NavigationTypes = EnumHelper.ToDescriptionDictionary<NavigationType>();
             return View();
         }
 
