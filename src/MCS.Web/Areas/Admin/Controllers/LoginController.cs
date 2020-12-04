@@ -41,20 +41,14 @@ namespace MCS.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index([Bind("UserName,Password,Remember,CheckCode")] ManageLoginModel user)
         {
-            if (string.IsNullOrWhiteSpace(user.UserName))
-            {
-                ModelState.AddModelError(nameof(ManageLoginModel), "名称需要填写");
-                return View(nameof(Index));
-            }
 
             CheckCheckCode(user.UserName, user.CheckCode);
 
             var manager = _iManagerService.Login(user.UserName, user.Password);
             if (manager == null)
             {
-                ModelState.AddModelError(nameof(ManageLoginModel), "用户名和密码不匹配");
                 int errorTimes = SetErrorTimes(user.UserName);
-                return View(nameof(Index));
+                return ErrorResult("用户名和密码不匹配");
             }
 
             var claims = new List<Claim>() { new Claim(ClaimTypes.Name, manager.UserName), new Claim(ClaimTypes.NameIdentifier, manager.Id.ToString()) };
@@ -73,8 +67,7 @@ namespace MCS.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                return RedirectResult("");
-                //return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectResult("/Admin/Home");
             }
 
             return View(nameof(Index));

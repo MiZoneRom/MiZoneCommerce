@@ -6,13 +6,14 @@ namespace MCS.Core
 {
     public class JsonErrorResponse
     {
+        public bool Success { get; set; }
         /// <summary>
         /// 生产环境的消息 
         /// /// </summary>
-        public string Message { get; set; }
+        public string msg { get; set; }
         /// <summary>
         /// 开发环境的消息 
         /// /// </summary>
-        public string DevelopmentMessage { get; set; }
+        public string devMsg { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace MCS.Web.Framework
 {
@@ -24,7 +25,6 @@ namespace MCS.Web.Framework
             public object data { get; set; }
 
             public int code { get; set; } = 200;
-            public int url { get; set; }
         }
 
         /// <summary>
@@ -37,29 +37,37 @@ namespace MCS.Web.Framework
         /// <param name="code"></param>
         /// camelCase,
         /// <returns></returns>
-        protected JsonResult Json<T>(bool success, string msg = "", T data = default(T), int code = 0, bool camelCase = false, string url = "")
+        protected JsonResult Json<T>(bool success, string msg = "", T data = default(T), int code = 0, bool camelCase = false)
         {
             if (camelCase)
             {
+                var options = new JsonSerializerOptions
+                {
+                    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
+                    PropertyNameCaseInsensitive = true
+                };
                 return Json(new Result()
                 {
                     data = data,
                     msg = msg,
                     success = success,
                     code = code
-                });
+                }, options);
             }
             else
             {
-                JsonSerializerSettings settings = new JsonSerializerSettings();
-                settings.ContractResolver = new DefaultContractResolver();
+                var options = new JsonSerializerOptions
+                {
+                    DictionaryKeyPolicy = null,
+                    PropertyNameCaseInsensitive = true
+                };
                 return Json(new Result()
                 {
                     data = data,
                     msg = msg,
                     success = success,
                     code = code
-                }, settings);
+                }, options);
             }
         }
 
@@ -96,21 +104,9 @@ namespace MCS.Web.Framework
         /// <param name="code"></param>
         /// <param name="camelCase"></param>
         /// <returns></returns>
-        protected JsonResult RedirectResult<T>(string url = "", T data = default(T), int code = 302, bool camelCase = false)
+        protected JsonResult RedirectResult(string url = "")
         {
-            return Json<T>(false, "", data, code, camelCase: camelCase, url);
-        }
-
-        /// <summary>
-        /// 重定向
-        /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="code"></param>
-        /// <param name="camelCase"></param>
-        /// <returns></returns>
-        protected JsonResult RedirectResult(string url = "", int code = 302, bool camelCase = false)
-        {
-            return RedirectResult<dynamic>(url: url, code: code, camelCase: camelCase);
+            return Json<object>(true, "", data: new { url = url }, code: 302, camelCase: false);
         }
 
         /// <summary>

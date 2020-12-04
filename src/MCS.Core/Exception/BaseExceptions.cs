@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace MCS.Core
@@ -21,24 +22,24 @@ namespace MCS.Core
             var json = new JsonErrorResponse();
 
             //这里面是自定义的操作记录日志
-            if (context.Exception.GetType() == typeof(UserOperationException))
+            if (context.Exception.GetType() == typeof(MCSException))
             {
-                json.Message = context.Exception.Message; if (_env.IsDevelopment())
+                json.msg = context.Exception.Message; if (_env.IsDevelopment())
                 {
-                    json.DevelopmentMessage = context.Exception.StackTrace;//堆栈信息
+                    json.devMsg = context.Exception.StackTrace;//堆栈信息
                 }
-                context.Result = new BadRequestObjectResult(json);//返回异常数据 
+                context.Result = new ObjectResult(json);//返回异常数据 
             }
             else
             {
-                json.Message = "发生了未知内部错误";
+                json.msg = "发生了未知内部错误";
                 if (_env.IsDevelopment())
                 {
-                    json.DevelopmentMessage = context.Exception.StackTrace;//堆栈信息
+                    json.devMsg = context.Exception.StackTrace;//堆栈信息
                 }
                 context.Result = new InternalServerErrorObjectResult(json);
+                Log.Error(json.msg, context.Exception);
             }
-            Log.Error(json.Message, context.Exception);
 
         }
     }
