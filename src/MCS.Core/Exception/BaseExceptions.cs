@@ -21,21 +21,21 @@ namespace MCS.Core
         {
             var json = new JsonErrorResponse();
 
-            //这里面是自定义的操作记录日志
+            //如果是用户操作反馈
             if (context.Exception.GetType() == typeof(MCSException))
             {
                 json.msg = context.Exception.Message; if (_env.IsDevelopment())
                 {
-                    json.devMsg = context.Exception.StackTrace;//堆栈信息
+                    json.devMsg = context.Exception.StackTrace;
                 }
-                context.Result = new ObjectResult(json);//返回异常数据 
+                context.Result = new ObjectResult(json);
             }
             else
             {
                 json.msg = "发生了未知内部错误";
                 if (_env.IsDevelopment())
                 {
-                    json.devMsg = context.Exception.StackTrace;//堆栈信息
+                    json.devMsg = context.Exception.StackTrace;
                 }
                 context.Result = new InternalServerErrorObjectResult(json);
                 Log.Error(json.msg, context.Exception);
