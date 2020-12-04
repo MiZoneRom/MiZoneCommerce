@@ -17,18 +17,14 @@ namespace MCS.Web.Framework
 
         public class Result
         {
-            public bool success { get; set; }
+            public bool success { get; set; } = true;
 
             public string msg { get; set; }
-            /// <summary>
-            /// 状态
-            /// <para>1表成功</para>
-            /// </summary>
-            public int status { get; set; }
 
             public object data { get; set; }
 
-            public int code { get; set; }
+            public int code { get; set; } = 200;
+            public int url { get; set; }
         }
 
         /// <summary>
@@ -41,7 +37,7 @@ namespace MCS.Web.Framework
         /// <param name="code"></param>
         /// camelCase,
         /// <returns></returns>
-        protected JsonResult Json<T>(bool success, string msg = "", T data = default(T), int code = 0, bool camelCase = false)
+        protected JsonResult Json<T>(bool success, string msg = "", T data = default(T), int code = 0, bool camelCase = false, string url = "")
         {
             if (camelCase)
             {
@@ -75,7 +71,7 @@ namespace MCS.Web.Framework
         /// <param name="data"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        protected JsonResult ErrorResult<T>(string msg = "", T data = default(T), int code = 0, bool camelCase = false)
+        protected JsonResult ErrorResult<T>(string msg = "", T data = default(T), int code = 500, bool camelCase = false)
         {
             return Json<T>(false, msg, data, code, camelCase: camelCase);
         }
@@ -86,9 +82,35 @@ namespace MCS.Web.Framework
         /// <param name="msg"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        protected JsonResult ErrorResult(string msg = "", int code = 0, bool camelCase = false)
+        protected JsonResult ErrorResult(string msg = "", int code = 500, bool camelCase = false)
         {
             return ErrorResult<dynamic>(msg: msg, code: code, camelCase: camelCase);
+        }
+
+        /// <summary>
+        /// 重定向
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="msg"></param>
+        /// <param name="data"></param>
+        /// <param name="code"></param>
+        /// <param name="camelCase"></param>
+        /// <returns></returns>
+        protected JsonResult RedirectResult<T>(string url = "", T data = default(T), int code = 302, bool camelCase = false)
+        {
+            return Json<T>(false, "", data, code, camelCase: camelCase, url);
+        }
+
+        /// <summary>
+        /// 重定向
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="code"></param>
+        /// <param name="camelCase"></param>
+        /// <returns></returns>
+        protected JsonResult RedirectResult(string url = "", int code = 302, bool camelCase = false)
+        {
+            return RedirectResult<dynamic>(url: url, code: code, camelCase: camelCase);
         }
 
         /// <summary>
@@ -99,7 +121,7 @@ namespace MCS.Web.Framework
         /// <param name="data"></param>
         /// <param name="code"></param>
         /// <returns></returns>
-        protected JsonResult SuccessResult<T>(string msg = "", T data = default(T), int code = 0, bool camelCase = false)
+        protected JsonResult SuccessResult<T>(string msg = "", T data = default(T), int code = 201, bool camelCase = false)
         {
             return Json<T>(true, msg, data, code, camelCase: camelCase);
         }

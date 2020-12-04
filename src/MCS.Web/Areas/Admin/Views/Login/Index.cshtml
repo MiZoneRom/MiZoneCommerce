@@ -83,5 +83,32 @@
     <script src="~/lib/adminlte/js/adminlte.min.js"></script>
     <script src="~/lib/jquery-validation/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+        $.validator.setDefaults({
+            submitHandler: function () {
+                var form = $(this.currentForm);
+                var button = $(this.submitButton);
+                var url = form.attr('action');
+                button.prepend('<i class="fas fa-3x fa-sync-alt fa-spin load-tip"></i>');
+                button.attr("disabled", true);
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: $(form).serialize(),
+                    dataType: "json",
+                    success: function (data) {
+                        button.remove('.load-tip');
+                        button.attr("disabled", false);
+                    },
+                    complete: function (xhr, TS) {
+                    },
+                    error: function (xhr) {
+                    }
+                });
+
+            }
+        });
+    </script>
 </body>
 </html>

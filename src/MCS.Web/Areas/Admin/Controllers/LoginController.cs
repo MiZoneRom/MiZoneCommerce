@@ -73,7 +73,8 @@ namespace MCS.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
+                return RedirectResult("");
+                //return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
             return View(nameof(Index));
