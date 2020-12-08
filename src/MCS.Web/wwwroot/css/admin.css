@@ -5251,3 +5251,9 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
 .tree-list a>i[class*=right]{transition: transform .3s linear;cursor:pointer;}
 .card .nav.flex-column>li.active a{background-color: #007bff;color: #fff;}
 .btn .load-tip{margin-right:4px;}
+.select2-results{animation: dropdown-menu-anim .5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;box-shadow:0px 5px 15px rgba(0,0,0,0.2);}
+
+@keyframes dropdown-menu-anim{
+	0%{ opacity: 0; transform: translate(0,-10px);}
+	100%{opacity: 1; transform: translate(0, 0);}
+}
