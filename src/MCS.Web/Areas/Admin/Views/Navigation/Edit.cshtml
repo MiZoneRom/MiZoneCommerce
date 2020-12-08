@@ -17,75 +17,87 @@
                         <input asp-for="Id" type="hidden" />
                         <div class="col-12">
                             <div class="form-group">
-                                <label asp-for="Name" />
-                                <input asp-for="Name" class="form-control" placeholder="标题">
+                                <label asp-for="Name"></label>
+                                <input asp-for="Name" class="form-control" placeholder="">
+                                <span asp-validation-for="Name" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">副标题</label>
-                                <input asp-for="SubTitle" class="form-control" placeholder="副标题">
+                                <label asp-for="SubTitle"></label>
+                                <input asp-for="SubTitle" class="form-control" placeholder="">
+                                <span asp-validation-for="SubTitle" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">图标</label>
-                                <input asp-for="Icon" class="form-control" placeholder="副标题">
+                                <label asp-for="Icon"></label>
+                                <input asp-for="Icon" class="form-control" placeholder="">
+                                <span asp-validation-for="Icon" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">区域</label>
-                                <input asp-for="Areas" class="form-control" placeholder="副标题">
+                                <label asp-for="Areas"></label>
+                                <input asp-for="Areas" class="form-control" placeholder="">
+                                <span asp-validation-for="Areas" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">控制器</label>
-                                <input asp-for="Controllers" class="form-control" placeholder="副标题">
+                                <label asp-for="Controllers"></label>
+                                <input asp-for="Controllers" class="form-control" placeholder="">
+                                <span asp-validation-for="Controllers" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">页面</label>
-                                <input asp-for="Views" class="form-control" placeholder="副标题">
+                                <label asp-for="Views"></label>
+                                <input asp-for="Views" class="form-control" placeholder="">
+                                <span asp-validation-for="Views" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">模块</label>
-                                <input asp-for="Component" class="form-control" placeholder="副标题">
+                                <label asp-for="Component"></label>
+                                <input asp-for="Component" class="form-control" placeholder="">
+                                <span asp-validation-for="Component" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">路径</label>
-                                <input asp-for="Path" class="form-control" placeholder="副标题">
+                                <label asp-for="Path"></label>
+                                <input asp-for="Path" class="form-control" placeholder="">
+                                <span asp-validation-for="Path" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">类型</label>
-                                <enums asp-id="property" asp-enum="@(MCS.CommonModel.NavigationType.Admin)" asp-value="@Model.Type" asp-valuetype="1" class="form-control single-select">
+                                <label asp-for="Type"></label>
+                                <enums asp-id="property" asp-enum="@(MCS.CommonModel.NavigationType.Admin)" asp-value="Model.Type" asp-valuetype="1" class="form-control single-select">
                                 </enums>
+                                <span asp-validation-for="Type" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">排序</label>
-                                <input asp-for="SortId" class="form-control" placeholder="副标题">
+                                <label asp-for="SortId"></label>
+                                <input asp-for="SortId" class="form-control" placeholder="">
+                                <span asp-validation-for="SortId" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">状态</label>
-                                <input asp-for="Status" class="form-control" placeholder="副标题">
+                                <label asp-for="Status"></label>
+                                <input asp-for="Status" class="form-control" placeholder="">
+                                <span asp-validation-for="Status" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="Name">备注</label>
-                                <input asp-for="Remark" class="form-control" placeholder="副标题">
+                                <label asp-for="Remark"></label>
+                                <input asp-for="Remark" class="form-control" placeholder="">
+                                <span asp-validation-for="Remark" class="error invalid-feedback"></span>
                             </div>
                         </div>
                     </div>

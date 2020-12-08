@@ -23,6 +23,8 @@ namespace MCS.DTO
         /// 导航名称
         /// </summary>
         [Display(Name = "导航名称")]
+        [Required(ErrorMessage = "导航名称必填")]
+        [StringLength(15, ErrorMessage = "字符长度不能超过15个字")]
         public string Name { get; set; }
 
         /// <summary>
