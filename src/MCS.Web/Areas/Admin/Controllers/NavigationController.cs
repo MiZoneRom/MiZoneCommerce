@@ -31,5 +31,9 @@ namespace MCS.Web.Areas.Admin.Controllers
             return Json(new Result() { success = true, msg = "", data = navList });
         }
 
+        public IActionResult Edit() {
+            return View();
+        }
+
     }
 }

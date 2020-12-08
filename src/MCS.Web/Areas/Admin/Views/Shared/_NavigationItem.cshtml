@@ -6,7 +6,7 @@
     {
         <li class="nav-item @(item.IsOpen?"menu-open":"")">
             <a href="@(string.IsNullOrEmpty(item.Path)?"javascript:;":item.Path)" class="nav-link @(item.IsOpen?"active":"")">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fas @item.Icon"></i>
                 <p>
                     @item.Name
                     @if (item.Children.Count > 0)

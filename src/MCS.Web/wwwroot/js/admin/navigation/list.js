@@ -38,7 +38,7 @@ function loadNav(result, isLevelFirst) {
     $.each(result, function (i, item) {
         var childList = _navList.filter(a => a.parentId == item.id);
         _html += `<li class="nav-item" data-nav-id="${item.id}" nav-expanded="false">`;
-        _html += `<a class="nav-link">`;
+        _html += `<a class="nav-link" href="./Edit?id=${item.id}">`;
         _html += `${getSpaceStr()}`;
         if (childList.length > 0) {
             _html += `<i class="fas fa-caret-right fa-fw"></i>`;
