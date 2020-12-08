@@ -1,4 +1,4 @@
-﻿@model MCS.Entities.NavigationInfo
+﻿@model MCS.DTO.NavigationModel
 <div class="row">
     <div class="col-md-3">
         <a href="mailbox.html" class="btn btn-primary btn-block mb-3">返回</a>
@@ -17,7 +17,7 @@
                         <input asp-for="Id" type="hidden" />
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="Name">标题</label>
+                                <label asp-for="Name" />
                                 <input asp-for="Name" class="form-control" placeholder="标题">
                             </div>
                         </div>

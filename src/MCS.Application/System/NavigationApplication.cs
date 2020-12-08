@@ -83,5 +83,11 @@ namespace MCS.Application
             return navigationList;
         }
 
+        public static NavigationModel GetNavigation(long id)
+        {
+            NavigationInfo navInfo = Service.GetNavigation(id);
+            return Mapper.Map<NavigationInfo, NavigationModel>(navInfo);
+        }
+
     }
 }

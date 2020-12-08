@@ -9,7 +9,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!--Admin Css-->
-    <link href="~/css/admin.css" rel="stylesheet" />
+    <link href="~/css/admin.min.css" rel="stylesheet" asp-append-version="true" />
     @RenderSection("Styles", false)
     @RenderSection("HeadScript", false)
 </head>
@@ -35,31 +35,10 @@
         @await Component.InvokeAsync("ControlSidebar")
     </div>
     <!-- ./wrapper -->
-    <!-- jQuery -->
-    <script src="~/lib/jquery/jquery.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Select2 -->
-    <script src="~/lib/select2/js/select2.full.min.js"></script>
-    <!-- Moment -->
-    <script src="~/lib/moment/moment.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="~/lib/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="~/lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="~/lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/lib/adminlte/js/adminlte.js"></script>
-    <!--jquery-validation-->
-    <script src="~/lib/jquery-validation/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <!--Admin Script-->
+    <script src="~/js/admin/admin.js" asp-append-version="true"></script>
     <!-- ControlSidebar -->
     <script src="~/js/admin/controlSidebar.js"></script>
-    <!--Admin Script-->
-    <script src="~/js/admin/custom.js"></script>
     @RenderSection("Scripts", false)
 </body>
 </html>

@@ -16,5 +16,27 @@
       "enabled": true,
       "commentMode": "all"
     }
+  },
+  {
+    "outputFileName": "wwwroot/js/admin/admin.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/jquery.min.js",
+      "wwwroot/lib/jquery-ui/jquery-ui.min.js",
+      "wwwroot/lib/bootstrap/js/bootstrap.bundle.min.js",
+      "wwwroot/lib/adminlte/js/adminlte.min.js",
+      "wwwroot/lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
+      "wwwroot/lib/jquery-validation/jquery.validate.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "wwwroot/lib/mcs/jquery.validate.unobtrusive.ajax.js",
+      "wwwroot/lib/daterangepicker/daterangepicker.js",
+      "wwwroot/lib/moment/moment.min.js",
+      "wwwroot/lib/select2/js/select2.full.min.js",
+      "wwwroot/lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+      "wwwroot/js/admin/custom.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "commentMode": "all"
+    }
   }
 ]

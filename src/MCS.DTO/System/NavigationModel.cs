@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MCS.CommonModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace MCS.DTO
@@ -7,28 +9,92 @@ namespace MCS.DTO
     public class NavigationModel
     {
 
+        /// <summary>
+        /// 导航Id
+        /// </summary>
         public long Id { get; set; }
 
+        /// <summary>
+        /// 父级导航ID
+        /// </summary>
         public long ParentId { get; set; }
 
-        public int? Type { get; set; }
-
+        /// <summary>
+        /// 导航名称
+        /// </summary>
+        [Display(Name = "导航名称")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// 副标题
+        /// </summary>
+        [Display(Name = "副标题")]
         public string SubTitle { get; set; }
 
+        /// <summary>
+        /// 图标
+        /// </summary>
+        [Display(Name = "图标")]
         public string Icon { get; set; }
 
-        public string Path { get; set; }
+        /// <summary>
+        /// 导航类型
+        /// </summary>
+        [Display(Name = "导航类型")]
+        public NavigationType Type { get; set; }
 
-        public int PathType { get; set; }
+        /// <summary>
+        /// 区域
+        /// </summary>
+        [Display(Name = "区域")]
+        public string Areas { get; set; }
 
+        /// <summary>
+        /// 控制器
+        /// </summary>
+        [Display(Name = "控制器")]
+        public string Controllers { get; set; }
+
+        /// <summary>
+        /// 视图
+        /// </summary>
+        [Display(Name = "视图")]
+        public string Views { get; set; }
+
+        /// <summary>
+        /// 模块（VUE使用）
+        /// </summary>
+        [Display(Name = "模块")]
         public string Component { get; set; }
 
+        /// <summary>
+        /// 路径
+        /// </summary>
+        [Display(Name = "路径")]
+        public string Path { get; set; }
+
+        /// <summary>
+        /// 路径类型（本页面，新标签页）
+        /// </summary>
+        [Display(Name = "路径类型")]
+        public int PathType { get; set; }
+
+        /// <summary>
+        /// 排序Id
+        /// </summary>
+        [Display(Name = "排序Id")]
         public int SortId { get; set; }
 
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [Display(Name = "状态")]
         public int Status { get; set; }
 
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Display(Name = "备注")]
         public string Remark { get; set; }
 
         public bool IsOpen { get; set; }

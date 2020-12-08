@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MCS.Application;
 using MCS.CommonModel;
 using MCS.Core;
+using MCS.DTO;
 using MCS.Entities;
 using MCS.IServices;
 using MCS.Web.Framework;
@@ -37,7 +38,7 @@ namespace MCS.Web.Areas.Admin.Controllers
         {
             if (id.HasValue)
             {
-                NavigationInfo model = ServiceProvider.Instance<INavigationService>.Create.GetNavigation(id.Value);
+                NavigationModel model = NavigationApplication.GetNavigation(id.Value);
                 return View(model);
             }
             return View();
