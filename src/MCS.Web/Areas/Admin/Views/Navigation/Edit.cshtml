@@ -66,9 +66,9 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="Name">类型</label>
-                                <enums asp-id="property" asp-enum="@(MCS.CommonModel.NavigationType.Admin)" asp-value="@Model.Type" asp-valuetype="1" class="form-control">
+                                <enums asp-id="property" asp-enum="@(MCS.CommonModel.NavigationType.Admin)" asp-value="@Model.Type" asp-valuetype="1" class="form-control single-select">
                                 </enums>
-                            </div>.
+                            </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -107,4 +107,12 @@
 <!-- /.row -->
 @section Scripts{
     <script src="~/lib/mcs/jquery.validate.unobtrusive.ajax.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.single-select').select2({
+                theme: 'bootstrap4'
+            });
+        })
+    </script>
 }

@@ -8,6 +8,8 @@
       "wwwroot/lib/adminlte/css/adminlte.min.css",
       "wwwroot/lib/overlayScrollbars/css/OverlayScrollbars.min.css",
       "wwwroot/lib/daterangepicker/daterangepicker.css",
+      "wwwroot/lib/select2/css/select2.min.css",
+      "wwwroot/lib/select2-bootstrap4-theme/select2-bootstrap4.min.css",
       "wwwroot/css/admin_cover.css"
     ],
     "minify": {
