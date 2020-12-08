@@ -38,15 +38,15 @@ function loadNav(result, isLevelFirst) {
     $.each(result, function (i, item) {
         var childList = _navList.filter(a => a.parentId == item.id);
         _html += `<li class="nav-item" data-nav-id="${item.id}" nav-expanded="false">`;
-        _html += `<a class="nav-link" href="./Edit?id=${item.id}">`;
+        _html += `<p class="nav-link">`;
         _html += `${getSpaceStr()}`;
         if (childList.length > 0) {
             _html += `<i class="fas fa-caret-right fa-fw"></i>`;
         } else {
             _html += `<i class="fas fa-file-code fa-fw"></i>`;
         }
-        _html += `${item.name}<button type="button" class="btn btn-primary btn-xs float-right">编辑</button>`;
-        _html += '</a>';
+        _html += `${item.name}<a type="button" class="btn btn-primary btn-xs float-right"  href="./Edit?id=${item.id}">编辑</a>`;
+        _html += '</p>';
         _html += `</li>`;
         if (childList.length > 0) {
             _html += `<li class="nav-item" style="display:none;" id="child_${item.id}">`;

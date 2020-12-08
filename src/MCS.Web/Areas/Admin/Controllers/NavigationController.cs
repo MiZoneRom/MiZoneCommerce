@@ -47,7 +47,7 @@ namespace MCS.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(NavigationInfo model)
         {
-            Log.Debug(model.Id);
+            ServiceProvider.Instance<INavigationService>.Create.UpdateNavigation(model);
             return SuccessResult();
         }
 

@@ -28,5 +28,10 @@ namespace MCS.Service
             return Context.QuerySet<NavigationInfo>().Where(a => a.Id == id).Get();
         }
 
+        public bool UpdateNavigation(NavigationInfo model)
+        {
+            return Context.CommandSet<NavigationInfo>().Where(item => item.Id == model.Id).Update(model) > 0;
+        }
+
     }
 }
