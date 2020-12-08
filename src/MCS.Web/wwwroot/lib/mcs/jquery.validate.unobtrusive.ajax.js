@@ -7,6 +7,11 @@
         button.prepend('<i class="fas fa-circle-notch fa-spin load-tip"></i>');
         button.attr("disabled", true);
 
+        var card = $(form).find('.card');
+        if (card.length > 0) {
+            card.prepend('<div class="overlay"><i class="fas fa-2x fa-circle-notch fa-spin"></i></div>');
+        }
+
         $.ajax({
             url: url,
             type: "POST",
@@ -17,6 +22,10 @@
                 button.attr("disabled", false);
                 if (button.find('.success-icon').length <= 0)
                     button.prepend('<i class="fas fa-check-circle success-icon"></i>');
+                else
+                    button.find('.success-icon').show();
+                if (card.length > 0)
+                    card.find('.overlay').remove();
                 var code = result.code;
                 if (result.success) {
 
