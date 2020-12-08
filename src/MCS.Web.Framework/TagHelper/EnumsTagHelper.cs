@@ -9,24 +9,20 @@ using System.Text;
 
 namespace MCS.Web.Framework
 {
+    /// <summary>
+    /// 枚举下拉列表
+    /// </summary>
     [HtmlTargetElement("enums")]
-    //[HtmlTargetElement("enums", TagStructure = TagStructure.WithoutEndTag)]
     public class EnumsTagHelper : TagHelper
     {
         [HtmlAttributeName("asp-enum")]
         public Enum Value { get; set; }
 
-
         [HtmlAttributeName("asp-value")]
-        public string SelectedValue { get; set; }
-
+        public Enum SelectedValue { get; set; }
 
         [HtmlAttributeName("asp-id")]
         public string Id { get; set; }
-
-        [HtmlAttributeName("asp-href")]
-        public string DataHref { get; set; }
-
 
         [HtmlAttributeName("asp-valuetype")]
         public int ValueIsIndex { get; set; } = 2;
@@ -44,12 +40,9 @@ namespace MCS.Web.Framework
             foreach (var value in enumValues)
             {
 
-                MemberInfo memberInfo =
-                    typeInfo.GetMember(value.ToString()).First();
+                MemberInfo memberInfo = typeInfo.GetMember(value.ToString()).First();
 
-
-                var descriptionAttribute =
-                    memberInfo.GetCustomAttribute<DescriptionAttribute>();
+                var descriptionAttribute = memberInfo.GetCustomAttribute<DescriptionAttribute>();
 
                 list.Add(new SelectListItem()
                 {
@@ -66,14 +59,13 @@ namespace MCS.Web.Framework
             var list = GetEnumSelectListItem();
             output.TagName = "select";
             output.Attributes.SetAttribute("id", Id);
-            output.Attributes.SetAttribute("data-href", DataHref);
             var content = output.GetChildContentAsync();
             output.Content.AppendHtml(content.Result);
             foreach (var item in list)
             {
                 if (item.Value != null)
                 {
-                    if (item.Value == SelectedValue)
+                    if (item.Value == SelectedValue.GetHashCode().ToString())
                     {
                         output.Content.AppendHtml($"<option value='{item.Value}' selected='selected'>{item.Text}</option>");
                     }
@@ -84,7 +76,7 @@ namespace MCS.Web.Framework
                 }
                 else
                 {
-                    if (item.Text == SelectedValue)
+                    if (item.Text == SelectedValue.GetHashCode().ToString())
                     {
                         output.Content.AppendHtml($"<option selected='selected'>{item.Text}</option>");
                     }
@@ -94,7 +86,6 @@ namespace MCS.Web.Framework
                     }
                 }
             }
-            //output.Content.AppendHtml("<select/>");
         }
     }
 }
