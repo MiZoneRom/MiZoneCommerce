@@ -15,7 +15,8 @@
             success: function (result) {
                 button.find('.load-tip').remove();
                 button.attr("disabled", false);
-                button.find('i').show();
+                if (button.find('.success-icon').length <= 0)
+                    button.prepend('<i class="fas fa-check-circle success-icon"></i>');
                 var code = result.code;
                 if (result.success) {
 
@@ -27,6 +28,7 @@
                         autohide: true,
                         delay: 750,
                     });
+                    button.find('i').show();
                 }
                 if (code == 302) {
                     window.location.href = result.data.url;
@@ -35,6 +37,9 @@
             complete: function (xhr, TS) {
             },
             error: function (xhr) {
+                button.find('.load-tip').remove();
+                button.attr("disabled", false);
+                button.find('i').show();
             }
         });
 
