@@ -87,6 +87,9 @@
                                 <input asp-for="Remark" class="form-control" placeholder="副标题">
                             </div>
                         </div>
+                        <enums asp-id="property" asp-enum="@(MCS.CommonModel.NavigationType.Admin)" asp-value="@Model.Type" asp-valuetype="1">
+                            <option value="">所有属性</option>
+                        </enums>
                     </div>
 
                 </div>
