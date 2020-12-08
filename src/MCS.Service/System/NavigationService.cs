@@ -23,6 +23,10 @@ namespace MCS.Service
             return navigations;
         }
 
+        public NavigationInfo GetNavigation(long id)
+        {
+            return Context.QuerySet<NavigationInfo>().Where(a => a.Id == id).Get();
+        }
 
     }
 }

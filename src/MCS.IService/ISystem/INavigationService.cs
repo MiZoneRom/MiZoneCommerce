@@ -11,5 +11,6 @@ namespace MCS.IServices
     {
         QuerySet<NavigationInfo> GetNavigations(long parentId = 0);
         List<NavigationInfo> GetNavigations();
+        NavigationInfo GetNavigation(long id);
     }
 }

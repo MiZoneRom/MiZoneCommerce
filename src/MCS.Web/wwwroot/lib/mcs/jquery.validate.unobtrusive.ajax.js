@@ -3,6 +3,7 @@
         var form = $(this.currentForm);
         var button = $(this.submitButton);
         var url = form.attr('action');
+        button.find('i').hide();
         button.prepend('<i class="fas fa-circle-notch fa-spin load-tip"></i>');
         button.attr("disabled", true);
 
@@ -14,6 +15,7 @@
             success: function (result) {
                 button.find('.load-tip').remove();
                 button.attr("disabled", false);
+                button.find('i').show();
                 var code = result.code;
                 if (result.success) {
 
