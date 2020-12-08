@@ -28,8 +28,9 @@
                     card.find('.overlay').remove();
                 var code = result.code;
                 if (result.success) {
-
+                    button.removeClass('btn-default').addClass('btn-success');
                 } else {
+                    button.removeClass('btn-default').addClass('btn-danger');
                     $(document).Toasts('create', {
                         class: 'bg-danger',
                         title: '提醒',

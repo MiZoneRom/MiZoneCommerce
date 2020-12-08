@@ -45,8 +45,9 @@ namespace MCS.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(NavigationInfo user)
+        public async Task<IActionResult> Edit(NavigationInfo model)
         {
+            Log.Debug(model.Id);
             return SuccessResult();
         }
 
