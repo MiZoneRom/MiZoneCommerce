@@ -17,16 +17,14 @@ namespace MCS.Entities
         /// MigrationId
         /// </summary>
 		[Identity]
-		//[Required]
-		//[Column("MigrationId")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "MigrationId")]
 		public string MigrationId { get; set; }
         
 		/// <summary>
         /// ProductVersion
         /// </summary>
 		
-		//[Required]
-		//[Column("ProductVersion")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "ProductVersion")]
 		public string ProductVersion { get; set; }
         
      }

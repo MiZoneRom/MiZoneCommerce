@@ -16,49 +16,43 @@ namespace MCS.Entities
 		/// <summary>
         /// Id
         /// </summary>
-		[Identity]
-		//[Required]
-		//[Column("Id")]
+		[Identity(IsIncrease =true)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// PageUrl
         /// </summary>
 		
-		//[Required]
-		//[Column("PageUrl")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "PageUrl")]
 		public string PageUrl { get; set; }
         
 		/// <summary>
         /// Date
         /// </summary>
 		
-		//[Required]
-		//[Column("Date")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Date")]
 		public DateTime Date { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
 		
-		//[Required]
-		//[Column("UserName")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "UserName")]
 		public string UserName { get; set; }
         
 		/// <summary>
         /// IPAddress
         /// </summary>
 		
-		//[Required]
-		//[Column("IPAddress")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "IPAddress")]
 		public string IPAddress { get; set; }
         
 		/// <summary>
         /// Description
         /// </summary>
 		
-		//[Required]
-		//[Column("Description")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Description")]
 		public string Description { get; set; }
         
      }

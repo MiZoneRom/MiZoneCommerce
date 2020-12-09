@@ -16,17 +16,15 @@ namespace MCS.Entities
 		/// <summary>
         /// Id
         /// </summary>
-		[Identity]
-		//[Required]
-		//[Column("Id")]
+		[Identity(IsIncrease =true)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
 		
-		//[Required]
-		//[Column("UserName")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "UserName")]
 		public string UserName { get; set; }
         
      }

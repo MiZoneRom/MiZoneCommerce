@@ -31,9 +31,8 @@ namespace <#=Namespace #>
 		/// <summary>
         /// <#=col.Remark#>
         /// </summary>
-		<#=col.IsPK ? "[Identity]":""#>
-		//<#=col.IsNullable ? "":"[Required]"#>
-		//[Column("<#=col.Name#>")]
+		<#=col.IsPK ?col.IsAutoIncrement?"[Identity(IsIncrease =true)]":"[Identity]":""#>
+        [System.ComponentModel.DataAnnotations.Display(Name = "<#=col.Remark#>")]
 		public <#=col.PropertyType#> <#=col.Name#> { get; set; }
         <#
         }

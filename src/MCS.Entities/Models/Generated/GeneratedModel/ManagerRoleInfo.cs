@@ -16,25 +16,22 @@ namespace MCS.Entities
 		/// <summary>
         /// Id
         /// </summary>
-		[Identity]
-		//[Required]
-		//[Column("Id")]
+		[Identity(IsIncrease =true)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// RoleName
         /// </summary>
 		
-		//[Required]
-		//[Column("RoleName")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "RoleName")]
 		public string RoleName { get; set; }
         
 		/// <summary>
         /// Description
         /// </summary>
 		
-		//[Required]
-		//[Column("Description")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Description")]
 		public string Description { get; set; }
         
      }

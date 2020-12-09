@@ -16,41 +16,36 @@ namespace MCS.Entities
 		/// <summary>
         /// Id
         /// </summary>
-		[Identity]
-		//[Required]
-		//[Column("Id")]
+		[Identity(IsIncrease =true)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
 		
-		//[Required]
-		//[Column("UserId")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "UserId")]
 		public long UserId { get; set; }
         
 		/// <summary>
         /// Token
         /// </summary>
 		
-		//[Required]
-		//[Column("Token")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Token")]
 		public string Token { get; set; }
         
 		/// <summary>
         /// RefreshToken
         /// </summary>
 		
-		//[Required]
-		//[Column("RefreshToken")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "RefreshToken")]
 		public string RefreshToken { get; set; }
         
 		/// <summary>
         /// Expires
         /// </summary>
 		
-		//[Required]
-		//[Column("Expires")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Expires")]
 		public DateTime Expires { get; set; }
         
      }

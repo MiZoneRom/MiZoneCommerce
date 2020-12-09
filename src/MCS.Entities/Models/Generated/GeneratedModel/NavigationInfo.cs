@@ -16,121 +16,106 @@ namespace MCS.Entities
 		/// <summary>
         /// 导航Id
         /// </summary>
-		[Identity]
-		//[Required]
-		//[Column("Id")]
+		[Identity(IsIncrease =true)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "导航Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// 父级导航ID
         /// </summary>
 		
-		//[Required]
-		//[Column("ParentId")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "父级导航ID")]
 		public long ParentId { get; set; }
         
 		/// <summary>
         /// 导航名称
         /// </summary>
 		
-		//
-		//[Column("Name")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "导航名称")]
 		public string Name { get; set; }
         
 		/// <summary>
         /// 副标题
         /// </summary>
 		
-		//
-		//[Column("SubTitle")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "副标题")]
 		public string SubTitle { get; set; }
         
 		/// <summary>
         /// 图标
         /// </summary>
 		
-		//
-		//[Column("Icon")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "图标")]
 		public string Icon { get; set; }
         
 		/// <summary>
         /// 导航类型
         /// </summary>
 		
-		//
-		//[Column("NavType")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "导航类型")]
 		public NavigationType NavType { get; set; }
         
 		/// <summary>
         /// 区域
         /// </summary>
 		
-		//
-		//[Column("Areas")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "区域")]
 		public string Areas { get; set; }
         
 		/// <summary>
         /// 控制器
         /// </summary>
 		
-		//
-		//[Column("Controllers")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "控制器")]
 		public string Controllers { get; set; }
         
 		/// <summary>
         /// 视图
         /// </summary>
 		
-		//
-		//[Column("Views")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "视图")]
 		public string Views { get; set; }
         
 		/// <summary>
         /// 模块（VUE使用）
         /// </summary>
 		
-		//
-		//[Column("Component")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "模块（VUE使用）")]
 		public string Component { get; set; }
         
 		/// <summary>
         /// 路径
         /// </summary>
 		
-		//
-		//[Column("Path")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "路径")]
 		public string Path { get; set; }
         
 		/// <summary>
         /// 路径类型（本页面，新标签页）
         /// </summary>
 		
-		//[Required]
-		//[Column("PathType")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "路径类型（本页面，新标签页）")]
 		public int PathType { get; set; }
         
 		/// <summary>
         /// 排序Id
         /// </summary>
 		
-		//[Required]
-		//[Column("SortId")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "排序Id")]
 		public int SortId { get; set; }
         
 		/// <summary>
         /// 状态
         /// </summary>
 		
-		//[Required]
-		//[Column("Status")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "状态")]
 		public int Status { get; set; }
         
 		/// <summary>
         /// 备注
         /// </summary>
 		
-		//
-		//[Column("Remark")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "备注")]
 		public string Remark { get; set; }
         
      }

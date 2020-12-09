@@ -16,73 +16,64 @@ namespace MCS.Entities
 		/// <summary>
         /// Id
         /// </summary>
-		[Identity]
-		//[Required]
-		//[Column("Id")]
+		[Identity(IsIncrease =true)]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public long Id { get; set; }
         
 		/// <summary>
         /// RoleId
         /// </summary>
 		
-		//[Required]
-		//[Column("RoleId")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "RoleId")]
 		public long RoleId { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
 		
-		//[Required]
-		//[Column("UserName")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "UserName")]
 		public string UserName { get; set; }
         
 		/// <summary>
         /// Password
         /// </summary>
 		
-		//[Required]
-		//[Column("Password")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Password")]
 		public string Password { get; set; }
         
 		/// <summary>
         /// PasswordSalt
         /// </summary>
 		
-		//[Required]
-		//[Column("PasswordSalt")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "PasswordSalt")]
 		public string PasswordSalt { get; set; }
         
 		/// <summary>
         /// CreateDate
         /// </summary>
 		
-		//[Required]
-		//[Column("CreateDate")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "CreateDate")]
 		public DateTime CreateDate { get; set; }
         
 		/// <summary>
         /// Remark
         /// </summary>
 		
-		//
-		//[Column("Remark")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Remark")]
 		public string Remark { get; set; }
         
 		/// <summary>
         /// RealName
         /// </summary>
 		
-		//
-		//[Column("RealName")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "RealName")]
 		public string RealName { get; set; }
         
 		/// <summary>
         /// Avatars
         /// </summary>
 		
-		//
-		//[Column("Avatars")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Avatars")]
 		public string Avatars { get; set; }
         
      }
