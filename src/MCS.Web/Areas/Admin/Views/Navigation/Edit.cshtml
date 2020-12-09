@@ -82,8 +82,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label asp-for="NavType"></label>
-                                <enums asp-id="property" asp-enum="@(MCS.CommonModel.NavigationType.Admin)" asp-value="Model.NavType" asp-valuetype="1" class="form-control single-select">
-                                </enums>
+                                <select enums="1" asp-for="NavType" class="form-control single-select"></select>
                                 <span asp-validation-for="NavType" class="error invalid-feedback"></span>
                             </div>
                         </div>

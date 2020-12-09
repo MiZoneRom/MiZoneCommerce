@@ -12,20 +12,14 @@ namespace MCS.Web.Framework
     /// <summary>
     /// 枚举下拉列表
     /// </summary>
-    [HtmlTargetElement("enums")]
+    [HtmlTargetElement("select", Attributes = "enums")]
     public class EnumsTagHelper : TagHelper
     {
-        [HtmlAttributeName("asp-enum")]
-        public Enum Value { get; set; }
 
-        [HtmlAttributeName("asp-value")]
-        public Enum SelectedValue { get; set; }
+        public int Enums { get; set; }
 
-        [HtmlAttributeName("asp-id")]
-        public string Id { get; set; }
-
-        [HtmlAttributeName("asp-valuetype")]
-        public int ValueIsIndex { get; set; } = 2;
+        [HtmlAttributeName("asp-for")]
+        public Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpression For { get; set; }
 
         /// <summary>
         /// 将Enum转换为List<SelectListItem>
@@ -34,7 +28,7 @@ namespace MCS.Web.Framework
         private List<SelectListItem> GetEnumSelectListItem()
         {
             var list = new List<SelectListItem>();
-            var typeInfo = Value.GetType().GetTypeInfo();
+            var typeInfo = For.Model.GetType().GetTypeInfo();
             var enumValues = typeInfo.GetEnumValues();
 
             foreach (var value in enumValues)
@@ -47,7 +41,7 @@ namespace MCS.Web.Framework
                 list.Add(new SelectListItem()
                 {
                     Text = descriptionAttribute.Description,
-                    Value = (ValueIsIndex == 1) ? ((int)value).ToString() : value.ToString()
+                    Value = (Enums == 1) ? ((int)value).ToString() : value.ToString()
                 });
 
             }
@@ -57,15 +51,19 @@ namespace MCS.Web.Framework
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             var list = GetEnumSelectListItem();
+
             output.TagName = "select";
-            output.Attributes.SetAttribute("id", Id);
+
+            output.Attributes.SetAttribute("id", For.Name);
+            output.Attributes.SetAttribute("name", For.Name);
+
             var content = output.GetChildContentAsync();
             output.Content.AppendHtml(content.Result);
             foreach (var item in list)
             {
                 if (item.Value != null)
                 {
-                    if (item.Value == SelectedValue.GetHashCode().ToString())
+                    if (item.Value == For.Model.GetHashCode().ToString())
                     {
                         output.Content.AppendHtml($"<option value='{item.Value}' selected='selected'>{item.Text}</option>");
                     }
@@ -76,7 +74,7 @@ namespace MCS.Web.Framework
                 }
                 else
                 {
-                    if (item.Text == SelectedValue.GetHashCode().ToString())
+                    if (item.Text == For.Model.GetHashCode().ToString())
                     {
                         output.Content.AppendHtml($"<option selected='selected'>{item.Text}</option>");
                     }
