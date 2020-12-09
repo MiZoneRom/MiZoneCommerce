@@ -23,7 +23,7 @@
       "wwwroot/lib/jquery/jquery.min.js",
       "wwwroot/lib/jquery-ui/jquery-ui.min.js",
       "wwwroot/lib/bootstrap/js/bootstrap.bundle.min.js",
-      "wwwroot/lib/adminlte/js/adminlte.min.js",
+      "wwwroot/lib/adminlte/js/adminlte.js",
       "wwwroot/lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js",
       "wwwroot/lib/jquery-validation/jquery.validate.js",
       "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
