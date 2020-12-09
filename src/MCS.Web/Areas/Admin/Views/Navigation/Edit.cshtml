@@ -24,6 +24,14 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
+                                <label asp-for="ParentId"></label>
+                                <select asp-for="ParentId" asp-items="ViewBag.Navigations" class="form-control single-select">
+                                    <option value="0">无父级导航</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
                                 <label asp-for="SubTitle"></label>
                                 <input asp-for="SubTitle" class="form-control" placeholder="">
                                 <span asp-validation-for="SubTitle" class="error invalid-feedback"></span>

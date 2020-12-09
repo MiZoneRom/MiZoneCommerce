@@ -11,6 +11,7 @@ using MCS.IServices;
 using MCS.Web.Framework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MCS.Web.Areas.Admin.Controllers
 {
@@ -36,6 +37,7 @@ namespace MCS.Web.Areas.Admin.Controllers
 
         public IActionResult Edit(long? id)
         {
+            ViewBag.Navigations = NavigationApplication.GetNavigationModels(0).Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString() }).ToList();
             if (id.HasValue)
             {
                 NavigationModel model = NavigationApplication.GetNavigation(id.Value);

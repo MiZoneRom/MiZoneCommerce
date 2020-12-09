@@ -17,6 +17,7 @@ namespace MCS.DTO
         /// <summary>
         /// 父级导航ID
         /// </summary>
+        [Display(Name = "父级导航")]
         public long ParentId { get; set; }
 
         /// <summary>

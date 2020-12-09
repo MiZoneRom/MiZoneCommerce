@@ -13,14 +13,20 @@
 .tree-list a>i[class*=right]{transition: transform .3s linear;cursor:pointer;}
 .card .nav.flex-column>li.active a{background-color: #007bff;color: #fff;}
 .btn .load-tip{margin-right:4px;}
-.select2-results{animation: dropdown-menu-anim .5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;box-shadow:0px 5px 15px rgba(0,0,0,0.2);}
+.select2-dropdown--above{animation: dropdown-menu-anim-up .5s forwards;box-shadow:0px -10px 15px rgba(0,0,0,0.2);}
+.select2-dropdown--below{animation: dropdown-menu-anim-down .5s forwards;box-shadow:0px 10px 15px rgba(0,0,0,0.2);}
 .nav-sidebar>.nav-item{transition:all 0.2s;}
 .nav-sidebar>.nav-item.menu-open{background-color:rgba(0,0,0,0.05);border-radius:.25rem;margin-bottom:.25rem;}
 .nav-sidebar .nav-item>.nav-link:last-child{margin-bottom:0;}
 .cardbox-controls {padding: 5px;}
 .cardbox-body{}
 
-@keyframes dropdown-menu-anim{
+@keyframes dropdown-menu-anim-up{
+	0%{ opacity: 0; transform: translate(0,10px);}
+	100%{opacity: 1; transform: translate(0, 0);}
+}
+
+@keyframes dropdown-menu-anim-down{
 	0%{ opacity: 0; transform: translate(0,-10px);}
 	100%{opacity: 1; transform: translate(0, 0);}
 }
