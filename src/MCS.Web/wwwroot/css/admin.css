@@ -5255,6 +5255,8 @@ html.os-html,html.os-html>.os-host{display:block;overflow:hidden;box-sizing:bord
 .nav-sidebar>.nav-item{transition:all 0.2s;}
 .nav-sidebar>.nav-item.menu-open{background-color:rgba(0,0,0,0.05);border-radius:.25rem;margin-bottom:.25rem;}
 .nav-sidebar .nav-item>.nav-link:last-child{margin-bottom:0;}
+.cardbox-controls {padding: 5px;}
+.cardbox-body{}
 
 @keyframes dropdown-menu-anim{
 	0%{ opacity: 0; transform: translate(0,-10px);}

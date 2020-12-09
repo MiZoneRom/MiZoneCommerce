@@ -4,7 +4,7 @@
 }
 <div class="row">
     <div class="col-md-3">
-        <a href="compose.html" class="btn btn-primary btn-block mb-3">新增</a>
+        <a asp-area="Admin" asp-controller="Navigation" asp-action="Edit" class="btn btn-primary btn-block mb-3">新增</a>
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">类型</h3>
@@ -42,9 +42,9 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <div class="mailbox-controls">
+                <div class="cardbox-controls">
                     <!-- Check all button -->
-                    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                    <button type="button" class="btn btn-default btn-sm checkbox-toggle check-all">
                         <i class="far fa-square"></i>
                     </button>
                     <div class="btn-group">
@@ -54,18 +54,18 @@
                     </div>
                     <!-- /.btn-group -->
                 </div>
-                <div class="table-responsive mailbox-messages">
+                <div class="table-responsive cardbox-body">
                     <ul class="nav nav-pills flex-column tree-list nav-list">
                     </ul>
                     <!-- /.table -->
                 </div>
-                <!-- /.mail-box-messages -->
+                <!-- /.card-box-messages -->
             </div>
             <!-- /.card-body -->
             <div class="card-footer p-0">
                 <div class="mailbox-controls">
                     <!-- Check all button -->
-                    <button type="button" class="btn btn-default btn-sm checkbox-toggle">
+                    <button type="button" class="btn btn-default btn-sm checkbox-toggle check-all">
                         <i class="far fa-square"></i>
                     </button>
                     <div class="btn-group">

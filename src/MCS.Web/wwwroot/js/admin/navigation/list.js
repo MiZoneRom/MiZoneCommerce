@@ -38,8 +38,8 @@ function loadNav(result, isLevelFirst) {
     $.each(result, function (i, item) {
         var childList = _navList.filter(a => a.parentId == item.id);
         _html += `<li class="nav-item" data-nav-id="${item.id}" nav-expanded="false">`;
-        _html += `<p class="nav-link">`;
-        _html += `<div class="icheck-primary">
+        _html += `<div class="nav-link">`;
+        _html += `<div class="icheck-primary d-inline ml-2">
                         <input type="checkbox" value="" id="check${item.id}">
                         <label for="check${item.id}"></label>
                       </div>`;
@@ -50,7 +50,7 @@ function loadNav(result, isLevelFirst) {
             _html += `<i class="fas fa-file-code fa-fw"></i>`;
         }
         _html += `${item.name}<a type="button" class="btn btn-primary btn-xs float-right"  href="./Edit?id=${item.id}">编辑</a>`;
-        _html += '</p>';
+        _html += '</div>';
         _html += `</li>`;
         if (childList.length > 0) {
             _html += `<li class="nav-item" style="display:none;" id="child_${item.id}">`;

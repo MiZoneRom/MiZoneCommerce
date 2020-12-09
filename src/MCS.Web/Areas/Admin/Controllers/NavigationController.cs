@@ -41,7 +41,7 @@ namespace MCS.Web.Areas.Admin.Controllers
                 NavigationModel model = NavigationApplication.GetNavigation(id.Value);
                 return View(model);
             }
-            return View();
+            return View(new NavigationModel());
         }
 
         [HttpPost]
