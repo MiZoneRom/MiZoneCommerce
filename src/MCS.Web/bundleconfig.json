@@ -10,6 +10,7 @@
       "wwwroot/lib/daterangepicker/daterangepicker.css",
       "wwwroot/lib/select2/css/select2.min.css",
       "wwwroot/lib/select2-bootstrap4-theme/select2-bootstrap4.min.css",
+      "wwwroot/lib/bootstrap4-duallistbox/bootstrap-duallistbox.css",
       "wwwroot/css/admin_cover.css"
     ],
     "minify": {
@@ -32,6 +33,7 @@
       "wwwroot/lib/moment/moment.min.js",
       "wwwroot/lib/select2/js/select2.full.min.js",
       "wwwroot/lib/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+      "wwwroot/lib/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js",
       "wwwroot/js/admin/custom.js"
     ],
     "minify": {

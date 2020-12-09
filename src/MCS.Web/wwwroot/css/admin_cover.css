@@ -20,6 +20,9 @@
 .nav-sidebar .nav-item>.nav-link:last-child{margin-bottom:0;}
 .cardbox-controls {padding: 5px;}
 .cardbox-body{}
+.bootstrap-duallistbox-container .btn-group .btn{border-color: #ced4da;}
+.bootstrap-duallistbox-container select{border-color: #ced4da;}
+.bootstrap-duallistbox-container select:focus{border-color: #80bdff;outline: 0;}
 
 @keyframes dropdown-menu-anim-up{
 	0%{ opacity: 0; transform: translate(0,10px);}
