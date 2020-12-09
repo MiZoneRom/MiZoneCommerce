@@ -29,7 +29,7 @@ namespace MCS.Web.Areas.Admin.Controllers
             var navList = NavigationApplication.GetNavigations();
             if (type.HasValue && type > 0)
             {
-                navList = navList.Where(a => a.Type == type).ToList();
+                navList = navList.Where(a => a.NavType == type).ToList();
             }
             return Json(new Result() { success = true, msg = "", data = navList });
         }

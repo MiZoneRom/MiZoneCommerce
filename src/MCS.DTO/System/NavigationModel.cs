@@ -43,7 +43,7 @@ namespace MCS.DTO
         /// 导航类型
         /// </summary>
         [Display(Name = "导航类型")]
-        public NavigationType Type { get; set; }
+        public NavigationType NavType { get; set; }
 
         /// <summary>
         /// 区域

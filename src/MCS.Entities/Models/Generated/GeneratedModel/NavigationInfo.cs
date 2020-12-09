@@ -58,8 +58,8 @@ namespace MCS.Entities
         /// </summary>
 		
 		//
-		//[Column("Type")]
-		public NavigationType Type { get; set; }
+		//[Column("NavType")]
+		public NavigationType NavType { get; set; }
         
 		/// <summary>
         /// 区域
