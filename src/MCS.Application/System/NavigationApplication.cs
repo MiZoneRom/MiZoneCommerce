@@ -18,6 +18,10 @@ namespace MCS.Application
         {
         }
 
+        /// <summary>
+        /// 获取导航
+        /// </summary>
+        /// <returns></returns>
         public static List<NavigationInfo> GetNavigations()
         {
             List<NavigationInfo> navigationInfoList = Core.Cache.Get<List<NavigationInfo>>(CacheKeyCollection.Navigations);
@@ -29,6 +33,37 @@ namespace MCS.Application
             return navigationInfoList;
         }
 
+        /// <summary>
+        /// 获取按照层级排序导航
+        /// </summary>
+        /// <param name="parent_id"></param>
+        /// <returns></returns>
+        public static List<NavigationModel> GetNavigationModels(long parent_id)
+        {
+            List<NavigationInfo> navigationInfoList = GetNavigations();
+            List<NavigationModel> navigationModelList = Mapper.Map<List<NavigationInfo>, List<NavigationModel>>(navigationInfoList);
+            var newList = new List<NavigationModel>();
+            GetNavigationChildModels(navigationModelList, newList, parent_id, 0);
+            return navigationModelList;
+        }
+
+        private static void GetNavigationChildModels(List<NavigationModel> oldData, List<NavigationModel> newData, long parent_id, int class_layer)
+        {
+            class_layer++;
+            List<NavigationModel> dr = oldData.Where(a => a.ParentId == parent_id).OrderBy(a => a.SortId).ToList();
+            foreach (var item in dr)
+            {
+                item.ClassLayer = class_layer;
+                newData.Add(item);
+                GetNavigationChildModels(oldData, newData, item.Id, class_layer);
+            }
+        }
+
+        /// <summary>
+        /// 获取面包屑导航
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public static List<NavigationBreadCrumbModel> GetBreadCrumb(string path)
         {
             List<NavigationInfo> navigationInfoList = GetNavigations();

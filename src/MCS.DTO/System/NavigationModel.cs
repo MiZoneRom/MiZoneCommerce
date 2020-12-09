@@ -99,10 +99,24 @@ namespace MCS.DTO
         [Display(Name = "备注")]
         public string Remark { get; set; }
 
+        /// <summary>
+        /// 是否打开
+        /// </summary>
         public bool IsOpen { get; set; }
 
+        /// <summary>
+        /// 层级
+        /// </summary>
+        public int ClassLayer { get; set; }
+
+        /// <summary>
+        /// 子项
+        /// </summary>
         public List<NavigationModel> Children { get; set; }
 
+        /// <summary>
+        /// 父级
+        /// </summary>
         public NavigationModel Parent { get; set; }
 
     }
