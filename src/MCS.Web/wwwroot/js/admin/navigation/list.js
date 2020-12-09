@@ -39,6 +39,10 @@ function loadNav(result, isLevelFirst) {
         var childList = _navList.filter(a => a.parentId == item.id);
         _html += `<li class="nav-item" data-nav-id="${item.id}" nav-expanded="false">`;
         _html += `<p class="nav-link">`;
+        _html += `<div class="icheck-primary">
+                        <input type="checkbox" value="" id="check${item.id}">
+                        <label for="check${item.id}"></label>
+                      </div>`;
         _html += `${getSpaceStr()}`;
         if (childList.length > 0) {
             _html += `<i class="fas fa-caret-right fa-fw"></i>`;
