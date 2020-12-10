@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -128,20 +129,18 @@ namespace MCS.Core
             return (int)d != d;
         }
 
-        //public static SelectList ToSelectList<TEnum>(this TEnum enumObj,bool perfix=true,bool onlyFlag=false)
-        //{
-        //    var values = from TEnum e in Enum.GetValues(typeof(TEnum))
-        //                 select new { Id = Convert.ToInt32(e), Name = GetDescription(typeof(TEnum),e.ToString()) };
-        //    //if (onlyFlag)
-        //    //    values = values.Where(v => IsIntType(Math.Log(v.Id, 2)));
-        //   var t= values.ToList();
-        //   var item = new { Id = 0, Name = "请选择..." };
-        //   if (perfix)
-        //   {
-        //       t.Insert(0, item);
-        //   }
-        // return  new SelectList(t, "Id", "Name", enumObj);
-        //} 
+        public static SelectList ToSelectList<TEnum>(this TEnum enumObj, bool perfix = false)
+        {
+            var values = from TEnum e in Enum.GetValues(typeof(TEnum))
+                         select new { Id = Convert.ToInt32(e), Name = GetDescription(typeof(TEnum), e.ToString()) };
+            var t = values.ToList();
+            var item = new { Id = 0, Name = "请选择..." };
+            if (perfix)
+            {
+                t.Insert(0, item);
+            }
+            return new SelectList(t, "Id", "Name", enumObj);
+        }
 
         static Hashtable enumDesciption = GetDescriptionContainer();
 

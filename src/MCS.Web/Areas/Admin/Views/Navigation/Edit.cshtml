@@ -110,12 +110,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>权限</label>
-                                <select class="dual-select" multiple="multiple">
-                                    <option selected>添加</option>
-                                    <option>修改</option>
-                                    <option>删除</option>
-                                    <option>查看</option>
-                                    <option>审核</option>
+                                <select asp-items="ViewBag.Actions" class="dual-select" multiple="multiple">
                                 </select>
                             </div>
                             <!-- /.form-group -->
