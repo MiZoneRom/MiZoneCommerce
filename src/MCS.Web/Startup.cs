@@ -58,6 +58,8 @@ namespace MCS.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
+            Log.Debug("ConfigureServices");
+
             //添加jwt验证：
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -212,14 +214,21 @@ namespace MCS.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
+            //注册IO及缓存
+            RegistAtStart.RegistStrategies();
+
             //注册Autofac
             var assembly = typeof(AutoFacModule).Assembly;
             builder.RegisterAssemblyModules(assembly);
+
+            //注册插件
+            RegistAtStart.RegistPlugins();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpContextAccessor accessor, IOptions<SenparcSetting> senparcSetting, IOptions<SenparcWeixinSetting> senparcWeixinSetting)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
