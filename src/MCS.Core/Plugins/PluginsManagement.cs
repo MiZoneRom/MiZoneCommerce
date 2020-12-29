@@ -456,6 +456,7 @@ namespace MCS.Core
             string pluginId = dllFile.Name.Replace(".dll", "");
             string installedConfigPath = IOHelper.GetMapPath("/Plugins/Configs/") + pluginId + ".config";
             string webPath = "/Plugins/Configs/" + pluginId + ".config";
+
             if (!MCSIO.ExistFile(webPath))//检查是否已经安装过
             {
                 //未安装过
@@ -482,9 +483,11 @@ namespace MCS.Core
                 }
                 else
                     throw new FileNotFoundException("未找到插件" + pluginId + "的配置文件");
+
             }
             else
-            {//读取系统插件配置文件中的配置信息
+            {
+                //读取系统插件配置文件中的配置信息
                 pluginInfo = (PluginInfo)XmlHelper.DeserializeFromXMLByOSS(typeof(PluginInfo), installedConfigPath);
             }
 
