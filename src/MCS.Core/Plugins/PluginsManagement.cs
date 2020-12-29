@@ -30,6 +30,7 @@ namespace MCS.Core
         /// 标记是否已经在创建时加载，插件已注册
         /// </summary>
         static bool registed = false;
+
         /// <summary>
         /// 标记是否已经在创建时加载，策略已注册
         /// </summary>
@@ -136,8 +137,6 @@ namespace MCS.Core
                 foreach (string dllFileName in dllFiles)//加载这些文件
                 {
                     Assembly assembly = InstallAssembly(dllFileName);
-                    //将程序集添加到当前应用程序域
-                    //  BuildManager.AddReferencedAssembly(assembly);
                 }
             }
         }
@@ -156,8 +155,6 @@ namespace MCS.Core
                 foreach (string dllFileName in dllFiles)//加载这些文件
                 {
                     Assembly assembly = InstallAssembly(dllFileName);
-                    //将程序集添加到当前应用程序域
-                    //  BuildManager.AddReferencedAssembly(assembly);
                 }
             }
         }
@@ -336,9 +333,6 @@ namespace MCS.Core
             return enum_pluginType;
         }
 
-
-
-
         #endregion
 
         #region 内部方法
@@ -350,42 +344,6 @@ namespace MCS.Core
         /// <returns></returns>
         static Assembly InstallAssembly(string dllFileName)
         {
-            //string newFileName = dllFileName;
-            //FileInfo fileInfo = new FileInfo(dllFileName);
-            ////DirectoryInfo copyFolder;
-
-            //Assembly assembly = null;
-            //PluginInfo pluginfo = null;
-
-            //try
-            //{
-
-            //    //排除以 MCS.Plugin 开头的，非插件的dll，主要是插件基类
-            //    if (assembly.FullName.StartsWith("MCS.Plugin") && !assembly.FullName.Contains("MCS.Plugin.Payment.Alipay.Base"))
-            //    {
-
-            //        pluginfo = AddPluginInfo(fileInfo);//添加插件信息
-
-            //        //向插件注入信息
-            //        IPlugin plugin = Core.Instance.Get<IPlugin>(pluginfo.ClassFullName);
-            //        plugin.WorkDirectory = fileInfo.Directory.FullName;
-
-            //    }
-
-            //    //assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllFileName);
-            //}
-            //catch (IOException ex)
-            //{
-            //    Core.Log.Error("插件复制失败(" + dllFileName + ")！", ex);
-            //    if (pluginfo != null)//插件复制失败时，移除插件安装信息
-            //        RemovePlugin(pluginfo);
-            //}
-            //catch (Exception ex)
-            //{
-            //    Core.Log.Error("插件加载失败(" + dllFileName + ")！", ex);
-            //    if (pluginfo != null)//插件加载失败时，移除插件安装信息
-            //        RemovePlugin(pluginfo);
-            //}
 
             string newFileName = dllFileName;
             FileInfo fileInfo = new FileInfo(dllFileName);
@@ -497,7 +455,6 @@ namespace MCS.Core
 
             return pluginInfo;
         }
-
 
         /// <summary>
         /// 更新插件列表
