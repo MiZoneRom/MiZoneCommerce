@@ -58,8 +58,6 @@ namespace MCS.Web
         public void ConfigureServices(IServiceCollection services)
         {
 
-            Log.Debug("ConfigureServices");
-
             //添加jwt验证：
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
