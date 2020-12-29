@@ -3,6 +3,7 @@ using MCS.Core.Plugins;
 using MCS.Core.Plugins.Message;
 using MCS.Core.Plugins.OAuth;
 using MCS.Core.Plugins.Payment;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -547,21 +548,20 @@ namespace MCS.Core
     /// <summary>
     /// 启动时注册
     /// </summary>
-    public class RegistAtStart
+    public static class RegistAtStart
     {
         /// <summary>
         /// 加载缓存和IO
         /// </summary>
-        public static void RegistStrategies()
+        public static void RegistStrategies(this IServiceCollection services)
         {
-            Log.Debug("Load Strategies");
             PluginsManagement.RegistAtStartStrategies();
         }
 
         /// <summary>
         /// 加载插件
         /// </summary>
-        public static void RegistPlugins()
+        public static void RegistPlugins(this IServiceCollection services)
         {
             PluginsManagement.RegistAtStart();
         }

@@ -106,8 +106,14 @@ namespace MCS.Web
             //注册session
             services.AddSession();
 
+            //注册IO及缓存
+            services.RegistStrategies();
+
             //配置Controller全部由Autofac创建
             services.AddControllersWithViews().AddControllersAsServices();
+
+            //注册插件
+            services.RegistPlugins();
 
             //如果在IIS中搭建
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
@@ -212,15 +218,11 @@ namespace MCS.Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            //注册IO及缓存
-            RegistAtStart.RegistStrategies();
 
             //注册Autofac
             var assembly = typeof(AutoFacModule).Assembly;
             builder.RegisterAssemblyModules(assembly);
 
-            //注册插件
-            RegistAtStart.RegistPlugins();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
