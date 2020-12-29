@@ -78,6 +78,7 @@ namespace MCS.Web.Middleware.WebSocket
         /// <summary>
         /// 对指定用户广播
         /// </summary>
+        /// <param name="userId"></param>
         /// <param name="msgModel"></param>
         /// <returns></returns>
         public static async Task BroadcastByUserId(long userId, WebSocketProtocolModel msgModel)

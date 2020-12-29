@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -11,8 +12,8 @@ namespace MCS.Core
 {
     public class BaseExceptions : IExceptionFilter
     {
-        private readonly IHostingEnvironment _env;
-        public BaseExceptions(IHostingEnvironment env)
+        private readonly IWebHostEnvironment _env;
+        public BaseExceptions(IWebHostEnvironment env)
         {
             _env = env;
         }

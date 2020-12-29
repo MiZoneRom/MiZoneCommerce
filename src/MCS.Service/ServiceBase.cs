@@ -10,7 +10,6 @@ namespace MCS.Service
     public class ServiceBase
     {
         #region 字段
-        private bool _useNoLazyNoProxyContext;
         private SqlConnection _connection;
         #endregion
 
