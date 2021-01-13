@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MessageStatus>
+  <EditPayPassWord>1</EditPayPassWord>
+  <EditLoginPassWord>1</EditLoginPassWord>  
+  <OrderCreated>1</OrderCreated>
+  <OrderPay>1</OrderPay>
+  <OrderShipping>1</OrderShipping>
+  <OrderRefundApply>1</OrderRefundApply>
+  <OrderRefundSuccess>1</OrderRefundSuccess>
+  <OrderRefundFail>1</OrderRefundFail>
+  <OrderReturnApply>1</OrderReturnApply>
+  <OrderReturnSuccess>1</OrderReturnSuccess>
+  <OrderReturnFail>1</OrderReturnFail>
+  <FightGroupOpenSuccess>1</FightGroupOpenSuccess>
+  <FightGroupJoinSuccess>1</FightGroupJoinSuccess>
+  <FightGroupFailed>1</FightGroupFailed>
+  <FightGroupSuccess>1</FightGroupSuccess>
+  <SelfTakeOrderPay>1</SelfTakeOrderPay>
+  <AlreadyVerification>1</AlreadyVerification>
+  <VirtualOrderPay>1</VirtualOrderPay>
+  <VirtualAlreadyVerification>1</VirtualAlreadyVerification>
+  <DistributorApply>1</DistributorApply>
+  <DistributorAuditSuccess>1</DistributorAuditSuccess>
+  <DistributorAuditFail>1</DistributorAuditFail>
+  <DistributorNewJoin>3</DistributorNewJoin>
+  <DistributorCommissionPendingSettlement>1</DistributorCommissionPendingSettlement>
+  <DistributorCommissionSettled>1</DistributorCommissionSettled>
+  <MemberWithDrawApply>1</MemberWithDrawApply>
+  <MemberWithDrawSuccess>1</MemberWithDrawSuccess>
+  <MemberWithDrawFail>1</MemberWithDrawFail>
+  <ShopOrderShipping>3</ShopOrderShipping>
+  <ShopDelivering>3</ShopDelivering>  
+  <!--<RefundDeliver>1</RefundDeliver>
+  <FindPassWord>1</FindPassWord>
+  <ShopAudited>1</ShopAudited>
+  <ShopHaveNewOrder>3</ShopHaveNewOrder>
+  <ReceiveBonus>3</ReceiveBonus>
+  <LimitTimeBuy>3</LimitTimeBuy>
+  <SubscribeLimitTimeBuy>3</SubscribeLimitTimeBuy>  
+  <SendCouponSuccess>1</SendCouponSuccess>
+  <GetBrokerage>1</GetBrokerage>-->
+</MessageStatus>

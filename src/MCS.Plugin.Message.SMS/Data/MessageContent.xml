@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MessageContent>
+  <Bind><![CDATA[您本次的验证码为：#checkCode#，有效期为2分钟，请勿泄露。【#siteName#】]]></Bind>
+  <EditPayPassWord><![CDATA[尊敬的会员:#userName#,您的账号交易密码已修改成功，请妥善保管好个人资料。【#siteName#】]]></EditPayPassWord>
+  <EditLoginPassWord><![CDATA[尊敬的会员:#userName#,您的账号登录密码已修改成功，请妥善保管好个人资料。【#siteName#】]]></EditLoginPassWord>
+  <OrderCreated><![CDATA[尊敬的会员:#userName#,您还有订单未成功付款，尽快支付别让好货错过！【#siteName#】]]></OrderCreated>
+  <OrderPay><![CDATA[尊敬的会员:#userName#,您的订单#orderId#已支付成功，我们会尽快为您发货。【#siteName#】]]></OrderPay>
+  <OrderShipping><![CDATA[尊敬的会员:#userName#,您的订单#orderId#已发货，请注意查收。【#siteName#】]]></OrderShipping>
+  <OrderRefundApply><![CDATA[尊敬的会员:#userName#,您的退款申请正在受理中,请至个人中心查看。【#siteName#】]]></OrderRefundApply>
+  <OrderRefundSuccess><![CDATA[尊敬的会员:#userName#,您的订单已经完成退款，请留意查收。【#siteName#】]]></OrderRefundSuccess>
+  <OrderRefundFail><![CDATA[尊敬的会员:#userName#,您的退款申请被拒绝，请知悉。【#siteName#】]]></OrderRefundFail>
+  <OrderReturnApply><![CDATA[尊敬的会员:#userName#,您的退货申请正在受理中,请至个人中心查看。【#siteName#】]]></OrderReturnApply>
+  <OrderReturnSuccess><![CDATA[尊敬的会员:#userName#,您的退货已审核通过，请及时发货。【#siteName#】]]></OrderReturnSuccess>
+  <OrderReturnFail><![CDATA[尊敬的会员:#userName#,您的退货申请被拒绝，如有疑问请联系卖家。【#siteName#】]]></OrderReturnFail>
+  <FightGroupOpenSuccess><![CDATA[尊敬的会员:#userName#,您的拼团已开团成功，赶紧邀请小伙伴参团吧！【#siteName#】]]></FightGroupOpenSuccess>
+  <FightGroupJoinSuccess><![CDATA[尊敬的会员:#userName#,您的拼团已参团成功，赶紧邀请小伙伴参团吧！【#siteName#】]]></FightGroupJoinSuccess>
+  <FightGroupFailed><![CDATA[尊敬的会员:#userName#,您的拼团人数不足，组团失败，等待平台确认退款。【#siteName#】]]></FightGroupFailed>
+  <FightGroupSuccess><![CDATA[尊敬的会员:#userName#,您的拼团人数满了，组团成功，等待商家发货。【#siteName#】]]></FightGroupSuccess>
+  <SelfTakeOrderPay><![CDATA[尊敬的会员:#userName#，您的提货码为：#pickupCode#，请您尽快到达门店提货。【#siteName#】]]></SelfTakeOrderPay>
+  <AlreadyVerification><![CDATA[尊敬的会员:#userName#，您的自提订单#orderId#已核销成功，感谢您的使用。【#siteName#】]]></AlreadyVerification>
+  <VirtualOrderPay><![CDATA[您的订单#orderId#已付款成功，消费码为：#核销码#，到期时间：#DueTime#，请尽快消费！【#siteName#】]]></VirtualOrderPay>
+  <VirtualAlreadyVerification><![CDATA[您的消费码：#核销码#,已于#VerificationTime#完成核销，请知晓！【#siteName#】]]></VirtualAlreadyVerification>
+  <DistributorApply><![CDATA[尊敬的会员:#userName#，您的销售员申请提交成功了，请耐心等待平台审核。【#siteName#】]]></DistributorApply>
+  <DistributorAuditSuccess><![CDATA[尊敬的会员:#userName#，恭喜您申请销售员审核通过！【#siteName#】]]></DistributorAuditSuccess>
+  <DistributorAuditFail><![CDATA[尊敬的会员:#userName#，您的销售员申请被拒绝了，请修改后重新提交申请。【#siteName#】]]></DistributorAuditFail>
+  <DistributorNewJoin><![CDATA[]]></DistributorNewJoin>
+  <DistributorCommissionPendingSettlement><![CDATA[尊敬的会员:#userName#，您有一笔新的佣金等待结算了。快进入小店了解详情吧。【#siteName#】]]></DistributorCommissionPendingSettlement>
+  <DistributorCommissionSettled><![CDATA[尊敬的会员:#userName#，您有一笔新的佣金已经结算了。分享越多，收获越多。【#siteName#】]]></DistributorCommissionSettled>
+  <MemberWithDrawApply><![CDATA[尊敬的会员:#userName#，您的提现申请正在受理中，我们将尽快处理，感谢您的支持。【#siteName#】]]></MemberWithDrawApply>
+  <MemberWithDrawSuccess><![CDATA[尊敬的会员:#userName#，您申请的提现已经到账了，请注意查收。【#siteName#】]]></MemberWithDrawSuccess>
+  <MemberWithDrawFail><![CDATA[尊敬的会员:#userName#，您的提现申请被拒绝了，如有疑问请联系平台。]]></MemberWithDrawFail>  
+  <!--<FindPassWord><![CDATA[您已经成功重置密码，请妥善保管。【#siteName#】]]></FindPassWord>
+  <ShopAudited><![CDATA[您申请的店铺#shopName#已经通过审核，请登录查看。【#siteName#】]]></ShopAudited>
+  <RefundDeliver><![CDATA[您的订单(#orderId#)售后申请己通过，请及时处理。【#siteName#】]]></RefundDeliver>
+  <SendCouponSuccess><![CDATA[#Money#元代金券已存入您的账户，请您登录个人中心查收。【#siteName#】]]></SendCouponSuccess>
+  <GetBrokerage><![CDATA[您获得了一笔新的佣金，金额：#Money#元，请进入店铺查看详情。【#siteName#】]]></GetBrokerage>-->
+</MessageContent>
