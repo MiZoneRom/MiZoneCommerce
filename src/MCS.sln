@@ -47,15 +47,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Strategy.Redis", "MCS.S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Message", "Message", "{996678F9-6738-41B8-ACF9-18BB5F252350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Message.SMS", "MCS.Plugin.Message.SMS\MCS.Plugin.Message.SMS.csproj", "{340F8411-C20F-44B0-9278-9C78FBE21BC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Message.SMS", "MCS.Plugin.Message.SMS\MCS.Plugin.Message.SMS.csproj", "{340F8411-C20F-44B0-9278-9C78FBE21BC8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.MessagePlugin", "MCS.Plugin.MessagePlugin\MCS.Plugin.MessagePlugin.csproj", "{30152956-9F7A-45F1-B0D5-BD8E92846748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Message.Email", "MCS.Plugin.Message.Email\MCS.Plugin.Message.Email.csproj", "{C7589ED5-54FB-4474-AD46-1687E0F05632}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Message.Email", "MCS.Plugin.Message.Email\MCS.Plugin.Message.Email.csproj", "{C7589ED5-54FB-4474-AD46-1687E0F05632}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OAuth", "OAuth", "{8E32AACD-91F5-4692-82B5-C501F31CD834}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.OAuth.QQ", "MCS.Plugin.OAuth.QQ\MCS.Plugin.OAuth.QQ.csproj", "{A1C8BEA0-9A5F-4544-BD37-AC3794213EDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.OAuth.QQ", "MCS.Plugin.OAuth.QQ\MCS.Plugin.OAuth.QQ.csproj", "{A1C8BEA0-9A5F-4544-BD37-AC3794213EDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.OAuth.WeiXin", "MCS.Plugin.OAuth.WeiXin\MCS.Plugin.OAuth.WeiXin.csproj", "{68148107-4D9F-4588-9F09-B52EC411BE7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +137,10 @@ Global
 		{A1C8BEA0-9A5F-4544-BD37-AC3794213EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1C8BEA0-9A5F-4544-BD37-AC3794213EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C8BEA0-9A5F-4544-BD37-AC3794213EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68148107-4D9F-4588-9F09-B52EC411BE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68148107-4D9F-4588-9F09-B52EC411BE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68148107-4D9F-4588-9F09-B52EC411BE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68148107-4D9F-4588-9F09-B52EC411BE7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +166,7 @@ Global
 		{C7589ED5-54FB-4474-AD46-1687E0F05632} = {996678F9-6738-41B8-ACF9-18BB5F252350}
 		{8E32AACD-91F5-4692-82B5-C501F31CD834} = {AA6100B4-5EE4-46EE-B870-743CF0DC6A09}
 		{A1C8BEA0-9A5F-4544-BD37-AC3794213EDA} = {8E32AACD-91F5-4692-82B5-C501F31CD834}
+		{68148107-4D9F-4588-9F09-B52EC411BE7D} = {8E32AACD-91F5-4692-82B5-C501F31CD834}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1545996-40BE-4F88-A489-BE41C612DB22}

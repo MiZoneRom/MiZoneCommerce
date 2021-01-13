@@ -117,6 +117,7 @@ namespace MCS.Core
         /// <param name="pluginsDirectory"></param>
         public static void RegistStrategies(this IServiceCollection _services)
         {
+            services = _services;
             if (!strategiesRegisted)
             {
                 strategiesRegisted = true;
@@ -135,6 +136,7 @@ namespace MCS.Core
         /// <param name="pluginsDirectory"></param>
         public static void RegistPlugins(this IServiceCollection _services)
         {
+            services = _services;
             if (!pluginsRegisted)
             {
                 pluginsRegisted = true;
