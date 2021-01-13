@@ -19,12 +19,11 @@ namespace MCS.Core
     /// </summary>
     public static class PluginsManagement
     {
-        #region 内部成员
 
         /// <summary>
-        /// 已安装插件
+        /// 已安装插件 此处可以考虑放到缓存中,否则多Web下会存在问题
         /// </summary>
-        static Dictionary<PluginType, List<PluginInfo>> IntalledPlugins = new Dictionary<PluginType, List<PluginInfo>>();//此处可以考虑放到缓存中,否则多Web下会存在问题
+        static Dictionary<PluginType, List<PluginInfo>> IntalledPlugins = new Dictionary<PluginType, List<PluginInfo>>();
 
         /// <summary>
         /// 标记是否已经在创建时加载，插件已注册
@@ -36,6 +35,11 @@ namespace MCS.Core
         /// </summary>
         static bool strategiesRegisted = false;
 
+        /// <summary>
+        /// 注入服务
+        /// </summary>
+        static IServiceCollection services;
+
         static PluginsManagement()
         {
             //初始化intalledPlugins
@@ -44,10 +48,6 @@ namespace MCS.Core
                 IntalledPlugins.Add((PluginType)value, new List<PluginInfo>());
             }
         }
-
-        #endregion
-
-        #region 获取已安装的插件信息
 
         /// <summary>
         /// 获取已安装的插件信息
@@ -59,10 +59,6 @@ namespace MCS.Core
             IEnumerable<PluginInfo> plugins = IntalledPlugins[pluginType].Select(item => DeepClone(item));
             return plugins;
         }
-
-        #endregion
-
-        #region 获取指定的插件信息
 
         /// <summary>
         /// 获取指定的插件信息
@@ -81,12 +77,8 @@ namespace MCS.Core
             return pluginfo;
         }
 
-        #endregion
-
-        #region 根据插件类型获取已安装插件
-
         /// <summary>
-        /// 获取已安装的插件
+        /// 根据类型获取已安装的插件
         /// </summary>
         /// <param name="pluginType">插件类型</param>
         /// <returns></returns>
@@ -102,12 +94,8 @@ namespace MCS.Core
             return plugins;
         }
 
-        #endregion
-
-        #region 根据插件ID获取已安装插件
-
         /// <summary>
-        /// 获取已安装的插件
+        /// 根据Id获取已安装的插件
         /// </summary>
         /// <param name="pluginType">插件类型</param>
         /// <returns></returns>
@@ -120,14 +108,11 @@ namespace MCS.Core
             return plugin;
         }
 
-        #endregion
-
-        #region 加载指定目录下的所有DLL
         /// <summary>
         /// 加载策略所有dll
         /// </summary>
         /// <param name="pluginsDirectory"></param>
-        public static void RegistAtStartStrategies()
+        public static void RegistStrategies(this IServiceCollection _services)
         {
             if (!strategiesRegisted)
             {
@@ -145,7 +130,7 @@ namespace MCS.Core
         /// 加载指定目录下所有dll
         /// </summary>
         /// <param name="pluginsDirectory"></param>
-        public static void RegistAtStart()
+        public static void RegistPlugins(this IServiceCollection _services)
         {
             if (!registed)
             {
@@ -158,10 +143,6 @@ namespace MCS.Core
                 }
             }
         }
-
-        #endregion
-
-        #region 开启插件
 
         /// <summary>
         /// 开启插件
@@ -178,10 +159,6 @@ namespace MCS.Core
             //序列化,将插件信息保存到系统插件配置文件中
             XmlHelper.SerializeToXmlByOSS(plugInfo, IOHelper.GetMapPath("/Plugins/Configs/") + pluginId + ".config");
         }
-
-        #endregion
-
-        #region 安装插件
 
         /// <summary>
         /// 安装插件
@@ -200,10 +177,6 @@ namespace MCS.Core
                     Core.Log.Error("插件安装失败(" + dllFileName + ")", ex);
                 }
         }
-
-        #endregion
-
-        #region 卸载插件
 
         /// <summary>
         /// 卸载插件
@@ -233,10 +206,6 @@ namespace MCS.Core
                 }
             }
         }
-
-        #endregion
-
-        #region 获取插件
 
         /// <summary>
         /// 获取指定类型所有插件
@@ -332,10 +301,6 @@ namespace MCS.Core
                 throw new NotSupportedException("暂不支持" + pluginType.Name + "类型的插件");
             return enum_pluginType;
         }
-
-        #endregion
-
-        #region 内部方法
 
         /// <summary>
         /// 加载(安装)dll 
@@ -498,31 +463,5 @@ namespace MCS.Core
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PluginInfo>(jsonString);
         }
 
-        #endregion
     }
-
-
-    /// <summary>
-    /// 启动时注册
-    /// </summary>
-    public static class RegistAtStart
-    {
-        /// <summary>
-        /// 加载缓存和IO
-        /// </summary>
-        public static void RegistStrategies(this IServiceCollection services)
-        {
-            PluginsManagement.RegistAtStartStrategies();
-        }
-
-        /// <summary>
-        /// 加载插件
-        /// </summary>
-        public static void RegistPlugins(this IServiceCollection services)
-        {
-            PluginsManagement.RegistAtStart();
-        }
-
-    }
-
 }
