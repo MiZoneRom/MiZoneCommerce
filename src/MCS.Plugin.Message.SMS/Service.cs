@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MCS.Plugin.Message.SMS
 {
@@ -20,6 +21,11 @@ namespace MCS.Plugin.Message.SMS
             {
                 InitMessageStatus();
             }
+        }
+
+        public void Regist(IServiceCollection _services)
+        {
+
         }
 
         void InitMessageStatus()

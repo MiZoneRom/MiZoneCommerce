@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace MCS.Core.Plugins
 {
@@ -15,5 +16,7 @@ namespace MCS.Core.Plugins
         /// <returns></returns>
         /// <exception cref="PluginConfigException"></exception>
         void CheckCanEnable();
+
+        void Regist(IServiceCollection _services);
     }
 }

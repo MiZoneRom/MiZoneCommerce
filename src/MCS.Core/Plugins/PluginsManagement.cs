@@ -15,7 +15,7 @@ using System.Runtime.Loader;
 namespace MCS.Core
 {
     /// <summary>
-    /// 插件
+    /// 插件管理
     /// </summary>
     public static class PluginsManagement
     {
@@ -28,7 +28,7 @@ namespace MCS.Core
         /// <summary>
         /// 标记是否已经在创建时加载，插件已注册
         /// </summary>
-        static bool registed = false;
+        static bool pluginsRegisted = false;
 
         /// <summary>
         /// 标记是否已经在创建时加载，策略已注册
@@ -40,6 +40,9 @@ namespace MCS.Core
         /// </summary>
         static IServiceCollection services;
 
+        /// <summary>
+        /// 构造方法
+        /// </summary>
         static PluginsManagement()
         {
             //初始化intalledPlugins
@@ -132,9 +135,9 @@ namespace MCS.Core
         /// <param name="pluginsDirectory"></param>
         public static void RegistPlugins(this IServiceCollection _services)
         {
-            if (!registed)
+            if (!pluginsRegisted)
             {
-                registed = true;
+                pluginsRegisted = true;
                 string pluginsDirectory = IOHelper.GetMapPath("/Plugins");
                 List<string> dllFiles = GetPluginFiles(pluginsDirectory).ToList();
                 foreach (string dllFileName in dllFiles)//加载这些文件
@@ -350,6 +353,7 @@ namespace MCS.Core
                     //向插件注入信息
                     IPlugin plugin = Core.Instance.Get<IPlugin>(pluginfo.ClassFullName);
                     plugin.WorkDirectory = fileInfo.Directory.FullName;
+                    plugin.Regist(services);
 
                 }
 

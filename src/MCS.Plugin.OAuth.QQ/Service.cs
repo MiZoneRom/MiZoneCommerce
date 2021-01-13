@@ -1,6 +1,7 @@
 ﻿using MCS.Core;
 using MCS.Core.Plugins;
 using MCS.Core.Plugins.OAuth;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,6 +12,11 @@ namespace MCS.Plugin.OAuth.QQ
     public class Service : IOAuthPlugin
     {
         static string ReturnUrl = string.Empty;
+
+        public void Regist(IServiceCollection _services)
+        {
+
+        }
 
         public string GetOpenLoginUrl(string returnUrl)
         {

@@ -1,6 +1,7 @@
 ﻿using MCS.Core;
 using MCS.Core.Plugins.Message;
 using MCS.Plugin.MessagePlugin;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,11 @@ namespace MCS.Plugin.Message.Email
             {
                 InitMessageStatus();
             }
+        }
+
+        public void Regist(IServiceCollection _services)
+        {
+
         }
 
         void InitMessageStatus()

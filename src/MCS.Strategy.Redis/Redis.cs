@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace MCS.Strategy
 {
-    public class Redis :ICache
+    public class Redis : ICache
     {
         int DEFAULT_TMEOUT = 600;//默认超时时间（单位秒）
         string address;
@@ -15,7 +15,7 @@ namespace MCS.Strategy
         ConnectionMultiplexer connectionMultiplexer;
         IDatabase database;
         ISubscriber sub;
-        Dictionary<string,ISubscriber> subs = new Dictionary<string,ISubscriber>();//多个订阅
+        Dictionary<string, ISubscriber> subs = new Dictionary<string, ISubscriber>();//多个订阅
 
         class CacheObject<T>
         {
@@ -57,7 +57,7 @@ namespace MCS.Strategy
 
         public T Get<T>(string key)
         {
-  
+
             DateTime begin = DateTime.Now;
             var cacheValue = database.StringGet(key);
             DateTime endCache = DateTime.Now;
@@ -71,10 +71,10 @@ namespace MCS.Strategy
             }
             DateTime endJson = DateTime.Now;
 #if DEBUG
-                Core.Log.Debug("redis取数据时间:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(endCache).TotalMilliseconds + "毫秒,总耗时:"+endJson.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis取数据时间:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(endCache).TotalMilliseconds + "毫秒,总耗时:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
             return value;
-   
+
         }
 
         public void Insert(string key, object data)
@@ -87,7 +87,7 @@ namespace MCS.Strategy
             database.StringSet(key, jsonData);
             DateTime endCache = DateTime.Now;
 #if DEBUG
-            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:"+endCache.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
         }
 
@@ -101,7 +101,7 @@ namespace MCS.Strategy
             database.StringSet(key, jsonData, timeSpan);
             DateTime endCache = DateTime.Now;
 #if DEBUG
-                Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds+ "毫秒,总耗时:"+endCache.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
         }
 
@@ -115,7 +115,7 @@ namespace MCS.Strategy
             database.StringSet(key, jsonData, timeSpan);
             DateTime endCache = DateTime.Now;
 #if DEBUG
-                Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:"+endCache.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
         }
 
@@ -129,7 +129,7 @@ namespace MCS.Strategy
             database.StringSet(key, jsonData);
             DateTime endCache = DateTime.Now;
 #if DEBUG
-                Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:"+endCache.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
         }
 
@@ -143,7 +143,7 @@ namespace MCS.Strategy
             database.StringSet(key, jsonData, timeSpan);
             DateTime endCache = DateTime.Now;
 #if DEBUG
-                Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:"+endCache.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
         }
 
@@ -157,7 +157,7 @@ namespace MCS.Strategy
             database.StringSet(key, jsonData, timeSpan);
             DateTime endCache = DateTime.Now;
 #if DEBUG
-                Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:"+endCache.Subtract(begin).TotalMilliseconds+"毫秒");
+            Core.Log.Debug("redis插入数据时间:" + endCache.Subtract(endJson).TotalMilliseconds + "毫秒,转JSON时间:" + endJson.Subtract(begin).TotalMilliseconds + "毫秒,总耗时:" + endCache.Subtract(begin).TotalMilliseconds + "毫秒");
 #endif
         }
 
@@ -165,7 +165,7 @@ namespace MCS.Strategy
         string GetJsonData(object data, int cacheTime, bool forceOutOfDate)
         {
             var cacheObject = new CacheObject<object>() { Value = data, ExpireTime = cacheTime, ForceOutofDate = forceOutOfDate };
-             return JsonConvert.SerializeObject(cacheObject, jsonConfig);//序列化对象
+            return JsonConvert.SerializeObject(cacheObject, jsonConfig);//序列化对象
         }
 
         string GetJsonData<T>(T data, int cacheTime, bool forceOutOfDate)
@@ -182,7 +182,7 @@ namespace MCS.Strategy
         /// <summary>
         /// 判断key是否存在
         /// </summary>
-        public bool Exists (string key)
+        public bool Exists(string key)
         {
             return database.KeyExists(key);
         }
@@ -192,7 +192,7 @@ namespace MCS.Strategy
         /// </summary>
         /// <param name="key"></param>
         /// <param name="data"></param>
-        public void Send(string key,object data)
+        public void Send(string key, object data)
         {
 
             var currentTime = DateTime.Now;
@@ -207,14 +207,15 @@ namespace MCS.Strategy
         public void RegisterSubscribe<T>(string key, Cache.DoSub dosub)
         {
             ISubscriber isub = connectionMultiplexer.GetSubscriber();
-            isub.Subscribe(key, (channel, message) => {
+            isub.Subscribe(key, (channel, message) =>
+            {
                 var cacheObject = Recieve<T>((string)message);
                 dosub(cacheObject);
             });
             foreach (var mkey in subs.Keys)
                 if (mkey == key)
                     return;
-            subs.Add(key,isub);
+            subs.Add(key, isub);
         }
 
         /// <summary>
