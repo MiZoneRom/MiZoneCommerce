@@ -1,6 +1,7 @@
 ﻿using MCS.Core;
 using MCS.Core.Plugins;
 using MCS.Core.Plugins.OAuth;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,11 @@ namespace MCS.Plugin.OAuth.QQ
         static string ReturnUrl = string.Empty;
 
         public void Regist(IServiceCollection _services)
+        {
+
+        }
+
+        public void UsePlugin(IApplicationBuilder app)
         {
 
         }

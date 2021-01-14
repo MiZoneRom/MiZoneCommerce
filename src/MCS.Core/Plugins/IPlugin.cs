@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace MCS.Core.Plugins
@@ -18,5 +19,7 @@ namespace MCS.Core.Plugins
         void CheckCanEnable();
 
         void Regist(IServiceCollection _services);
+
+        void UsePlugin(IApplicationBuilder app);
     }
 }

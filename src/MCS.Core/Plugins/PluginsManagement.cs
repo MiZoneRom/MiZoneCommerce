@@ -3,6 +3,7 @@ using MCS.Core.Plugins;
 using MCS.Core.Plugins.Message;
 using MCS.Core.Plugins.OAuth;
 using MCS.Core.Plugins.Payment;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections;
@@ -50,6 +51,54 @@ namespace MCS.Core
             {
                 IntalledPlugins.Add((PluginType)value, new List<PluginInfo>());
             }
+        }
+
+        /// <summary>
+        /// 加载策略所有dll
+        /// </summary>
+        /// <param name="pluginsDirectory"></param>
+        public static void AddStrategies(this IServiceCollection _services)
+        {
+            services = _services;
+            if (!strategiesRegisted)
+            {
+                strategiesRegisted = true;
+                string pluginsDirectory = IOHelper.GetMapPath("/Strategies");
+                List<string> dllFiles = GetPluginFiles(pluginsDirectory).ToList();
+                foreach (string dllFileName in dllFiles)//加载这些文件
+                {
+                    Assembly assembly = InstallAssembly(dllFileName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 加载指定目录下所有dll
+        /// </summary>
+        /// <param name="pluginsDirectory"></param>
+        public static void AddPlugins(this IServiceCollection _services)
+        {
+            services = _services;
+            if (!pluginsRegisted)
+            {
+                pluginsRegisted = true;
+                string pluginsDirectory = IOHelper.GetMapPath("/Plugins");
+                List<string> dllFiles = GetPluginFiles(pluginsDirectory).ToList();
+                foreach (string dllFileName in dllFiles)//加载这些文件
+                {
+                    Assembly assembly = InstallAssembly(dllFileName);
+                }
+            }
+        }
+
+        public static void UseStrategies(this IApplicationBuilder app)
+        {
+
+        }
+
+        public static void UsePlugins(this IApplicationBuilder app)
+        {
+
         }
 
         /// <summary>
@@ -109,44 +158,6 @@ namespace MCS.Core
             if (pluginInfo != null)
                 plugin = Instance.Get<T>(pluginInfo.ClassFullName);
             return plugin;
-        }
-
-        /// <summary>
-        /// 加载策略所有dll
-        /// </summary>
-        /// <param name="pluginsDirectory"></param>
-        public static void RegistStrategies(this IServiceCollection _services)
-        {
-            services = _services;
-            if (!strategiesRegisted)
-            {
-                strategiesRegisted = true;
-                string pluginsDirectory = IOHelper.GetMapPath("/Strategies");
-                List<string> dllFiles = GetPluginFiles(pluginsDirectory).ToList();
-                foreach (string dllFileName in dllFiles)//加载这些文件
-                {
-                    Assembly assembly = InstallAssembly(dllFileName);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 加载指定目录下所有dll
-        /// </summary>
-        /// <param name="pluginsDirectory"></param>
-        public static void RegistPlugins(this IServiceCollection _services)
-        {
-            services = _services;
-            if (!pluginsRegisted)
-            {
-                pluginsRegisted = true;
-                string pluginsDirectory = IOHelper.GetMapPath("/Plugins");
-                List<string> dllFiles = GetPluginFiles(pluginsDirectory).ToList();
-                foreach (string dllFileName in dllFiles)//加载这些文件
-                {
-                    Assembly assembly = InstallAssembly(dllFileName);
-                }
-            }
         }
 
         /// <summary>

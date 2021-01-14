@@ -1,6 +1,7 @@
 ﻿using MCS.Core;
 using MCS.Core.Plugins.Message;
 using MCS.Plugin.MessagePlugin;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,12 @@ namespace MCS.Plugin.Message.Email
             }
         }
 
-        public void Regist(IServiceCollection _services)
+        public void Regist(IServiceCollection services)
+        {
+
+        }
+
+        public void UsePlugin(IApplicationBuilder app)
         {
 
         }

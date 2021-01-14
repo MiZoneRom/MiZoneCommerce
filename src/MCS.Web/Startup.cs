@@ -107,13 +107,13 @@ namespace MCS.Web
             services.AddSession();
 
             //注册IO及缓存
-            services.RegistStrategies();
+            services.AddStrategies();
 
             //配置Controller全部由Autofac创建
             services.AddControllersWithViews().AddControllersAsServices();
 
             //注册插件
-            services.RegistPlugins();
+            services.AddPlugins();
 
             //如果在IIS中搭建
             services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true);
@@ -238,10 +238,11 @@ namespace MCS.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            //静态文件
             app.UseStaticFiles();
 
+            //Swagger
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MCS API V1");
@@ -250,6 +251,12 @@ namespace MCS.Web
 
             //使用路由
             app.UseRouting();
+
+            //使用策略
+            app.UseStrategies();
+
+            //使用插件
+            app.UsePlugins();
 
             // 启动 CO2NET 全局注册，必须！
             var registerService = app.UseSenparcGlobal(env, senparcSetting.Value, globalRegister =>

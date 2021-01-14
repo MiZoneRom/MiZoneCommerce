@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
 namespace MCS.Plugin.Message.SMS
 {
@@ -24,6 +25,11 @@ namespace MCS.Plugin.Message.SMS
         }
 
         public void Regist(IServiceCollection _services)
+        {
+
+        }
+
+        public void UsePlugin(IApplicationBuilder app)
         {
 
         }
