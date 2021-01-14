@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Dapper.Common;
+using Dapper;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using Swashbuckle.AspNetCore.Swagger;

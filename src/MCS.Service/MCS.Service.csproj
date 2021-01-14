@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kogel.Dapper.Extension" Version="3.1.9.8" />
-    <PackageReference Include="Kogel.Dapper.Extension.MsSql" Version="3.1.9.9" />
+    <PackageReference Include="Kogel.Dapper.Extension" Version="3.2.0.2" />
+    <PackageReference Include="Kogel.Dapper.Extension.MsSql" Version="3.2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
