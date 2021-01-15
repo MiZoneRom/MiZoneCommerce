@@ -14,9 +14,16 @@ namespace MCS.Plugin.OAuth.QQ
     {
         static string ReturnUrl = string.Empty;
 
-        public void Regist(IServiceCollection _services)
+        public void Regist(IServiceCollection services)
         {
+            OAuthQQConfig qqconfig = QQCore.GetConfig();
 
+            services.AddAuthentication(options => {})
+                .AddQQ(options =>
+                {
+                    options.ClientId = qqconfig.AppId;
+                    options.ClientSecret = qqconfig.AppKey;
+                });
         }
 
         public void UsePlugin(IApplicationBuilder app)

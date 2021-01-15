@@ -8,4 +8,10 @@
     <ProjectReference Include="..\MCS.Plugin.MessagePlugin\MCS.Plugin.MessagePlugin.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="plugin.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
