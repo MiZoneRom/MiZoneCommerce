@@ -20,7 +20,7 @@ namespace MCS.Plugin.OAuth.QQ
         {
             OAuthQQConfig config = new OAuthQQConfig();
 
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/QQ.config";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/QQ.config";
 
             if (MCSIO.ExistFile(sDirectory))
             {
@@ -44,7 +44,7 @@ namespace MCS.Plugin.OAuth.QQ
         /// <param name="config"></param>
         public static void SaveConfig(OAuthQQConfig config)
         {
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/QQ.config";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/QQ.config";
             XmlSerializer xml = new XmlSerializer(typeof(OAuthQQConfig));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);

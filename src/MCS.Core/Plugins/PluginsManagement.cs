@@ -408,7 +408,7 @@ namespace MCS.Core
             string installedConfigPath = IOHelper.GetMapPath("/Plugins/Configs/") + pluginId + ".config";
             string webPath = "/Plugins/Configs/" + pluginId + ".config";
 
-            if (!MCSIO.ExistFile(webPath))//检查是否已经安装过
+            if (!IOHelper.ExistFile(webPath))//检查是否已经安装过
             {
                 //未安装过
 
@@ -418,7 +418,7 @@ namespace MCS.Core
                 {
 
                     //读取插件自带的配置信息
-                    pluginInfo = (PluginInfo)XmlHelper.DeserializeFromXMLByOSS(typeof(PluginInfo), configFiles[0].FullName);
+                    pluginInfo = (PluginInfo)XmlHelper.DeserializeFromXML(typeof(PluginInfo), configFiles[0].FullName);
 
                     //使用程序集名称为插件唯一标识
                     pluginInfo.PluginId = pluginId;
@@ -430,7 +430,7 @@ namespace MCS.Core
                     pluginInfo.AddedTime = DateTime.Now;
 
                     //序列化,将插件信息保存到系统插件配置文件中
-                    XmlHelper.SerializeToXmlByOSS(pluginInfo, installedConfigPath);
+                    XmlHelper.SerializeToXml(pluginInfo, installedConfigPath);
                 }
                 else
                     throw new FileNotFoundException("未找到插件" + pluginId + "的配置文件");
@@ -439,7 +439,7 @@ namespace MCS.Core
             else
             {
                 //读取系统插件配置文件中的配置信息
-                pluginInfo = (PluginInfo)XmlHelper.DeserializeFromXMLByOSS(typeof(PluginInfo), installedConfigPath);
+                pluginInfo = (PluginInfo)XmlHelper.DeserializeFromXML(typeof(PluginInfo), installedConfigPath);
             }
 
             //将插件信息保存至内存插件列表中

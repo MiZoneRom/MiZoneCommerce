@@ -82,7 +82,7 @@ namespace MCS.Core.Helper
 
             try
             {
-                string sDirectory = IOHelper.urlToVirtual(filePath);
+                string sDirectory = IOHelper.UrlToVirtual(filePath);
                 XmlSerializer xml = new XmlSerializer(obj.GetType());
                 MemoryStream Stream = new MemoryStream();
                 xml.Serialize(Stream, obj);
@@ -111,7 +111,7 @@ namespace MCS.Core.Helper
         {
             try
             {
-                string sDirectory = IOHelper.urlToVirtual(filePath);
+                string sDirectory = IOHelper.UrlToVirtual(filePath);
                 if (MCSIO.ExistFile(sDirectory))
                 {
                     XmlSerializer xs = new XmlSerializer(type);

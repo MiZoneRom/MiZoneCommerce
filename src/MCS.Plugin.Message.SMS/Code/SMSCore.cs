@@ -22,7 +22,7 @@ namespace MCS.Plugin.Message.SMS
         public static MessageSMSConfig GetConfig()
         {
             MessageSMSConfig config = new MessageSMSConfig();
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/Data/SMS.config";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Data/SMS.config";
 
             if (MCSIO.ExistFile(sDirectory))
             {
@@ -51,7 +51,7 @@ namespace MCS.Plugin.Message.SMS
                 //    Core.Cache.Insert("MessageContent", config);
                 //}
 
-                string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/Data/MessageContent.xml";
+                string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Data/MessageContent.xml";
 
                 if (MCSIO.ExistFile(sDirectory))
                 {
@@ -74,7 +74,7 @@ namespace MCS.Plugin.Message.SMS
         public static MessageStatus GetMessageStatus()
         {
             MessageStatus config = new MessageStatus();
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/Data/config.xml";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Data/config.xml";
 
             if (MCSIO.ExistFile(sDirectory))
             {
@@ -99,7 +99,7 @@ namespace MCS.Plugin.Message.SMS
             //    xs.Serialize(fs, config);
             //}
 
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/Data/SMS.config";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Data/SMS.config";
             XmlSerializer xml = new XmlSerializer(typeof(MessageSMSConfig));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
@@ -122,7 +122,7 @@ namespace MCS.Plugin.Message.SMS
             //    Core.Cache.Insert("MessageContent", config);
             //}
 
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/Data/MessageContent.xml";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Data/MessageContent.xml";
             XmlSerializer xml = new XmlSerializer(typeof(MessageContent));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
@@ -139,7 +139,7 @@ namespace MCS.Plugin.Message.SMS
         /// <param name="config"></param>
         public static void SaveMessageStatus(MessageStatus config)
         {
-            string sDirectory = IOHelper.urlToVirtual(WorkDirectory) + "/Data/config.xml";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Data/config.xml";
             XmlSerializer xml = new XmlSerializer(typeof(MessageStatus));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);

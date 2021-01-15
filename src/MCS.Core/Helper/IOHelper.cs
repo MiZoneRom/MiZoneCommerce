@@ -123,12 +123,35 @@ namespace MCS.Core.Helper
         /// </summary>
         /// <param name="url">物理路径名称</param>
         /// <returns>返回绝对路径</returns>
-        public static string urlToVirtual(string url)
+        public static string UrlToVirtual(string url)
         {
             string tmpRootDir = GetMapPath("/");//获取程序根目录  
             string imagesurl2 = url.Replace(tmpRootDir, ""); //转换成相对路径  
             imagesurl2 = imagesurl2.Replace(@"\", @"/");
             return "/" + imagesurl2;
         }
+
+        public static bool ExistFile(string fileName)
+        {
+            var file = GetPhysicalPath(fileName);
+            var result = File.Exists(file);
+            return result;
+        }
+
+        private static string GetPhysicalPath(string fileName)
+        {
+            if (!string.IsNullOrWhiteSpace(fileName))
+            {
+                if (fileName.StartsWith("http://") || fileName.StartsWith("https://"))
+                    fileName = fileName.Substring(fileName.IndexOf("/", fileName.IndexOf("//") + 2) + 1);
+
+                var index = fileName.LastIndexOf("@");
+                if (index > 0)
+                    fileName = fileName.Substring(0, index);
+            }
+
+            return Core.Helper.IOHelper.GetMapPath(fileName);
+        }
+
     }
 }

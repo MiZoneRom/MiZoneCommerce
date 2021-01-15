@@ -21,7 +21,7 @@ namespace MCS.Plugin.Message.Email
         public static MessageEmailConfig GetConfig()
         {
             Log.Info("email1---sss");
-            string sDirectory = MCS.Core.Helper.IOHelper.urlToVirtual(WorkDirectory) + "/Data/Email.config";
+            string sDirectory = MCS.Core.Helper.IOHelper.UrlToVirtual(WorkDirectory) + "/Data/Email.config";
             MessageEmailConfig config = new MessageEmailConfig();
 
             if (MCSIO.ExistFile(sDirectory))
@@ -51,7 +51,7 @@ namespace MCS.Plugin.Message.Email
             MessageContent config = Core.Cache.Get<MessageContent>("EmailMessageContent");
             if (config == null)
             {
-                string sDirectory = MCS.Core.Helper.IOHelper.urlToVirtual(WorkDirectory) + "/Data/MessageContent.xml";
+                string sDirectory = MCS.Core.Helper.IOHelper.UrlToVirtual(WorkDirectory) + "/Data/MessageContent.xml";
 
                 if (MCSIO.ExistFile(sDirectory))
                 {
@@ -78,7 +78,7 @@ namespace MCS.Plugin.Message.Email
         {
             Log.Info("email3---sss");
             MessageStatus config = new MessageStatus();
-            string sDirectory = MCS.Core.Helper.IOHelper.urlToVirtual(WorkDirectory) + "/Data/config.xml";
+            string sDirectory = MCS.Core.Helper.IOHelper.UrlToVirtual(WorkDirectory) + "/Data/config.xml";
 
             if (MCSIO.ExistFile(sDirectory))
             {
@@ -106,7 +106,7 @@ namespace MCS.Plugin.Message.Email
             //    xs.Serialize(fs, config);
             //}
 
-            string sDirectory = MCS.Core.Helper.IOHelper.urlToVirtual(WorkDirectory) + "/Data/Email.config";
+            string sDirectory = MCS.Core.Helper.IOHelper.UrlToVirtual(WorkDirectory) + "/Data/Email.config";
             XmlSerializer xml = new XmlSerializer(typeof(MessageEmailConfig));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
@@ -129,7 +129,7 @@ namespace MCS.Plugin.Message.Email
             //    Core.Cache.Insert("MessageContent", config);
             //}
 
-            string sDirectory = MCS.Core.Helper.IOHelper.urlToVirtual(WorkDirectory) + "/Data/MessageContent.config";
+            string sDirectory = MCS.Core.Helper.IOHelper.UrlToVirtual(WorkDirectory) + "/Data/MessageContent.config";
             XmlSerializer xml = new XmlSerializer(typeof(MessageContent));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
@@ -146,7 +146,7 @@ namespace MCS.Plugin.Message.Email
         /// <param name="config"></param>
         public static void SaveMessageStatus(MessageStatus config)
         {
-            string sDirectory = MCS.Core.Helper.IOHelper.urlToVirtual(EmailCore.WorkDirectory) + "/Data/config.xml";
+            string sDirectory = MCS.Core.Helper.IOHelper.UrlToVirtual(EmailCore.WorkDirectory) + "/Data/config.xml";
             XmlSerializer xml = new XmlSerializer(typeof(MessageStatus));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
