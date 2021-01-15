@@ -10,13 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="plugin.config">
+    <None Update="Config\plugin.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Config\" />
   </ItemGroup>
 
 </Project>
