@@ -1,15 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="md $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\&#xD;&#xA;md $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\Config\&#xD;&#xA;md $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\Resource\&#xD;&#xA;copy $(TargetPath) $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\&#xD;&#xA;xcopy  /s /y $(TargetDir)Config $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\Config&#xD;&#xA;xcopy  /s /y $(TargetDir)Resource $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\Resource" />
+	</Target>
+
+	<ItemGroup>
+		<None Update="Config\*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="Resource\*">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
