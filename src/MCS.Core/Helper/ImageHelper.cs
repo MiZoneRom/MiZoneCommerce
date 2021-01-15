@@ -343,7 +343,7 @@ namespace MCS.Core.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error("", ex);
             }
             finally
             {
@@ -440,7 +440,7 @@ namespace MCS.Core.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error("", ex);
             }
             finally
             {

@@ -29,7 +29,7 @@ namespace MCS.Core.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error("", ex);
             }
             finally
             {
@@ -57,7 +57,8 @@ namespace MCS.Core.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error("", ex);
+                return null;
             }
             finally
             {
@@ -95,7 +96,7 @@ namespace MCS.Core.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error("", ex);
             }
             return result;
 
@@ -124,7 +125,8 @@ namespace MCS.Core.Helper
             }
             catch (Exception ex)
             {
-                throw ex;
+                Log.Error("", ex);
+                return null;
             }
         }
 
