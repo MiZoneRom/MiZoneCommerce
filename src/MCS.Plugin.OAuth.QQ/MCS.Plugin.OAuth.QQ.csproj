@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -13,17 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="plugin.config">
+    <None Update="Config\data.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Config\plugin.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Config\" />
-  </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="md $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\&#xD;&#xA;copy $(TargetPath) $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\&#xD;&#xA;copy $(TargetDir)plugin.config $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\" />
+    <Exec Command="md $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\&#xD;&#xA;md $(SolutionDir)MCS.Web\$(OutDir)Plugins\OAuth\$(ProjectName)\Config\&#xD;&#xA;copy $(TargetPath) $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\&#xD;&#xA;xcopy  /s/e $(TargetDir)\Config $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\Config\" />
   </Target>
 
 </Project>
