@@ -16,9 +16,11 @@ namespace MCS.Plugin.OAuth.QQ
 
         public void Regist(IServiceCollection services)
         {
+            Log.Debug("Regist" + this.GetType().FullName);
+
             OAuthQQConfig qqconfig = QQCore.GetConfig();
 
-            services.AddAuthentication(options => {})
+            services.AddAuthentication(options => { })
                 .AddQQ(options =>
                 {
                     options.ClientId = qqconfig.AppId;

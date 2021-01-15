@@ -18,4 +18,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="md $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\&#xD;&#xA;copy $(TargetPath) $(SolutionDir)MCS.Web\$(OutDir)\Plugins\OAuth\$(ProjectName)\" />
+  </Target>
+
 </Project>
