@@ -27,6 +27,11 @@ namespace MCS.Core
         static Dictionary<PluginType, List<PluginInfo>> IntalledPlugins = new Dictionary<PluginType, List<PluginInfo>>();
 
         /// <summary>
+        /// 
+        /// </summary>
+        static List<IPlugin> IPluginList = new List<IPlugin>();
+
+        /// <summary>
         /// 标记是否已经在创建时加载，插件已注册
         /// </summary>
         static bool pluginsRegisted = false;
@@ -93,7 +98,10 @@ namespace MCS.Core
 
         public static void UseStrategies(this IApplicationBuilder app)
         {
-
+            foreach (var item in IPluginList)
+            {
+                item.UsePlugin(app);
+            }
         }
 
         public static void UsePlugins(this IApplicationBuilder app)
@@ -368,6 +376,8 @@ namespace MCS.Core
                     plugin.WorkDirectory = fileInfo.Directory.FullName;
                     plugin.Regist(services);
 
+                    IPluginList.Add(plugin);
+
                 }
 
             }
@@ -448,6 +458,10 @@ namespace MCS.Core
                 IntalledPlugins[pluginType].Add(plugin);
         }
 
+        /// <summary>
+        /// 移除插件
+        /// </summary>
+        /// <param name="plugin"></param>
         static void RemovePlugin(PluginInfo plugin)
         {
             foreach (var pluginType in plugin.PluginTypes)
