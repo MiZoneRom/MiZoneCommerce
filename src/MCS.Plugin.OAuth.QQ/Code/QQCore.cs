@@ -16,19 +16,19 @@ namespace MCS.Plugin.OAuth.QQ
         /// 获取配置
         /// </summary>
         /// <returns></returns>
-        public static OAuthQQConfig GetConfig()
+        public static PluginConfig GetConfig()
         {
-            OAuthQQConfig config = new OAuthQQConfig();
+            PluginConfig config = new PluginConfig();
 
             string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Config/data.config";
 
             if (IOHelper.ExistFile(sDirectory))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(OAuthQQConfig));
+                XmlSerializer xs = new XmlSerializer(typeof(PluginConfig));
                 byte[] b = IOHelper.GetFileContent(sDirectory);
                 string str = System.Text.Encoding.Default.GetString(b);
                 MemoryStream fs = new MemoryStream(b);
-                config = (OAuthQQConfig)xs.Deserialize(fs);
+                config = (PluginConfig)xs.Deserialize(fs);
             }
             else
             {
@@ -42,10 +42,10 @@ namespace MCS.Plugin.OAuth.QQ
         /// 保存配置
         /// </summary>
         /// <param name="config"></param>
-        public static void SaveConfig(OAuthQQConfig config)
+        public static void SaveConfig(PluginConfig config)
         {
             string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/QQ.config";
-            XmlSerializer xml = new XmlSerializer(typeof(OAuthQQConfig));
+            XmlSerializer xml = new XmlSerializer(typeof(PluginConfig));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
 

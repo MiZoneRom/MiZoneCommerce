@@ -4,7 +4,7 @@ namespace MCS.Plugin.OAuth.Weibo.Code
     /// <summary>
     /// 微博登录配置
     /// </summary>
-    public class OAuthWeiboConfig
+    public class PluginConfig
     {
 
         /// <summary>

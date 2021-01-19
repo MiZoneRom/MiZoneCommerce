@@ -17,19 +17,19 @@ namespace MCS.Plugin.OAuth.Weibo.Code
         /// 获取配置
         /// </summary>
         /// <returns></returns>
-        public static OAuthWeiboConfig GetConfig()
+        public static PluginConfig GetConfig()
         {
-            OAuthWeiboConfig config = new OAuthWeiboConfig();
+            PluginConfig config = new PluginConfig();
 
             string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Weibo.config";
 
             if (MCSIO.ExistFile(sDirectory))
             {
-                XmlSerializer xs = new XmlSerializer(typeof(OAuthWeiboConfig));
+                XmlSerializer xs = new XmlSerializer(typeof(PluginConfig));
                 byte[] b = MCSIO.GetFileContent(sDirectory);
                 string str = System.Text.Encoding.Default.GetString(b);
                 MemoryStream fs = new MemoryStream(b);
-                config = (OAuthWeiboConfig)xs.Deserialize(fs);
+                config = (PluginConfig)xs.Deserialize(fs);
             }
             else
             {
@@ -43,10 +43,10 @@ namespace MCS.Plugin.OAuth.Weibo.Code
         /// 保存配置
         /// </summary>
         /// <param name="config"></param>
-        public static void SaveConfig(OAuthWeiboConfig config)
+        public static void SaveConfig(PluginConfig config)
         {
             string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Weibo.config";
-            XmlSerializer xml = new XmlSerializer(typeof(OAuthWeiboConfig));
+            XmlSerializer xml = new XmlSerializer(typeof(PluginConfig));
             MemoryStream Stream = new MemoryStream();
             xml.Serialize(Stream, config);
 

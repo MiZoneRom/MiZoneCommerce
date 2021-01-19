@@ -4,7 +4,7 @@ namespace MCS.Plugin.OAuth.QQ
     /// <summary>
     /// 配置信息
     /// </summary>
-    public class OAuthQQConfig
+    public class PluginConfig
     {
         /// <summary>
         /// AppId

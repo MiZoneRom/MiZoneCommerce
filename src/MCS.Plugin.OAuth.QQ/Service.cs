@@ -18,7 +18,7 @@ namespace MCS.Plugin.OAuth.QQ
         {
             Log.Debug("Regist:" + this.GetType().FullName);
 
-            OAuthQQConfig qqconfig = QQCore.GetConfig();
+            PluginConfig qqconfig = QQCore.GetConfig();
 
             services.AddAuthentication(options => { })
                 .AddQQ(options =>
@@ -36,7 +36,7 @@ namespace MCS.Plugin.OAuth.QQ
         public string GetOpenLoginUrl(string returnUrl)
         {
             ReturnUrl = returnUrl;
-            OAuthQQConfig qqconfig = QQCore.GetConfig();
+            PluginConfig qqconfig = QQCore.GetConfig();
 
             if (string.IsNullOrWhiteSpace(qqconfig.AppId))
                 throw new MissingFieldException("未配置AppId");
@@ -84,7 +84,7 @@ namespace MCS.Plugin.OAuth.QQ
 
         public void CheckCanEnable()
         {
-            OAuthQQConfig qqconfig = QQCore.GetConfig();
+            PluginConfig qqconfig = QQCore.GetConfig();
             if (string.IsNullOrWhiteSpace(qqconfig.AppId))
                 throw new PluginConfigException("未设置AppId");
 
@@ -165,7 +165,7 @@ namespace MCS.Plugin.OAuth.QQ
                     throw new PluginException("验证内容必须以 /> 结尾");
             }
 
-            OAuthQQConfig oldConfig = QQCore.GetConfig();
+            PluginConfig oldConfig = QQCore.GetConfig();
             oldConfig.AppId = appidItem.Value;
             oldConfig.AppKey = appKeyItem.Value;
             oldConfig.ValidateContent = validateContent.Value;
@@ -175,7 +175,7 @@ namespace MCS.Plugin.OAuth.QQ
 
         public string GetValidateContent()
         {
-            OAuthQQConfig config = QQCore.GetConfig();
+            PluginConfig config = QQCore.GetConfig();
             return config.ValidateContent;
         }
 
