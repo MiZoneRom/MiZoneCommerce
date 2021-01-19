@@ -3,6 +3,7 @@ using MCS.Core.Plugins;
 using MCS.Core.Plugins.Message;
 using MCS.Core.Plugins.OAuth;
 using MCS.Core.Plugins.Payment;
+using MCS.Core.Strategies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -30,6 +31,11 @@ namespace MCS.Core
         /// 已加载的列表
         /// </summary>
         static List<IPlugin> IPluginList = new List<IPlugin>();
+
+        /// <summary>
+        /// 已加载的列表
+        /// </summary>
+        static List<IStrategy> IStrategyList = new List<IStrategy>();
 
         /// <summary>
         /// 标记是否已经在创建时加载，插件已注册
@@ -338,6 +344,7 @@ namespace MCS.Core
 
             Assembly assembly = null;
             PluginInfo pluginfo = null;
+            StrategyInfo strategyInfo = null;
             try
             {
 
@@ -360,7 +367,7 @@ namespace MCS.Core
 
                 if (assembly.FullName.StartsWith("MCS.Strategy"))
                 {
-
+                    strategyInfo = GetStrategyInfo(fileInfo);
                 }
 
             }
@@ -427,6 +434,50 @@ namespace MCS.Core
 
             //将插件信息保存至内存插件列表中
             UpdatePluginList(pluginInfo);
+
+            return pluginInfo;
+        }
+
+        static StrategyInfo GetStrategyInfo(FileInfo dllFile)
+        {
+            StrategyInfo pluginInfo;
+            string pluginId = dllFile.Name.Replace(".dll", "");
+            string installedConfigPath = IOHelper.GetMapPath("/Strategies/Configs/") + pluginId + ".config";
+            string webPath = "/Strategies/Configs/" + pluginId + ".config";
+
+            if (!IOHelper.ExistFile(webPath))//检查是否已经安装过
+            {
+                //未安装过
+
+                //查找插件自带的配置文件
+                FileInfo[] configFiles = dllFile.Directory.GetFiles("plugin.config", SearchOption.AllDirectories);
+                if (configFiles.Length > 0)
+                {
+
+                    //读取插件自带的配置信息
+                    pluginInfo = (StrategyInfo)XmlHelper.DeserializeFromXML(typeof(StrategyInfo), configFiles[0].FullName);
+
+                    //使用程序集名称为插件唯一标识
+                    pluginInfo.StrategyId = pluginId;
+
+                    //记录插件所在目录
+                    pluginInfo.StrategyDirectory = dllFile.Directory.FullName;
+
+                    //更新插件时间
+                    pluginInfo.AddedTime = DateTime.Now;
+
+                    //序列化,将插件信息保存到系统插件配置文件中
+                    XmlHelper.SerializeToXml(pluginInfo, installedConfigPath);
+                }
+                else
+                    throw new FileNotFoundException("未找到插件" + pluginId + "的配置文件");
+
+            }
+            else
+            {
+                //读取系统插件配置文件中的配置信息
+                pluginInfo = (StrategyInfo)XmlHelper.DeserializeFromXML(typeof(StrategyInfo), installedConfigPath);
+            }
 
             return pluginInfo;
         }
