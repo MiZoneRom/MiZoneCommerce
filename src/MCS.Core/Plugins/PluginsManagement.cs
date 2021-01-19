@@ -334,36 +334,36 @@ namespace MCS.Core
         static Assembly InstallAssembly(string dllFileName)
         {
 
-            string newFileName = dllFileName;
+            //string newFileName = dllFileName;
             FileInfo fileInfo = new FileInfo(dllFileName);
-            DirectoryInfo copyFolder;
+            //DirectoryInfo copyFolder;
 
-            if (!string.IsNullOrWhiteSpace(AppDomain.CurrentDomain.DynamicDirectory))
-            {
-                //获取asp.net dll运行目录
-                copyFolder = new DirectoryInfo(AppDomain.CurrentDomain.DynamicDirectory);
-            }
-            else
-                copyFolder = new DirectoryInfo(IOHelper.GetMapPath(""));
+            //if (!string.IsNullOrWhiteSpace(AppDomain.CurrentDomain.DynamicDirectory))
+            //{
+            //    //获取asp.net dll运行目录
+            //    copyFolder = new DirectoryInfo(AppDomain.CurrentDomain.DynamicDirectory);
+            //}
+            //else
+            //    copyFolder = new DirectoryInfo(IOHelper.GetMapPath(""));
 
-            newFileName = copyFolder.FullName + "\\" + fileInfo.Name;
+            //newFileName = copyFolder.FullName + "\\" + fileInfo.Name;
 
             Assembly assembly = null;
             PluginInfo pluginfo = null;
             try
             {
-                try
-                {
-                    System.IO.File.Copy(dllFileName, newFileName, true);
-                }
-                catch
-                {
-                    //在某些情况下会出现"正由另一进程使用，因此该进程无法访问该文件"错误，所以先重命名再复制
-                    File.Move(newFileName, newFileName + Guid.NewGuid().ToString("N") + ".locked");
-                    System.IO.File.Copy(dllFileName, newFileName, true);
-                }
+                //try
+                //{
+                //    System.IO.File.Copy(dllFileName, newFileName, true);
+                //}
+                //catch
+                //{
+                //    //在某些情况下会出现"正由另一进程使用，因此该进程无法访问该文件"错误，所以先重命名再复制
+                //    File.Move(newFileName, newFileName + Guid.NewGuid().ToString("N") + ".locked");
+                //    System.IO.File.Copy(dllFileName, newFileName, true);
+                //}
 
-                assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(newFileName);
+                assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllFileName);
 
                 //排除以 MCS.Plugin 开头的，非插件的dll，主要是插件基类
                 if (assembly.FullName.StartsWith("MCS.Plugin") && !assembly.FullName.Contains("MCS.Plugin.Payment.Alipay.Base"))
