@@ -54,6 +54,7 @@ namespace MCS.Core.Helper
             }
 
         }
+
         /// <summary>
         /// 复制指定的文件到指定目录
         /// </summary>
@@ -117,7 +118,6 @@ namespace MCS.Core.Helper
             return len;
         }
 
-
         /// <summary>
         /// 将物理路径转换成相对路径
         /// </summary>
@@ -150,7 +150,61 @@ namespace MCS.Core.Helper
                     fileName = fileName.Substring(0, index);
             }
 
-            return Core.Helper.IOHelper.GetMapPath(fileName);
+            return GetMapPath(fileName);
+        }
+
+        public static byte[] GetFileContent(string fileName)
+        {
+            var f = GetPhysicalPath(fileName);
+            FileStream fs = new FileStream(f, FileMode.Open);
+            byte[] byteData = new byte[fs.Length];
+            fs.Read(byteData, 0, byteData.Length);
+            fs.Close();
+            return byteData;
+        }
+
+        public static void CreateFile(string fileName, System.IO.Stream stream, FileCreateType fileCreateType = FileCreateType.CreateNew)
+        {
+            var path = GetPhysicalPath(fileName);
+            var dir = path.Remove(path.LastIndexOf("\\"));
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            if (fileCreateType == FileCreateType.CreateNew)
+            {
+                if (!File.Exists(path))
+                {
+                    FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                    //将内容写入文件流
+                    var fileContent = StreamToBytes(stream);
+                    fs.Write(fileContent, 0, fileContent.Length);
+                    //必须关闭文件流，否则得到的文本什么内容都没有
+                    fs.Close();//必须关闭
+                }
+                else
+                {
+                    throw new MCSIOException("");
+                }
+            }
+            else
+            {
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+                //将内容写入文件流
+                var fileContent = StreamToBytes(stream);
+                fs.Write(fileContent, 0, fileContent.Length);
+                //必须关闭文件流，否则得到的文本什么内容都没有
+                fs.Close();//必须关闭
+            }
+        }
+
+        private static byte[] StreamToBytes(Stream stream)
+        {
+            byte[] bytes = new byte[stream.Length];
+            stream.Read(bytes, 0, bytes.Length);
+            // 设置当前流的位置为流的开始
+            stream.Seek(0, SeekOrigin.Begin);
+            return bytes;
         }
 
     }

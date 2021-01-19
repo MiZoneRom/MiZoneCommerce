@@ -20,12 +20,12 @@ namespace MCS.Plugin.OAuth.QQ
         {
             OAuthQQConfig config = new OAuthQQConfig();
 
-            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/QQ.config";
+            string sDirectory = IOHelper.UrlToVirtual(WorkDirectory) + "/Config/data.config";
 
-            if (MCSIO.ExistFile(sDirectory))
+            if (IOHelper.ExistFile(sDirectory))
             {
                 XmlSerializer xs = new XmlSerializer(typeof(OAuthQQConfig));
-                byte[] b = MCSIO.GetFileContent(sDirectory);
+                byte[] b = IOHelper.GetFileContent(sDirectory);
                 string str = System.Text.Encoding.Default.GetString(b);
                 MemoryStream fs = new MemoryStream(b);
                 config = (OAuthQQConfig)xs.Deserialize(fs);
@@ -51,7 +51,7 @@ namespace MCS.Plugin.OAuth.QQ
 
             byte[] b = Stream.ToArray();
             MemoryStream stream2 = new MemoryStream(b);
-            MCSIO.CreateFile(sDirectory, stream2, Core.FileCreateType.Create);
+            IOHelper.CreateFile(sDirectory, stream2, Core.FileCreateType.Create);
         }
 
     }

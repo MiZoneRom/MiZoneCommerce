@@ -558,7 +558,6 @@
     <Folder Include="Areas\Admin\Models\System\" />
     <Folder Include="Areas\Web\Data\" />
     <Folder Include="Areas\Web\Models\" />
-    <Folder Include="Plugins\Configs\" />
     <Folder Include="Strategies\Cache\" />
     <Folder Include="Strategies\IO\" />
     <Folder Include="wwwroot\lib\adminlte\" />
