@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using MCS.Core;
 using System.IO;
 using System.Web;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MCS.Strategy
 {
     public class AspNetCoreIO : IMCSIO
     {
+        public void Regist(IServiceCollection _services)
+        {
+
+        }
+
         public void AppendFile(string fileName, string content)
         {
             byte[] fileContent = System.Text.Encoding.UTF8.GetBytes(content);

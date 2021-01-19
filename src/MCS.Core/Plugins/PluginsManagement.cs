@@ -368,6 +368,9 @@ namespace MCS.Core
                 if (assembly.FullName.StartsWith("MCS.Strategy"))
                 {
                     strategyInfo = GetStrategyInfo(fileInfo);
+
+                    //向插件注入信息
+                    IStrategy plugin = Core.Instance.Get<IStrategy>(strategyInfo.ClassFullName);
                 }
 
             }

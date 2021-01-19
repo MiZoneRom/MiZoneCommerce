@@ -22,6 +22,11 @@ namespace MCS.Strategy
             }
         }
 
+        public void Regist(IServiceCollection _services)
+        {
+
+        }
+
         /// <summary>
         /// 获得指定键的缓存值
         /// </summary>

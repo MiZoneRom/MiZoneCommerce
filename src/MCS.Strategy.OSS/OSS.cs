@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Aliyun.OSS;
 using System.IO;
 using MCS.Core;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MCS.Strategy
 {
@@ -16,6 +17,11 @@ namespace MCS.Strategy
         public OSS()
         {
             ossClient = OssClientFactory.CreateOssClient();
+        }
+
+        public void Regist(IServiceCollection _services)
+        {
+
         }
 
         public string GetFilePath(string fileName)

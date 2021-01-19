@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using StackExchange.Redis;
 using Newtonsoft.Json;
 using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MCS.Strategy
 {
@@ -26,13 +27,18 @@ namespace MCS.Strategy
 
         public Redis()
         {
-            this.address = ConfigurationManager.AppSettings.GetSection("Redis")["RedisServer"];
+            this.address = Core.ConfigurationManager.AppSettings.GetSection("Redis")["RedisServer"];
 
             if (this.address == null || string.IsNullOrWhiteSpace(this.address.ToString()))
                 throw new ApplicationException("配置文件中未找到RedisServer的有效配置");
             connectionMultiplexer = ConnectionMultiplexer.Connect(address);
             database = connectionMultiplexer.GetDatabase();
             sub = connectionMultiplexer.GetSubscriber();
+        }
+
+        public void Regist(IServiceCollection _services)
+        {
+
         }
 
         /// <summary>
