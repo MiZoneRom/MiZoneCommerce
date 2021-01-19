@@ -27,7 +27,7 @@ namespace MCS.Core
         static Dictionary<PluginType, List<PluginInfo>> IntalledPlugins = new Dictionary<PluginType, List<PluginInfo>>();
 
         /// <summary>
-        /// 
+        /// 已加载的列表
         /// </summary>
         static List<IPlugin> IPluginList = new List<IPlugin>();
 
@@ -334,34 +334,12 @@ namespace MCS.Core
         static Assembly InstallAssembly(string dllFileName)
         {
 
-            //string newFileName = dllFileName;
             FileInfo fileInfo = new FileInfo(dllFileName);
-            //DirectoryInfo copyFolder;
-
-            //if (!string.IsNullOrWhiteSpace(AppDomain.CurrentDomain.DynamicDirectory))
-            //{
-            //    //获取asp.net dll运行目录
-            //    copyFolder = new DirectoryInfo(AppDomain.CurrentDomain.DynamicDirectory);
-            //}
-            //else
-            //    copyFolder = new DirectoryInfo(IOHelper.GetMapPath(""));
-
-            //newFileName = copyFolder.FullName + "\\" + fileInfo.Name;
 
             Assembly assembly = null;
             PluginInfo pluginfo = null;
             try
             {
-                //try
-                //{
-                //    System.IO.File.Copy(dllFileName, newFileName, true);
-                //}
-                //catch
-                //{
-                //    //在某些情况下会出现"正由另一进程使用，因此该进程无法访问该文件"错误，所以先重命名再复制
-                //    File.Move(newFileName, newFileName + Guid.NewGuid().ToString("N") + ".locked");
-                //    System.IO.File.Copy(dllFileName, newFileName, true);
-                //}
 
                 assembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(dllFileName);
 
