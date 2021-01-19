@@ -8,4 +8,14 @@
     <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Config\plugin.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="md $(SolutionDir)MCS.Web\$(OutDir)Strategies\Cache\$(ProjectName)\&#xD;&#xA;md $(SolutionDir)MCS.Web\$(OutDir)Strategies\Cache\$(ProjectName)\Config\&#xD;&#xA;copy $(TargetPath) $(SolutionDir)MCS.Web\$(OutDir)Strategies\Cache\$(ProjectName)\&#xD;&#xA;xcopy  /s /y $(TargetDir)Config $(SolutionDir)MCS.Web\$(OutDir)Strategies\Cache\$(ProjectName)\Config" />
+  </Target>
+
 </Project>

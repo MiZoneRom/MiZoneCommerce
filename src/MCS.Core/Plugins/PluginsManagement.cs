@@ -380,6 +380,11 @@ namespace MCS.Core
 
                 }
 
+                if (assembly.FullName.StartsWith("MCS.Strategy"))
+                {
+
+                }
+
             }
             catch (IOException ex)
             {

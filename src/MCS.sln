@@ -63,7 +63,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Strategy", "Strategy", "{CE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IO", "IO", "{83C8F4C7-961B-4589-BCB2-D8B3B6E87382}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.OAuth.Weibo", "MCS.Plugin.OAuth.Weibo\MCS.Plugin.OAuth.Weibo.csproj", "{CDBF92CF-BBC8-4176-BE52-6BC10713AD05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.OAuth.Weibo", "MCS.Plugin.OAuth.Weibo\MCS.Plugin.OAuth.Weibo.csproj", "{CDBF92CF-BBC8-4176-BE52-6BC10713AD05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
