@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.IO;
 using System.Text;
 using System.Web;
 using System.Xml;
@@ -78,11 +79,15 @@ namespace MCS.WeixinPaymentBase
                 string v = (string)collection[k];
                 this.setParameter(k, v);
             }
-            if (this.request.InputStream.Length > 0)
+
+            var buffer = new MemoryStream();
+            this.request.Body.CopyTo(buffer);
+
+            if (buffer.Length > 0)
             {
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.XmlResolver = null;
-                xmlDoc.Load(this.request.InputStream);
+                xmlDoc.Load(buffer);
                 XmlNode root = xmlDoc.SelectSingleNode("xml");
                 XmlNodeList xnl = root.ChildNodes;
 
