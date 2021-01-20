@@ -1,4 +1,6 @@
 ﻿using MCS.Core;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -233,8 +235,7 @@ namespace MCS.WeixinPaymentBase
         /// <returns></returns>
         public static bool IsWeixinClientRequest(this HttpContext httpContext)
         {
-            return !string.IsNullOrEmpty(httpContext.Request.UserAgent) &&
-                   httpContext.Request.UserAgent.Contains("MicroMessenger");
+            return !string.IsNullOrEmpty(httpContext.Request.Headers[HeaderNames.UserAgent]) && httpContext.Request.Headers[HeaderNames.UserAgent].ToString().Contains("MicroMessenger");
         }
 
         /// <summary>

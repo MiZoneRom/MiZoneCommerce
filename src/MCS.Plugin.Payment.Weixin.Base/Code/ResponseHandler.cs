@@ -72,7 +72,7 @@ namespace MCS.WeixinPaymentBase
                 }
             }
             //query string
-            collection = this.request.QueryString;
+            collection = this.request.Query;
             foreach (string k in collection)
             {
                 string v = (string)collection[k];
