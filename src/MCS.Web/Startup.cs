@@ -136,8 +136,8 @@ namespace MCS.Web
                 });
             });
 
-            //注册缓存
-            services.AddMemoryCache();
+            //注册缓存 移动至插件内注册
+            //services.AddMemoryCache();
 
             //配置接口文档
             services.AddSwaggerGen(c =>

@@ -24,7 +24,7 @@ namespace MCS.Strategy
 
         public void Regist(IServiceCollection _services)
         {
-
+            _services.AddMemoryCache();
         }
 
         /// <summary>
