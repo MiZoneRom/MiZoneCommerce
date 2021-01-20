@@ -231,10 +231,10 @@ namespace MCS.Plugin.Payment.AlipayWAP
         NameValueCollection GetQuerystring(HttpRequest request)
         {
             NameValueCollection querystring;
-            if (request.HttpMethod == "POST")
+            if (request.Method == "POST")
                 querystring = request.Form;
             else
-                querystring = request.QueryString;
+                querystring = request.Query;
             return querystring;
         }
 
