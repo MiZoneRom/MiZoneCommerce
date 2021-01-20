@@ -9,6 +9,10 @@
 	</Target>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="Config\*">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

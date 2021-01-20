@@ -275,7 +275,7 @@ namespace MCS.Web
             registerService.UseSenparcWeixin(senparcWeixinSetting.Value, weixinRegister =>
             {
                 //注册小程序
-                weixinRegister.RegisterWxOpenAccount(senparcWeixinSetting.Value, "测试小程序");
+                weixinRegister.RegisterWxOpenAccount(senparcWeixinSetting.Value, "MCS_SmallProgram");
             });
 
             //启用跨越
