@@ -371,6 +371,7 @@ namespace MCS.Core
 
                     //向插件注入信息
                     IStrategy plugin = Core.Instance.Get<IStrategy>(strategyInfo.ClassFullName);
+                    plugin.Regist(services);
                 }
 
             }
