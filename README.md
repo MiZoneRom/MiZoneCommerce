@@ -1,5 +1,5 @@
 # MiZoneCommerce
-### 基于.net core 3.1搭建
+### 基于.net 5.0搭建
 #### 架构设计
 - 使用Autofac替代自带ioc框架实现工厂模式
 - 添加Log4Net自动日志
