@@ -238,13 +238,13 @@ namespace MCS.Plugin.Payment.AlipayWAP
             return querystring;
         }
 
-        public PaymentInfo ProcessNotify(System.Web.HttpRequest context)
+        public PaymentInfo ProcessNotify(HttpRequest context)
         {
             //Post方式
             var queryString = GetQuerystring(context);
-            NameValueCollection coll = context.Form;
+            IFormCollection coll = context.Form;
             Dictionary<string, string> paras = new Dictionary<string, string>();
-            foreach (string key in coll.AllKeys)
+            foreach (string key in coll.Keys)
             {
                 paras.Add(key, coll[key]);
             }
@@ -276,7 +276,7 @@ namespace MCS.Plugin.Payment.AlipayWAP
             var queryString = GetQuerystring(context);
             IFormCollection coll = context.Form;
             Dictionary<string, string> paras = new Dictionary<string, string>();
-            foreach (string key in coll.AllKeys)
+            foreach (string key in coll.Keys)
             {
                 paras.Add(key, coll[key]);
             }
