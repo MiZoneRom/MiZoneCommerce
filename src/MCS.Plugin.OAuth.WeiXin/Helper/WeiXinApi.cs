@@ -12,7 +12,7 @@ namespace MCS.Plugin.OAuth.WeiXin.Assistant
         public static UserInfo GetUserInfo(string code,string appid,string appsecret)
         {
             UserInfo userinfo= null;
-            OAuthRule rule = ConfigService<OAuthRule>.GetConfig(WXLoginPlugin.WXWorkDirectory + "\\Config\\OAuthUrl.config");
+            OAuthRule rule = ConfigService<OAuthRule>.GetConfig(Service.WXWorkDirectory + "\\Config\\OAuthUrl.config");
             if (string.IsNullOrEmpty(rule.GetTokenUrl))
                 throw new System.MissingFieldException("未设置微信接口地址:GetTokenUrl");
             if (string.IsNullOrEmpty(rule.GetUserInfoUrl))

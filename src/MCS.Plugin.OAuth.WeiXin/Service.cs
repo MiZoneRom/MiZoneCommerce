@@ -14,14 +14,13 @@ using MCS.Core;
 
 namespace MCS.Plugin.OAuth.WeiXin
 {
-    public class WXLoginPlugin : IOAuthPlugin
+    public class Service : IOAuthPlugin
     {
         public static string WXWorkDirectory = string.Empty;
         static string ReturnUrl = string.Empty;
 
         public void Regist(IServiceCollection services)
         {
-            Log.Debug("Regist" + this.GetType().FullName);
 
         }
 
@@ -152,7 +151,7 @@ namespace MCS.Plugin.OAuth.WeiXin
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentNullException("WorkDirectory不能为空");
-                WXLoginPlugin.WXWorkDirectory = value;
+                Service.WXWorkDirectory = value;
             }
         }
 
@@ -175,10 +174,11 @@ namespace MCS.Plugin.OAuth.WeiXin
             {
                 if (string.IsNullOrWhiteSpace(WXWorkDirectory))
                 {
-                    throw new System.MissingFieldException("未设置工作目录！");
+                    throw new MissingFieldException("未设置工作目录！");
                 }
                 return WXWorkDirectory + "/Resource/weixin2.png";
             }
         }
+
     }
 }

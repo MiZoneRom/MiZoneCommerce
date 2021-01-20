@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Alipay.AopSdk.Core" Version="2.5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MCS.Core\MCS.Core.csproj" />
+    <ProjectReference Include="..\MCS.Plugin.Payment.Alipay.Base\MCS.Plugin.Payment.Alipay.Base.csproj" />
+    <ProjectReference Include="..\MCS.Plugin.PaymentPlugin\MCS.Plugin.PaymentPlugin.csproj" />
+  </ItemGroup>
+
+</Project>
