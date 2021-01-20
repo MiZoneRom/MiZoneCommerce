@@ -82,13 +82,13 @@ namespace MCS.Plugin.Payment.Alipay.Base
         /// 获取支付宝GET过来通知消息，并以“参数名=参数值”的形式组成数组
         /// </summary>
         /// <returns>request回来的信息组成的数组</returns>
-        public static Dictionary<string, string> GetRequestGet(NameValueCollection queryString)
+        public static Dictionary<string, string> GetRequestGet(Dictionary<string, string> queryString)
         {
             int i = 0;
             Dictionary<string, string> sArray = new Dictionary<string, string>();
 
             // Get names of all forms into a string array.
-            String[] requestItem = queryString.AllKeys;
+            String[] requestItem = queryString.Keys;
 
             for (i = 0; i < requestItem.Length; i++)
             {
@@ -103,16 +103,13 @@ namespace MCS.Plugin.Payment.Alipay.Base
         /// 获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
         /// </summary>
         /// <returns>request回来的信息组成的数组</returns>
-        public static Dictionary<string, string> GetRequestPost(NameValueCollection form)
+        public static Dictionary<string, string> GetRequestPost(Dictionary<string, string> form)
         {
             int i = 0;
             Dictionary<string, string> sArray = new Dictionary<string, string>();
-            NameValueCollection coll;
-            //Load Form variables into NameValueCollection variable.
-            coll = form;
 
             // Get names of all forms into a string array.
-            String[] requestItem = coll.AllKeys;
+            String[] requestItem = form.Keys.ToArray();
 
             for (i = 0; i < requestItem.Length; i++)
             {

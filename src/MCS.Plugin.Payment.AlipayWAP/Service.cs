@@ -16,11 +16,25 @@ using Alipay.AopSdk.Core.Request;
 using Alipay.AopSdk.Core.Domain;
 using Microsoft.AspNetCore.Http;
 using Alipay.AopSdk.Core.Util;
+using Microsoft.Extensions.Primitives;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 
 namespace MCS.Plugin.Payment.AlipayWAP
 {
     public class Service : AlipayServiceBase, IPaymentPlugin
     {
+
+        public void Regist(IServiceCollection services)
+        {
+
+        }
+
+        public void UsePlugin(IApplicationBuilder app)
+        {
+
+        }
+
         public FormData GetFormData()
         {
             Config config = Utility<Config>.GetConfig(WorkDirectory);
@@ -228,13 +242,13 @@ namespace MCS.Plugin.Payment.AlipayWAP
             set { throw new NotImplementedException(); }
         }
 
-        NameValueCollection GetQuerystring(HttpRequest request)
+        Dictionary<string, string> GetQuerystring(HttpRequest request)
         {
-            NameValueCollection querystring;
+            Dictionary<string, string> querystring;
             if (request.Method == "POST")
-                querystring = request.Form;
+                querystring = request.Form.ToDictionary(k => k.Key, v => v.Value.ToString());
             else
-                querystring = request.Query;
+                querystring = request.Query.ToDictionary(k => k.Key, v => v.Value.ToString());
             return querystring;
         }
 

@@ -199,14 +199,13 @@ namespace MCS.Plugin.Payment.Alipay
             return paymentInfo;
         }
 
-
-        NameValueCollection GetQuerystring(HttpRequest request)
+        Dictionary<string, string> GetQuerystring(HttpRequest request)
         {
-            NameValueCollection querystring;
+            Dictionary<string, string> querystring;
             if (request.Method == "POST")
-                querystring = (NameValueCollection)request.Form;
+                querystring = request.Form.ToDictionary(k => k.Key, v => v.Value.ToString());
             else
-                querystring = (NameValueCollection)request.Query;
+                querystring = request.Query.ToDictionary(k => k.Key, v => v.Value.ToString());
             return querystring;
         }
 
