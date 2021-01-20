@@ -88,7 +88,7 @@ namespace MCS.Plugin.Payment.Alipay.Base
             Dictionary<string, string> sArray = new Dictionary<string, string>();
 
             // Get names of all forms into a string array.
-            String[] requestItem = queryString.Keys;
+            String[] requestItem = queryString.Keys.ToArray();
 
             for (i = 0; i < requestItem.Length; i++)
             {
