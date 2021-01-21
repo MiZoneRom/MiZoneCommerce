@@ -11,7 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Web;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     public static class RequestUtility
     {

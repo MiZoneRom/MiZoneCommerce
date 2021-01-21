@@ -3,7 +3,7 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     /// <summary>
     /// 微信支付接口，官方API：https://mp.weixin.qq.com/paymch/readtemplate?t=mp/business/course2_tmpl&lang=zh_CN&token=25857919#4

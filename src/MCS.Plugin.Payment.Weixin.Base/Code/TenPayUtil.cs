@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     /// <summary>
     /// TenpayUtil 的摘要说明。

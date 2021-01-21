@@ -67,21 +67,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.OAuth.Weibo", "M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{29FD358F-1F7F-41FE-81AA-A3C2F2AC0511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.Alipay", "MCS.Plugin.Payment.Alipay\MCS.Plugin.Payment.Alipay.csproj", "{E5C8D279-F413-4B75-9773-9276A09E3A41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.Alipay", "MCS.Plugin.Payment.Alipay\MCS.Plugin.Payment.Alipay.csproj", "{E5C8D279-F413-4B75-9773-9276A09E3A41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.Alipay.Base", "MCS.Plugin.Payment.Alipay.Base\MCS.Plugin.Payment.Alipay.Base.csproj", "{50CB6B6A-6742-4DEE-B8CF-9E4637A4B8FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.Alipay.Base", "MCS.Plugin.Payment.Alipay.Base\MCS.Plugin.Payment.Alipay.Base.csproj", "{50CB6B6A-6742-4DEE-B8CF-9E4637A4B8FB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.PaymentPlugin", "MCS.Plugin.PaymentPlugin\MCS.Plugin.PaymentPlugin.csproj", "{28B1E5F1-3BC8-4CA4-A1F8-ACDD045F5874}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Alipay", "Alipay", "{745DB70F-02C3-438C-BA78-A3E7D1702DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.AlipayApp", "MCS.Plugin.Payment.AlipayApp\MCS.Plugin.Payment.AlipayApp.csproj", "{B58DB04F-C248-47EE-BB0A-45332980BE21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.AlipayApp", "MCS.Plugin.Payment.AlipayApp\MCS.Plugin.Payment.AlipayApp.csproj", "{B58DB04F-C248-47EE-BB0A-45332980BE21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.AlipayWAP", "MCS.Plugin.Payment.AlipayWAP\MCS.Plugin.Payment.AlipayWAP.csproj", "{E7428588-845D-4289-BEF3-7505FB2CABC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.AlipayWAP", "MCS.Plugin.Payment.AlipayWAP\MCS.Plugin.Payment.AlipayWAP.csproj", "{E7428588-845D-4289-BEF3-7505FB2CABC1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeiXin", "WeiXin", "{2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.Weixin.Base", "MCS.Plugin.Payment.Weixin.Base\MCS.Plugin.Payment.Weixin.Base.csproj", "{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.Weixin.Base", "MCS.Plugin.Payment.Weixin.Base\MCS.Plugin.Payment.Weixin.Base.csproj", "{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.WeiXinPay", "MCS.Plugin.Payment.WeiXinPay\MCS.Plugin.Payment.WeiXinPay.csproj", "{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Himall.Plugin.Payment.WeiXinPayApp", "Himall.Plugin.Payment.WeiXinPayApp\Himall.Plugin.Payment.WeiXinPayApp.csproj", "{DC9AFBAC-9A91-4974-93BB-048E3361E87D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -193,6 +197,14 @@ Global
 		{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC9AFBAC-9A91-4974-93BB-048E3361E87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC9AFBAC-9A91-4974-93BB-048E3361E87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC9AFBAC-9A91-4974-93BB-048E3361E87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC9AFBAC-9A91-4974-93BB-048E3361E87D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,6 +243,8 @@ Global
 		{E7428588-845D-4289-BEF3-7505FB2CABC1} = {745DB70F-02C3-438C-BA78-A3E7D1702DA6}
 		{2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99} = {29FD358F-1F7F-41FE-81AA-A3C2F2AC0511}
 		{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
+		{15B318F4-BAB9-43B4-AC85-BF98D3A937CF} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
+		{DC9AFBAC-9A91-4974-93BB-048E3361E87D} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1545996-40BE-4F88-A489-BE41C612DB22}

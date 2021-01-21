@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using System.Xml;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
 
     /** 

@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     class SHA1Util
     {

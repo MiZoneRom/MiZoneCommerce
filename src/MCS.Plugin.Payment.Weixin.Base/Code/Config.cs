@@ -1,7 +1,7 @@
 ﻿using MCS.Core;
 using MCS.Plugin.PaymentPlugin;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     public class Config : ConfigBase
     {

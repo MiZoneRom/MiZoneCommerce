@@ -11,7 +11,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     public class ServiceBase : PaymentBase<Config>
     {

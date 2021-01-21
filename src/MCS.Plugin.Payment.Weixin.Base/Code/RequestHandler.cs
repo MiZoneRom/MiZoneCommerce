@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     /**
     '签名工具类

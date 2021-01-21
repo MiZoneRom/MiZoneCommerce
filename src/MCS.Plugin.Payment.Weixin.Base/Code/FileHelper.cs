@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace MCS.WeixinPaymentBase
+namespace MCS.Plugin.Payment.Weixin.Base
 {
     public class FileHelper
     {
