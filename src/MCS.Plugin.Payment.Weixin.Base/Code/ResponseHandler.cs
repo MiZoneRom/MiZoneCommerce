@@ -24,9 +24,9 @@ namespace MCS.WeixinPaymentBase
     */
 
     public class ResponseHandler
-	{
-		// 密钥 
-		private string key;
+    {
+        // 密钥 
+        private string key;
 
         // appkey
         private string appkey;
@@ -34,11 +34,11 @@ namespace MCS.WeixinPaymentBase
         //xmlMap
         private Hashtable xmlMap;
 
-		// 应答的参数
-		protected Hashtable parameters;
-		
-		 //debug信息
-		private string debugInfo;
+        // 应答的参数
+        protected Hashtable parameters;
+
+        //debug信息
+        private string debugInfo;
         //原始内容
         protected string content;
 
@@ -61,22 +61,22 @@ namespace MCS.WeixinPaymentBase
             xmlMap = new Hashtable();
 
             this.request = request;
-            NameValueCollection collection;
+            //NameValueCollection collection;
             //post data
             if (this.request.Method == "POST")
             {
-                collection = request.Form;
-                foreach (string k in collection)
+                var formCollection = request.Form;
+                foreach (string k in formCollection.Keys)
                 {
-                    string v = (string)collection[k];
+                    string v = (string)formCollection[k];
                     this.setParameter(k, v);
                 }
             }
             //query string
-            collection = this.request.Query;
-            foreach (string k in collection)
+            var queryCollection = this.request.Query;
+            foreach (string k in queryCollection.Keys)
             {
-                string v = (string)collection[k];
+                string v = (string)queryCollection[k];
                 this.setParameter(k, v);
             }
 
@@ -98,65 +98,65 @@ namespace MCS.WeixinPaymentBase
                 }
             }
         }
-    
 
-		/** 获取密钥 */
-		public string getKey() 
-		{ return key;}
 
-		/** 设置密钥 */
-		public void setKey(string key, string appkey) 
-		{
+        /** 获取密钥 */
+        public string getKey()
+        { return key; }
+
+        /** 设置密钥 */
+        public void setKey(string key, string appkey)
+        {
             this.key = key;
             this.appkey = appkey;
         }
 
-		/** 获取参数值 */
-		public string getParameter(string parameter) 
-		{
-			string s = (string)parameters[parameter];
-			return (null == s) ? "" : s;
-		}
+        /** 获取参数值 */
+        public string getParameter(string parameter)
+        {
+            string s = (string)parameters[parameter];
+            return (null == s) ? "" : s;
+        }
 
-		/** 设置参数值 */
-		public void setParameter(string parameter,string parameterValue) 
-		{
-			if(parameter != null && parameter != "")
-			{
-				if(parameters.Contains(parameter))
-				{
-					parameters.Remove(parameter);
-				}
-	
-				parameters.Add(parameter,parameterValue);		
-			}
-		}
+        /** 设置参数值 */
+        public void setParameter(string parameter, string parameterValue)
+        {
+            if (parameter != null && parameter != "")
+            {
+                if (parameters.Contains(parameter))
+                {
+                    parameters.Remove(parameter);
+                }
 
-		/** 是否财付通签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 
+                parameters.Add(parameter, parameterValue);
+            }
+        }
+
+        /** 是否财付通签名,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 
 		 * @return boolean */
-        public virtual Boolean isTenpaySign() 
-		{
-			StringBuilder sb = new StringBuilder();
+        public virtual Boolean isTenpaySign()
+        {
+            StringBuilder sb = new StringBuilder();
 
-			ArrayList akeys=new ArrayList(parameters.Keys); 
-			akeys.Sort();
+            ArrayList akeys = new ArrayList(parameters.Keys);
+            akeys.Sort();
 
-			foreach(string k in akeys)
-			{
-				string v = (string)parameters[k];
-				if(null != v && "".CompareTo(v) != 0
-					&& "sign".CompareTo(k) != 0 && "key".CompareTo(k) != 0) 
-				{
-					sb.Append(k + "=" + v + "&");
-				}
-			}
+            foreach (string k in akeys)
+            {
+                string v = (string)parameters[k];
+                if (null != v && "".CompareTo(v) != 0
+                    && "sign".CompareTo(k) != 0 && "key".CompareTo(k) != 0)
+                {
+                    sb.Append(k + "=" + v + "&");
+                }
+            }
 
-			sb.Append("key=" + this.getKey());
+            sb.Append("key=" + this.getKey());
             string sign = MD5Util.GetMD5(sb.ToString(), getCharset()).ToLower();
             this.setDebugInfo(sb.ToString() + " => sign:" + sign);
-			//debug信息
-			return getParameter("sign").ToLower().Equals(sign); 
-		}
+            //debug信息
+            return getParameter("sign").ToLower().Equals(sign);
+        }
 
         //判断微信签名
         public virtual Boolean isWXsign()
@@ -197,16 +197,16 @@ namespace MCS.WeixinPaymentBase
 
         }
 
-   				
-		/** 设置debug信息 */
-		protected void setDebugInfo(String debugInfo)
-		{ this.debugInfo = debugInfo;}
 
-		protected virtual string getCharset()
-		{
-			return "UTF-8";
-		}
+        /** 设置debug信息 */
+        protected void setDebugInfo(String debugInfo)
+        { this.debugInfo = debugInfo; }
 
-		
-	}
+        protected virtual string getCharset()
+        {
+            return "UTF-8";
+        }
+
+
+    }
 }
