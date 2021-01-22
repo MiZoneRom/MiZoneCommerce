@@ -10,7 +10,12 @@ namespace MCS.AdminAPI.Controllers
 {
     [ApiController]
     [Route("api/admin/[controller]")]
-    public class LoginController : BaseAPIController
+    public class LoginController : BaseAdminAPIController
     {
+        [HttpGet("{id}")]
+        public ActionResult<string> Get(int id)
+        {
+            return "value";
+        }
     }
 }

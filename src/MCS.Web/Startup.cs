@@ -36,6 +36,8 @@ using Senparc.Weixin;
 using AutoMapper;
 using MCS.Application.Mappers.Profiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using MCS.AdminAPI;
+using System.Reflection;
 
 namespace MCS.Web
 {
@@ -197,9 +199,7 @@ namespace MCS.Web
             services.AddMvc(o =>
             {
                 o.Filters.Add(typeof(BaseExceptions));
-            });
-
-            //.AddApplicationPart();//插件式开发
+            }).AddApplicationPart(typeof(BaseAdminAPIController).Assembly);//插件式开发
 
             services.Configure<CookiePolicyOptions>(options =>
             {
