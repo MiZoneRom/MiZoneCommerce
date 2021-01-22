@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Specialized;
@@ -269,6 +270,264 @@ namespace MCS.Core.Helper
         {
             var port = HttpContextAccessor.HttpContext.Request.HttpContext.Connection.RemotePort;
             return port.ToString();
+        }
+
+        /// <summary>
+        /// 获得请求的url
+        /// </summary>
+        /// <returns></returns>
+        public static string GetUrl()
+        {
+            return HttpContextAccessor.HttpContext.Request.GetDisplayUrl();
+        }
+
+        /// <summary>
+        /// 获得请求的原始url
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRawUrl()
+        {
+            return HttpContextAccessor.HttpContext.Request.GetEncodedUrl();
+        }
+
+        /// <summary>
+        /// 获得请求的ip
+        /// </summary>
+        /// <returns></returns>
+        public static string GetIP()
+        {
+            string ip = string.Empty;
+            #region 之前获取IP地址方式
+            //if (HttpContext.Current.Request.ServerVariables["HTTP_VIA"] != null)
+            //    ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+            //else
+            //    ip = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].ToString();
+            #endregion
+
+            #region 新获取IP地址方式
+            ip = HttpContextAccessor.HttpContext.Request.Headers["X-Forwarded-For"];
+            if (ip != null && ip != String.Empty)
+            {
+                //可能有代理 
+                if (ip.IndexOf(".") == -1)     //没有“.”肯定是非IPv4格式 
+                    ip = null;
+                else
+                {
+                    if (ip.IndexOf(",") != -1)
+                    {
+                        //有“,”，估计多个代理。取第一个不是内网的IP。 
+                        ip = ip.Replace(" ", "").Replace("'", "");
+                        string[] temparyip = ip.Split(",;".ToCharArray());
+                        for (int i = 0; i < temparyip.Length; i++)
+                        {
+                            if (ValidateHelper.IsIP(temparyip[i])
+                                && temparyip[i].Substring(0, 3) != "10."
+                                && temparyip[i].Substring(0, 7) != "192.168"
+                                && temparyip[i].Substring(0, 7) != "172.16.")
+                            {
+                                return temparyip[i];     //找到不是内网的地址 
+                            }
+                        }
+                    }
+                    else if (ValidateHelper.IsIP(ip)) //代理即是IP格式 
+                        return ip;
+                    else
+                        ip = null;     //代理中的内容 非IP，取IP 
+                }
+            }
+            string IpAddress = (HttpContextAccessor.HttpContext.Request.Headers["X-Forwarded-For"] != "" && HttpContextAccessor.HttpContext.Request.Headers["X-Forwarded-For"] != String.Empty) ? HttpContextAccessor.HttpContext.Request.Headers["X-Forwarded-For"] : HttpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+
+
+            if (string.IsNullOrEmpty(ip) || !ValidateHelper.IsIP(ip))
+                ip = HttpContextAccessor.HttpContext.Request.Headers["X-Forwarded-For"];
+
+            if (string.IsNullOrEmpty(ip) || !ValidateHelper.IsIP(ip))
+                ip = HttpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            #endregion
+
+            if (string.IsNullOrEmpty(ip) || !ValidateHelper.IsIP(ip))
+                ip = "127.0.0.1";
+            return ip;
+        }
+
+        /// <summary>
+        /// 获得请求的浏览器类型
+        /// </summary>
+        /// <returns></returns>
+        public static string GetBrowserType()
+        {
+            string type = HttpContextAccessor.HttpContext.Request.UserAgent().UA.Family;
+            if (string.IsNullOrEmpty(type))
+                return "未知";
+
+            return type.ToLower();
+        }
+
+        /// <summary>
+        /// 获得请求的浏览器名称
+        /// </summary>
+        /// <returns></returns>
+        public static string GetBrowserName()
+        {
+            string name = HttpContextAccessor.HttpContext.Request.UserAgent().UA.Family;
+            if (string.IsNullOrEmpty(name))
+                return "未知";
+
+            return name.ToLower();
+        }
+
+        /// <summary>
+        /// 获得请求的浏览器版本
+        /// </summary>
+        /// <returns></returns>
+        public static string GetBrowserVersion()
+        {
+            string version = HttpContextAccessor.HttpContext.Request.UserAgent().UA.Major + "." + HttpContextAccessor.HttpContext.Request.UserAgent().UA.Minor;
+            if (string.IsNullOrEmpty(version))
+                return "未知";
+
+            return version;
+        }
+
+        /// <summary>
+        /// 获得请求客户端的操作系统类型
+        /// </summary>
+        /// <returns></returns>
+        public static string GetOSType()
+        {
+            string type = "未知";
+            string userAgent = HttpContextAccessor.HttpContext.Request.Headers["User-Agent"];
+
+            if (userAgent.Contains("NT 6.1"))
+            {
+                type = "Windows 7";
+            }
+            else if (userAgent.Contains("NT 5.1"))
+            {
+                type = "Windows XP";
+            }
+            else if (userAgent.Contains("NT 6.2"))
+            {
+                type = "Windows 8";
+            }
+            else if (userAgent.Contains("android"))
+            {
+                type = "Android";
+            }
+            else if (userAgent.Contains("iphone"))
+            {
+                type = "IPhone";
+            }
+            else if (userAgent.Contains("Mac"))
+            {
+                type = "Mac";
+            }
+            else if (userAgent.Contains("NT 6.0"))
+            {
+                type = "Windows Vista";
+            }
+            else if (userAgent.Contains("NT 5.2"))
+            {
+                type = "Windows 2003";
+            }
+            else if (userAgent.Contains("NT 5.0"))
+            {
+                type = "Windows 2000";
+            }
+            else if (userAgent.Contains("98"))
+            {
+                type = "Windows 98";
+            }
+            else if (userAgent.Contains("95"))
+            {
+                type = "Windows 95";
+            }
+            else if (userAgent.Contains("Me"))
+            {
+                type = "Windows Me";
+            }
+            else if (userAgent.Contains("NT 4"))
+            {
+                type = "Windows NT4";
+            }
+            else if (userAgent.Contains("Unix"))
+            {
+                type = "UNIX";
+            }
+            else if (userAgent.Contains("Linux"))
+            {
+                type = "Linux";
+            }
+            else if (userAgent.Contains("SunOS"))
+            {
+                type = "SunOS";
+            }
+            return type;
+        }
+
+        /// <summary>
+        /// 获得请求客户端的操作系统名称
+        /// </summary>
+        /// <returns></returns>
+        public static string GetOSName()
+        {
+            string name = HttpContextAccessor.HttpContext.Request.UserAgent().OS.Family;
+            if (string.IsNullOrEmpty(name))
+                return "未知";
+
+            return name;
+        }
+
+        /// <summary>
+        /// 判断是否是浏览器请求
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsBrowser()
+        {
+            string name = GetBrowserName();
+            foreach (string item in _browserlist)
+            {
+                if (name.Contains(item))
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 是否是移动设备请求
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsMobile()
+        {
+            if (HttpContextAccessor.HttpContext.Request.UserAgent().Device.Model == "Mobile")
+                return true;
+
+            if (HttpContextAccessor.HttpContext.Request.UserAgent().Device.Model == "Tablet")
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// 判断是否是搜索引擎爬虫请求
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsCrawler()
+        {
+            bool result = HttpContextAccessor.HttpContext.Request.UserAgent().Device.IsSpider;
+            if (!result)
+            {
+                string referrer = GetUrlReferrer();
+                if (referrer.Length > 0)
+                {
+                    foreach (string item in _searchenginelist)
+                    {
+                        if (referrer.Contains(item))
+                            return true;
+                    }
+                }
+            }
+            return result;
         }
 
         #endregion

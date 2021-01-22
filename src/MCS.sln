@@ -83,9 +83,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeiXin", "WeiXin", "{2D9DE9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.Weixin.Base", "MCS.Plugin.Payment.Weixin.Base\MCS.Plugin.Payment.Weixin.Base.csproj", "{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.WeiXinPay", "MCS.Plugin.Payment.WeiXinPay\MCS.Plugin.Payment.WeiXinPay.csproj", "{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.WeiXinPay", "MCS.Plugin.Payment.WeiXinPay\MCS.Plugin.Payment.WeiXinPay.csproj", "{15B318F4-BAB9-43B4-AC85-BF98D3A937CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCS.Plugin.Payment.WeiXinPayApp", "MCS.Plugin.Payment.WeiXinPayApp\MCS.Plugin.Payment.WeiXinPayApp.csproj", "{95EC82E2-F246-4E13-AA94-D93121F74995}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.WeiXinPayWap", "MCS.Plugin.Payment.WeiXinPayWap\MCS.Plugin.Payment.WeiXinPayWap.csproj", "{5A2EC5FB-B165-4A02-A927-635F0B5A1945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.WeiXinPayNative", "MCS.Plugin.Payment.WeiXinPayNative\MCS.Plugin.Payment.WeiXinPayNative.csproj", "{1007002C-9C77-477E-803B-6B41897D20D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCS.Plugin.Payment.WeiXinPaySmallProgam", "MCS.Plugin.Payment.WeiXinPaySmallProgam\MCS.Plugin.Payment.WeiXinPaySmallProgam.csproj", "{3C01710C-F770-4BB9-A1E5-702AFC08F692}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -205,6 +211,18 @@ Global
 		{95EC82E2-F246-4E13-AA94-D93121F74995}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95EC82E2-F246-4E13-AA94-D93121F74995}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95EC82E2-F246-4E13-AA94-D93121F74995}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A2EC5FB-B165-4A02-A927-635F0B5A1945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A2EC5FB-B165-4A02-A927-635F0B5A1945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A2EC5FB-B165-4A02-A927-635F0B5A1945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A2EC5FB-B165-4A02-A927-635F0B5A1945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1007002C-9C77-477E-803B-6B41897D20D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1007002C-9C77-477E-803B-6B41897D20D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1007002C-9C77-477E-803B-6B41897D20D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1007002C-9C77-477E-803B-6B41897D20D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C01710C-F770-4BB9-A1E5-702AFC08F692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C01710C-F770-4BB9-A1E5-702AFC08F692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C01710C-F770-4BB9-A1E5-702AFC08F692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C01710C-F770-4BB9-A1E5-702AFC08F692}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -245,6 +263,9 @@ Global
 		{5392DCEE-F73F-4EE7-81CA-B31246E1B3EF} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
 		{15B318F4-BAB9-43B4-AC85-BF98D3A937CF} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
 		{95EC82E2-F246-4E13-AA94-D93121F74995} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
+		{5A2EC5FB-B165-4A02-A927-635F0B5A1945} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
+		{1007002C-9C77-477E-803B-6B41897D20D2} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
+		{3C01710C-F770-4BB9-A1E5-702AFC08F692} = {2D9DE9CC-1A8B-4A73-BDD3-EB6C71B7AB99}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1545996-40BE-4F88-A489-BE41C612DB22}
