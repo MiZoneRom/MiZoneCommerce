@@ -199,7 +199,8 @@ namespace MCS.Web
             services.AddMvc(o =>
             {
                 o.Filters.Add(typeof(BaseExceptions));
-            }).AddApplicationPart(typeof(BaseAdminAPIController).Assembly);//插件式开发
+            })
+                .AddApplicationPart(typeof(BaseAdminAPIController).Assembly);//插件式开发
 
             services.Configure<CookiePolicyOptions>(options =>
             {
