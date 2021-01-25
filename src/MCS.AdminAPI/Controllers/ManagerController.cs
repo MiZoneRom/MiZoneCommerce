@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MCS.Web.Framework.BaseControllers;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MCS.Web.Areas.API.Controllers
+namespace MCS.AdminAPI.Controllers
 {
+
     /// <summary>
     /// 管理员
     /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
     [Authorize]
-    public class ManagerController : BaseAPIController
+    public class ManagerController : BaseAdminAPIController
     {
 
         private readonly IConfiguration _configuration;
@@ -34,6 +35,7 @@ namespace MCS.Web.Areas.API.Controllers
         {
             return Json(new { managerModel = CurrentManager });
         }
+
 
     }
 }
