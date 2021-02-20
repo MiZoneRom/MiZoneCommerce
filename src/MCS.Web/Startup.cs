@@ -50,8 +50,10 @@ namespace MCS.Web
         {
             Configuration = configuration;
             //加载log4net日志配置文件
+            var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//获取应用程序所在目录 防止发布后找不到配置文件
+            var xmlPath = Path.Combine(basePath, @"Config\log4net.config");//组合log4net配置文件
             Repository = LogManager.CreateRepository("NETCoreRepository");
-            XmlConfigurator.Configure(Repository, new FileInfo(@"Config\log4net.config"));
+            XmlConfigurator.Configure(Repository, new FileInfo(xmlPath));
         }
 
         public IConfiguration Configuration { get; }
