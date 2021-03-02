@@ -100,13 +100,13 @@ namespace MCS.Web
 
                 });
 
-            services.AddAuthentication(options =>
-            {
-                options.AddScheme<MCSAuthHandler>(MCSAuthHandler.SchemeName, "default scheme");
-                options.DefaultScheme = MCSAuthHandler.SchemeName;
-                options.DefaultAuthenticateScheme = MCSAuthHandler.SchemeName;
-                options.DefaultChallengeScheme = MCSAuthHandler.SchemeName;
-            }).AddCookie();
+            //services.AddAuthentication(options =>
+            //{
+            //    options.AddScheme<MCSAuthHandler>(MCSAuthHandler.SchemeName, "default scheme");
+            //    options.DefaultScheme = MCSAuthHandler.SchemeName;
+            //    options.DefaultAuthenticateScheme = MCSAuthHandler.SchemeName;
+            //    options.DefaultChallengeScheme = MCSAuthHandler.SchemeName;
+            //}).AddCookie();
 
             //注册session
             services.AddSession();
