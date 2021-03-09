@@ -38,12 +38,27 @@ namespace MCS.Application
         /// </summary>
         /// <param name="parent_id"></param>
         /// <returns></returns>
-        public static List<NavigationModel> GetNavigationModels(long parent_id)
+        public static List<NavigationModel> GetNavigationModels(long roleId)
+        {
+            long[] NavIds=ServiceProvider.Instance<IManagerService>.Create.
+            List<NavigationInfo> navigationInfoList = GetNavigations();
+            List<NavigationModel> navigationModelList = Mapper.Map<List<NavigationInfo>, List<NavigationModel>>(navigationInfoList);
+            var newList = new List<NavigationModel>();
+            GetNavigationChildModels(navigationModelList, newList, 0, 0);
+            return navigationModelList;
+        }
+
+        /// <summary>
+        /// 获取按照层级排序导航
+        /// </summary>
+        /// <param name="parent_id"></param>
+        /// <returns></returns>
+        public static List<NavigationModel> GetNavigationModels()
         {
             List<NavigationInfo> navigationInfoList = GetNavigations();
             List<NavigationModel> navigationModelList = Mapper.Map<List<NavigationInfo>, List<NavigationModel>>(navigationInfoList);
             var newList = new List<NavigationModel>();
-            GetNavigationChildModels(navigationModelList, newList, parent_id, 0);
+            GetNavigationChildModels(navigationModelList, newList, 0, 0);
             return navigationModelList;
         }
 

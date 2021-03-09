@@ -5,12 +5,24 @@ using MCS.Entities;
 using MCS.IServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MCS.Service
 {
     public class NavigationService : ServiceBase, INavigationService
     {
+        /// <summary>
+        /// 通过Id集合获取导航
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public QuerySet<NavigationInfo> GetNavigationsByIds(long[] ids)
+        {
+            var navigations = Context.QuerySet<NavigationInfo>().Where(item => ids.Contains(item.Id));
+            return navigations;
+        }
+
         public QuerySet<NavigationInfo> GetNavigations(long parentId = 0)
         {
             var navigations = Context.QuerySet<NavigationInfo>().Where(item => item.ParentId == parentId);

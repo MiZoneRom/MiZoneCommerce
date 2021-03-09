@@ -37,7 +37,7 @@ namespace MCS.Web.Areas.Admin.Controllers
 
         public IActionResult Edit(long? id)
         {
-            ViewBag.Navigations = NavigationApplication.GetNavigationModels(0).Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString() }).ToList();
+            ViewBag.Navigations = NavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString() }).ToList();
             ViewBag.Actions = NavigationAction.Add.ToSelectList();
             if (id.HasValue)
             {

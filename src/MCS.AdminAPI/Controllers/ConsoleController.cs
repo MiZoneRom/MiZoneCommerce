@@ -1,4 +1,5 @@
 ﻿using MCS.Web.Framework;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace MCS.AdminAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
+    [Authorize]
     public class ConsoleController : BaseAdminAPIController
     {
         /// <summary>

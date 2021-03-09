@@ -190,5 +190,20 @@ namespace MCS.Service
             int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId && a.Expires < DateTime.Now).Delete();
         }
 
+        /// <summary>
+        /// 通过角色获取导航Id
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        public long[] GetRoleNavigationIds(long roleId)
+        {
+            long[] ids = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => a.RoleId == roleId).ToList(a => a.NavId).ToArray();
+            if (roleId == 0)
+            {
+                ids = Context.QuerySet<NavigationInfo>().ToList(a => a.Id).ToArray();
+            }
+            return ids;
+        }
+
     }
 }
