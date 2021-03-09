@@ -40,8 +40,8 @@ namespace MCS.Application
         /// <returns></returns>
         public static List<NavigationModel> GetNavigationModels(long roleId)
         {
-            long[] NavIds=ServiceProvider.Instance<IManagerService>.Create.
-            List<NavigationInfo> navigationInfoList = GetNavigations();
+            long[] navIds = ServiceProvider.Instance<IManagerService>.Create.GetRoleNavigationIds(roleId);
+            List<NavigationInfo> navigationInfoList = GetNavigations().Where(a => navIds.Contains(a.Id)).ToList();
             List<NavigationModel> navigationModelList = Mapper.Map<List<NavigationInfo>, List<NavigationModel>>(navigationInfoList);
             var newList = new List<NavigationModel>();
             GetNavigationChildModels(navigationModelList, newList, 0, 0);

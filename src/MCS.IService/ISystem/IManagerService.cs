@@ -90,5 +90,6 @@ namespace MCS.IServices
         void RemoveToken(long userId);
 
         void RemoveExpiresToken(long userId);
+        long[] GetRoleNavigationIds(long roleId);
     }
 }
