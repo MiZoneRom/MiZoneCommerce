@@ -16,7 +16,6 @@ namespace MCS.AdminAPI.Controllers
     /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize(AccessControlHelperConstants.PolicyName)]
     public class ManagerController : BaseAdminAPIController
     {
 
@@ -32,6 +31,7 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <returns>管理员Model</returns>
         [HttpGet]
+        [AccessControl(AccessKey = "Manager")]
         public ActionResult<object> Get()
         {
             return Json(new { managerModel = CurrentManager });

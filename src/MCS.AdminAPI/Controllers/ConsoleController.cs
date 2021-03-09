@@ -23,7 +23,7 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("Navigation")]
-        [AccessControl(AccessKey = "Contact")]
+        [AccessControl(AccessKey = "Navigation")]
         public ActionResult<object> Navigation()
         {
             long roleId = CurrentManager.RoleId;
