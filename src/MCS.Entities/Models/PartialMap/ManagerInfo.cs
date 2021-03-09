@@ -1,4 +1,5 @@
-﻿using Kogel.Dapper.Extension.Attributes;
+﻿using Kogel.Dapper.Extension;
+using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,10 @@ namespace MCS.Entities
 {
     public partial class ManagerInfo
     {
-        [Display(IsField = false)]
-        public virtual List<AdminPrivilege> AdminPrivileges { get; set; }
+        [ForeignKey("Id", "RoleId")]
+        public ManagerRoleInfo ManagerRole { get; set; }
+
+        [ForeignKey("RoleId", "RoleId")]
+        public List<ManagerRolePrivilegeInfo> ManagerRolePrivilege { get; set; }
     }
 }

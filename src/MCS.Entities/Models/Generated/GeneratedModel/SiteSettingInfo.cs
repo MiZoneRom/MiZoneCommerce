@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Dapper;
+using Kogel.Dapper.Extension;
 using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
 
@@ -10,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "SiteSetting")]
-     public partial class SiteSettingInfo:IModel
+     public partial class SiteSettingInfo:IBaseEntity<ManagerInfo, long>, IModel
      {
         
 		/// <summary>

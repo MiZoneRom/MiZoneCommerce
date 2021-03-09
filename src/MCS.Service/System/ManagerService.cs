@@ -47,21 +47,12 @@ namespace MCS.Service
                     return null;
                 if (manager.RoleId == 0)
                 {
-                    List<AdminPrivilege> AdminPrivileges = new List<AdminPrivilege>();
-                    AdminPrivileges.Add((AdminPrivilege)0);
                     manager.RealName = "系统管理员";
-                    manager.AdminPrivileges = AdminPrivileges;
+                    manager.ManagerRolePrivilege = new List<ManagerRolePrivilegeInfo>();
                 }
                 else
                 {
-                    var model = Context.QuerySet<ManagerInfo>().Where(p => p.Id == manager.RoleId).Get();
-                    if (model != null)
-                    {
-                        List<AdminPrivilege> AdminPrivileges = new List<AdminPrivilege>();
-                        (from a in Context.QuerySet<ManagerRolePrivilegeInfo>() where a.RoleId == model.RoleId select a).ToList().ForEach(a => AdminPrivileges.Add((AdminPrivilege)a.Privilege));
-                        manager.RealName = model.RealName;
-                        manager.AdminPrivileges = AdminPrivileges;
-                    }
+                    manager.ManagerRolePrivilege = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => a.RoleId == manager.Id).ToList();
                 }
                 CacheHelper.Insert(CACHE_MANAGER_KEY, manager);
             }

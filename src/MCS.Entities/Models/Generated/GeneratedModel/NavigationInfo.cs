@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Dapper;
+using Kogel.Dapper.Extension;
 using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
 
@@ -10,112 +11,112 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "Navigation")]
-     public partial class NavigationInfo:IModel
+     public partial class NavigationInfo:IBaseEntity<ManagerInfo, long>, IModel
      {
         
 		/// <summary>
-        /// 导航Id
+        /// Id
         /// </summary>
-		[Identity(IsIncrease =true)]
-        [System.ComponentModel.DataAnnotations.Display(Name = "导航Id")]
+		[Identity]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public long Id { get; set; }
         
 		/// <summary>
-        /// 父级导航ID
+        /// ParentId
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "父级导航ID")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "ParentId")]
 		public long ParentId { get; set; }
         
 		/// <summary>
-        /// 导航名称
+        /// Name
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "导航名称")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Name")]
 		public string Name { get; set; }
         
 		/// <summary>
-        /// 副标题
+        /// SubTitle
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "副标题")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "SubTitle")]
 		public string SubTitle { get; set; }
         
 		/// <summary>
-        /// 图标
+        /// Icon
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "图标")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Icon")]
 		public string Icon { get; set; }
         
 		/// <summary>
-        /// 导航类型
+        /// NavType
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "导航类型")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "NavType")]
 		public NavigationType NavType { get; set; }
         
 		/// <summary>
-        /// 区域
+        /// Areas
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "区域")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Areas")]
 		public string Areas { get; set; }
         
 		/// <summary>
-        /// 控制器
+        /// Controllers
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "控制器")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Controllers")]
 		public string Controllers { get; set; }
         
 		/// <summary>
-        /// 视图
+        /// Views
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "视图")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Views")]
 		public string Views { get; set; }
         
 		/// <summary>
-        /// 模块（VUE使用）
+        /// Component
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "模块（VUE使用）")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Component")]
 		public string Component { get; set; }
         
 		/// <summary>
-        /// 路径
+        /// Path
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "路径")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Path")]
 		public string Path { get; set; }
         
 		/// <summary>
-        /// 路径类型（本页面，新标签页）
+        /// PathType
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "路径类型（本页面，新标签页）")]
-		public int PathType { get; set; }
+        [System.ComponentModel.DataAnnotations.Display(Name = "PathType")]
+		public int? PathType { get; set; }
         
 		/// <summary>
-        /// 排序Id
+        /// SortId
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "排序Id")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "SortId")]
 		public int SortId { get; set; }
         
 		/// <summary>
-        /// 状态
+        /// Status
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "状态")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Status")]
 		public int Status { get; set; }
         
 		/// <summary>
-        /// 备注
+        /// Remark
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "备注")]
+        [System.ComponentModel.DataAnnotations.Display(Name = "Remark")]
 		public string Remark { get; set; }
         
      }

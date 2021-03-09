@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using Dapper;
+using Kogel.Dapper.Extension;
 using Kogel.Dapper.Extension.Attributes;
 using MCS.CommonModel;
 
@@ -10,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "ManagerRolePrivilege")]
-     public partial class ManagerRolePrivilegeInfo:IModel
+     public partial class ManagerRolePrivilegeInfo:IBaseEntity<ManagerInfo, long>, IModel
      {
         
 		/// <summary>
@@ -25,7 +26,7 @@ namespace MCS.Entities
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Privilege")]
-		public int Privilege { get; set; }
+		public long Privilege { get; set; }
         
 		/// <summary>
         /// RoleId
