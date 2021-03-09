@@ -19,7 +19,7 @@ namespace MCS.Application
         }
 
         /// <summary>
-        /// 获取导航
+        /// 获取所有导航
         /// </summary>
         /// <returns></returns>
         public static List<NavigationInfo> GetNavigations()
@@ -34,11 +34,11 @@ namespace MCS.Application
         }
 
         /// <summary>
-        /// 获取按照层级排序导航
+        /// 根据角色获取导航列表
         /// </summary>
         /// <param name="parent_id"></param>
         /// <returns></returns>
-        public static List<NavigationModel> GetNavigationModels(long roleId)
+        public static List<NavigationModel> GetNavigationByRoleId(long roleId)
         {
             long[] navIds = ServiceProvider.Instance<IManagerService>.Create.GetRoleNavigationIds(roleId);
             List<NavigationInfo> navigationInfoList = GetNavigations().Where(a => navIds.Contains(a.Id)).ToList();
@@ -62,6 +62,13 @@ namespace MCS.Application
             return navigationModelList;
         }
 
+        /// <summary>
+        /// 获取子项导航
+        /// </summary>
+        /// <param name="oldData"></param>
+        /// <param name="newData"></param>
+        /// <param name="parent_id"></param>
+        /// <param name="class_layer"></param>
         private static void GetNavigationChildModels(List<NavigationModel> oldData, List<NavigationModel> newData, long parent_id, int class_layer)
         {
             class_layer++;

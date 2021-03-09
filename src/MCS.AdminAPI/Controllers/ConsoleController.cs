@@ -1,4 +1,5 @@
-﻿using MCS.Web.Framework;
+﻿using MCS.Application;
+using MCS.Web.Framework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,7 +25,8 @@ namespace MCS.AdminAPI.Controllers
         [HttpGet("Navigation")]
         public ActionResult<object> Navigation()
         {
-            var navs = PrivilegeHelper.AdminPrivilegesDefault.Privilege;
+            long roleId = CurrentManager.RoleId;
+            var navs = NavigationApplication.GetNavigationByRoleId(roleId);
             return SuccessResult<object>(navs);
         }
     }
