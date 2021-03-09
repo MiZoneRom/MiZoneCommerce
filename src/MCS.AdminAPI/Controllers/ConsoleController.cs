@@ -16,7 +16,6 @@ namespace MCS.AdminAPI.Controllers
     /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
-    [Authorize(AccessControlHelperConstants.PolicyName)]
     public class ConsoleController : BaseAdminAPIController
     {
         /// <summary>
@@ -24,6 +23,7 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("Navigation")]
+        [AccessControl(AccessKey = "Contact")]
         public ActionResult<object> Navigation()
         {
             long roleId = CurrentManager.RoleId;

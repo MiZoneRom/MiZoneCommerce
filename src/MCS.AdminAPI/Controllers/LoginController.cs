@@ -3,6 +3,7 @@ using MCS.Core.Helper;
 using MCS.DTO;
 using MCS.Entities;
 using MCS.IServices;
+using MCS.Web.Framework.AccessControlHelper;
 using MCS.Web.Framework.BaseControllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +38,7 @@ namespace MCS.AdminAPI.Controllers
         /// <param name="password">密码</param>
         /// <returns></returns>
         [HttpGet]
+        [NoAccessControl]
         public ActionResult<object> Get(string username, string password)
         {
 
@@ -79,6 +81,7 @@ namespace MCS.AdminAPI.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpPost("RefreshToken")]
+        [NoAccessControl]
         public ActionResult<object> RefreshToken([FromBody] RefreshTokenModel entity)
         {
 

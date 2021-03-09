@@ -38,10 +38,15 @@ namespace MCS.Web
             }
 
             long userId = Convert.ToInt64(sidClaim.Value);
-            string controller = _accessor.HttpContext.Request.RouteValues["Controller"].ToString();
-            string view = _accessor.HttpContext.Request.RouteValues["View"].ToString();
 
-            return user.Identity.IsAuthenticated;
+            //如果有访问Key
+            if (!string.IsNullOrEmpty(accessKey))
+            {
+                string controller = _accessor.HttpContext.Request.RouteValues["Controller"].ToString();
+                string view = _accessor.HttpContext.Request.RouteValues["View"].ToString();
+            }
+
+            return true;
         }
 
         public IActionResult DisallowedCommonResult => new ContentResult
