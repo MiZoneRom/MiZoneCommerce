@@ -17,7 +17,7 @@ namespace MCS.Entities
 		/// <summary>
         /// Id
         /// </summary>
-		[Identity]
+		[Identity(IsIncrease =true)]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
 		public override long Id { get; set; }
         

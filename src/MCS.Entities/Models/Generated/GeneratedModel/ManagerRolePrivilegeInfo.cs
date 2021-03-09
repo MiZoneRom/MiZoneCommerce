@@ -42,6 +42,13 @@ namespace MCS.Entities
         [System.ComponentModel.DataAnnotations.Display(Name = "NavId")]
 		public  long NavId { get; set; }
         
+		/// <summary>
+        /// ActionId
+        /// </summary>
+		
+        [System.ComponentModel.DataAnnotations.Display(Name = "ActionId")]
+		public  long ActionId { get; set; }
+        
      }
 
 }
