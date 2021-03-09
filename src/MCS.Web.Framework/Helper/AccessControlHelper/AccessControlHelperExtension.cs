@@ -1,5 +1,5 @@
 ﻿using System;
-using MCS.Core.AccessControlHelper;
+using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;

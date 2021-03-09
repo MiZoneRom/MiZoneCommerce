@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MCS.Core.AccessControlHelper
+namespace MCS.Web.Framework.AccessControlHelper
 {
     public interface IResourceAccessStrategy
     {
@@ -16,16 +16,9 @@ namespace MCS.Core.AccessControlHelper
         /// </summary>
         //string StrategyName { get; }
 
-#if NET45
-        ActionResult DisallowedCommonResult { get; }
-
-        ActionResult DisallowedAjaxResult { get; }
-
-#else
         IActionResult DisallowedCommonResult { get; }
 
         IActionResult DisallowedAjaxResult { get; }
 
-#endif
     }
 }

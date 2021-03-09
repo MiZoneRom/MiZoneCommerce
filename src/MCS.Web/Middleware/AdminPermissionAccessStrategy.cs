@@ -1,13 +1,18 @@
-﻿using MCS.Core.AccessControlHelper;
+﻿using MCS.Core;
+using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MCS.Web
 {
+    /// <summary>
+    /// 资源权限访问控制
+    /// </summary>
     public class AdminPermissionAccessStrategy : IResourceAccessStrategy
     {
         private readonly IHttpContextAccessor _accessor;
@@ -19,8 +24,24 @@ namespace MCS.Web
 
         public bool IsCanAccess(string accessKey)
         {
+            //获取当前登录用户
             var user = _accessor.HttpContext.User;
-            return user.Identity.IsAuthenticated && user.IsInRole("Admin");
+            //如果没有认证
+            if (!user.Identity.IsAuthenticated)
+            {
+                return false;
+            }
+            var sidClaim = user.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault();
+            if (sidClaim == null)
+            {
+                return false;
+            }
+
+            long userId = Convert.ToInt64(sidClaim.Value);
+            string controller = _accessor.HttpContext.Request.RouteValues["Controller"].ToString();
+            string view = _accessor.HttpContext.Request.RouteValues["View"].ToString();
+
+            return user.Identity.IsAuthenticated;
         }
 
         public IActionResult DisallowedCommonResult => new ContentResult
@@ -32,8 +53,9 @@ namespace MCS.Web
 
         public IActionResult DisallowedAjaxResult => new JsonResult(new Framework.BaseControllers.BaseAPIController.Result<object>
         {
+            success = false,
             msg = "No Permission",
-            code = 998
+            code = 403
         });
 
     }

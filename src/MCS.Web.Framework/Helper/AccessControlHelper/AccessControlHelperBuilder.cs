@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace MCS.Core.AccessControlHelper
+namespace MCS.Web.Framework.AccessControlHelper
 {
     public interface IAccessControlHelperBuilder
     {

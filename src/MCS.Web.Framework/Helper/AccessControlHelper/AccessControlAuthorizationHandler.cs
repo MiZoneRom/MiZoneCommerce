@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 
-namespace MCS.Core.AccessControlHelper
+namespace MCS.Web.Framework.AccessControlHelper
 {
     internal sealed class AccessControlAuthorizationHandler : AuthorizationHandler<AccessControlRequirement>
     {

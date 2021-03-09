@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace MCS.Core.AccessControlHelper
+namespace MCS.Web.Framework.AccessControlHelper
 {
     public class AccessControlOptions
     {

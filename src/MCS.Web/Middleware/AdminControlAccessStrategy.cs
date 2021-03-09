@@ -1,4 +1,4 @@
-﻿using MCS.Core.AccessControlHelper;
+﻿using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MCS.Web
 {
+    /// <summary>
+    /// 控件访问权限控制
+    /// </summary>
     public class AdminControlAccessStrategy : IControlAccessStrategy
     {
         private readonly IHttpContextAccessor _accessor;

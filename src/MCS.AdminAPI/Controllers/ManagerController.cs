@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MCS.Web.Framework.AccessControlHelper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -15,7 +16,7 @@ namespace MCS.AdminAPI.Controllers
     /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(AccessControlHelperConstants.PolicyName)]
     public class ManagerController : BaseAdminAPIController
     {
 
