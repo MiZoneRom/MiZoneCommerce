@@ -2,21 +2,21 @@
 
 ## Based on DotNetCore 5.0
 #### Framework Design
-using Autofac instead Core IOC.
-using Log4Net to save local log.
-using ali OSS and local sotrage. easy switch.
-using jwt Authorize
-Hot swap plugin
-using mvc and webapi at same time
-built-in from validate plugin.plug and play
-build in websocket
-action level Authorize check
-using areas mode when using mvc model
-using dapper to connect database
-using swagger api document
-global error catch
-build-in wechat plugin
-pluggable webapi modular design
+- using Autofac instead Core IOC.
+- using Log4Net to save local log.
+- using ali OSS and local sotrage. easy switch.
+- using jwt Authorize
+- Hot swap plugin
+- using mvc and webapi at same time
+- built-in from validate plugin.plug and play
+- build in websocket
+- action level Authorize check
+- using areas mode when using mvc model
+- using dapper to connect database
+- using swagger api document
+- global error catch
+- build-in wechat plugin
+- pluggable webapi modular design
 
 
 ### 基于.net 5.0搭建
