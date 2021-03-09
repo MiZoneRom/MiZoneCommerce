@@ -11,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "ManagerToken")]
-     public partial class ManagerTokenInfo:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class ManagerTokenInfo:IBaseEntity<ManagerTokenInfo, long>
      {
         
 		/// <summary>
@@ -19,35 +19,35 @@ namespace MCS.Entities
         /// </summary>
 		[Identity(IsIncrease =true)]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
-		public long Id { get; set; }
+		public override long Id { get; set; }
         
 		/// <summary>
         /// UserId
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "UserId")]
-		public long UserId { get; set; }
+		public  long UserId { get; set; }
         
 		/// <summary>
         /// Token
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Token")]
-		public string Token { get; set; }
+		public  string Token { get; set; }
         
 		/// <summary>
         /// RefreshToken
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "RefreshToken")]
-		public string RefreshToken { get; set; }
+		public  string RefreshToken { get; set; }
         
 		/// <summary>
         /// Expires
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Expires")]
-		public DateTime Expires { get; set; }
+		public  DateTime Expires { get; set; }
         
      }
 

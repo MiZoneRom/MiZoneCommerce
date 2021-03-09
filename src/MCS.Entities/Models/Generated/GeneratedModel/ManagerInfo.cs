@@ -11,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "Manager")]
-     public partial class ManagerInfo:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class ManagerInfo:IBaseEntity<ManagerInfo, long>
      {
         
 		/// <summary>
@@ -19,63 +19,63 @@ namespace MCS.Entities
         /// </summary>
 		[Identity(IsIncrease =true)]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
-		public long Id { get; set; }
+		public override long Id { get; set; }
         
 		/// <summary>
         /// RoleId
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "RoleId")]
-		public long RoleId { get; set; }
+		public  long RoleId { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "UserName")]
-		public string UserName { get; set; }
+		public  string UserName { get; set; }
         
 		/// <summary>
         /// Password
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Password")]
-		public string Password { get; set; }
+		public  string Password { get; set; }
         
 		/// <summary>
         /// PasswordSalt
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "PasswordSalt")]
-		public string PasswordSalt { get; set; }
+		public  string PasswordSalt { get; set; }
         
 		/// <summary>
         /// CreateDate
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "CreateDate")]
-		public DateTime? CreateDate { get; set; }
+		public  DateTime? CreateDate { get; set; }
         
 		/// <summary>
         /// Remark
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Remark")]
-		public string Remark { get; set; }
+		public  string Remark { get; set; }
         
 		/// <summary>
         /// RealName
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "RealName")]
-		public string RealName { get; set; }
+		public  string RealName { get; set; }
         
 		/// <summary>
         /// Avatars
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Avatars")]
-		public string Avatars { get; set; }
+		public  string Avatars { get; set; }
         
      }
 

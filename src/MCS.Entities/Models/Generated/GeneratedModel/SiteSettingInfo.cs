@@ -11,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "SiteSetting")]
-     public partial class SiteSettingInfo:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class SiteSettingInfo:IBaseEntity<SiteSettingInfo, long>
      {
         
 		/// <summary>
@@ -19,21 +19,21 @@ namespace MCS.Entities
         /// </summary>
 		[Identity(IsIncrease =true)]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
-		public long Id { get; set; }
+		public override long Id { get; set; }
         
 		/// <summary>
         /// Key
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Key")]
-		public string Key { get; set; }
+		public  string Key { get; set; }
         
 		/// <summary>
         /// Value
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Value")]
-		public string Value { get; set; }
+		public  string Value { get; set; }
         
      }
 

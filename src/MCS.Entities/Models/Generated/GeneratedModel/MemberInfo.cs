@@ -11,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "Member")]
-     public partial class MemberInfo:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class MemberInfo:IBaseEntity<MemberInfo, long>
      {
         
 		/// <summary>
@@ -19,14 +19,14 @@ namespace MCS.Entities
         /// </summary>
 		[Identity]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
-		public long Id { get; set; }
+		public override long Id { get; set; }
         
 		/// <summary>
         /// UserName
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "UserName")]
-		public string UserName { get; set; }
+		public  string UserName { get; set; }
         
      }
 

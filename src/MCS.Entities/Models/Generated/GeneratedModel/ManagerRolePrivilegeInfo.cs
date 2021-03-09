@@ -11,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "ManagerRolePrivilege")]
-     public partial class ManagerRolePrivilegeInfo:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class ManagerRolePrivilegeInfo:IBaseEntity<ManagerRolePrivilegeInfo, long>
      {
         
 		/// <summary>
@@ -19,28 +19,28 @@ namespace MCS.Entities
         /// </summary>
 		[Identity(IsIncrease =true)]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
-		public long Id { get; set; }
+		public override long Id { get; set; }
         
 		/// <summary>
         /// Privilege
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Privilege")]
-		public long Privilege { get; set; }
+		public  long Privilege { get; set; }
         
 		/// <summary>
         /// RoleId
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "RoleId")]
-		public long RoleId { get; set; }
+		public  long RoleId { get; set; }
         
 		/// <summary>
         /// NavId
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "NavId")]
-		public long NavId { get; set; }
+		public  long NavId { get; set; }
         
      }
 

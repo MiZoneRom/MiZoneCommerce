@@ -11,7 +11,7 @@ namespace MCS.Entities
 {
     
      [Display(Rename = "ManagerRole")]
-     public partial class ManagerRoleInfo:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class ManagerRoleInfo:IBaseEntity<ManagerRoleInfo, long>
      {
         
 		/// <summary>
@@ -19,21 +19,21 @@ namespace MCS.Entities
         /// </summary>
 		[Identity(IsIncrease =true)]
         [System.ComponentModel.DataAnnotations.Display(Name = "Id")]
-		public long Id { get; set; }
+		public override long Id { get; set; }
         
 		/// <summary>
         /// RoleName
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "RoleName")]
-		public string RoleName { get; set; }
+		public  string RoleName { get; set; }
         
 		/// <summary>
         /// Description
         /// </summary>
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Description")]
-		public string Description { get; set; }
+		public  string Description { get; set; }
         
      }
 

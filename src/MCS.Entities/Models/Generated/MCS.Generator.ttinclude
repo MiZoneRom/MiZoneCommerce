@@ -22,7 +22,7 @@ namespace <#=Namespace #>
 {
     
      [Display(Rename = "<#=item.Name#>")]
-     public partial class <#=item.ClassName#>:IBaseEntity<ManagerInfo, long>, IModel
+     public partial class <#=item.ClassName#>:IBaseEntity<<#=item.ClassName#>, long>
      {
         <#
         foreach(var col in item.Columns)
@@ -34,7 +34,7 @@ namespace <#=Namespace #>
         /// </summary>
 		<#=col.IsPK ?col.IsAutoIncrement?"[Identity(IsIncrease =true)]":"[Identity]":""#>
         [System.ComponentModel.DataAnnotations.Display(Name = "<#=col.Remark#>")]
-		public <#=col.PropertyType#> <#=col.Name#> { get; set; }
+		public <#=col.Name=="Id"?"override":""#> <#=col.PropertyType#> <#=col.Name#> { get; set; }
         <#
         }
         #>
