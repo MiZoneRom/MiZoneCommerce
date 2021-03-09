@@ -16,6 +16,7 @@ namespace MCS.AdminAPI.Controllers
     /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
+    [Authorize(AccessControlHelperConstants.PolicyName)]
     public class ManagerController : BaseAdminAPIController
     {
 
