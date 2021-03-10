@@ -27,7 +27,7 @@ namespace MCS.AdminAPI.Controllers
         public ActionResult<object> Navigation()
         {
             long roleId = CurrentManager.RoleId;
-            var navs = ManagerNavigationApplication.GetNavigationByRoleId(roleId);
+            var navs = ManagerNavigationApplication.GetNavigationTreeList(roleId);
             return SuccessResult<object>(navs);
         }
     }

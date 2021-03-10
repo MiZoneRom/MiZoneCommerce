@@ -19,7 +19,7 @@ namespace MCS.Web.Areas.Admin.ViewComponents
         {
             string path = this.HttpContext.Request.Path;
             Log.Debug(path);
-            List<DTO.ManagerNavigationModel> navList = ManagerNavigationApplication.GetNavigationTreeList(path);
+            List<DTO.ManagerNavigationModel> navList = ManagerNavigationApplication.GetNavigationTreeList(CurrentManager.RoleId, path);
             ViewBag.Navs = navList;
             ViewBag.Manager = CurrentManager;
             return View();

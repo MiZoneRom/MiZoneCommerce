@@ -45,7 +45,7 @@ namespace MCS.Application
             List<ManagerNavigationModel> navigationModelList = Mapper.Map<List<ManagerNavigationInfo>, List<ManagerNavigationModel>>(navigationInfoList);
             var newList = new List<ManagerNavigationModel>();
             GetNavigationChildModels(navigationModelList, newList, 0, 0);
-            return newList;
+            return navigationModelList;
         }
 
         /// <summary>
@@ -116,21 +116,22 @@ namespace MCS.Application
 
         }
 
-        public static List<ManagerNavigationModel> GetNavigationTreeList(string path = "")
+        public static List<ManagerNavigationModel> GetNavigationTreeList(long roleId, string path = "")
         {
-            return GetTreeChild(0, path);
+            long[] navIds = ServiceProvider.Instance<IManagerService>.Create.GetRoleNavigationIds(roleId);
+            return GetTreeChild(0, navIds, path);
         }
 
-        private static List<ManagerNavigationModel> GetTreeChild(long parentId, string path = "")
+        private static List<ManagerNavigationModel> GetTreeChild(long parentId, long[] navIds, string path = "")
         {
-            List<ManagerNavigationInfo> navigationInfoList = Service.GetNavigations(parentId).ToList();
+            List<ManagerNavigationInfo> navigationInfoList = Service.GetNavigations(navIds, parentId).ToList();
             List<ManagerNavigationModel> navigationList = new List<ManagerNavigationModel>();
             foreach (var item in navigationInfoList)
             {
                 ManagerNavigationModel nav = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(item);
                 if (!string.IsNullOrEmpty(nav.Path))
                     nav.IsOpen = nav.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase);
-                List<ManagerNavigationModel> childList = GetTreeChild(nav.Id, path);
+                List<ManagerNavigationModel> childList = GetTreeChild(nav.Id, navIds, path);
                 childList.ForEach(a => a.Parent = nav);
                 nav.Children = childList;
                 if (nav.Children.Count > 0)

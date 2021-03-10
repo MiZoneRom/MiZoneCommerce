@@ -29,6 +29,12 @@ namespace MCS.Service
             return navigations;
         }
 
+        public QuerySet<ManagerNavigationInfo> GetNavigations(long[] navIds, long parentId = 0)
+        {
+            var navigations = Context.QuerySet<ManagerNavigationInfo>().Where(item => navIds.Contains(item.Id) && item.ParentId == parentId);
+            return navigations;
+        }
+
         public List<ManagerNavigationInfo> GetNavigations()
         {
             var navigations = Context.QuerySet<ManagerNavigationInfo>().Where(item => item.Id > 0).ToList();
