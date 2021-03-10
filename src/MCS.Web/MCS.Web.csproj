@@ -568,6 +568,7 @@
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
     <ItemGroup>
       <DocFile Include="bin\Debug\$(TargetFramework)\$(RuntimeIdentifier)\$(TargetName).xml" />
+      <DocFile Include="bin\Debug\$(TargetFramework)\$(RuntimeIdentifier)\MCS.AdminAPI.xml" />
     </ItemGroup>
     <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
   </Target>

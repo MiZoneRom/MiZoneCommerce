@@ -45,7 +45,7 @@ namespace MCS.Application
             List<ManagerNavigationModel> navigationModelList = Mapper.Map<List<ManagerNavigationInfo>, List<ManagerNavigationModel>>(navigationInfoList);
             var newList = new List<ManagerNavigationModel>();
             GetNavigationChildModels(navigationModelList, newList, 0, 0);
-            return navigationModelList;
+            return newList;
         }
 
         /// <summary>
