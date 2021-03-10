@@ -59,13 +59,12 @@ namespace MCS.DTO
         /// <summary>
         /// lOGO图片
         /// </summary>
-
         public string Logo { set; get; }
+
         /// <summary>
         /// 微信Logo
         /// <para>用于微信卡券，100*100，小于1M</para>
         /// </summary>
-
         public string WXLogo
         {
             get;

@@ -17,6 +17,10 @@ namespace MCS.AdminAPI.Controllers
     [ApiController]
     public class SiteController : BaseAPIController
     {
+        /// <summary>
+        /// 获取系统设置
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("SiteSettings")]
         public ActionResult<object> SiteSettings()
         {
@@ -24,6 +28,11 @@ namespace MCS.AdminAPI.Controllers
             return SuccessResult<object>(siteSettingModel);
         }
 
+        /// <summary>
+        /// 设置系统设置
+        /// </summary>
+        /// <param name="siteSettingModel"></param>
+        /// <returns></returns>
         [HttpPut("SiteSettings")]
         public ActionResult<object> SiteSettings(SiteSettings siteSettingModel)
         {
