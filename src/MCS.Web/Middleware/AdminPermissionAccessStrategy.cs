@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -30,11 +31,14 @@ namespace MCS.Web
             //如果没有认证
             if (!user.Identity.IsAuthenticated)
             {
+
                 return false;
             }
             var sidClaim = user.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault();
             if (sidClaim == null)
             {
+                _accessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                _accessor.HttpContext.Abort();
                 return false;
             }
 
