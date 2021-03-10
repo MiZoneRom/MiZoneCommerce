@@ -62,7 +62,7 @@ namespace MCS.Web.Framework.BaseControllers
                     return null;
                 }
 
-                Claim iden = clams.Claims.Where(a => a.Type == JwtRegisteredClaimNames.Sid).FirstOrDefault();
+                Claim iden = clams.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault();
 
                 if (iden == null)
                 {

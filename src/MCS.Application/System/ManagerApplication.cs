@@ -96,7 +96,6 @@ namespace MCS.Application
             return Service.GetManagers(keyWords);
         }
 
-
         /// <summary>
         /// 登录
         /// </summary>
@@ -107,6 +106,17 @@ namespace MCS.Application
         public static ManagerInfo Login(string username, string password)
         {
             return Service.Login(username, password);
+        }
+
+        /// <summary>
+        /// 获取是否有访问权
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="accessKey"></param>
+        /// <returns></returns>
+        public static bool GetManagerAccess(long userId, string accessKey)
+        {
+            return Service.GetManagerAccess(userId, accessKey);
         }
 
     }

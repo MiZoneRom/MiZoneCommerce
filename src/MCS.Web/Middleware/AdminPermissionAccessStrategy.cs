@@ -1,4 +1,5 @@
-﻿using MCS.Core;
+﻿using MCS.Application;
+using MCS.Core;
 using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,8 @@ namespace MCS.Web
             {
                 long userId = Convert.ToInt64(sidClaim.Value);
                 string controller = _accessor.HttpContext.Request.RouteValues["Controller"].ToString();
-                string view = _accessor.HttpContext.Request.RouteValues["View"].ToString();
+                //string view = _accessor.HttpContext.Request.RouteValues["View"].ToString();
+                return ManagerApplication.GetManagerAccess(userId, accessKey);
             }
 
             return true;

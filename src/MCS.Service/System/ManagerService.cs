@@ -196,5 +196,22 @@ namespace MCS.Service
             return ids;
         }
 
+        public bool GetManagerAccess(long userId, string accessKey)
+        {
+            ManagerInfo managerInfo = GetPlatformManager(userId);
+            if (managerInfo == null)
+            {
+                return false;
+            }
+            long roleId = managerInfo.RoleId;
+            if (roleId == 0)
+            {
+                return true;
+            }
+            long[] actionIds = Context.QuerySet<NavigationActionInfo>().Where(a => a.AccessKey == accessKey).ToList(a => a.Id).ToArray();
+            int privilegeCount = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => actionIds.Contains(a.ActionId) && a.RoleId == roleId).Count();
+            return privilegeCount > 0;
+        }
+
     }
 }

@@ -91,5 +91,6 @@ namespace MCS.IServices
 
         void RemoveExpiresToken(long userId);
         long[] GetRoleNavigationIds(long roleId);
+        bool GetManagerAccess(long userId, string accessKey);
     }
 }
