@@ -29,13 +29,8 @@ namespace MCS.Web
             //获取当前登录用户
             var user = _accessor.HttpContext.User;
             //如果没有认证
-            if (!user.Identity.IsAuthenticated)
-            {
-
-                return false;
-            }
             var sidClaim = user.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault();
-            if (sidClaim == null)
+            if (!user.Identity.IsAuthenticated || sidClaim == null)
             {
                 _accessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 _accessor.HttpContext.Abort();
