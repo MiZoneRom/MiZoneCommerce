@@ -77,8 +77,8 @@ namespace MCS.Web.Areas.Admin.Controllers
             _iManagerService.RemoveExpiresToken(managerModel.Id);
             _iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
 
-            HttpContext.Response.Cookies.Append("token", token);
-            HttpContext.Response.Cookies.Append("refresh_token", refreshToken);
+            HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_TOKEN, token);
+            HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_REFRESH_TOKEN, refreshToken);
 
             //清除输入错误记录次数
             ClearErrorTimes(user.UserName);
