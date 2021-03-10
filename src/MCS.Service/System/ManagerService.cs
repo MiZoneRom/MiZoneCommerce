@@ -31,10 +31,10 @@ namespace MCS.Service
             return Context.QuerySet<ManagerInfo>().Where(item => item.RoleId == roleId).ToList();
         }
 
-        public ManagerInfo GetPlatformManager(long userId)
+        public ManagerInfo GetPlatformManager(long managerId)
         {
             ManagerInfo manager = null;
-            string CACHE_MANAGER_KEY = CacheKeyCollection.Manager(userId);
+            string CACHE_MANAGER_KEY = CacheKeyCollection.Manager(managerId);
 
             if (CacheHelper.Exists(CACHE_MANAGER_KEY))
             {
@@ -42,7 +42,7 @@ namespace MCS.Service
             }
             else
             {
-                manager = Context.QuerySet<ManagerInfo>().Where(item => item.Id == userId).Get();
+                manager = Context.QuerySet<ManagerInfo>().Where(item => item.Id == managerId).Get();
                 if (manager == null)
                     return null;
                 if (manager.RoleId == 0)
@@ -151,14 +151,14 @@ namespace MCS.Service
             return Context.QuerySet<MemberInfo>().Where(item => item.UserName.ToLower() == username.ToLower()).Count() > 0;
         }
 
-        public void AddRefeshToken(string token, string refeshToken, long userId, double minutes = 1)
+        public void AddRefeshToken(string token, string refeshToken, long managerId, double minutes = 1)
         {
-            Context.CommandSet<ManagerTokenInfo>().Insert(new ManagerTokenInfo() { UserId = userId, Token = token, RefreshToken = refeshToken, Expires = DateTime.Now.AddMinutes(minutes) });
+            Context.CommandSet<ManagerTokenInfo>().Insert(new ManagerTokenInfo() { ManagerId = managerId, Token = token, RefreshToken = refeshToken, Expires = DateTime.Now.AddMinutes(minutes) });
         }
 
-        public ManagerTokenInfo GetToken(long userId)
+        public ManagerTokenInfo GetToken(long managerId)
         {
-            return Context.QuerySet<ManagerTokenInfo>().Where(a => a.UserId == userId).OrderByDescing(a => a.Id).Get();
+            return Context.QuerySet<ManagerTokenInfo>().Where(a => a.ManagerId == managerId).OrderByDescing(a => a.Id).Get();
         }
 
         public ManagerTokenInfo GetTokenByRefreshToken(string refreshToken)
@@ -171,14 +171,14 @@ namespace MCS.Service
             return Context.CommandSet<ManagerTokenInfo>().Where(item => item.Id == model.Id).Update(model) > 0;
         }
 
-        public void RemoveToken(long userId)
+        public void RemoveToken(long managerId)
         {
-            int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId).Delete();
+            int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.ManagerId == managerId).Delete();
         }
 
-        public void RemoveExpiresToken(long userId)
+        public void RemoveExpiresToken(long managerId)
         {
-            int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.UserId == userId && a.Expires < DateTime.Now).Delete();
+            int result = Context.CommandSet<ManagerTokenInfo>().Where(a => a.ManagerId == managerId && a.Expires < DateTime.Now).Delete();
         }
 
         /// <summary>
@@ -188,17 +188,17 @@ namespace MCS.Service
         /// <returns></returns>
         public long[] GetRoleNavigationIds(long roleId)
         {
-            long[] ids = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => a.RoleId == roleId).ToList(a => a.NavId).ToArray();
+            long[] ids = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => a.RoleId == roleId).ToList(a => a.NavigationId).ToArray();
             if (roleId == 0)
             {
-                ids = Context.QuerySet<NavigationInfo>().ToList(a => a.Id).ToArray();
+                ids = Context.QuerySet<ManagerNavigationInfo>().ToList(a => a.Id).ToArray();
             }
             return ids;
         }
 
-        public bool GetManagerAccess(long userId, string accessKey)
+        public bool GetManagerAccess(long managerId, string accessKey)
         {
-            ManagerInfo managerInfo = GetPlatformManager(userId);
+            ManagerInfo managerInfo = GetPlatformManager(managerId);
             if (managerInfo == null)
             {
                 return false;
@@ -208,7 +208,7 @@ namespace MCS.Service
             {
                 return true;
             }
-            long[] actionIds = Context.QuerySet<NavigationActionInfo>().Where(a => a.AccessKey == accessKey).ToList(a => a.Id).ToArray();
+            long[] actionIds = Context.QuerySet<ManagerNavigationActionInfo>().Where(a => a.AccessKey == accessKey).ToList(a => a.Id).ToArray();
             int privilegeCount = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => actionIds.Contains(a.ActionId) && a.RoleId == roleId).Count();
             return privilegeCount > 0;
         }

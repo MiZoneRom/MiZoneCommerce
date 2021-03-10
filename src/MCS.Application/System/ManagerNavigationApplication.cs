@@ -11,10 +11,10 @@ using System.Text;
 
 namespace MCS.Application
 {
-    public class NavigationApplication : BaseApplicaion<INavigationService>
+    public class ManagerNavigationApplication : BaseApplicaion<IManagerNavigationService>
     {
 
-        public NavigationApplication()
+        public ManagerNavigationApplication()
         {
         }
 
@@ -22,9 +22,9 @@ namespace MCS.Application
         /// 获取所有导航
         /// </summary>
         /// <returns></returns>
-        public static List<NavigationInfo> GetNavigations()
+        public static List<ManagerNavigationInfo> GetNavigations()
         {
-            List<NavigationInfo> navigationInfoList = Core.Cache.Get<List<NavigationInfo>>(CacheKeyCollection.Navigations);
+            List<ManagerNavigationInfo> navigationInfoList = Core.Cache.Get<List<ManagerNavigationInfo>>(CacheKeyCollection.Navigations);
             if (navigationInfoList == null)
             {
                 navigationInfoList = Service.GetNavigations().ToList();
@@ -38,12 +38,12 @@ namespace MCS.Application
         /// </summary>
         /// <param name="parent_id"></param>
         /// <returns></returns>
-        public static List<NavigationModel> GetNavigationByRoleId(long roleId)
+        public static List<ManagerNavigationModel> GetNavigationByRoleId(long roleId)
         {
             long[] navIds = ServiceProvider.Instance<IManagerService>.Create.GetRoleNavigationIds(roleId);
-            List<NavigationInfo> navigationInfoList = GetNavigations().Where(a => navIds.Contains(a.Id)).ToList();
-            List<NavigationModel> navigationModelList = Mapper.Map<List<NavigationInfo>, List<NavigationModel>>(navigationInfoList);
-            var newList = new List<NavigationModel>();
+            List<ManagerNavigationInfo> navigationInfoList = GetNavigations().Where(a => navIds.Contains(a.Id)).ToList();
+            List<ManagerNavigationModel> navigationModelList = Mapper.Map<List<ManagerNavigationInfo>, List<ManagerNavigationModel>>(navigationInfoList);
+            var newList = new List<ManagerNavigationModel>();
             GetNavigationChildModels(navigationModelList, newList, 0, 0);
             return navigationModelList;
         }
@@ -53,11 +53,11 @@ namespace MCS.Application
         /// </summary>
         /// <param name="parent_id"></param>
         /// <returns></returns>
-        public static List<NavigationModel> GetNavigationModels()
+        public static List<ManagerNavigationModel> GetNavigationModels()
         {
-            List<NavigationInfo> navigationInfoList = GetNavigations();
-            List<NavigationModel> navigationModelList = Mapper.Map<List<NavigationInfo>, List<NavigationModel>>(navigationInfoList);
-            var newList = new List<NavigationModel>();
+            List<ManagerNavigationInfo> navigationInfoList = GetNavigations();
+            List<ManagerNavigationModel> navigationModelList = Mapper.Map<List<ManagerNavigationInfo>, List<ManagerNavigationModel>>(navigationInfoList);
+            var newList = new List<ManagerNavigationModel>();
             GetNavigationChildModels(navigationModelList, newList, 0, 0);
             return navigationModelList;
         }
@@ -69,10 +69,10 @@ namespace MCS.Application
         /// <param name="newData"></param>
         /// <param name="parent_id"></param>
         /// <param name="class_layer"></param>
-        private static void GetNavigationChildModels(List<NavigationModel> oldData, List<NavigationModel> newData, long parent_id, int class_layer)
+        private static void GetNavigationChildModels(List<ManagerNavigationModel> oldData, List<ManagerNavigationModel> newData, long parent_id, int class_layer)
         {
             class_layer++;
-            List<NavigationModel> dr = oldData.Where(a => a.ParentId == parent_id).OrderBy(a => a.SortId).ToList();
+            List<ManagerNavigationModel> dr = oldData.Where(a => a.ParentId == parent_id).OrderBy(a => a.SortId).ToList();
             foreach (var item in dr)
             {
                 item.ClassLayer = class_layer;
@@ -86,25 +86,25 @@ namespace MCS.Application
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static List<NavigationBreadCrumbModel> GetBreadCrumb(string path)
+        public static List<ManagerNavigationBreadCrumbModel> GetBreadCrumb(string path)
         {
-            List<NavigationInfo> navigationInfoList = GetNavigations();
-            List<NavigationBreadCrumbModel> breadCrumbList = new List<NavigationBreadCrumbModel>();
-            NavigationInfo page = navigationInfoList.Where(a => !string.IsNullOrEmpty(a.Path) && a.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            List<ManagerNavigationInfo> navigationInfoList = GetNavigations();
+            List<ManagerNavigationBreadCrumbModel> breadCrumbList = new List<ManagerNavigationBreadCrumbModel>();
+            ManagerNavigationInfo page = navigationInfoList.Where(a => !string.IsNullOrEmpty(a.Path) && a.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
 
             if (page == null)
-                return new List<NavigationBreadCrumbModel>();
+                return new List<ManagerNavigationBreadCrumbModel>();
 
-            breadCrumbList.Add(new NavigationBreadCrumbModel { Name = page.Name, Path = page.Path });
+            breadCrumbList.Add(new ManagerNavigationBreadCrumbModel { Name = page.Name, Path = page.Path });
 
-            NavigationInfo temp = page;
+            ManagerNavigationInfo temp = page;
             bool hasParent = true;
             do
             {
                 temp = navigationInfoList.Where(a => a.Id == temp.ParentId).FirstOrDefault();
                 if (temp != null)
                 {
-                    breadCrumbList.Insert(0, new NavigationBreadCrumbModel { Name = temp.Name, Path = temp.Path });
+                    breadCrumbList.Insert(0, new ManagerNavigationBreadCrumbModel { Name = temp.Name, Path = temp.Path });
                 }
                 else
                 {
@@ -116,21 +116,21 @@ namespace MCS.Application
 
         }
 
-        public static List<NavigationModel> GetNavigationTreeList(string path = "")
+        public static List<ManagerNavigationModel> GetNavigationTreeList(string path = "")
         {
             return GetTreeChild(0, path);
         }
 
-        private static List<NavigationModel> GetTreeChild(long parentId, string path = "")
+        private static List<ManagerNavigationModel> GetTreeChild(long parentId, string path = "")
         {
-            List<NavigationInfo> navigationInfoList = Service.GetNavigations(parentId).ToList();
-            List<NavigationModel> navigationList = new List<NavigationModel>();
+            List<ManagerNavigationInfo> navigationInfoList = Service.GetNavigations(parentId).ToList();
+            List<ManagerNavigationModel> navigationList = new List<ManagerNavigationModel>();
             foreach (var item in navigationInfoList)
             {
-                NavigationModel nav = Mapper.Map<NavigationInfo, NavigationModel>(item);
+                ManagerNavigationModel nav = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(item);
                 if (!string.IsNullOrEmpty(nav.Path))
                     nav.IsOpen = nav.Path.Equals(path, System.StringComparison.OrdinalIgnoreCase);
-                List<NavigationModel> childList = GetTreeChild(nav.Id, path);
+                List<ManagerNavigationModel> childList = GetTreeChild(nav.Id, path);
                 childList.ForEach(a => a.Parent = nav);
                 nav.Children = childList;
                 if (nav.Children.Count > 0)
@@ -140,10 +140,10 @@ namespace MCS.Application
             return navigationList;
         }
 
-        public static NavigationModel GetNavigation(long id)
+        public static ManagerNavigationModel GetNavigation(long id)
         {
-            NavigationInfo navInfo = Service.GetNavigation(id);
-            return Mapper.Map<NavigationInfo, NavigationModel>(navInfo);
+            ManagerNavigationInfo navInfo = Service.GetNavigation(id);
+            return Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
         }
 
     }

@@ -36,11 +36,11 @@ namespace MCS.Entities
 		public  long RoleId { get; set; }
         
 		/// <summary>
-        /// NavId
+        /// NavigationId
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "NavId")]
-		public  long NavId { get; set; }
+        [System.ComponentModel.DataAnnotations.Display(Name = "NavigationId")]
+		public  long NavigationId { get; set; }
         
 		/// <summary>
         /// ActionId

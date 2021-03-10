@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using MCS.CommonModel;
+using MCS.Core.Helper;
 using MCS.IServices;
 using MCS.Web.Areas.Admin.Models.Manage;
 using MCS.Web.Framework;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace MCS.Web.Areas.Admin.Controllers
 {
@@ -24,10 +26,12 @@ namespace MCS.Web.Areas.Admin.Controllers
         /// </summary>
         const int TIMES_WITHOUT_CHECKCODE = 3;
 
-        private IManagerService _iManagerService;
+        private readonly IConfiguration _iConfiguration;
+        private readonly IManagerService _iManagerService;
 
-        public LoginController(IManagerService iManagerService)
+        public LoginController(IConfiguration iConfiguration, IManagerService iManagerService)
         {
+            _iConfiguration = iConfiguration;
             _iManagerService = iManagerService;
         }
 
@@ -44,23 +48,37 @@ namespace MCS.Web.Areas.Admin.Controllers
 
             CheckCheckCode(user.UserName, user.CheckCode);
 
-            var manager = _iManagerService.Login(user.UserName, user.Password);
-            if (manager == null)
+            var managerModel = _iManagerService.Login(user.UserName, user.Password);
+            var jwtSection = _iConfiguration.GetSection("jwt");
+            int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
+            int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
+
+            if (managerModel == null)
             {
                 int errorTimes = SetErrorTimes(user.UserName);
                 return ErrorResult("用户名和密码不匹配");
             }
 
-            var claims = new List<Claim>() { new Claim(ClaimTypes.Name, manager.UserName), new Claim(ClaimTypes.NameIdentifier, manager.Id.ToString()) };
+            JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
 
-            var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, CookieKeysCollection.PLATFORM_MANAGER));
-
-            await HttpContext.SignInAsync(MCSAuthHandler.SchemeName, userPrincipal, new AuthenticationProperties
+            var claims = new Claim[]
             {
-                ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
-                IsPersistent = false,
-                AllowRefresh = false
-            });
+                new Claim(ClaimTypes.Actor, "Admin"),
+                new Claim(ClaimTypes.Name, managerModel.UserName),
+                new Claim(ClaimTypes.Role, managerModel.RoleId.ToString()),
+                new Claim(ClaimTypes.Sid, managerModel.Id.ToString()),
+            };
+
+            string token = jwtTokenHelper.GetToken(claims);
+            string refreshToken = jwtTokenHelper.RefreshToken();
+            string tokenExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(tokenExpires));
+            string refreshToeknExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(refreshTokenExpires));
+
+            _iManagerService.RemoveExpiresToken(managerModel.Id);
+            _iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
+
+            HttpContext.Response.Cookies.Append("token", token);
+            HttpContext.Response.Cookies.Append("refresh_token", refreshToken);
 
             //清除输入错误记录次数
             ClearErrorTimes(user.UserName);

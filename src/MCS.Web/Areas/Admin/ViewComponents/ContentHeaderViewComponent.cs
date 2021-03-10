@@ -18,7 +18,7 @@ namespace MCS.Web.Areas.Admin.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             string path = this.HttpContext.Request.Path;
-            ViewBag.BreadCrumb = NavigationApplication.GetBreadCrumb(path);
+            ViewBag.BreadCrumb = ManagerNavigationApplication.GetBreadCrumb(path);
             return View();
         }
     }

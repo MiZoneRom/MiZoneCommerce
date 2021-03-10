@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Display(Rename = "Navigation")]
-     public partial class NavigationInfo:IBaseEntity<NavigationInfo, long>
+     [Display(Rename = "ManagerNavigation")]
+     public partial class ManagerNavigationInfo:IBaseEntity<ManagerNavigationInfo, long>
      {
         
 		/// <summary>
@@ -48,13 +48,6 @@ namespace MCS.Entities
 		
         [System.ComponentModel.DataAnnotations.Display(Name = "Icon")]
 		public  string Icon { get; set; }
-        
-		/// <summary>
-        /// NavType
-        /// </summary>
-		
-        [System.ComponentModel.DataAnnotations.Display(Name = "NavType")]
-		public  NavigationType NavType { get; set; }
         
 		/// <summary>
         /// Areas

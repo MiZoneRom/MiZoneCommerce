@@ -22,11 +22,11 @@ namespace MCS.Entities
 		public override long Id { get; set; }
         
 		/// <summary>
-        /// UserId
+        /// ManagerId
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "UserId")]
-		public  long UserId { get; set; }
+        [System.ComponentModel.DataAnnotations.Display(Name = "ManagerId")]
+		public  long ManagerId { get; set; }
         
 		/// <summary>
         /// Token

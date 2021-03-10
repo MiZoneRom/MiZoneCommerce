@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MCS.DTO
 {
-    public class NavigationModel
+    public class ManagerNavigationModel
     {
 
         /// <summary>
@@ -39,12 +39,6 @@ namespace MCS.DTO
         /// </summary>
         [Display(Name = "图标")]
         public string Icon { get; set; }
-
-        /// <summary>
-        /// 导航类型
-        /// </summary>
-        [Display(Name = "导航类型")]
-        public NavigationType NavType { get; set; }
 
         /// <summary>
         /// 区域
@@ -113,12 +107,12 @@ namespace MCS.DTO
         /// <summary>
         /// 子项
         /// </summary>
-        public List<NavigationModel> Children { get; set; }
+        public List<ManagerNavigationModel> Children { get; set; }
 
         /// <summary>
         /// 父级
         /// </summary>
-        public NavigationModel Parent { get; set; }
+        public ManagerNavigationModel Parent { get; set; }
 
     }
 }

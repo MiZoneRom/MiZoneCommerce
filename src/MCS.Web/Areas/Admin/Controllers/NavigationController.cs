@@ -21,37 +21,37 @@ namespace MCS.Web.Areas.Admin.Controllers
         [Authorize]
         public IActionResult List()
         {
-            ViewBag.NavigationTypes = EnumHelper.ToDescriptionDictionary<NavigationType>();
+            //ViewBag.NavigationTypes = EnumHelper.ToDescriptionDictionary<NavigationType>();
             return View();
         }
 
-        public JsonResult ListResult(NavigationType? type)
-        {
-            var navList = NavigationApplication.GetNavigations();
-            if (type.HasValue && type > 0)
-            {
-                navList = navList.Where(a => a.NavType == type).ToList();
-            }
-            return Json(new Result() { success = true, msg = "", data = navList });
-        }
+        //public JsonResult ListResult(NavigationType? type)
+        //{
+        //    var navList = ManagerNavigationApplication.GetNavigations();
+        //    if (type.HasValue && type > 0)
+        //    {
+        //        navList = navList.Where(a => a.NavType == type).ToList();
+        //    }
+        //    return Json(new Result() { success = true, msg = "", data = navList });
+        //}
 
         public IActionResult Edit(long? id)
         {
-            ViewBag.Navigations = NavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString() }).ToList();
+            ViewBag.Navigations = ManagerNavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString() }).ToList();
             ViewBag.Actions = NavigationAction.Add.ToSelectList();
             if (id.HasValue)
             {
-                NavigationModel model = NavigationApplication.GetNavigation(id.Value);
+                ManagerNavigationModel model = ManagerNavigationApplication.GetNavigation(id.Value);
                 return View(model);
             }
-            return View(new NavigationModel());
+            return View(new ManagerNavigationModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(NavigationInfo model)
+        public IActionResult Edit(ManagerNavigationInfo model)
         {
-            ServiceProvider.Instance<INavigationService>.Create.UpdateNavigation(model);
+            ServiceProvider.Instance<IManagerNavigationService>.Create.UpdateNavigation(model);
             return SuccessResult();
         }
 

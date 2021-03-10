@@ -22,7 +22,7 @@ namespace MCS.IServices
         /// 获取当前登录的平台管理员
         /// </summary>
         /// <returns></returns>
-        ManagerInfo GetPlatformManager(long userId);
+        ManagerInfo GetPlatformManager(long managerId);
 
         /// <summary>
         /// 根据角色ID获取平台角色下的管理员
@@ -79,18 +79,18 @@ namespace MCS.IServices
         /// <returns></returns>
         ManagerInfo Login(string username, string password);
 
-        void AddRefeshToken(string token, string refeshToken, long userId, double minutes = 1);
+        void AddRefeshToken(string token, string refeshToken, long managerId, double minutes = 1);
 
-        ManagerTokenInfo GetToken(long userId);
+        ManagerTokenInfo GetToken(long managerId);
 
         ManagerTokenInfo GetTokenByRefreshToken(string refreshToken);
 
         bool UpdateManagerToken(ManagerTokenInfo model);
 
-        void RemoveToken(long userId);
+        void RemoveToken(long managerId);
 
-        void RemoveExpiresToken(long userId);
+        void RemoveExpiresToken(long managerId);
         long[] GetRoleNavigationIds(long roleId);
-        bool GetManagerAccess(long userId, string accessKey);
+        bool GetManagerAccess(long managerId, string accessKey);
     }
 }

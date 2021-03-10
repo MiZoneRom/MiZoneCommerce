@@ -102,7 +102,7 @@ namespace MCS.AdminAPI.Controllers
             }
 
             //通过记录获取用户信息
-            ManagerInfo managerModel = _manager.GetPlatformManager(tokenModel.UserId);
+            ManagerInfo managerModel = _manager.GetPlatformManager(tokenModel.ManagerId);
 
             JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
 

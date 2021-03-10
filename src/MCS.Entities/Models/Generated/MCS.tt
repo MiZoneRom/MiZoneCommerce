@@ -8,7 +8,6 @@
 	 ExcludePrefix = new string[] { }; // Exclude tables by prefix.
 	 ClassReplaces = new string[] { "WMS_", "WMs_", "wms_" };
 	 EnumLists = new Dictionary<string, string> {
-        { "NavigationInfo.NavType", "NavigationType" }
 	 };
 
 	var tables = LoadTables();
