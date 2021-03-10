@@ -50,27 +50,6 @@ namespace MCS.Entities
 		public  string Icon { get; set; }
         
 		/// <summary>
-        /// Areas
-        /// </summary>
-		
-        [System.ComponentModel.DataAnnotations.Display(Name = "Areas")]
-		public  string Areas { get; set; }
-        
-		/// <summary>
-        /// Controllers
-        /// </summary>
-		
-        [System.ComponentModel.DataAnnotations.Display(Name = "Controllers")]
-		public  string Controllers { get; set; }
-        
-		/// <summary>
-        /// Views
-        /// </summary>
-		
-        [System.ComponentModel.DataAnnotations.Display(Name = "Views")]
-		public  string Views { get; set; }
-        
-		/// <summary>
         /// Component
         /// </summary>
 		

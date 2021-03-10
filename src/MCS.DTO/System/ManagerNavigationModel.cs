@@ -41,24 +41,6 @@ namespace MCS.DTO
         public string Icon { get; set; }
 
         /// <summary>
-        /// 区域
-        /// </summary>
-        [Display(Name = "区域")]
-        public string Areas { get; set; }
-
-        /// <summary>
-        /// 控制器
-        /// </summary>
-        [Display(Name = "控制器")]
-        public string Controllers { get; set; }
-
-        /// <summary>
-        /// 视图
-        /// </summary>
-        [Display(Name = "视图")]
-        public string Views { get; set; }
-
-        /// <summary>
         /// 模块（VUE使用）
         /// </summary>
         [Display(Name = "模块")]
