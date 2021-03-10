@@ -38,6 +38,8 @@ using MCS.Application.Mappers.Profiles;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using MCS.AdminAPI;
 using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace MCS.Web
 {
@@ -115,7 +117,13 @@ namespace MCS.Web
             services.AddStrategies();
 
             //配置Controller全部由Autofac创建
-            services.AddControllersWithViews().AddControllersAsServices();
+            services.AddControllersWithViews().AddControllersAsServices().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver(); //序列化时key为驼峰样式
+                options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;//忽略循环引用
+            });
 
             //注册插件
             services.AddPlugins();
