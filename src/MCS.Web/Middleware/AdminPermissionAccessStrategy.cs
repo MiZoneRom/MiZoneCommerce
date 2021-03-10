@@ -33,7 +33,9 @@ namespace MCS.Web
             if (!user.Identity.IsAuthenticated || sidClaim == null)
             {
                 _accessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                _accessor.HttpContext.Abort();
+                _accessor.HttpContext.Response.HttpContext.Response.WriteAsync("No Login");
+                _accessor.HttpContext.Response.CompleteAsync();
+                //_accessor.HttpContext.Abort();
                 return false;
             }
 
