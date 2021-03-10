@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace MCS.AdminAPI.Controllers
 {
+    /// <summary>
+    /// 站点配置
+    /// </summary>
     [Route("api/admin/[controller]")]
     [ApiController]
     public class SiteController : BaseAPIController

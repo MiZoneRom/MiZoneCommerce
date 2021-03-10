@@ -17,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace MCS.AdminAPI.Controllers
 {
+    /// <summary>
+    /// 登录
+    /// </summary>
     [ApiController]
     [Route("api/admin/[controller]")]
     public class LoginController : BaseAdminAPIController

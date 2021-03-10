@@ -186,8 +186,8 @@ namespace MCS.Web
                 });
 
                 var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);
-                var xmlPath = Path.Combine(basePath, "MCS.Web.xml");
-                c.IncludeXmlComments(xmlPath);
+                c.IncludeXmlComments(Path.Combine(basePath, "MCS.Web.xml"), true);
+                c.IncludeXmlComments(Path.Combine(basePath, "MCS.AdminAPI.xml"), true);
             });
 
             services.AddAccessControlHelper()
