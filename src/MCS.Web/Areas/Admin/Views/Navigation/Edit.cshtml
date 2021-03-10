@@ -1,4 +1,4 @@
-﻿@model MCS.DTO.NavigationModel
+﻿@model MCS.DTO.ManagerNavigationModel
 <div class="row">
     <div class="col-md-3">
         <a class="btn btn-primary btn-block mb-3 btn-action-back">返回</a>
@@ -46,27 +46,6 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label asp-for="Areas"></label>
-                                <input asp-for="Areas" class="form-control" placeholder="">
-                                <span asp-validation-for="Areas" class="error invalid-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label asp-for="Controllers"></label>
-                                <input asp-for="Controllers" class="form-control" placeholder="">
-                                <span asp-validation-for="Controllers" class="error invalid-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label asp-for="Views"></label>
-                                <input asp-for="Views" class="form-control" placeholder="">
-                                <span asp-validation-for="Views" class="error invalid-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
                                 <label asp-for="Component"></label>
                                 <input asp-for="Component" class="form-control" placeholder="">
                                 <span asp-validation-for="Component" class="error invalid-feedback"></span>
@@ -77,13 +56,6 @@
                                 <label asp-for="Path"></label>
                                 <input asp-for="Path" class="form-control" placeholder="">
                                 <span asp-validation-for="Path" class="error invalid-feedback"></span>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label asp-for="NavType"></label>
-                                <select enums="1" asp-for="NavType" class="form-control single-select"></select>
-                                <span asp-validation-for="NavType" class="error invalid-feedback"></span>
                             </div>
                         </div>
                         <div class="col-6">
