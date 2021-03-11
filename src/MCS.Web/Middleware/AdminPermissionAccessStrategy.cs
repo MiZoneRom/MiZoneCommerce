@@ -55,14 +55,14 @@ namespace MCS.Web
         {
             Content = "No Permission",
             ContentType = "text/plain",
-            StatusCode = 403
+            StatusCode = (int)HttpStatusCode.Forbidden
         };
 
         public IActionResult DisallowedAjaxResult => new JsonResult(new Framework.BaseControllers.BaseAPIController.Result<object>
         {
             success = false,
             msg = "No Permission",
-            code = 403
+            code = (int)HttpStatusCode.Forbidden
         });
 
     }
