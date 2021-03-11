@@ -35,7 +35,7 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<object> SiteSettings()
+        public ActionResult<object> GetSiteSettings()
         {
             SiteSettings siteSettingModel = SiteSettingApplication.SiteSettings;
             return SuccessResult<object>(siteSettingModel);

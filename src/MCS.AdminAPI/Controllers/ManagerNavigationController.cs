@@ -2,6 +2,7 @@
 using MCS.DTO;
 using MCS.Entities;
 using MCS.IServices;
+using MCS.Web.Framework.AccessControlHelper;
 using MCS.Web.Framework.BaseControllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,6 +29,19 @@ namespace MCS.AdminAPI.Controllers
         public ManagerNavigationController(IManagerNavigationService iManagerNavigationService)
         {
             _iManagerNavigationService = iManagerNavigationService;
+        }
+
+        /// <summary>
+        /// 获取导航
+        /// </summary>
+        /// <returns>导航列表</returns>
+        [HttpGet]
+        [AccessControl(AccessKey = "Navigation")]
+        public ActionResult<object> GetNavigationList()
+        {
+            long roleId = CurrentManager.RoleId;
+            var navs = ManagerNavigationApplication.GetNavigationTreeList(roleId);
+            return SuccessResult<List<ManagerNavigationModel>>(navs);
         }
 
         /// <summary>
