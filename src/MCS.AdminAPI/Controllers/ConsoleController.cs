@@ -1,4 +1,5 @@
 ﻿using MCS.Application;
+using MCS.DTO;
 using MCS.Web.Framework;
 using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Authorization;
@@ -21,14 +22,14 @@ namespace MCS.AdminAPI.Controllers
         /// <summary>
         /// 获取导航
         /// </summary>
-        /// <returns></returns>
+        /// <returns>导航列表</returns>
         [HttpGet("Navigation")]
         [AccessControl(AccessKey = "Navigation")]
         public ActionResult<object> Navigation()
         {
             long roleId = CurrentManager.RoleId;
             var navs = ManagerNavigationApplication.GetNavigationTreeList(roleId);
-            return SuccessResult<object>(navs);
+            return SuccessResult<List<ManagerNavigationModel>>(navs);
         }
     }
 }
