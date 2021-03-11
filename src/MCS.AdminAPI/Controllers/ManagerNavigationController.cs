@@ -35,7 +35,7 @@ namespace MCS.AdminAPI.Controllers
         /// 获取导航
         /// </summary>
         /// <returns>导航列表</returns>
-        [HttpGet]
+        [HttpGet("GetNavigationList")]
         [AccessControl(AccessKey = "Navigation")]
         public ActionResult<object> GetNavigationList()
         {
