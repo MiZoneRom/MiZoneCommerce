@@ -25,13 +25,13 @@ namespace MCS.AdminAPI.Controllers
     public class LoginController : BaseAdminAPIController
     {
 
-        private readonly IConfiguration _configuration;
-        private readonly IManagerService _manager;
+        private readonly IConfiguration _iConfiguration;
+        private readonly IManagerService _iManagerService;
 
-        public LoginController(IConfiguration configuration, IManagerService manager)
+        public LoginController(IConfiguration iConfiguration, IManagerService iManagerService)
         {
-            _configuration = configuration;
-            _manager = manager;
+            _iConfiguration = iConfiguration;
+            _iManagerService = iManagerService;
         }
 
         /// <summary>
@@ -45,8 +45,8 @@ namespace MCS.AdminAPI.Controllers
         public ActionResult<object> Get(string username, string password)
         {
 
-            ManagerInfo managerModel = _manager.Login(username, password);
-            var jwtSection = _configuration.GetSection("jwt");
+            ManagerInfo managerModel = _iManagerService.Login(username, password);
+            var jwtSection = _iConfiguration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
             int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
 
@@ -70,8 +70,8 @@ namespace MCS.AdminAPI.Controllers
             string tokenExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(tokenExpires));
             string refreshToeknExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(refreshTokenExpires));
 
-            _manager.RemoveExpiresToken(managerModel.Id);
-            _manager.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
+            _iManagerService.RemoveExpiresToken(managerModel.Id);
+            _iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
 
             return SuccessResult<object>(new { token = token, refreshToken = refreshToken, userName = managerModel.UserName, expires = tokenExpired, refreshExpires = refreshToeknExpired });
         }
@@ -87,14 +87,14 @@ namespace MCS.AdminAPI.Controllers
         {
 
             //jwt配置
-            var jwtSection = _configuration.GetSection("jwt");
+            var jwtSection = _iConfiguration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
             int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
             string token = entity.token;
             string refreshToken = entity.refresh_token;
 
             //获取刷新token记录
-            ManagerTokenInfo tokenModel = _manager.GetTokenByRefreshToken(entity.refresh_token);
+            ManagerTokenInfo tokenModel = _iManagerService.GetTokenByRefreshToken(entity.refresh_token);
 
             if (tokenModel == null)
             {
@@ -102,7 +102,7 @@ namespace MCS.AdminAPI.Controllers
             }
 
             //通过记录获取用户信息
-            ManagerInfo managerModel = _manager.GetPlatformManager(tokenModel.ManagerId);
+            ManagerInfo managerModel = _iManagerService.GetPlatformManager(tokenModel.ManagerId);
 
             JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
 
@@ -123,7 +123,7 @@ namespace MCS.AdminAPI.Controllers
             tokenModel.Expires = DateTime.Now.AddMinutes(refreshTokenExpires);
 
             //更新token
-            _manager.UpdateManagerToken(tokenModel);
+            _iManagerService.UpdateManagerToken(tokenModel);
 
             return SuccessResult<object>(new { token = newToken, refreshToken = newRefreshToken, userName = managerModel.UserName, expires = tokenExpired, refreshExpires = refreshToeknExpired });
 

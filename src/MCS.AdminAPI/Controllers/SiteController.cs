@@ -1,5 +1,7 @@
 ﻿using MCS.Application;
 using MCS.DTO;
+using MCS.Entities;
+using MCS.IServices;
 using MCS.Web.Framework.BaseControllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,11 +19,22 @@ namespace MCS.AdminAPI.Controllers
     [ApiController]
     public class SiteController : BaseAPIController
     {
+        protected readonly IManagerNavigationService _iManagerNavigationService;
+
+        /// <summary>
+        /// 站点设置
+        /// </summary>
+        /// <param name="iManagerNavigationService"></param>
+        public SiteController(IManagerNavigationService iManagerNavigationService)
+        {
+            _iManagerNavigationService = iManagerNavigationService;
+        }
+
         /// <summary>
         /// 获取系统设置
         /// </summary>
         /// <returns></returns>
-        [HttpGet("SiteSettings")]
+        [HttpGet]
         public ActionResult<object> SiteSettings()
         {
             SiteSettings siteSettingModel = SiteSettingApplication.SiteSettings;
@@ -33,13 +46,14 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <param name="siteSettingModel"></param>
         /// <returns></returns>
-        [HttpPut("SiteSettings")]
-        public ActionResult<object> SiteSettings(SiteSettings siteSettingModel)
+        [HttpPut]
+        public ActionResult<object> UpdateSiteSettings(SiteSettings siteSettingModel)
         {
             var settings = SiteSettingApplication.SiteSettings;
             settings.SiteName = siteSettingModel.SiteName;
             SiteSettingApplication.SaveChanges();
             return SuccessResult<object>();
         }
+
     }
 }

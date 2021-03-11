@@ -20,11 +20,11 @@ namespace MCS.AdminAPI.Controllers
     public class ManagerController : BaseAdminAPIController
     {
 
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration _iConfiguration;
 
-        public ManagerController(IConfiguration configuration)
+        public ManagerController(IConfiguration iConfiguration)
         {
-            _configuration = configuration;
+            _iConfiguration = iConfiguration;
         }
 
         /// <summary>
