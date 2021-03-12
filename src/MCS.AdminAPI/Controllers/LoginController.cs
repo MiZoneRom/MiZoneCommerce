@@ -83,7 +83,7 @@ namespace MCS.AdminAPI.Controllers
         /// <returns></returns>
         [HttpPost("RefreshToken")]
         [NoAccessControl]
-        public ActionResult<Result<ManagerLoginModel>> RefreshToken([FromBody] RefreshTokenModel entity)
+        public Result<ManagerLoginModel> RefreshToken([FromBody] RefreshTokenModel entity)
         {
 
             //jwt配置
