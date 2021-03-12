@@ -58,11 +58,11 @@ namespace MCS.Web
             StatusCode = (int)HttpStatusCode.Forbidden
         };
 
-        public IActionResult DisallowedAjaxResult => new JsonResult(new Framework.BaseControllers.BaseAPIController.Result<object>
+        public IActionResult DisallowedAjaxResult => new JsonResult(new Framework.BaseControllers.BaseAPIController.ApiResult<object>
         {
-            success = false,
-            msg = "No Permission",
-            code = (int)HttpStatusCode.Forbidden
+            Success = false,
+            Msg = "No Permission",
+            Code = (int)HttpStatusCode.Forbidden
         });
 
     }

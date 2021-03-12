@@ -104,14 +104,14 @@ namespace MCS.Web.Framework.BaseControllers
         /// <param name="msg"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        protected Result<T> ApiResult<T>(bool success, string msg = "", T data = default(T), int code = 0)
+        protected ApiResult<T> ApiResultContent<T>(bool success, string msg = "", T data = default(T), int code = 200)
         {
-            return new Result<T>
+            return new ApiResult<T>
             {
-                success = success,
-                msg = msg,
-                data = data,
-                code = code
+                Success = success,
+                Msg = msg,
+                Data = data,
+                Code = code
             };
         }
 
@@ -122,9 +122,9 @@ namespace MCS.Web.Framework.BaseControllers
         /// <param name="msg"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        protected Result<T> SuccessResult<T>(T data = default(T), string msg = "", int code = 0)
+        protected ApiResult<T> SuccessResult<T>(T data = default(T), string msg = "", int code = 200)
         {
-            return ApiResult<T>(true, msg, data, code);
+            return ApiResultContent<T>(true, msg, data, code);
         }
 
         /// <summary>
@@ -134,82 +134,37 @@ namespace MCS.Web.Framework.BaseControllers
         /// <param name="msg"></param>
         /// <param name="data"></param>
         /// <returns></returns>
-        protected Result<T> ErrorResult<T>(string msg, T data = default(T), int code = 0)
+        protected ApiResult<T> ErrorResult<T>(string msg, T data = default(T), int code = 406)
         {
-            return ApiResult<T>(false, msg, data, code);
+            return ApiResultContent<T>(false, msg, data, code);
         }
 
-        public class Result<TData>
+        /// <summary>
+        /// API返回基类
+        /// </summary>
+        /// <typeparam name="TData"></typeparam>
+        public class ApiResult<TData>
         {
-            #region 字段
-            private bool _success = false;
-            private string _msg = string.Empty;
-            private int _code = 0;
-            private TData _data = default(TData);
-            #endregion
+            /// <summary>
+            /// 是否成功
+            /// </summary>
+            public bool Success { get; set; } = false;
 
-            #region 构造函数
-
-            #endregion
-
-            #region 属性
-            public bool success
-            {
-                get { return _success; }
-                set { _success = value; }
-            }
-
-            public string msg
-            {
-                get { return _msg; }
-                set { _msg = value; }
-            }
+            /// <summary>
+            /// 返回消息
+            /// </summary>
+            public string Msg { get; set; } = string.Empty;
 
             /// <summary>
             /// 状态码
             /// </summary>
-            public int code
-            {
-                get { return _code; }
-                set { _code = value; }
-            }
+            public int Code { get; set; } = 200;
 
-            public TData data
-            {
-                get { return _data; }
-                set { _data = value; }
-            }
+            /// <summary>
+            /// 数据
+            /// </summary>
+            public TData Data { get; set; } = default(TData);
 
-            #endregion
-
-            #region 重写方法
-            //public override bool TrySetMember(System.Dynamic.SetMemberBinder binder, object value)
-            //{
-            //    if (!_members.ContainsKey(binder.Name))
-            //    {
-            //        _members.Add(binder.Name, value);
-            //        return true;
-            //    }
-
-            //    return base.TrySetMember(binder, value);
-            //}
-
-            //public override bool TryGetMember(System.Dynamic.GetMemberBinder binder, out object result)
-            //{
-            //    if (_members.ContainsKey(binder.Name))
-            //    {
-            //        result = _members[binder.Name];
-            //        return true;
-            //    }
-
-            //    return base.TryGetMember(binder, out result);
-            //}
-
-            //public override IEnumerable<string> GetDynamicMemberNames()
-            //{
-            //    return base.GetDynamicMemberNames().Concat(_members.Keys);
-            //}
-            #endregion
         }
 
         #endregion

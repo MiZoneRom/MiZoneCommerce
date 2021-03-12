@@ -42,7 +42,7 @@ namespace MCS.AdminAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [NoAccessControl]
-        public Result<ManagerLoginModel> Get(string username, string password)
+        public ApiResult<ManagerLoginModel> Get(string username, string password)
         {
 
             ManagerInfo managerModel = _iManagerService.Login(username, password);
@@ -83,7 +83,7 @@ namespace MCS.AdminAPI.Controllers
         /// <returns></returns>
         [HttpPost("RefreshToken")]
         [NoAccessControl]
-        public Result<ManagerLoginModel> RefreshToken([FromBody] RefreshTokenModel entity)
+        public ApiResult<ManagerLoginModel> RefreshToken([FromBody] RefreshTokenModel entity)
         {
 
             //jwt配置
