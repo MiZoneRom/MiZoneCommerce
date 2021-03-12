@@ -25,11 +25,11 @@ namespace MCS.AdminAPI.Controllers
         /// <returns>导航列表</returns>
         [HttpGet("Navigation")]
         [AccessControl(AccessKey = "Navigation")]
-        public ActionResult<object> Navigation()
+        public ActionResult<Result<List<ManagerNavigationModel>>> Navigation()
         {
             long roleId = CurrentManager.RoleId;
             var navs = ManagerNavigationApplication.GetNavigationTreeList(roleId);
-            return SuccessResult<List<ManagerNavigationModel>>(navs);
+            return SuccessResult(navs);
         }
     }
 }
