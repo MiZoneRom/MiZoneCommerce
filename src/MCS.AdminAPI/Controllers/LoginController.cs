@@ -42,7 +42,7 @@ namespace MCS.AdminAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [NoAccessControl]
-        public ActionResult<Result<ManagerLoginModel>> Get(string username, string password)
+        public Result<ManagerLoginModel> Get(string username, string password)
         {
 
             ManagerInfo managerModel = _iManagerService.Login(username, password);
@@ -73,7 +73,7 @@ namespace MCS.AdminAPI.Controllers
             _iManagerService.RemoveExpiresToken(managerModel.Id);
             _iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
 
-            return SuccessResult<ManagerLoginModel>(new ManagerLoginModel { Token = token, RefreshToken = refreshToken, UserName = managerModel.UserName, Expires = tokenExpired, RefreshExpires = refreshToeknExpired });
+            return SuccessResult(new ManagerLoginModel { Token = token, RefreshToken = refreshToken, UserName = managerModel.UserName, Expires = tokenExpired, RefreshExpires = refreshToeknExpired });
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace MCS.AdminAPI.Controllers
         /// <returns></returns>
         [HttpPost("RefreshToken")]
         [NoAccessControl]
-        public ActionResult<object> RefreshToken([FromBody] RefreshTokenModel entity)
+        public ActionResult<Result<ManagerLoginModel>> RefreshToken([FromBody] RefreshTokenModel entity)
         {
 
             //jwt配置
@@ -98,7 +98,7 @@ namespace MCS.AdminAPI.Controllers
 
             if (tokenModel == null)
             {
-                return ErrorResult<int>("登录过期");
+                throw new MCSException("登录过期");
             }
 
             //通过记录获取用户信息
@@ -125,7 +125,7 @@ namespace MCS.AdminAPI.Controllers
             //更新token
             _iManagerService.UpdateManagerToken(tokenModel);
 
-            return SuccessResult<object>(new { token = newToken, refreshToken = newRefreshToken, userName = managerModel.UserName, expires = tokenExpired, refreshExpires = refreshToeknExpired });
+            return SuccessResult(new ManagerLoginModel { Token = newToken, RefreshToken = newRefreshToken, UserName = managerModel.UserName, Expires = tokenExpired, RefreshExpires = refreshToeknExpired });
 
         }
     }
