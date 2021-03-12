@@ -8,8 +8,4 @@
     <ProjectReference Include="..\MCS.Entities\MCS.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Manage\" />
-  </ItemGroup>
-
 </Project>

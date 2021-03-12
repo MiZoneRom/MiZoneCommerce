@@ -42,7 +42,7 @@ namespace MCS.AdminAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [NoAccessControl]
-        public ActionResult<object> Get(string username, string password)
+        public ActionResult<Result<ManagerLoginModel>> Get(string username, string password)
         {
 
             ManagerInfo managerModel = _iManagerService.Login(username, password);
@@ -52,7 +52,7 @@ namespace MCS.AdminAPI.Controllers
 
             if (managerModel == null)
             {
-                return ErrorResult<int>("用户名或密码错误");
+                throw new MCSException("用户名或密码错误");
             }
 
             JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
@@ -73,7 +73,7 @@ namespace MCS.AdminAPI.Controllers
             _iManagerService.RemoveExpiresToken(managerModel.Id);
             _iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
 
-            return SuccessResult<object>(new { token = token, refreshToken = refreshToken, userName = managerModel.UserName, expires = tokenExpired, refreshExpires = refreshToeknExpired });
+            return SuccessResult<ManagerLoginModel>(new ManagerLoginModel { Token = token, RefreshToken = refreshToken, UserName = managerModel.UserName, Expires = tokenExpired, RefreshExpires = refreshToeknExpired });
         }
 
         /// <summary>
