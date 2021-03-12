@@ -37,11 +37,11 @@ namespace MCS.AdminAPI.Controllers
         /// <returns>导航列表</returns>
         [HttpGet("GetNavigationList")]
         [AccessControl(AccessKey = "Navigation")]
-        public ActionResult<object> GetNavigationList()
+        public ActionResult<Result<List<ManagerNavigationModel>>> GetNavigationList()
         {
             long roleId = CurrentManager.RoleId;
             var navs = ManagerNavigationApplication.GetNavigationTreeList(roleId);
-            return SuccessResult<List<ManagerNavigationModel>>(navs);
+            return SuccessResult(navs);
         }
 
         /// <summary>
@@ -50,10 +50,10 @@ namespace MCS.AdminAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<object> Get(long id)
+        public ActionResult<Result<ManagerNavigationModel>> Get(long id)
         {
             ManagerNavigationModel model = ManagerNavigationApplication.GetNavigation(id);
-            return SuccessResult<object>(model);
+            return SuccessResult(model);
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace MCS.AdminAPI.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult<object> Put(ManagerNavigationInfo model)
+        public ActionResult<Result<object>> Put(ManagerNavigationInfo model)
         {
             _iManagerNavigationService.UpdateNavigation(model);
             return SuccessResult<object>(null, "更新成功");
@@ -74,7 +74,7 @@ namespace MCS.AdminAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public ActionResult<object> Delete(long id)
+        public ActionResult<Result<object>> Delete(long id)
         {
             return SuccessResult<object>(null, "删除成功");
         }
