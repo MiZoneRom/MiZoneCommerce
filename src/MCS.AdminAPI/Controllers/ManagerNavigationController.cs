@@ -87,8 +87,8 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut]
-        public ActionResult<ApiResult<object>> Put(ManagerNavigationInfo model)
+        [HttpPut("{id}")]
+        public ActionResult<ApiResult<object>> Put(string id, ManagerNavigationInfo model)
         {
             _iManagerNavigationService.UpdateNavigation(model);
             return SuccessResult<object>(null, "更新成功");
@@ -99,7 +99,7 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ApiResult<object> Delete(long id)
         {
             return SuccessResult<object>(null, "删除成功");

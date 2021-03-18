@@ -142,6 +142,7 @@ namespace MCS.Web
                 {
                     // 设定允许跨域的来源，有多个可以用','隔开
                     policy.WithOrigins(Configuration.GetSection("AllowedCorHosts").Value.Split('|'))
+                    //policy.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
