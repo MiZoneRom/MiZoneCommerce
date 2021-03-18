@@ -35,12 +35,25 @@ namespace MCS.AdminAPI.Controllers
         /// 获取导航
         /// </summary>
         /// <returns>导航列表</returns>
-        [HttpGet("GetNavigationList")]
+        [HttpGet("GetNavigationTreeList")]
         [AccessControl(AccessKey = "Navigation")]
-        public ApiResult<List<ManagerNavigationModel>> GetNavigationList()
+        public ApiResult<List<ManagerNavigationModel>> GetNavigationTreeList()
         {
             long roleId = CurrentManager.RoleId;
             var navs = ManagerNavigationApplication.GetNavigationTreeList(roleId);
+            return SuccessResult(navs);
+        }
+
+        /// <summary>
+        /// 通过父级Id获取导航列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetNavigationList")]
+        [AccessControl(AccessKey = "Navigation")]
+        public ApiResult<List<ManagerNavigationInfo>> GetNavigationList(long id)
+        {
+            var navs = _iManagerNavigationService.GetNavigations(id).ToList();
             return SuccessResult(navs);
         }
 
