@@ -35,10 +35,10 @@ namespace MCS.AdminAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult<object> GetSiteSettings()
+        public ApiResult<SiteSettings> GetSiteSettings()
         {
             SiteSettings siteSettingModel = SiteSettingApplication.SiteSettings;
-            return SuccessResult<object>(siteSettingModel);
+            return SuccessResult<SiteSettings>(siteSettingModel);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace MCS.AdminAPI.Controllers
         /// <param name="siteSettingModel"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult<object> UpdateSiteSettings(SiteSettings siteSettingModel)
+        public ApiResult<object> UpdateSiteSettings(SiteSettings siteSettingModel)
         {
             var settings = SiteSettingApplication.SiteSettings;
             settings.SiteName = siteSettingModel.SiteName;
