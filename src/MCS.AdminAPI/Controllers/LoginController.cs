@@ -90,11 +90,11 @@ namespace MCS.AdminAPI.Controllers
             var jwtSection = _iConfiguration.GetSection("jwt");
             int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
             int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
-            string token = entity.token;
-            string refreshToken = entity.refresh_token;
+            string token = entity.Token;
+            string refreshToken = entity.RefreshToken;
 
             //获取刷新token记录
-            ManagerTokenInfo tokenModel = _iManagerService.GetTokenByRefreshToken(entity.refresh_token);
+            ManagerTokenInfo tokenModel = _iManagerService.GetTokenByRefreshToken(entity.RefreshToken);
 
             if (tokenModel == null)
             {

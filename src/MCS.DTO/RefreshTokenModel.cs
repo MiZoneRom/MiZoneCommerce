@@ -9,10 +9,10 @@ namespace MCS.DTO
         /// <summary>
         /// token
         /// </summary>
-        public string token { get; set; }
+        public string Token { get; set; }
         /// <summary>
         /// 刷新token
         /// </summary>
-        public string refresh_token { get; set; }
+        public string RefreshToken { get; set; }
     }
 }
