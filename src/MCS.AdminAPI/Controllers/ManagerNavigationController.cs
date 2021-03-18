@@ -58,6 +58,19 @@ namespace MCS.AdminAPI.Controllers
         }
 
         /// <summary>
+        /// 通过父级Id获取导航列表
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetNavigationSortList")]
+        [AccessControl(AccessKey = "Navigation")]
+        public ApiResult<List<ManagerNavigationModel>> GetNavigationSortList(long id)
+        {
+            var navs = ManagerNavigationApplication.GetNavigationModels();
+            return SuccessResult(navs);
+        }
+
+        /// <summary>
         /// 获取导航
         /// </summary>
         /// <param name="id"></param>
