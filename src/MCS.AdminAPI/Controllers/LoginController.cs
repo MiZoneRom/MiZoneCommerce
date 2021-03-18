@@ -108,9 +108,10 @@ namespace MCS.AdminAPI.Controllers
 
             var claims = new Claim[]
             {
+                new Claim(ClaimTypes.Actor, "Admin"),
                 new Claim(ClaimTypes.Name, managerModel.UserName),
                 new Claim(ClaimTypes.Role, managerModel.RoleId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sid, managerModel.Id.ToString()),
+                new Claim(ClaimTypes.Sid, managerModel.Id.ToString()),
             };
 
             string newToken = jwtTokenHelper.GetToken(claims);
