@@ -12,8 +12,8 @@
         }
         var html = `
                     <tr data-index='${index}'>
-                        <th><input class="form-control" name="Actions[${index}].Name" type="text" value="" readonly="readonly" /></th>
-                        <th><input class="form-control" name="Actions[${index}].AccessKey" type="text" value="" readonly="readonly" /></th>
+                        <th><input class="form-control" name="Actions[${index}].Name" type="text" value="" /></th>
+                        <th><input class="form-control" name="Actions[${index}].AccessKey" type="text" value="" /></th>
                         <th><input class="form-control" name="Actions[${index}].Id" type="hidden" value="0" /> <input class="btn btn-danger btn-delete" type="button" value="删除" /></th>
                     </tr>`;
         $('.table-actions tbody').append(html);

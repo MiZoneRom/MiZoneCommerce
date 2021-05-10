@@ -149,5 +149,12 @@ namespace MCS.Application
             return model;
         }
 
+        public static bool UpdateNavigation(ManagerNavigationModel model)
+        {
+            ManagerNavigationInfo modelInfo = Mapper.Map<ManagerNavigationModel, ManagerNavigationInfo>(model);
+            List<ManagerNavigationActionInfo> modelActions = Mapper.Map<List<ManagerNavigationActionModel>, List<ManagerNavigationActionInfo>>(model.Actions);
+            return Service.UpdateNavigation(modelInfo, modelActions);
+        }
+
     }
 }

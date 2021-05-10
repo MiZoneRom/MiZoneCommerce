@@ -19,7 +19,7 @@ namespace MCS.IServices
         QuerySet<ManagerNavigationInfo> GetNavigations(long[] navIds, long parentId = 0);
         List<ManagerNavigationInfo> GetNavigations();
         ManagerNavigationInfo GetNavigation(long id);
-        bool UpdateNavigation(ManagerNavigationModel model);
+        bool UpdateNavigation(ManagerNavigationInfo model, List<ManagerNavigationActionInfo> actions = null);
         List<ManagerNavigationActionInfo> GetNavigationActions(long id);
     }
 }

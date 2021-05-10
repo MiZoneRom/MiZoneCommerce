@@ -46,7 +46,7 @@ namespace MCS.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ManagerNavigationModel model)
         {
-            ServiceProvider.Instance<IManagerNavigationService>.Create.UpdateNavigation(model);
+            ManagerNavigationApplication.UpdateNavigation(model);
             return SuccessResult();
         }
 
