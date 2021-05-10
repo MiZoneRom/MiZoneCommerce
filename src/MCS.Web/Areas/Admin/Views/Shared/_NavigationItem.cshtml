@@ -5,7 +5,7 @@
     foreach (var item in Model)
     {
         <li class="nav-item @(item.IsOpen?"menu-open":"")">
-            <a href="@(string.IsNullOrEmpty(item.Path)?"javascript:;":item.Path)" class="nav-link @(item.IsOpen?"active":"")">
+            <a href="@(string.IsNullOrEmpty(item.Path)?"javascript:;":"/Admin"+item.Path)" class="nav-link @(item.IsOpen?"active":"")">
                 <i class="nav-icon fas @item.Icon"></i>
                 <p>
                     @item.Name
