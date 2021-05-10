@@ -21,19 +21,14 @@ namespace MCS.Web.Areas.Admin.Controllers
         [Authorize]
         public IActionResult List()
         {
-            //ViewBag.NavigationTypes = EnumHelper.ToDescriptionDictionary<NavigationType>();
             return View();
         }
 
-        //public JsonResult ListResult(NavigationType? type)
-        //{
-        //    var navList = ManagerNavigationApplication.GetNavigations();
-        //    if (type.HasValue && type > 0)
-        //    {
-        //        navList = navList.Where(a => a.NavType == type).ToList();
-        //    }
-        //    return Json(new Result() { success = true, msg = "", data = navList });
-        //}
+        public JsonResult ListResult()
+        {
+            var navList = ManagerNavigationApplication.GetNavigations();
+            return Json(new Result() { success = true, msg = "", data = navList });
+        }
 
         public IActionResult Edit(long? id)
         {
