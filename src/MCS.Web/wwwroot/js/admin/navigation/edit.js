@@ -4,11 +4,18 @@
     });
 
     $('.btn-add-action').click(function () {
+        var index = $('.table-actions tbody tr').last();
+        console.info(index);
+        if (index.length > 0) {
+            index = $(index).data('index')+1;
+        } else {
+            index = 0;
+        }
         var html = `
-                    <tr>
-                        <th><input class="form-control" name="Name" type="text" value="" readonly="readonly" /></th>
-                        <th><input class="form-control" name="AccessKey" type="text" value="" readonly="readonly" /></th>
-                        <th><input class="form-control" name="Id" type="hidden" value="0" /> <input class="btn btn-danger btn-delete" type="button" value="删除" /></th>
+                    <tr data-index='${index}'>
+                        <th><input class="form-control" name="Actions[${index}].Name" type="text" value="" readonly="readonly" /></th>
+                        <th><input class="form-control" name="Actions[${index}].AccessKey" type="text" value="" readonly="readonly" /></th>
+                        <th><input class="form-control" name="Actions[${index}].Id" type="hidden" value="0" /> <input class="btn btn-danger btn-delete" type="button" value="删除" /></th>
                     </tr>`;
         $('.table-actions tbody').append(html);
     });
