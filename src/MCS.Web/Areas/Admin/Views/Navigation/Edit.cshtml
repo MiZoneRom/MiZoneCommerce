@@ -80,11 +80,20 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="form-group">
-                                <label>权限</label>
-                                <select asp-items="ViewBag.Actions" class="dual-select" multiple="multiple">
-                                </select>
-                            </div>
+                            <label>权限</label>
+                            <table class="table table-bordered table-actions">
+                                <thead>
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>代号</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <input type="button" class="btn btn-primary btn-add-action" value="添加" />
                             <!-- /.form-group -->
                         </div>
                         <!-- /.col -->
@@ -107,4 +116,5 @@
 <!-- /.row -->
 @section Scripts{
     <script src="~/lib/mcs/jquery.validate.unobtrusive.ajax.js"></script>
+    <script src="~/js/admin/navigation/edit.js"></script>
 }
