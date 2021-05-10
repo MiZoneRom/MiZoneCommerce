@@ -49,9 +49,9 @@ namespace MCS.Web.Areas.Admin.Controllers
             CheckCheckCode(user.UserName, user.CheckCode);
 
             var managerModel = _iManagerService.Login(user.UserName, user.Password);
-            var jwtSection = _iConfiguration.GetSection("jwt");
-            int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
-            int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
+            //var jwtSection = _iConfiguration.GetSection("jwt");
+            //int tokenExpires = Convert.ToInt32(jwtSection.GetSection("TokenExpires").Value);
+            //int refreshTokenExpires = Convert.ToInt32(jwtSection.GetSection("RefreshTokenExpires").Value);
 
             if (managerModel == null)
             {
@@ -59,7 +59,7 @@ namespace MCS.Web.Areas.Admin.Controllers
                 return ErrorResult("用户名和密码不匹配");
             }
 
-            JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
+            //JwtTokenHelper jwtTokenHelper = new JwtTokenHelper();
 
             var claims = new Claim[]
             {
@@ -69,16 +69,16 @@ namespace MCS.Web.Areas.Admin.Controllers
                 new Claim(ClaimTypes.Sid, managerModel.Id.ToString()),
             };
 
-            string token = jwtTokenHelper.GetToken(claims);
-            string refreshToken = jwtTokenHelper.RefreshToken();
-            string tokenExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(tokenExpires));
-            string refreshToeknExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(refreshTokenExpires));
+            //string token = jwtTokenHelper.GetToken(claims);
+            //string refreshToken = jwtTokenHelper.RefreshToken();
+            //string tokenExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(tokenExpires));
+            //string refreshToeknExpired = StringHelper.GetTimeStamp(DateTime.UtcNow.AddMinutes(refreshTokenExpires));
 
-            _iManagerService.RemoveExpiresToken(managerModel.Id);
-            _iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
+            //_iManagerService.RemoveExpiresToken(managerModel.Id);
+            //_iManagerService.AddRefeshToken(token, refreshToken, managerModel.Id, refreshTokenExpires);
 
-            HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_TOKEN, token);
-            HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_REFRESH_TOKEN, refreshToken);
+            //HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_TOKEN, token);
+            //HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_REFRESH_TOKEN, refreshToken);
 
             var identity = new ClaimsIdentity(CookieKeysCollection.MANAGER);
             identity.AddClaims(claims);
