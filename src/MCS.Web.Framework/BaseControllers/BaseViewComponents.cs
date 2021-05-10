@@ -20,7 +20,7 @@ namespace MCS.Web.Framework
                 {
                     return manager;
                 }
-                var userId = this.UserClaimsPrincipal.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userId = this.UserClaimsPrincipal.FindFirstValue(ClaimTypes.Sid);
                 if (!string.IsNullOrEmpty(userId))
                     manager = ManagerApplication.GetPlatformManager(Convert.ToInt32(userId));
                 return manager;
