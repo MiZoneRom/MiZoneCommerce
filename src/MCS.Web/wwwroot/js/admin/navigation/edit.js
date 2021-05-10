@@ -5,7 +5,6 @@
 
     $('.btn-add-action').click(function () {
         var index = $('.table-actions tbody tr').last();
-        console.info(index);
         if (index.length > 0) {
             index = $(index).data('index')+1;
         } else {
