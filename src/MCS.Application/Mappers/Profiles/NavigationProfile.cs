@@ -14,6 +14,9 @@ namespace MCS.Application.Mappers.Profiles
         {
             CreateMap<ManagerNavigationInfo, DTO.ManagerNavigationModel>();
             CreateMap<DTO.ManagerNavigationModel, ManagerNavigationInfo>();
+
+            CreateMap<ManagerNavigationActionInfo, DTO.ManagerNavigationActionModel>();
+            CreateMap<DTO.ManagerNavigationActionModel, ManagerNavigationActionInfo>();
         }
     }
 }

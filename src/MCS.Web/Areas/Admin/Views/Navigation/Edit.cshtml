@@ -90,7 +90,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @for (int i = 0; i < Model.Actions.Count(); i++)
+                                    {
+                                        <tr data-index="@i">
+                                            <th><input class="form-control" name="Actions[@i].Name" type="text" value="@Model.Actions[i].Name" readonly="readonly" /></th>
+                                            <th><input class="form-control" name="Actions[@i].AccessKey" type="text" value="@Model.Actions[i].AccessKey" readonly="readonly" /></th>
+                                            <th><input class="form-control" name="Actions[@i].Id" type="hidden" value="@Model.Actions[i].Id" /> <input class="btn btn-danger" type="button" value="删除" /></th>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                             <input type="button" class="btn btn-primary btn-add-action" value="添加" />

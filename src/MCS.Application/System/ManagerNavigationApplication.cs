@@ -144,7 +144,9 @@ namespace MCS.Application
         public static ManagerNavigationModel GetNavigation(long id)
         {
             ManagerNavigationInfo navInfo = Service.GetNavigation(id);
-            return Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
+            ManagerNavigationModel model = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
+            model.Actions = Mapper.Map<List<ManagerNavigationActionInfo>, List<ManagerNavigationActionModel>>(Service.GetNavigationActions(id));
+            return model;
         }
 
     }
