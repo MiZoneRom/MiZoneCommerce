@@ -20,5 +20,6 @@ namespace MCS.IServices
         List<ManagerNavigationInfo> GetNavigations();
         ManagerNavigationInfo GetNavigation(long id);
         bool UpdateNavigation(ManagerNavigationInfo model);
+        List<ManagerNavigationActionInfo> GetNavigationActions(long id);
     }
 }

@@ -96,5 +96,10 @@ namespace MCS.DTO
         /// </summary>
         public ManagerNavigationModel Parent { get; set; }
 
+        /// <summary>
+        /// 操作类型
+        /// </summary>
+        public List<ManagerNavigationActionModel> Actions { get; set; }
+
     }
 }

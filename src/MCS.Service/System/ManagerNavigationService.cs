@@ -51,5 +51,10 @@ namespace MCS.Service
             return Context.CommandSet<ManagerNavigationInfo>().Where(item => item.Id == model.Id).Update(model) > 0;
         }
 
+        public List<ManagerNavigationActionInfo> GetNavigationActions(long id)
+        {
+            return Context.QuerySet<ManagerNavigationActionInfo>().Where(a => a.NavigationId == id).ToList();
+        }
+
     }
 }
