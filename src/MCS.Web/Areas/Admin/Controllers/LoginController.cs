@@ -80,6 +80,11 @@ namespace MCS.Web.Areas.Admin.Controllers
             HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_TOKEN, token);
             HttpContext.Response.Cookies.Append(CookieKeysCollection.MANAGER_REFRESH_TOKEN, refreshToken);
 
+            var identity = new ClaimsIdentity(CookieKeysCollection.MANAGER);
+            identity.AddClaims(claims);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
             //清除输入错误记录次数
             ClearErrorTimes(user.UserName);
 

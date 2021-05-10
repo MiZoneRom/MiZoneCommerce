@@ -9,7 +9,7 @@ namespace MCS.Web.Framework
         /// <summary>
         /// 平台管理员登录标识
         /// </summary>
-        public const string PLATFORM_MANAGER = "MCS_Manager";
+        public const string MANAGER = "MCS_MANAGER";
 
         /// <summary>
         /// 管理员Token

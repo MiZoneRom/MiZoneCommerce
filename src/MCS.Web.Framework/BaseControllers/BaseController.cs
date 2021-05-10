@@ -39,36 +39,36 @@ namespace MCS.Web.Framework
         /// <returns></returns>
         protected JsonResult Json<T>(bool success, string msg = "", T data = default(T), int code = 0, bool camelCase = false)
         {
-            if (camelCase)
-            {
-                var options = new JsonSerializerOptions
-                {
-                    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
-                    PropertyNameCaseInsensitive = true
-                };
+            //if (camelCase)
+            //{
+            //    var options = new MvcNewtonsoftJsonOptions
+            //    {
+            //        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            //        PropertyNameCaseInsensitive = true
+            //    };
+            //    return Json(new Result()
+            //    {
+            //        data = data,
+            //        msg = msg,
+            //        success = success,
+            //        code = code
+            //    }, options);
+            //}
+            //else
+            //{
+                //var options = new JsonSerializerOptions
+                //{
+                //    DictionaryKeyPolicy = null,
+                //    PropertyNameCaseInsensitive = true
+                //};
                 return Json(new Result()
                 {
                     data = data,
                     msg = msg,
                     success = success,
                     code = code
-                }, options);
-            }
-            else
-            {
-                var options = new JsonSerializerOptions
-                {
-                    DictionaryKeyPolicy = null,
-                    PropertyNameCaseInsensitive = true
-                };
-                return Json(new Result()
-                {
-                    data = data,
-                    msg = msg,
-                    success = success,
-                    code = code
-                }, options);
-            }
+                });
+            //}
         }
 
         /// <summary>
