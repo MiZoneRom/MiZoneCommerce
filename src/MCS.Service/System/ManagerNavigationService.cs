@@ -23,6 +23,11 @@ namespace MCS.Service
             return navigations;
         }
 
+        /// <summary>
+        /// 获取导航列表
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
         public QuerySet<ManagerNavigationInfo> GetNavigations(long parentId = 0)
         {
             var navigations = Context.QuerySet<ManagerNavigationInfo>().Where(item => item.ParentId == parentId);
