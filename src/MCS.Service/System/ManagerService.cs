@@ -241,6 +241,12 @@ namespace MCS.Service
             return ids;
         }
 
+        /// <summary>
+        /// 获取是否有权限
+        /// </summary>
+        /// <param name="managerId"></param>
+        /// <param name="accessKey"></param>
+        /// <returns></returns>
         public bool GetManagerAccess(long managerId, string accessKey)
         {
             ManagerInfo managerInfo = GetPlatformManager(managerId);
