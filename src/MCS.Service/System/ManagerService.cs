@@ -15,6 +15,11 @@ namespace MCS.Service
 {
     public class ManagerService : ServiceBase, IManagerService
     {
+        /// <summary>
+        /// 查询平台管理员
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public QueryPageModel<ManagerInfo> GetPlatformManagers(ManagerQuery query)
         {
             var users = Context.QuerySet<ManagerInfo>().Where(item => item.Id > 0).PageList(query.PageNo, query.PageSize);
@@ -26,11 +31,21 @@ namespace MCS.Service
             return pageModel;
         }
 
+        /// <summary>
+        /// 通过角色获取管理员
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
         public List<ManagerInfo> GetPlatformManagerByRoleId(long roleId)
         {
             return Context.QuerySet<ManagerInfo>().Where(item => item.RoleId == roleId).ToList();
         }
 
+        /// <summary>
+        /// 通过Id获取平台管理员
+        /// </summary>
+        /// <param name="managerId"></param>
+        /// <returns></returns>
         public ManagerInfo GetPlatformManager(long managerId)
         {
             ManagerInfo manager = null;
@@ -59,6 +74,10 @@ namespace MCS.Service
             return manager;
         }
 
+        /// <summary>
+        /// 添加管理员
+        /// </summary>
+        /// <param name="model"></param>
         public void AddPlatformManager(ManagerInfo model)
         {
             if (model.RoleId == 0)
@@ -74,6 +93,12 @@ namespace MCS.Service
             Context.CommandSet<ManagerInfo>().Insert(model);
         }
 
+        /// <summary>
+        /// 修改管理员密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="password"></param>
+        /// <param name="roleId"></param>
         public void ChangePlatformManagerPassword(long id, string password, long roleId)
         {
             var model = Context.QuerySet<ManagerInfo>().Where(item => item.Id == id).Get();
@@ -95,6 +120,10 @@ namespace MCS.Service
             CacheHelper.Remove(CACHE_MANAGER_KEY);
         }
 
+        /// <summary>
+        /// 删除管理员
+        /// </summary>
+        /// <param name="id"></param>
         public void DeletePlatformManager(long id)
         {
             var model = Context.CommandSet<ManagerInfo>().Where(item => item.Id == id && item.RoleId != 0).Delete();
@@ -102,6 +131,10 @@ namespace MCS.Service
             CacheHelper.Remove(CACHE_MANAGER_KEY);
         }
 
+        /// <summary>
+        /// 批量删除管理员
+        /// </summary>
+        /// <param name="ids"></param>
         public void BatchDeletePlatformManager(long[] ids)
         {
             var model = Context.CommandSet<ManagerInfo>().Where(item => item.RoleId != 0 && ids.Contains(item.Id)).Delete();
@@ -119,6 +152,12 @@ namespace MCS.Service
             return managers;
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public ManagerInfo Login(string username, string password)
         {
             ManagerInfo manager = Context.QuerySet<ManagerInfo>().Where(item => item.UserName == username).Get();
@@ -142,6 +181,12 @@ namespace MCS.Service
             return encryptedWithSaltPassword;
         }
 
+        /// <summary>
+        /// 检查用户名是否存在
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="isPlatFormManager"></param>
+        /// <returns></returns>
         public bool CheckUserNameExist(string username, bool isPlatFormManager = false)
         {
             if (isPlatFormManager)
