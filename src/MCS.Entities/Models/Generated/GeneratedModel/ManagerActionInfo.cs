@@ -10,8 +10,8 @@ using MCS.CommonModel;
 namespace MCS.Entities
 {
     
-     [Display(Rename = "ManagerNavigationAction")]
-     public partial class ManagerNavigationActionInfo:IBaseEntity<ManagerNavigationActionInfo, long>
+     [Display(Rename = "ManagerAction")]
+     public partial class ManagerActionInfo:IBaseEntity<ManagerActionInfo, long>
      {
         
 		/// <summary>
@@ -22,18 +22,18 @@ namespace MCS.Entities
 		public override long Id { get; set; }
         
 		/// <summary>
-        /// NavigationId
+        /// Name
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "NavigationId")]
-		public  long NavigationId { get; set; }
+        [System.ComponentModel.DataAnnotations.Display(Name = "Name")]
+		public  string Name { get; set; }
         
 		/// <summary>
-        /// ActionId
+        /// AccessKey
         /// </summary>
 		
-        [System.ComponentModel.DataAnnotations.Display(Name = "ActionId")]
-		public  long ActionId { get; set; }
+        [System.ComponentModel.DataAnnotations.Display(Name = "AccessKey")]
+		public  string AccessKey { get; set; }
         
      }
 

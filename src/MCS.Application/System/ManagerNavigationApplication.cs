@@ -144,9 +144,26 @@ namespace MCS.Application
         public static ManagerNavigationModel GetNavigation(long id)
         {
             ManagerNavigationInfo navInfo = Service.GetNavigation(id);
-            ManagerNavigationModel model = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
-            model.Actions = Mapper.Map<List<ManagerNavigationActionInfo>, List<ManagerNavigationActionModel>>(Service.GetNavigationActions(id));
-            return model;
+            ManagerNavigationModel navigationModel = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
+            List<ManagerNavigationActionInfo> managerNavigationActionList = Service.GetNavigationActions(id);
+            List<ManagerActionInfo> actionList = Service.GetActions();
+
+            navigationModel.Actions = actionList.Select(a =>
+            {
+                ManagerNavigationActionInfo managerNavigationActionInfo = managerNavigationActionList.Where(b => b.ActionId == a.Id).FirstOrDefault();
+
+                return new ManagerNavigationActionModel()
+                {
+                    Id = managerNavigationActionInfo == null ? 0 : managerNavigationActionInfo.Id,
+                    ActionId = a.Id,
+                    AccessKey = a.AccessKey,
+                    Name = a.Name,
+                    NavigationId = id,
+                    Selected = managerNavigationActionInfo == null ? false : true
+                };
+            }).ToList();
+
+            return navigationModel;
         }
 
         public static bool UpdateNavigation(ManagerNavigationModel model)

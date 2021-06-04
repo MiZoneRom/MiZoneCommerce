@@ -56,6 +56,13 @@ namespace MCS.Entities
         [System.ComponentModel.DataAnnotations.Display(Name = "Description")]
 		public  string Description { get; set; }
         
+		/// <summary>
+        /// ManagerId
+        /// </summary>
+		
+        [System.ComponentModel.DataAnnotations.Display(Name = "ManagerId")]
+		public  long ManagerId { get; set; }
+        
      }
 
 }

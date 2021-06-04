@@ -19,6 +19,11 @@ namespace MCS.DTO
         public long NavigationId { get; set; }
 
         /// <summary>
+        /// ActionId
+        /// </summary>
+        public long ActionId { get; set; }
+
+        /// <summary>
         /// Name
         /// </summary>
         public string Name { get; set; }
@@ -27,5 +32,10 @@ namespace MCS.DTO
         /// AccessKey
         /// </summary>
         public string AccessKey { get; set; }
+
+        /// <summary>
+        /// 是否选择
+        /// </summary>
+        public bool Selected { get; set; }
     }
 }

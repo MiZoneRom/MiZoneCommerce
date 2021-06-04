@@ -81,5 +81,14 @@ namespace MCS.Service
             return Context.QuerySet<ManagerNavigationActionInfo>().Where(a => a.NavigationId == id).ToList();
         }
 
+        /// <summary>
+        /// 获取操作类型
+        /// </summary>
+        /// <returns></returns>
+        public List<ManagerActionInfo> GetActions()
+        {
+            return Context.QuerySet<ManagerActionInfo>().Where(a => a.Id > 0).ToList();
+        }
+
     }
 }
