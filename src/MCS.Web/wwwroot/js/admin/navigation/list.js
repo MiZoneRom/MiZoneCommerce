@@ -49,7 +49,7 @@ function loadNav(result, isLevelFirst) {
         } else {
             _html += `<i class="fas fa-file-code fa-fw"></i>`;
         }
-        _html += `${item.name}<a type="button" class="btn btn-primary btn-xs float-right"  href="./Edit?id=${item.id}">编辑</a>`;
+        _html += `${item.name}<a type="button" class="btn btn-primary btn-xs float-right"  href="./Edit?Id=${item.id}">编辑</a><a type="button" class="btn btn-primary btn-xs float-right"  href="./Edit?ParentId=${item.id}">加子级</a>`;
         _html += '</div>';
         _html += `</li>`;
         if (childList.length > 0) {
@@ -68,7 +68,7 @@ function loadNav(result, isLevelFirst) {
 function getSpaceStr() {
     var str = '';
     for (var i = 0; i < _level; i++) {
-        str += '<i class="fas fa-ellipsis-h fa-fw" style="color:#e0e0e0"></i>';
+        str += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     }
     return str;
 }

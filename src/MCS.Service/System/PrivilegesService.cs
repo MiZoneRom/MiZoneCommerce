@@ -12,7 +12,10 @@ namespace MCS.Service
 {
     public class PrivilegesService : ServiceBase, IPrivilegesService
     {
-
+        /// <summary>
+        /// 添加角色
+        /// </summary>
+        /// <param name="model"></param>
         public void AddPlatformRole(ManagerRoleInfo model)
         {
 
@@ -29,6 +32,10 @@ namespace MCS.Service
             Context.CommandSet<ManagerRoleInfo>().Insert(model);
         }
 
+        /// <summary>
+        /// 更新角色
+        /// </summary>
+        /// <param name="model"></param>
         public void UpdatePlatformRole(ManagerRoleInfo model)
         {
             var updatemodel = Context.QuerySet<ManagerRoleInfo>().Where(a => a.Id == model.Id).Get();
@@ -53,16 +60,29 @@ namespace MCS.Service
 
         }
 
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <param name="id"></param>
         public void DeletePlatformRole(long id)
         {
             var model = Context.CommandSet<ManagerRoleInfo>().Where(a => a.Id == id).Delete();
         }
 
+        /// <summary>
+        /// 获取橘色
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ManagerRoleInfo GetPlatformRole(long id)
         {
             return Context.QuerySet<ManagerRoleInfo>().Where(a => a.Id == id).Get();
         }
 
+        /// <summary>
+        /// 获取角色列表
+        /// </summary>
+        /// <returns></returns>
         public List<ManagerRoleInfo> GetPlatformRoles()
         {
             return Context.QuerySet<ManagerRoleInfo>().Where(item => item.Id > 0).ToList();

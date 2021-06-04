@@ -71,6 +71,11 @@ namespace MCS.Service
             return true;
         }
 
+        /// <summary>
+        /// 获取导航子权限
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<ManagerNavigationActionInfo> GetNavigationActions(long id)
         {
             return Context.QuerySet<ManagerNavigationActionInfo>().Where(a => a.NavigationId == id).ToList();

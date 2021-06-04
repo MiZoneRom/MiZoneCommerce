@@ -24,24 +24,38 @@ namespace MCS.Web.Areas.Admin.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 导航列表
+        /// </summary>
+        /// <returns></returns>
         public JsonResult ListResult()
         {
             var navList = ManagerNavigationApplication.GetNavigations();
             return Json(new Result() { success = true, msg = "", data = navList });
         }
 
-        public IActionResult Edit(long? id)
+        /// <summary>
+        /// 编辑导航
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        public IActionResult Edit(long? id, long? parentId)
         {
-            ViewBag.Navigations = ManagerNavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString() }).ToList();
-            //ViewBag.Actions = NavigationAction.Add.ToSelectList();
+            ViewBag.Navigations = ManagerNavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == parentId }).ToList();
             if (id.HasValue)
             {
                 ManagerNavigationModel model = ManagerNavigationApplication.GetNavigation(id.Value);
                 return View(model);
             }
-            return View(new ManagerNavigationModel());
+            return View(new ManagerNavigationModel() { Actions = new List<ManagerNavigationActionModel>() });
         }
 
+        /// <summary>
+        /// 编辑导航
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ManagerNavigationModel model)
