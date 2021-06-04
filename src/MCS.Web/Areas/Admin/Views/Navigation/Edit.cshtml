@@ -79,6 +79,14 @@
                                 <span asp-validation-for="Remark" class="error invalid-feedback"></span>
                             </div>
                         </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label asp-for="Actions"></label>
+                                <select asp-for="Actions" asp-items="Model.Actions.Select(a=>new SelectListItem() {  Text=a.Name, Value=a.ActionId.ToString(), Selected=a.Selected})" multiple="multiple" class="form-control single-select">
+                                    <option value="0">无父级导航</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <label>权限</label>
                             <table class="table table-bordered table-actions">

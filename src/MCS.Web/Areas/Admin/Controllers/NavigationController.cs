@@ -9,6 +9,7 @@ using MCS.DTO;
 using MCS.Entities;
 using MCS.IServices;
 using MCS.Web.Framework;
+using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,6 +20,7 @@ namespace MCS.Web.Areas.Admin.Controllers
     public class NavigationController : BaseAdminController
     {
         [Authorize]
+        [AccessControl(AccessKey = "List")]
         public IActionResult List()
         {
             return View();
@@ -40,6 +42,7 @@ namespace MCS.Web.Areas.Admin.Controllers
         /// <param name="id"></param>
         /// <param name="parentId"></param>
         /// <returns></returns>
+        [AccessControl(AccessKey = "Edit")]
         public IActionResult Edit(long? id, long? parentId)
         {
             ViewBag.Navigations = ManagerNavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == parentId }).ToList();
@@ -58,6 +61,7 @@ namespace MCS.Web.Areas.Admin.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AccessControl(AccessKey = "Edit")]
         public IActionResult Edit(ManagerNavigationModel model)
         {
             ManagerNavigationApplication.UpdateNavigation(model);

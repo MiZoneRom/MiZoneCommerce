@@ -259,7 +259,7 @@ namespace MCS.Service
             {
                 return true;
             }
-            long[] actionIds = Context.QuerySet<ManagerNavigationActionInfo>().Where(a => a.AccessKey == accessKey).ToList(a => a.Id).ToArray();
+            long[] actionIds = Context.QuerySet<ManagerActionInfo>().Where(a => a.AccessKey == accessKey).ToList(a => a.Id).ToArray();
             int privilegeCount = Context.QuerySet<ManagerRolePrivilegeInfo>().Where(a => actionIds.Contains(a.ActionId) && a.RoleId == roleId).Count();
             return privilegeCount > 0;
         }

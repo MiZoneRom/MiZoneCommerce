@@ -145,11 +145,17 @@ namespace MCS.Application
         {
             ManagerNavigationInfo navInfo = Service.GetNavigation(id);
             ManagerNavigationModel navigationModel = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
+
+            //获取导航选择的权限
             List<ManagerNavigationActionInfo> managerNavigationActionList = Service.GetNavigationActions(id);
+
+            //获取所有权限
             List<ManagerActionInfo> actionList = Service.GetActions();
 
+            //循环所有权限
             navigationModel.Actions = actionList.Select(a =>
             {
+                //如果有选择的权限
                 ManagerNavigationActionInfo managerNavigationActionInfo = managerNavigationActionList.Where(b => b.ActionId == a.Id).FirstOrDefault();
 
                 return new ManagerNavigationActionModel()
@@ -166,6 +172,11 @@ namespace MCS.Application
             return navigationModel;
         }
 
+        /// <summary>
+        /// 更新导航
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public static bool UpdateNavigation(ManagerNavigationModel model)
         {
             ManagerNavigationInfo modelInfo = Mapper.Map<ManagerNavigationModel, ManagerNavigationInfo>(model);
