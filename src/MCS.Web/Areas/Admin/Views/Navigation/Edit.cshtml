@@ -79,11 +79,10 @@
                                 <span asp-validation-for="Remark" class="error invalid-feedback"></span>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label asp-for="Actions"></label>
-                                <select asp-for="Actions" asp-items="Model.Actions.Select(a=>new SelectListItem() {  Text=a.Name, Value=a.ActionId.ToString(), Selected=a.Selected})" multiple="multiple" class="form-control single-select">
-                                    <option value="0">无父级导航</option>
+                                <label asp-for="ActionIds"></label>
+                                <select asp-for="ActionIds" asp-items="Model.Actions.Select(a=>new SelectListItem() {  Text=a.Name, Value=a.ActionId.ToString(), Selected=a.Selected})" multiple="multiple" class="form-control single-select">
                                 </select>
                             </div>
                         </div>

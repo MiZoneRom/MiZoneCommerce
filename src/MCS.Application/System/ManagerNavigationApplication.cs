@@ -180,7 +180,7 @@ namespace MCS.Application
         public static bool UpdateNavigation(ManagerNavigationModel model)
         {
             ManagerNavigationInfo modelInfo = Mapper.Map<ManagerNavigationModel, ManagerNavigationInfo>(model);
-            List<ManagerNavigationActionInfo> modelActions = Mapper.Map<List<ManagerNavigationActionModel>, List<ManagerNavigationActionInfo>>(model.Actions);
+            List<ManagerNavigationActionInfo> modelActions = model.ActionIds.Select(a => new ManagerNavigationActionInfo() { ActionId = a }).ToList();
             return Service.UpdateNavigation(modelInfo, modelActions);
         }
 

@@ -94,12 +94,20 @@ namespace MCS.DTO
         /// <summary>
         /// 父级
         /// </summary>
+        [Display(Name = "父级")]
         public ManagerNavigationModel Parent { get; set; }
 
         /// <summary>
         /// 操作类型
         /// </summary>
+        [Display(Name = "操作")]
         public List<ManagerNavigationActionModel> Actions { get; set; }
+
+        /// <summary>
+        /// 操作Id
+        /// </summary>
+        [Display(Name = "操作")]
+        public List<long> ActionIds { get; set; }
 
     }
 }

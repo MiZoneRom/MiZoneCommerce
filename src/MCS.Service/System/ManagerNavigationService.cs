@@ -58,15 +58,14 @@ namespace MCS.Service
             Context.CommandSet<ManagerNavigationActionInfo>().Where(item => item.NavigationId == model.Id).Delete();
 
             //操作赋值
-            if (actions != null)
+            if (actions != null && actions.Count() > 0)
             {
                 foreach (var item in actions)
                 {
                     item.NavigationId = model.Id;
                 }
+                Context.CommandSet<ManagerNavigationActionInfo>().Insert(actions);
             }
-
-            Context.CommandSet<ManagerNavigationActionInfo>().Insert(actions);
 
             return true;
         }
