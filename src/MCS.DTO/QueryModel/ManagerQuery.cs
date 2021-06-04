@@ -9,6 +9,6 @@ namespace MCS.DTO.QueryModel
     public partial class ManagerQuery : QueryBase
     {
 
-        public long userID { set; get; }
+        public long UserID { set; get; }
     }
 }
