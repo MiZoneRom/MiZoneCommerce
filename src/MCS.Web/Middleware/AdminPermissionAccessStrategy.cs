@@ -31,8 +31,10 @@ namespace MCS.Web
             bool isAjax = WebHelper.IsAjax();
 
             string controller = _accessor.HttpContext.Request.RouteValues["controller"].ToString();
-            string view = _accessor.HttpContext.Request.RouteValues["view"].ToString();
+            //string view = _accessor.HttpContext.Request.RouteValues["view"].ToString();
             string areas = _accessor.HttpContext.Request.RouteValues["area"].ToString();
+
+            string urlPath = _accessor.HttpContext.Request.Path;
 
             //获取当前登录用户
             var user = _accessor.HttpContext.User;
@@ -42,7 +44,7 @@ namespace MCS.Web
             {
                 if (!isAjax)
                 {
-                    string loginUrl = string.IsNullOrEmpty(areas) ? "/Login" : $"/{areas}/Login";
+                    string loginUrl = $"{(string.IsNullOrEmpty(areas) ? "" : "/" + areas)}/Login{(string.IsNullOrEmpty(urlPath) ? "" : "?redirectUrl=" + WebUtility.UrlEncode(urlPath))}";
                     _accessor.HttpContext.Response.Redirect(loginUrl);
                     _accessor.HttpContext.Response.CompleteAsync();
                     return true;
