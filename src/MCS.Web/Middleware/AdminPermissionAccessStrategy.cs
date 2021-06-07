@@ -1,5 +1,6 @@
 ﻿using MCS.Application;
 using MCS.Core;
+using MCS.Core.Helper;
 using MCS.Web.Framework.AccessControlHelper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,12 +27,27 @@ namespace MCS.Web
 
         public bool IsCanAccess(string accessKey)
         {
+            //是否是Ajax访问
+            bool isAjax = WebHelper.IsAjax();
+
+            string controller = _accessor.HttpContext.Request.RouteValues["controller"].ToString();
+            string view = _accessor.HttpContext.Request.RouteValues["view"].ToString();
+            string areas = _accessor.HttpContext.Request.RouteValues["area"].ToString();
+
             //获取当前登录用户
             var user = _accessor.HttpContext.User;
             //如果没有认证
             var sidClaim = user.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault();
             if (!user.Identity.IsAuthenticated || sidClaim == null)
             {
+                if (!isAjax)
+                {
+                    string loginUrl = string.IsNullOrEmpty(areas) ? "/Login" : $"/{areas}/Login";
+                    _accessor.HttpContext.Response.Redirect(loginUrl);
+                    _accessor.HttpContext.Response.CompleteAsync();
+                    return true;
+                }
+
                 _accessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                 //_accessor.HttpContext.Response.HttpContext.Response.WriteAsync("No Login");
                 _accessor.HttpContext.Response.CompleteAsync();
@@ -43,8 +59,6 @@ namespace MCS.Web
             if (!string.IsNullOrEmpty(accessKey))
             {
                 long userId = Convert.ToInt64(sidClaim.Value);
-                string controller = _accessor.HttpContext.Request.RouteValues["Controller"].ToString();
-                //string view = _accessor.HttpContext.Request.RouteValues["View"].ToString();
                 return ManagerApplication.GetManagerAccess(userId, accessKey);
             }
 
