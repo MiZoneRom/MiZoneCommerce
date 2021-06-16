@@ -143,11 +143,17 @@ namespace MCS.Application
 
         public static ManagerNavigationModel GetNavigation(long id)
         {
-            ManagerNavigationInfo navInfo = Service.GetNavigation(id);
-            ManagerNavigationModel navigationModel = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
+            ManagerNavigationInfo navInfo = new ManagerNavigationInfo();
+            ManagerNavigationModel navigationModel = new ManagerNavigationModel();
+            List<ManagerNavigationActionInfo> managerNavigationActionList = new List<ManagerNavigationActionInfo>();
 
-            //获取导航选择的权限
-            List<ManagerNavigationActionInfo> managerNavigationActionList = Service.GetNavigationActions(id);
+            if (id > 0)
+            {
+                navInfo = Service.GetNavigation(id);
+                navigationModel = Mapper.Map<ManagerNavigationInfo, ManagerNavigationModel>(navInfo);
+                //获取导航选择的权限
+                managerNavigationActionList = Service.GetNavigationActions(id);
+            }
 
             //获取所有权限
             List<ManagerActionInfo> actionList = Service.GetActions();
