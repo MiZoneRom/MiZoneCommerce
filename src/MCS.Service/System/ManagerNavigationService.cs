@@ -53,9 +53,15 @@ namespace MCS.Service
 
         public bool UpdateNavigation(ManagerNavigationInfo model, List<ManagerNavigationActionInfo> actions = null)
         {
-            Context.CommandSet<ManagerNavigationInfo>().Where(item => item.Id == model.Id).Update(model);
-
-            Context.CommandSet<ManagerNavigationActionInfo>().Where(item => item.NavigationId == model.Id).Delete();
+            if (model.Id > 0)
+            {
+                Context.CommandSet<ManagerNavigationInfo>().Where(item => item.Id == model.Id).Update(model);
+                Context.CommandSet<ManagerNavigationActionInfo>().Where(item => item.NavigationId == model.Id).Delete();
+            }
+            else
+            {
+                model.Id = Context.CommandSet<ManagerNavigationInfo>().Insert(model);
+            }
 
             //操作赋值
             if (actions != null && actions.Count() > 0)

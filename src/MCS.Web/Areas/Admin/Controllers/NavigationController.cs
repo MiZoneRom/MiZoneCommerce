@@ -46,12 +46,8 @@ namespace MCS.Web.Areas.Admin.Controllers
         public IActionResult Edit(long? id, long? parentId)
         {
             ViewBag.Navigations = ManagerNavigationApplication.GetNavigationModels().Select(a => new SelectListItem() { Text = a.Name, Value = a.Id.ToString(), Selected = a.Id == parentId }).ToList();
-            if (id.HasValue)
-            {
-                ManagerNavigationModel model = ManagerNavigationApplication.GetNavigation(id.Value);
-                return View(model);
-            }
-            return View(new ManagerNavigationModel() { Actions = new List<ManagerNavigationActionModel>() });
+            ManagerNavigationModel model = ManagerNavigationApplication.GetNavigation(id == null ? 0 : id.Value);
+            return View(model);
         }
 
         /// <summary>
