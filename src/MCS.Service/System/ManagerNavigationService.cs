@@ -51,6 +51,12 @@ namespace MCS.Service
             return Context.QuerySet<ManagerNavigationInfo>().Where(a => a.Id == id).Get();
         }
 
+        /// <summary>
+        /// 更新导航
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="actions"></param>
+        /// <returns></returns>
         public bool UpdateNavigation(ManagerNavigationInfo model, List<ManagerNavigationActionInfo> actions = null)
         {
             if (model.Id > 0)
