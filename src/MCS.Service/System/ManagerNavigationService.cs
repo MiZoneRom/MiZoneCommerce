@@ -40,6 +40,10 @@ namespace MCS.Service
             return navigations;
         }
 
+        /// <summary>
+        /// 获取导航列表
+        /// </summary>
+        /// <returns></returns>
         public List<ManagerNavigationInfo> GetNavigations()
         {
             var navigations = Context.QuerySet<ManagerNavigationInfo>().Where(item => item.Id > 0).ToList();
