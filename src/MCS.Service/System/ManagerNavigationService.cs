@@ -46,6 +46,11 @@ namespace MCS.Service
             return navigations;
         }
 
+        /// <summary>
+        /// 获取导航
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ManagerNavigationInfo GetNavigation(long id)
         {
             return Context.QuerySet<ManagerNavigationInfo>().Where(a => a.Id == id).Get();
