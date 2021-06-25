@@ -102,6 +102,7 @@ namespace MCS.Web
 
                 });
 
+            //添加传统mvc认证
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             //注册session
@@ -195,6 +196,7 @@ namespace MCS.Web
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
+            //添加页面权限控制 控件权限控制
             services.AddAccessControlHelper()
                 .AddResourceAccessStrategy<AdminPermissionAccessStrategy>()
                 .AddControlAccessStrategy<AdminControlAccessStrategy>();
@@ -213,7 +215,7 @@ namespace MCS.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //AutoMapper
+            //AutoMapper 自动转换Model
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<NavigationProfile>();
@@ -224,6 +226,10 @@ namespace MCS.Web
 
         }
 
+        /// <summary>
+        /// 设置容器
+        /// </summary>
+        /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
 
