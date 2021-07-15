@@ -32,17 +32,19 @@ namespace MCS.Web
 
             string controller = _accessor.HttpContext.Request.RouteValues["controller"].ToString();
             //string view = _accessor.HttpContext.Request.RouteValues["view"].ToString();
-            string areas = _accessor.HttpContext.Request.RouteValues["area"].ToString();
+            string areas = _accessor.HttpContext.Request.RouteValues["area"] == null ? "" : _accessor.HttpContext.Request.RouteValues["area"].ToString();
 
             string urlPath = _accessor.HttpContext.Request.Path;
 
             //获取当前登录用户
             var user = _accessor.HttpContext.User;
+
             //如果没有认证
             var sidClaim = user.Claims.Where(a => a.Type == ClaimTypes.Sid).FirstOrDefault();
             if (!user.Identity.IsAuthenticated || sidClaim == null)
             {
-                if (!isAjax)
+                //如果不是Ajax请求且不是webapi
+                if (!isAjax && !urlPath.Contains("/api/"))
                 {
                     string loginUrl = $"{(string.IsNullOrEmpty(areas) ? "" : "/" + areas)}/Login{(string.IsNullOrEmpty(urlPath) ? "" : "?redirectUrl=" + WebUtility.UrlEncode(urlPath))}";
                     _accessor.HttpContext.Response.Redirect(loginUrl);

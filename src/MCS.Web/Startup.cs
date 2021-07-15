@@ -63,10 +63,109 @@ namespace MCS.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Log.Debug("ConfigureServices");
+
+            //services.AddAuthentication(opts =>
+            //{
+            //    opts.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            //    .AddPolicyScheme("MCS_Policy", "Bearer or Jwt", options =>
+            //    {
+            //        options.ForwardDefaultSelector = context =>
+            //        {
+            //            var bearerAuth = context.Request.Headers["Authorization"].FirstOrDefault()?.StartsWith("Bearer ") ?? false;
+            //            // You could also check for the actual path here if that's your requirement:
+            //            // eg: if (context.HttpContext.Request.Path.StartsWithSegments("/api", StringComparison.InvariantCulture))
+            //            if (bearerAuth)
+            //                return JwtBearerDefaults.AuthenticationScheme;
+            //            else
+            //                return CookieAuthenticationDefaults.AuthenticationScheme;
+            //        };
+            //    })
+            //    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            //    {
+
+
+            //    })
+            //                    .AddJwtBearer(options =>
+            //                    {
+            //                        options.SaveToken = true;
+            //                        var jwtSection = Configuration.GetSection("jwt");
+
+            //                        options.TokenValidationParameters = new TokenValidationParameters
+            //                        {
+            //                            ValidateIssuer = true,//是否验证Issuer
+            //                            ValidateAudience = true,//是否验证Audience
+            //                            ValidateLifetime = true,//是否验证失效时间
+            //                            ValidateIssuerSigningKey = true,//是否验证SecurityKey
+            //                            ValidAudience = jwtSection.GetSection("ValidAudience").Value,//Audience
+            //                            ValidIssuer = jwtSection.GetSection("ValidIssuer").Value,//Issuer，这两项和前面签发jwt的设置一致
+            //                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSection.GetSection("SecurityKey").Value))//拿到SecurityKey
+            //                        };
+
+            //                        //认证事件
+            //                        options.Events = new JwtBearerEvents
+            //                        {
+            //                            //认证过期添加过期消息
+            //                            OnAuthenticationFailed = context =>
+            //                            {
+            //                                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+            //                                {
+            //                                    context.Response.Headers.Add("act", "expired");
+            //                                }
+            //                                return Task.CompletedTask;
+            //                            },
+            //                            OnMessageReceived = context =>
+            //                            {
+            //                                return Task.CompletedTask;
+            //                            }
+            //                        };
+            //                    });
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    // Cookie settings
+            //    options.Cookie.Name = "MCS_Policy";
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromSeconds(10);
+            //    options.LoginPath = "/Identity/Account/Login";
+            //    options.LogoutPath = "/Identity/Account/Logout";
+            //    options.Events = new CookieAuthenticationEvents()
+            //    {
+            //        OnRedirectToLogin = context =>
+            //        {
+            //            //这里区分当访问/api 如果cookie过期那么 不重定向到login登录界面
+            //            if (context.Request.Path.Value.StartsWith("/api"))
+            //            {
+            //                context.Response.Clear();
+            //                context.Response.StatusCode = 401;
+            //                return Task.FromResult(0);
+            //            }
+            //            context.Response.Redirect(context.RedirectUri);
+            //            return Task.FromResult(0);
+            //        }
+            //    };
+            //});
 
             //添加jwt验证：
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(opts =>
+            {
+                //opts.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                //opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddPolicyScheme("MCS_Policy", "Bearer or Jwt", options =>
+                {
+                    options.ForwardDefaultSelector = context =>
+                    {
+                        var bearerAuth = context.Request.Headers["Authorization"].FirstOrDefault()?.StartsWith("Bearer ") ?? false;
+                        // You could also check for the actual path here if that's your requirement:
+                        // eg: if (context.HttpContext.Request.Path.StartsWithSegments("/api", StringComparison.InvariantCulture))
+                        if (bearerAuth)
+                            return JwtBearerDefaults.AuthenticationScheme;
+                        else
+                            return CookieAuthenticationDefaults.AuthenticationScheme;
+                    };
+                })
                 .AddJwtBearer(options =>
                 {
                     var jwtSection = Configuration.GetSection("jwt");
@@ -100,10 +199,11 @@ namespace MCS.Web
                         }
                     };
 
-                });
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 
             //添加传统mvc认证
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             //注册session
             services.AddSession();
@@ -297,6 +397,8 @@ namespace MCS.Web
 
             //使用授权中间件
             app.UseAuthorization();
+
+            app.UseCookiePolicy();
 
             //如果不设置路由
             //app.UseWebSockets();
