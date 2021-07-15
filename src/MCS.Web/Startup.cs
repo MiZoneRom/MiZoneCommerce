@@ -150,8 +150,8 @@ namespace MCS.Web
             //添加jwt验证：
             services.AddAuthentication(opts =>
             {
-                //opts.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                //opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
                 .AddPolicyScheme("MCS_Policy", "Bearer or Jwt", options =>
                 {
