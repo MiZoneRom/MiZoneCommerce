@@ -1,5 +1,8 @@
 # MiZoneCommerce
 
+####Front End
+https://github.com/MiZoneRom/MiZoneCommerceFront
+
 ## Based on DotNetCore 5.0
 #### Framework Design
 - using Autofac instead Core IOC.
@@ -19,6 +22,9 @@
 - pluggable webapi modular design
 
 
+####前端项目（未完成技术选型，正在考虑前端框架【ElementUI或Materialize】）
+https://github.com/MiZoneRom/MiZoneCommerceFront
+
 ### 基于.net 5.0搭建
 #### 架构设计
 - 使用Autofac替代自带ioc框架实现工厂模式
@@ -35,7 +41,6 @@
 - 配置Swagger文档
 - 全局异常捕捉
 - 集成Senparc微信库
-
 
 #### 引用
 - WeihanLi.AspNetMvc.AccessControlHelper
